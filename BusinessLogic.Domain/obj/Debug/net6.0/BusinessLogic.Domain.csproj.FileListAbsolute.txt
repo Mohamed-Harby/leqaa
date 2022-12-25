@@ -10,3 +10,15 @@
 /home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/Debug/net6.0/refint/BusinessLogic.Domain.dll
 /home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.pdb
 /home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/Debug/net6.0/ref/BusinessLogic.Domain.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/bin/Debug/net6.0/BusinessLogic.Domain.deps.json
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/bin/Debug/net6.0/BusinessLogic.Domain.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/bin/Debug/net6.0/BusinessLogic.Domain.pdb
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.csproj.AssemblyReference.cache
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.AssemblyInfoInputs.cache
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.AssemblyInfo.cs
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.csproj.CoreCompileInputs.cache
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/refint/BusinessLogic.Domain.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/BusinessLogic.Domain.pdb
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/Debug/net6.0/ref/BusinessLogic.Domain.dll

@@ -4779,11 +4779,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Presentation/BusinessLogic.Presentation.csproj",
+      "projectUniqueName": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/BusinessLogic.Presentation.csproj",
       "projectName": "BusinessLogic.Presentation",
-      "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Presentation/BusinessLogic.Presentation.csproj",
+      "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/BusinessLogic.Presentation.csproj",
       "packagesPath": "/home/mab/.nuget/packages/",
-      "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Presentation/obj/",
+      "outputPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mab/.nuget/NuGet/NuGet.Config"
@@ -4798,8 +4798,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
-              "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj"
+            "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
+              "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj"
             }
           }
         }

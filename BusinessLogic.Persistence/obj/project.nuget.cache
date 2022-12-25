@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N5DEYKnebV06KvmkSPrskSPSqfptpJEkPMi+qLlL3JNYC7hGQIg7Fi7N+gi502eJyQqNsTS1i19I+oNTdkqu+A==",
+  "dgSpecHash": "iY+tgWhrvD3E6kLD6NTL3H9+ipQEoa6WxbXsWn1qI6YgvFkz9mMkSI8QU5OJPJsME9GGtW6/fPYjg8xwJcFXEw==",
   "success": true,
-  "projectFilePath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
+  "projectFilePath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
   "expectedPackageFiles": [
     "/home/mab/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/mab/.nuget/packages/fluentvalidation/11.2.1/fluentvalidation.11.2.1.nupkg.sha512",

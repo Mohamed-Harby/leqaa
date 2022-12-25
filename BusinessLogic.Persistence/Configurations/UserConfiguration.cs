@@ -26,8 +26,7 @@ public class UserConfiguration : BaseConfiguration<User>
 
         builder
         .HasMany(u => u.Followers)
-        .WithMany(u => u.FollowedUsers);
-        
+        .WithMany(u => u.FollowedUsers).UsingEntity<UserUser>();
         base.Configure(builder);
 
     }

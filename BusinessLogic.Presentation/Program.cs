@@ -30,11 +30,19 @@ app.MapControllers();
 
 var databaseOptions = new DbContextOptionsBuilder<ApplicationDbContext>().Options;
 var dbContext = new ApplicationDbContext(databaseOptions);
+var user = new User
+{
+    Name = "ASDF",
+    Email = "ASDF@gmail.com",
+    Password = "ASDF",
+    Gender = Gender.male,
+    Username = "ASDF",
+};
+dbContext.users.Add(user);
 
-var medhat = dbContext.users!.FirstOrDefault(u => u.Name == "Medhat");
-var reda = dbContext.users.FirstOrDefault(u => u.Id == Guid.Parse("fc9a4864-d149-47a7-954f-600ce4b0db10"));
-dbContext.Entry(medhat).Collection(m => m.Followers).IsModified = true;
-medhat.Followers.Add(reda);
+// var medhat = dbContext.users!.FirstOrDefault(u => u.Name == "Medhat");
+// var reda = dbContext.users.FirstOrDefault(u => u.Id == Guid.Parse("fc9a4864-d149-47a7-954f-600ce4b0db10"));
+// medhat.Followers.Add(reda);
 
 dbContext.SaveChanges();
 var x = dbContext.ChangeTracker.DebugView.ShortView;

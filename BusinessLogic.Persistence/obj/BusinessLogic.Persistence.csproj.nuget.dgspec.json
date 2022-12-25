@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {}
+    "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {}
   },
   "projects": {
-    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+    "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
         "projectName": "BusinessLogic.Domain",
-        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+        "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
         "packagesPath": "/home/mab/.nuget/packages/",
-        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mab/.nuget/NuGet/NuGet.Config"
@@ -57,14 +57,14 @@
         }
       }
     },
-    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
+    "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
         "projectName": "BusinessLogic.Persistence",
-        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
+        "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
         "packagesPath": "/home/mab/.nuget/packages/",
-        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/obj/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mab/.nuget/NuGet/NuGet.Config"
@@ -79,11 +79,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
-                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
+              "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
               },
-              "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj": {
-                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj"
+              "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/Common.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/Common.csproj"
               }
             }
           }
@@ -123,14 +123,14 @@
         }
       }
     },
-    "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj": {
+    "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/Common.csproj": {
       "version": "8.0.0",
       "restore": {
-        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj",
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/Common.csproj",
         "projectName": "CommonGenericClasses",
-        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj",
+        "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/Common.csproj",
         "packagesPath": "/home/mab/.nuget/packages/",
-        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/obj/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/leqaa/Src/CommonGenericClasses/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mab/.nuget/NuGet/NuGet.Config"
@@ -145,8 +145,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
-                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
+              "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
               }
             }
           }

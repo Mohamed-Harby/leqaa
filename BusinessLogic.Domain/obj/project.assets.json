@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+      "projectUniqueName": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
       "projectName": "BusinessLogic.Domain",
-      "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+      "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
       "packagesPath": "/home/mab/.nuget/packages/",
-      "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/",
+      "outputPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mab/.nuget/NuGet/NuGet.Config"

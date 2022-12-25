@@ -1,6 +1,10 @@
 namespace BusinessLogic.Domain;
 
-public enum Gender { male, female };
+public enum Gender
+{
+    male,
+    female
+};
 public class User : BaseEntity
 {
     public User()
