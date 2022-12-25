@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {}
+  },
+  "projects": {
+    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+        "projectName": "BusinessLogic.Domain",
+        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj",
+        "packagesPath": "/home/mab/.nuget/packages/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mab/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/mab/.dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
+        "projectName": "BusinessLogic.Persistence",
+        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj",
+        "packagesPath": "/home/mab/.nuget/packages/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Persistence/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mab/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
+              },
+              "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/mab/.dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj": {
+      "version": "8.0.0",
+      "restore": {
+        "projectUniqueName": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj",
+        "projectName": "CommonGenericClasses",
+        "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/Common.csproj",
+        "packagesPath": "/home/mab/.nuget/packages/",
+        "outputPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/Src/CommonGenericClasses/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/mab/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj": {
+                "projectPath": "/home/mab/Desktop/GraduationProject/BusinessLogic/BusinessLogic.Domain/BusinessLogic.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.2.1, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/mab/.dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
