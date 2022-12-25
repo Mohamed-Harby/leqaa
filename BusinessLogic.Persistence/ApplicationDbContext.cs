@@ -11,9 +11,12 @@ public class ApplicationDbContext : DbContext
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121",
-                          ServerVersion.AutoDetect("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121"))
-                          .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseMySql("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121",
+                              ServerVersion.AutoDetect("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121"))
+                              .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+        }
         base.OnConfiguring(optionsBuilder);
 
     }
