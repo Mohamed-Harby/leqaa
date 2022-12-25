@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "BusinessLogic.Presentation/1.0.0": {
         "dependencies": {
+          "BusinessLogic.Application": "1.0.0",
           "BusinessLogic.Persistence": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "6.0.8",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2",
@@ -740,6 +741,14 @@
           "System.Xml.ReaderWriter": "4.0.11"
         }
       },
+      "BusinessLogic.Application/1.0.0": {
+        "dependencies": {
+          "BusinessLogic.Domain": "1.0.0"
+        },
+        "runtime": {
+          "BusinessLogic.Application.dll": {}
+        }
+      },
       "BusinessLogic.Domain/1.0.0": {
         "runtime": {
           "BusinessLogic.Domain.dll": {}
@@ -747,6 +756,7 @@
       },
       "BusinessLogic.Persistence/1.0.0": {
         "dependencies": {
+          "BusinessLogic.Application": "1.0.0",
           "BusinessLogic.Domain": "1.0.0",
           "CommonGenericClasses": "8.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2"
@@ -758,6 +768,7 @@
       "CommonGenericClasses/8.0.0": {
         "dependencies": {
           "AutoMapper": "11.0.1",
+          "BusinessLogic.Application": "1.0.0",
           "BusinessLogic.Domain": "1.0.0",
           "FluentValidation": "11.2.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
@@ -1411,6 +1422,11 @@
       "sha512": "sha512-Mk2mKmPi0nWaoiYeotq1dgeNK1fqWh61+EK+w4Wu8SWuTYLzpUnschb59bJtGywaPq7SmTuPf44wrXRwbIrukg==",
       "path": "system.xml.xdocument/4.0.11",
       "hashPath": "system.xml.xdocument.4.0.11.nupkg.sha512"
+    },
+    "BusinessLogic.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "BusinessLogic.Domain/1.0.0": {
       "type": "project",

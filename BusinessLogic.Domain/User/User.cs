@@ -24,7 +24,7 @@ public class User : BaseEntity
     public virtual ICollection<Channel>? Channels { get; set; }
     public virtual ICollection<Hub>? Hubs { get; set; }
     public virtual ICollection<Post>? Posts { get; set; }
-    public virtual ICollection<Announcements>? Announcements { get; set; }
+    public virtual ICollection<Announcement>? Announcements { get; set; }
     public virtual ICollection<User>? Followers { get; set; }
     public virtual ICollection<User>? FollowedUsers { get; set; }
 

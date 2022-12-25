@@ -90,3 +90,5 @@
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/obj/Debug/net6.0/BusinessLogic.Presentation.pdb
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/obj/Debug/net6.0/BusinessLogic.Presentation.genruntimeconfig.cache
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/obj/Debug/net6.0/ref/BusinessLogic.Presentation.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/bin/Debug/net6.0/BusinessLogic.Application.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Presentation/bin/Debug/net6.0/BusinessLogic.Application.pdb

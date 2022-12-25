@@ -1,5 +1,5 @@
 namespace BusinessLogic.Domain;
-public class Announcements : BaseEntity
+public class Announcement : BaseEntity
 {
     public string RoleName { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;

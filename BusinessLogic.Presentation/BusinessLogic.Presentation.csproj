@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../BusinessLogic.Persistence/BusinessLogic.Persistence.csproj" />
+    <ProjectReference Include="../BusinessLogic.Application/BusinessLogic.Application.csproj" />
   </ItemGroup>
 
 

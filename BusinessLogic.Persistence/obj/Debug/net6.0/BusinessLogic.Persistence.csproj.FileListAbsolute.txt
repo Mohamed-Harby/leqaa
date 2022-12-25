@@ -32,3 +32,5 @@
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/obj/Debug/net6.0/refint/BusinessLogic.Persistence.dll
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/obj/Debug/net6.0/BusinessLogic.Persistence.pdb
 /home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/obj/Debug/net6.0/ref/BusinessLogic.Persistence.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/bin/Debug/net6.0/BusinessLogic.Application.dll
+/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/bin/Debug/net6.0/BusinessLogic.Application.pdb

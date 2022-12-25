@@ -1,5 +1,8 @@
+using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Persistence;
+using BusinessLogic.Persistence.Repositories;
+using BusinessLogic.Persistence.UnitsOfWork;
 using BusinessLogic.Presentation.ServiceConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +15,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContextConfiguration(builder.Configuration);
+
+builder.Services.AddUserRepository();
+builder.Services.AddRoomRepository();
+builder.Services.AddChannelRepository();
+builder.Services.AddHubRepository();
+builder.Services.AddPostRepository();
+builder.Services.AddAnnouncementRepository();
+builder.Services.AddUnitOfWork();
 
 var app = builder.Build();
 
@@ -28,8 +39,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-var databaseOptions = new DbContextOptionsBuilder<ApplicationDbContext>().Options;
-var dbContext = new ApplicationDbContext(databaseOptions);
+
 var user = new User
 {
     Name = "ASDF",
@@ -38,13 +48,18 @@ var user = new User
     Gender = Gender.male,
     Username = "ASDF",
 };
-dbContext.users.Add(user);
-
+var serviceProvider = builder.Services.BuildServiceProvider();
+IHubRepository hubRepository = (serviceProvider.GetService(typeof(IHubRepository)) as HubRepository)!;
 // var medhat = dbContext.users!.FirstOrDefault(u => u.Name == "Medhat");
 // var reda = dbContext.users.FirstOrDefault(u => u.Id == Guid.Parse("fc9a4864-d149-47a7-954f-600ce4b0db10"));
 // medhat.Followers.Add(reda);
 
-dbContext.SaveChanges();
-var x = dbContext.ChangeTracker.DebugView.ShortView;
-int y = 10;
+await hubRepository.AddAsync(new Hub
+{
+    Name = "Hub1"
+
+});
+IUnitOfWork? unitOfWork = (serviceProvider.GetService(typeof(IUnitOfWork)) as UnitOfWork)!;
+await unitOfWork.Save();
+
 // app.Run();

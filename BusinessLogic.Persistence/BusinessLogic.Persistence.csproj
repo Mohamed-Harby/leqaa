@@ -12,6 +12,7 @@
    <ItemGroup>
     <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj"/>
     <ProjectReference Include="../Src/CommonGenericClasses/Common.csproj"/>
+    <ProjectReference Include="../BusinessLogic.Application/BusinessLogic.Application.csproj"/>
   </ItemGroup>
 
 </Project>

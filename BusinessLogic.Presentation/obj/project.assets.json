@@ -1512,6 +1512,19 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "BusinessLogic.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BusinessLogic.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BusinessLogic.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BusinessLogic.Application.dll": {}
+        }
+      },
       "BusinessLogic.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1526,6 +1539,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "BusinessLogic.Application": "1.0.0",
           "BusinessLogic.Domain": "1.0.0",
           "CommonGenericClasses": "8.0.0",
           "Pomelo.EntityFrameworkCore.MySql": "6.0.2"
@@ -1542,6 +1556,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "AutoMapper": "11.0.1",
+          "BusinessLogic.Application": "1.0.0",
           "BusinessLogic.Domain": "1.0.0",
           "FluentValidation": "11.2.1",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
@@ -4749,6 +4764,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "BusinessLogic.Application/1.0.0": {
+      "type": "project",
+      "path": "../BusinessLogic.Application/BusinessLogic.Application.csproj",
+      "msbuildProject": "../BusinessLogic.Application/BusinessLogic.Application.csproj"
+    },
     "BusinessLogic.Domain/1.0.0": {
       "type": "project",
       "path": "../BusinessLogic.Domain/BusinessLogic.Domain.csproj",
@@ -4767,6 +4787,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BusinessLogic.Application >= 1.0.0",
       "BusinessLogic.Persistence >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.8",
       "Pomelo.EntityFrameworkCore.MySql >= 6.0.2",
@@ -4798,6 +4819,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Application/BusinessLogic.Application.csproj": {
+              "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Application/BusinessLogic.Application.csproj"
+            },
             "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj": {
               "projectPath": "/home/mab/Desktop/GraduationProject/leqaa/BusinessLogic.Persistence/BusinessLogic.Persistence.csproj"
             }
