@@ -1,27 +1,29 @@
 using BusinessLogic.Domain;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.Repositories;
+using BusinessLogic.UnitTest.Fixtures;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.UnitTest;
-public class HubRepositoryTestsInMemory
+public class HubRepositoryTestsInMemory : IClassFixture<DbContextMemoryFixture>
 {
+    public DbContextMemoryFixture _memoryDb;
+    public HubRepositoryTestsInMemory(DbContextMemoryFixture memory)
+    {
+        _memoryDb = memory;
+    }
+
     [Fact]
     public async Task AddAsync_AddHub_MustHitTheDatabase()
     {
-        var connectionString = nameof(AddAsync_AddHub_MustHitTheDatabase);
-        var builder = new DbContextOptionsBuilder<ApplicationDbContext>().UseInMemoryDatabase(connectionString);
-        using var dbContext = new ApplicationDbContext(builder.Options);
-        // await dbContext.Database.EnsureDeletedAsync();
-        await dbContext.Database.EnsureCreatedAsync();
-        var hubRepository = new HubRepository(dbContext);
+        await _memoryDb.dbContext.Database.EnsureCreatedAsync();
+        var hubRepository = new HubRepository(_memoryDb.dbContext);
         var hub = new Hub
         {
             Name = "test",
             Description = "test"
         };
         await hubRepository.AddAsync(hub);
-        Assert.Equal(1, await dbContext.SaveChangesAsync());
-
+        Assert.Equal(1, await _memoryDb.dbContext.SaveChangesAsync());
     }
 }
