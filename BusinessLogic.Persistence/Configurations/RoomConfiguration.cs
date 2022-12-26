@@ -13,9 +13,12 @@ public class RoomConfiguration : BaseConfiguration<Room>
         base.Configure(builder);
 
         builder
-        .HasMany(r=>r.JoinedUsers)
-        .WithMany(u=>u.Rooms);
+        .HasOne(r => r.Channel)
+        .WithMany(u => u.Rooms);
 
+
+        builder.Property(p => p.Description).IsRequired();
+        builder.Property(p => p.StartedAt).IsRequired();
     }
 
 }

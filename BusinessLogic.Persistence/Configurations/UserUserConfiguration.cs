@@ -9,5 +9,7 @@ public class UserUserConfiguration : BaseConfiguration<UserUser>
     {
         // base.Configure(builder);
         builder.HasKey(uu => new { uu.FollowerId, uu.FollowedId });
+
+
     }
 }

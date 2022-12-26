@@ -39,5 +39,16 @@ public class UserConfiguration : BaseConfiguration<User>
         );
         base.Configure(builder);
 
+
+
+        //fields which are required
+        builder.Property(p => p.Name).IsRequired();
+        builder.Property(p => p.Email).IsRequired();
+        builder.Property(p => p.Gender).IsRequired();
+        builder.Property(p => p.Username).IsRequired();
+        builder.Property(p => p.Password).IsRequired();
+        builder.Property(p => p.ProfileImage).IsRequired();
+
+
     }
 }
