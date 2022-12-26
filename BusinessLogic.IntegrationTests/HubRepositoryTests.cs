@@ -1,10 +1,9 @@
 using BusinessLogic.Domain;
-using BusinessLogic.Persistence;
+using BusinessLogic.IntegrationTests.Fixtures;
 using BusinessLogic.Persistence.Repositories;
-using BusinessLogic.UnitTest.Fixtures;
-using Microsoft.EntityFrameworkCore;
 
-namespace BusinessLogic.UnitTest;
+namespace BusinessLogic.Tests.IntegrationTests;
+
 public class HubRepositoryTests : IClassFixture<DbContextMySqlFixture>
 {
     private readonly DbContextMySqlFixture _mysqlFixture;

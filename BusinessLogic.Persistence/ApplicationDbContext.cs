@@ -4,7 +4,10 @@ using Microsoft.EntityFrameworkCore;
 namespace BusinessLogic.Persistence;
 public class ApplicationDbContext : DbContext
 {
-    public DbSet<User>? users { get; set; }
+    public DbSet<User>? Users { get; set; }
+    public DbSet<Hub>? Hubs { get; set; }
+    public DbSet<Channel>? Channels { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 

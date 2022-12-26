@@ -1,8 +1,6 @@
 using BusinessLogic.Domain;
-using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.UnitTest.Fixtures;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.UnitTest;
 public class HubRepositoryTestsInMemory : IClassFixture<DbContextMemoryFixture>
@@ -14,7 +12,7 @@ public class HubRepositoryTestsInMemory : IClassFixture<DbContextMemoryFixture>
     }
 
     [Fact]
-    public async Task AddAsync_AddHub_MustHitTheDatabase()
+    public async Task AddAsync_AddHub_MustSaveInMemory()
     {
         await _memoryDb.dbContext.Database.EnsureCreatedAsync();
         var hubRepository = new HubRepository(_memoryDb.dbContext);
@@ -24,6 +22,13 @@ public class HubRepositoryTestsInMemory : IClassFixture<DbContextMemoryFixture>
             Description = "test"
         };
         await hubRepository.AddAsync(hub);
-        Assert.Equal(1, await _memoryDb.dbContext.SaveChangesAsync());
+        hub = new Hub
+        {
+            Name = "test2",
+            Description = "test2"
+        };
+        await hubRepository.AddAsync(hub);
+
+        Assert.Equal(2, await _memoryDb.dbContext.SaveChangesAsync());
     }
 }

@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.Application", "BusinessLogic.Application\BusinessLogic.Application.csproj", "{8495414C-B546-4282-938B-9584D53F98CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.UnitTest", "BusinessLogic.UnitTest\BusinessLogic.UnitTest.csproj", "{F06FDDAD-6F50-417D-894E-138BBAC2F27D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic.IntegrationTests", "BusinessLogic.IntegrationTests\BusinessLogic.IntegrationTests.csproj", "{91C63855-D1F1-47D2-ABA5-8352096233E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BusinessLogic.Tests", "BusinessLogic.Tests", "{EA663B2A-2E0B-4FAF-AD5B-EE0099001FF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,8 +54,14 @@ Global
 		{F06FDDAD-6F50-417D-894E-138BBAC2F27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06FDDAD-6F50-417D-894E-138BBAC2F27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06FDDAD-6F50-417D-894E-138BBAC2F27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C63855-D1F1-47D2-ABA5-8352096233E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C63855-D1F1-47D2-ABA5-8352096233E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C63855-D1F1-47D2-ABA5-8352096233E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C63855-D1F1-47D2-ABA5-8352096233E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{F06FDDAD-6F50-417D-894E-138BBAC2F27D} = {EA663B2A-2E0B-4FAF-AD5B-EE0099001FF0}
+		{91C63855-D1F1-47D2-ABA5-8352096233E1} = {EA663B2A-2E0B-4FAF-AD5B-EE0099001FF0}
 		{1F069588-D5B5-4FC1-8345-AA48DCE1C6FC} = {93CE31DE-B635-4BB6-8E4A-A45DE98320AB}
 	EndGlobalSection
 EndGlobal
