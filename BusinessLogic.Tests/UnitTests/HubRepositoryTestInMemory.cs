@@ -2,7 +2,7 @@ using BusinessLogic.Domain;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.UnitTest.Fixtures;
 
-namespace BusinessLogic.UnitTest;
+namespace BusinessLogic.Tests.UnitTests;
 public class HubRepositoryTestsInMemory : IClassFixture<DbContextMemoryFixture>
 {
     public DbContextMemoryFixture _memoryDb;
