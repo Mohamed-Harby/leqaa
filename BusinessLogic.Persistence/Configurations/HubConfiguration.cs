@@ -12,10 +12,6 @@ public class HubConfiguration : BaseConfiguration<Hub>
 
         base.Configure(builder);
 
-        builder
-        .HasMany(r => r.Channels)
-        .WithOne(u => u.Hub);
-
     }
 
 }

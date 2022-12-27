@@ -47,8 +47,6 @@ public class UserConfiguration : BaseConfiguration<User>
         builder.Property(p => p.Gender).IsRequired();
         builder.Property(p => p.Username).IsRequired();
         builder.Property(p => p.Password).IsRequired();
-        builder.Property(p => p.ProfileImage).IsRequired();
-
 
     }
 }

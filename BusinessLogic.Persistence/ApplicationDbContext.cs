@@ -7,6 +7,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User>? Users { get; set; }
     public DbSet<Hub>? Hubs { get; set; }
     public DbSet<Channel>? Channels { get; set; }
+    public DbSet<Room>? Rooms { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

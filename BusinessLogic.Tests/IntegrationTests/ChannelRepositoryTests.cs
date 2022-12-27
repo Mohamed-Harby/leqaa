@@ -39,7 +39,8 @@ public class ChannelRepositoryTests : IClassFixture<DbContextMySqlFixture>
     [Fact]//(Skip = "Doesn't work inline with other tests")]
     public async Task AddAsync_AddChannelWithoutHub_MustThrowException()
     {
-        var connectionString = "server=localhost;database=leqaaBusinessTestDbExceptions;Uid=root;Pwd=2510203121";
+        var configuration = ConfigurationInitializer.InitializeConfiguration();
+        var connectionString = configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
         var builder = new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         var dbContext = new ApplicationDbContext(builder.Options);
         await dbContext.Database.EnsureCreatedAsync();

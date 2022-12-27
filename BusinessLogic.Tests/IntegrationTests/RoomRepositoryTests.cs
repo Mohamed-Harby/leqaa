@@ -3,6 +3,7 @@ using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.IntegrationTests.Fixtures;
 using Microsoft.EntityFrameworkCore;
+using BusinessLogic.Tests.IntegrationTests.Options;
 
 namespace BusinessLogic.Tests.IntegrationTests;
 public class RoomRepositoryTests : IClassFixture<DbContextMySqlFixture>
@@ -38,7 +39,7 @@ public class RoomRepositoryTests : IClassFixture<DbContextMySqlFixture>
             ChannelId = channel.Id,
             Description = "test"
         };
-        channel.Rooms.Add(room);
+        channel.Rooms!.Add(room);
         hub.Channels.Add(channel);
         await _mysql.dbContext.AddAsync(hub);
         // await _mysql.dbContext.AddAsync(channel);
@@ -61,10 +62,12 @@ public class RoomRepositoryTests : IClassFixture<DbContextMySqlFixture>
     [Fact]//(Skip = "Doesn't work inline with other tests")]
     public async Task AddAsync_AddRoomWithoutChannel_MustThrowException()
     {
+        var configuration = ConfigurationInitializer.InitializeConfiguration();
+        var connectionString = configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
+        var builder = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseMySql(connectionString,
+                      ServerVersion.AutoDetect(connectionString));
 
-        // await dbContext.Database.EnsureDeletedAsync();
-        var connectionString = "server=localhost;database=leqaaBusinessTestDbExceptions;Uid=root;Pwd=2510203121";
-        var builder = new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         var dbContext = new ApplicationDbContext(builder.Options);
         await dbContext.Database.EnsureCreatedAsync();
         var roomRepository = new RoomRepository(dbContext);

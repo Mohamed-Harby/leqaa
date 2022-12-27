@@ -18,7 +18,7 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
 
         builder
         .HasMany(r => r.Announcements)
-        .WithOne(u => u.Channel);
+        .WithOne(a => a.Channel);
 
 
 
