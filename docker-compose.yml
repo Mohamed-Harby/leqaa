@@ -13,6 +13,11 @@ services:
       - mysql
     volumes:
       - ./BusinessLogic.Tests/IntegrationTests:/src/BusinessLogic.Tests/IntegrationTests
+    healthcheck:
+      test: ["CMD","curl","-f","http://mysql:3306"]
+      timeout: 5s
+      interval: 3s
+      retries: 3
   mysql:
     image: mysql/mysql-server
     environment:
