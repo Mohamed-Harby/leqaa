@@ -36,6 +36,62 @@
                 "${workspaceFolder}/BusinessLogic.Presentation/BusinessLogic.Presentation.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "leqaa:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/IntegrationTests.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: release",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "leqaa:latest",
+                "dockerfile": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/IntegrationTests.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/IntegrationTests.csproj",
+                "enableDebugging": true
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build: release"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/BusinessLogic.Tests/IntegrationTests/IntegrationTests.csproj"
+            }
         }
     ]
 }

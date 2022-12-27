@@ -1,0 +1,28 @@
+
+version: '3.4'
+
+services:
+  integrationtests:
+    image: integrationtests:v1.0
+    build:
+      context: .
+      dockerfile: BusinessLogic.Tests/IntegrationTests/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=mysql;Database=BusinessLogicTestDb;Uid=root;Pwd=2510203121;
+    depends_on:
+      - mysql
+    volumes:
+      - ./BusinessLogic.Tests/IntegrationTests:/src/BusinessLogic.Tests/IntegrationTests
+  mysql:
+    image: mysql/mysql-server
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=BusinessLogicTestDb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+    volumes:
+      - dbvolume:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+volumes:
+  dbvolume:
+     
