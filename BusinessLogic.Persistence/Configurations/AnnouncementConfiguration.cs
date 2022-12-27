@@ -14,6 +14,12 @@ public class AnnouncementConfiguration : BaseConfiguration<Announcement>
 
 
 
+        builder.Property(t=>t.Title).IsRequired()
+        .HasMaxLength(50);
+        builder.Property(t=>t.content).IsRequired()
+        .HasMaxLength(500);
+        
+
     }
 
 }

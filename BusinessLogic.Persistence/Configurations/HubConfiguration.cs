@@ -16,6 +16,11 @@ public class HubConfiguration : BaseConfiguration<Hub>
         .HasMany(r => r.Channels)
         .WithOne(u => u.Hub);
 
+        builder.Property(t=>t.Name).IsRequired()
+        .HasMaxLength(20);
+        builder.Property(t=>t.Description).HasMaxLength(200);
+
+
     }
 
 }

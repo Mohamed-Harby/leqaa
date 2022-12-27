@@ -12,6 +12,13 @@ public class PostConfiguration : BaseConfiguration<Post>
 
         base.Configure(builder);
 
+        builder.Property(t=>t.Title).IsRequired()
+        .HasMaxLength(30);
+        builder.Property(t=>t.Content).IsRequired()
+        .HasMaxLength(1000);
+
+
+
 
     }
 

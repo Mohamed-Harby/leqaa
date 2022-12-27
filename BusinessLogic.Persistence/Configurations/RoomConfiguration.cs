@@ -17,7 +17,8 @@ public class RoomConfiguration : BaseConfiguration<Room>
         .WithMany(u => u.Rooms);
 
 
-        builder.Property(p => p.Description).IsRequired();
+        builder.Property(p => p.Description).IsRequired()
+        .HasMaxLength(100);
         builder.Property(p => p.StartedAt).IsRequired();
     }
 

@@ -42,12 +42,15 @@ public class UserConfiguration : BaseConfiguration<User>
 
 
         //fields which are required
-        builder.Property(p => p.Name).IsRequired();
+        builder.Property(p => p.Name).IsRequired()
+        .HasMaxLength(30);
         builder.Property(p => p.Email).IsRequired();
         builder.Property(p => p.Gender).IsRequired();
-        builder.Property(p => p.Username).IsRequired();
-        builder.Property(p => p.Password).IsRequired();
-        builder.Property(p => p.ProfileImage).IsRequired();
+        builder.Property(p => p.Username).IsRequired()
+        .HasMaxLength(30);
+        builder.Property(p => p.Password).IsRequired()
+        .HasMaxLength(30);
+        // builder.Property(p => p.ProfileImage).IsRequired();
 
 
     }

@@ -20,6 +20,14 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
         .HasMany(r => r.Announcements)
         .WithOne(u => u.Channel);
 
+        builder.Property(t=>t.Name).IsRequired()
+        .HasMaxLength(30);
+
+        builder.Property(t=>t.Description).HasMaxLength(200);
+        
+
+
+
 
 
     }
