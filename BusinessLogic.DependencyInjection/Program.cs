@@ -3,6 +3,7 @@ using BusinessLogic.Domain;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.Persistence.UnitsOfWork;
+using BusinessLogic.Presentation.Controllers;
 using BusinessLogic.Presentation.ServiceConfigurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddApplicationPart(typeof(WeatherForecastController).Assembly)
+.AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -48,18 +50,4 @@ var user = new User
     Gender = Gender.male,
     Username = "ASDF",
 };
-var serviceProvider = builder.Services.BuildServiceProvider();
-IHubRepository hubRepository = (serviceProvider.GetService(typeof(IHubRepository)) as HubRepository)!;
-// var medhat = dbContext.users!.FirstOrDefault(u => u.Name == "Medhat");
-// var reda = dbContext.users.FirstOrDefault(u => u.Id == Guid.Parse("fc9a4864-d149-47a7-954f-600ce4b0db10"));
-// medhat.Followers.Add(reda);
-
-await hubRepository.AddAsync(new Hub
-{
-    Name = "Hub1"
-
-});
-IUnitOfWork? unitOfWork = (serviceProvider.GetService(typeof(IUnitOfWork)) as UnitOfWork)!;
-await unitOfWork.Save();
-
-// app.Run();
+app.Run();

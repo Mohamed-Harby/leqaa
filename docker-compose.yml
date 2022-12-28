@@ -18,6 +18,13 @@ services:
       timeout: 5s
       interval: 3s
       retries: 3
+  unittests:
+    image: unittests:v1.0
+    build:
+      context: .
+      dockerfile: BusinessLogic.Tests/UnitTests/Dockerfile
+    volumes:
+      - ./BusinessLogic.Tests/UnitTests:/src/BusinessLogic.Tests/UnitTests
   mysql:
     image: mysql/mysql-server
     environment:
