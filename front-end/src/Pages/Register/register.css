@@ -1,0 +1,128 @@
+.logo {
+  font-family: "Leckerli One", cursive;
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 0.25rem;
+}
+
+body {
+  background: #1B1B1B;
+  color: #E2E0E3;
+  overflow-y: hidden;
+}
+
+.registerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 2rem;
+}
+
+.containerLeft {
+  width: 50%;
+}
+.containerLeft h1 {
+  font-size: 3.2rem;
+}
+.containerLeft p {
+  padding: 0px;
+  margin: 3rem 0rem;
+  font-size: 2rem;
+}
+.containerLeft .joinMeetingWithCode {
+  margin-top: 1.3rem;
+  display: flex;
+}
+.containerLeft .button {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+.containerLeft .registerInput {
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+  margin-right: 1.2rem;
+}
+.containerLeft .registerInput::-moz-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.containerLeft .registerInput:-ms-input-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.containerLeft .registerInput::placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+
+.registerContainerRight {
+  display: flex;
+  flex-direction: column;
+  background-color: #262427;
+  margin: 3rem;
+  width: 40%;
+  border-radius: 10px;
+}
+.registerContainerRight .registerSecondHeader {
+  font-size: 2.5rem;
+  text-align: center;
+}
+.registerContainerRight .registerInput {
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+  width: 70%;
+  margin-top: 1rem;
+  align-self: center;
+}
+.registerContainerRight .registerInput::-moz-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.registerContainerRight .registerInput:-ms-input-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.registerContainerRight .registerInput::placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.registerContainerRight .registerError {
+  text-align: center;
+  color: rgb(214, 214, 2);
+  padding: 0px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.registerContainerRight .signUpButtons {
+  align-self: center;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.registerContainerRight .button {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+.registerContainerRight .secondButton {
+  background-color: #E2E0E3;
+  color: #262427;
+  padding: 0.6rem 2rem;
+}/*# sourceMappingURL=register.css.map */

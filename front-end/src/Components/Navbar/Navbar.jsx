@@ -29,7 +29,16 @@ function Navbar() {
 
           <li>
             <button onClick={() => setModalOpen(true)}>+</button>
-            <button>Log In</button>
+            {/* <button>Log In</button> */}
+            <Link
+              to={`/login`}
+              className="homeLoginButton"
+              style={{ textDecoration: "none" }}
+            >
+              Log In
+            </Link>
+
+
           </li>
           
         </ul>

@@ -109,15 +109,19 @@ nav ul li button:first-child {
     height: 25px;
   }
 }
-nav ul li button:last-child {
+
+.homeLoginButton {
   height: 100%;
   border-radius: 10px;
   background-color: #656366;
   font-size: 18px;
+  padding: 5px 18px;
+  display: flex;
+  align-items: center;
   color: #e2e0e3;
 }
 @media screen and (max-width: 768px) {
-  nav ul li button:last-child {
+  .homeLoginButton {
     font-size: 16px;
     padding: 3px;
   }

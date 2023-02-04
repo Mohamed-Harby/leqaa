@@ -1,0 +1,150 @@
+.logo {
+  font-family: "Leckerli One", cursive;
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 0.25rem;
+}
+
+body {
+  background: #1B1B1B;
+  color: #E2E0E3;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.loginContainerLeft {
+  width: 50%;
+  height: 70%;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.loginContainerLeft .headers .mainHeader {
+  font-size: 3.2rem;
+}
+.loginContainerLeft .headers .subHeader {
+  font-size: 1.5rem;
+}
+.loginContainerLeft .loginToolbox .joinMeetingWithCode {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.loginContainerLeft .loginToolbox .button {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+.loginContainerLeft .loginToolbox .loginInput {
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+  margin-right: 1.2rem;
+}
+.loginContainerLeft .loginToolbox .loginInput::-moz-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainerLeft .loginToolbox .loginInput:-ms-input-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainerLeft .loginToolbox .loginInput::placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+
+.loginContainerRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #262427;
+  margin: 2rem;
+  width: 40%;
+  height: 70%;
+  border-radius: 10px;
+}
+.loginContainerRight .loginInputFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginContainerRight .loginInputFields .loginText {
+  font-size: 3rem;
+  text-align: center;
+}
+.loginContainerRight .loginInputFields .loginInput {
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+  margin-top: 2rem;
+  width: 75%;
+}
+.loginContainerRight .loginInputFields .loginInput::-moz-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainerRight .loginInputFields .loginInput:-ms-input-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainerRight .loginInputFields .loginInput::placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainerRight .loginInputFields .loginError {
+  text-align: center;
+  color: rgb(214, 214, 2);
+  padding: 0px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.loginContainerRight .loginButtons {
+  align-self: center;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.loginContainerRight .loginButtons .button {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+.loginContainerRight .loginButtons .secondButton {
+  background-color: #E2E0E3;
+  color: #262427;
+  padding: 0.6rem 2rem;
+}
+
+@media screen and (max-width: 480px) {
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .loginContainerLeft .headers .mainHeader {
+    font-size: 1rem;
+  }
+  .loginContainerLeft .headers .subHeader {
+    font-size: 0.6rem;
+  }
+}/*# sourceMappingURL=login.css.map */

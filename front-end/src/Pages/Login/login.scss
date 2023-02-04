@@ -1,0 +1,182 @@
+.logo {
+  font-family: 'Leckerli One', cursive;
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 0.25rem;
+}
+
+@mixin loginInputMix{
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+}
+
+@mixin loginButtonMix{
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+body {
+  background: #1B1B1B;
+  color: #E2E0E3;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  height: 100vh;
+}
+
+.loginContainerLeft{
+  width: 50%;
+  height: 70%;
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .headers{
+    .mainHeader {
+      font-size: 3.2rem;
+    }
+  
+    .subHeader{
+      font-size: 1.5rem;
+    }
+  }
+
+  .loginToolbox{
+    .joinMeetingWithCode{
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+  
+    }
+  
+    .button {
+      @include loginButtonMix()
+    }
+  
+    .loginInput {
+      @include loginInputMix();
+      margin-right: 1.2rem;
+    }
+  
+    .loginInput::placeholder { 
+      color: #DCDCDC;
+      opacity: 1; 
+    }
+  }
+
+
+
+
+}
+
+.loginContainerRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #262427;
+  margin: 2rem;
+  width: 40%;
+  height: 70%;
+  border-radius: 10px;
+  
+  
+  .loginInputFields{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .loginText{
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    .loginInput {
+      @include loginInputMix();
+      margin-top: 2rem;
+      width: 75%;
+    }
+
+    .loginInput::placeholder { 
+      color: #DCDCDC;
+      opacity: 1; 
+    }
+
+    .loginError{
+      text-align: center;
+      color: rgb(214, 214, 2);
+      padding: 0px;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+    }
+  
+  
+  }
+
+
+
+
+
+  .loginButtons{
+    align-self: center;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    
+    .button{
+      @include loginButtonMix()
+    }
+  
+    .secondButton{
+      background-color: #E2E0E3;
+      color: #262427;
+      padding: 0.6rem 2rem;
+    }
+  }
+  
+}
+
+// mobile
+@media screen and (max-width: 480px) {
+
+
+  .loginContainer{
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .loginContainerLeft{
+    .headers{
+      .mainHeader {
+        font-size: 1rem;
+      }
+    
+      .subHeader{
+        font-size: 0.6rem;
+      }
+    }
+  }
+  
+
+}
+
+// //tablet 
+// @media screen and (max-width: 768px) {
+//   body{
+//       background-color: red;
+//   }
+// }

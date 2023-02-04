@@ -1,0 +1,128 @@
+.logo {
+  font-family: 'Leckerli One', cursive;
+  font-size: 2rem;
+  margin-left: 2rem;
+  margin-top: 0.25rem;
+}
+
+
+@mixin registerInputMix{
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  // width: 20rem;
+  width: 60%;
+}
+
+@mixin registerButtonMix{
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+body {
+  background: #1B1B1B;
+  color: #E2E0E3;
+  overflow-y: hidden;
+}
+
+.registerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items:stretch;
+  padding: 2rem;
+}
+
+.containerLeft{
+  width: 50%;
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  p{
+    padding: 0px;
+    margin: 3rem 0rem;
+    font-size: 2rem;
+  }
+
+  .joinMeetingWithCode{
+    margin-top: 1.3rem;
+    display: flex;
+
+  }
+
+  .button {
+    @include registerButtonMix()
+  }
+
+  .registerInput {
+    @include registerInputMix();
+    margin-right: 1.2rem;
+  }
+
+  .registerInput::placeholder { 
+    color: #DCDCDC;
+    opacity: 1; 
+  }
+
+
+}
+
+.registerContainerRight{
+  display: flex;
+  flex-direction: column;
+  background-color: #262427;
+  margin: 3rem;
+  width: 40%;
+  border-radius: 10px;
+
+  .registerSecondHeader{
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .registerInput {
+    @include registerInputMix();
+    width: 70%;
+    margin-top: 1rem;
+    align-self: center;
+  }
+
+  .registerInput::placeholder { 
+    color: #DCDCDC;
+    opacity: 1; 
+  }
+
+  .registerError{
+    text-align: center;
+    color: rgb(214, 214, 2);
+    padding: 0px;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .signUpButtons{
+    align-self: center;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button{
+    @include registerButtonMix()
+  }
+
+  .secondButton{
+    background-color: #E2E0E3;
+    color: #262427;
+    padding: 0.6rem 2rem;
+  }
+
+}
