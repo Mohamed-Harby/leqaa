@@ -5,6 +5,14 @@
   margin-top: 0.25rem;
 }
 
+a {
+  text-decoration: none;
+}
+
+.line {
+  color: #353535;
+}
+
 body {
   background: #1B1B1B;
   color: #E2E0E3;

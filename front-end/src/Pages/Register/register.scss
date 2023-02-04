@@ -5,6 +5,13 @@
   margin-top: 0.25rem;
 }
 
+a {
+  text-decoration: none;
+}
+
+.line {
+  color: #353535;
+}
 
 @mixin registerInputMix{
   background-color: #656366;

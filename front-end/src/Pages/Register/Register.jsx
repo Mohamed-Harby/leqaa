@@ -47,12 +47,11 @@ function Register() {
       <Link
         to={`/`}
         className="logo"
-        style={{ textDecoration: "none" }}
       >
         Leqaa
       </Link>
 
-      <hr color="#353535" />
+      <hr className="line" />
 
       <div className="registerContainer">
         <div className="containerLeft">
