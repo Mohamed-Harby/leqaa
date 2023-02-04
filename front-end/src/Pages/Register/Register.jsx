@@ -1,6 +1,8 @@
 import React from "react";
 import "./register.css";
 import { Link } from "react-router-dom";
+import Navbar from "../../Components/Navbar/Navbar";
+
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -44,24 +46,27 @@ function Register() {
 
   return (
     <>
-      <Link
-        to={`/`}
-        className="logo"
-      >
+      {/* <Link to={`/`} className="logo">
         Leqaa
-      </Link>
+      </Link> */}
+      <Navbar />
+      <hr color="#353535" noshade />
 
-      <hr className="line" />
+      <hr color="#353535" noshade />
 
       <div className="registerContainer">
-        <div className="containerLeft">
-          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
-          <p>
-            Leqaa is a service for secure, high-quality video meetings and calls
-            available for everyone.
-          </p>
+        <div className="registerContainerLeft">
+          <div className="registerHeaders">
+            <h1>
+              Video Calls and Meetings for personal Use and organizations.
+            </h1>
+            <p>
+              Leqaa is a service for secure, high-quality video meetings and
+              calls available for everyone.
+            </p>
+          </div>
 
-          <div className="toolbox">
+          <div className="registerToolbox">
             <button className="button">Create Instant Meeting</button>
             <div className="joinMeetingWithCode">
               <input
@@ -78,51 +83,49 @@ function Register() {
           className="registerContainerRight"
           onSubmit={handleSubmit(onSubmitHandler)}
         >
-          <h1 className="registerSecondHeader">Sign Up</h1>
+          <div className="loginInputFields">
+            <h1>Sign Up</h1>
 
-          <input
-            className="registerInput"
-            placeholder="Email"
-            type="email"
-            name="email"
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className="registerError">{errors.email.message}</p>
-          )}
+            <input
+              className="registerInput"
+              placeholder="Email"
+              type="email"
+              name="email"
+              {...register("email")}
+            />
 
-          <input
-            className="registerInput"
-            placeholder="User Name"
-            type="text"
-            name="name"
-            {...register("name")}
-          />
-          {errors.name && (
-            <p className="registerError">{errors.name.message}</p>
-          )}
+            {errors.email && <p>{errors.email.message}</p>}
 
-          <input
-            className="registerInput"
-            placeholder="Password"
-            type="password"
-            name="password"
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className="registerError">{errors.password.message}</p>
-          )}
+            <input
+              className="registerInput"
+              placeholder="User Name"
+              type="text"
+              name="name"
+              {...register("name")}
+            />
 
-          <input
-            className="registerInput"
-            placeholder="Confirm Password"
-            type="password"
-            name="confirmPassword"
-            {...register("confirmPassword")}
-          />
-          {errors.confirmPassword && (
-            <p className="registerError">{errors.confirmPassword.message}</p>
-          )}
+            {errors.name && <p>{errors.name.message}</p>}
+
+            <input
+              className="registerInput"
+              placeholder="Password"
+              type="password"
+              name="password"
+              {...register("password")}
+            />
+
+            {errors.password && <p>{errors.password.message}</p>}
+
+            <input
+              className="registerInput"
+              placeholder="Confirm Password"
+              type="password"
+              name="confirmPassword"
+              {...register("confirmPassword")}
+            />
+
+            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          </div>
 
           <div className="signUpButtons">
             <Link

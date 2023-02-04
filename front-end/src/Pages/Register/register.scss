@@ -9,9 +9,6 @@ a {
   text-decoration: none;
 }
 
-.line {
-  color: #353535;
-}
 
 @mixin registerInputMix{
   background-color: #656366;
@@ -20,7 +17,6 @@ a {
   font-size: 1.2rem;
   border-radius: 8px;
   padding: 0.7rem 2rem;
-  // width: 20rem;
   width: 60%;
 }
 
@@ -32,104 +28,132 @@ a {
   color: white;
 }
 
-body {
-  background: #1B1B1B;
-  color: #E2E0E3;
-  overflow-y: hidden;
-}
+
+
+// body {
+//   background: #1B1B1B;
+//   color: #E2E0E3;
+//   overflow-y: hidden;
+// }
 
 .registerContainer {
   display: flex;
   justify-content: space-between;
-  align-items:stretch;
-  padding: 2rem;
-}
+  align-items: center;
+  height: calc(100vh - 40px);
+  background: #1B1B1B;
+  color: #E2E0E3;
 
-.containerLeft{
-  width: 50%;
-  h1 {
-    font-size: 3.2rem;
-  }
-
-  p{
-    padding: 0px;
-    margin: 3rem 0rem;
-    font-size: 2rem;
-  }
-
-  .joinMeetingWithCode{
-    margin-top: 1.3rem;
-    display: flex;
-
-  }
-
-  .button {
-    @include registerButtonMix()
-  }
-
-  .registerInput {
-    @include registerInputMix();
-    margin-right: 1.2rem;
-  }
-
-  .registerInput::placeholder { 
-    color: #DCDCDC;
-    opacity: 1; 
-  }
-
-
-}
-
-.registerContainerRight{
-  display: flex;
-  flex-direction: column;
-  background-color: #262427;
-  margin: 3rem;
-  width: 40%;
-  border-radius: 10px;
-
-  .registerSecondHeader{
-    font-size: 2.5rem;
-    text-align: center;
-  }
-
-  .registerInput {
-    @include registerInputMix();
-    width: 70%;
-    margin-top: 1rem;
-    align-self: center;
-  }
-
-  .registerInput::placeholder { 
-    color: #DCDCDC;
-    opacity: 1; 
-  }
-
-  .registerError{
-    text-align: center;
-    color: rgb(214, 214, 2);
-    padding: 0px;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  .signUpButtons{
-    align-self: center;
+  
+  .registerContainerLeft{
     width: 50%;
+    height: 70%;
+    margin: 2rem;
     display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    flex-direction: column;
+    // justify-content: space-around;
+    
+
+    .registerHeaders{
+      margin-bottom: 100px;
+      h1 {
+        font-size: 3.2rem;
+      }
+    
+      p {
+        margin-top: 10px;
+        font-size: 1.5rem;
+      }
+    }
+
+    .registerToolbox{
+      .joinMeetingWithCode{
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+    
+      }
+    
+      button {
+        @include registerButtonMix()
+      }
+    
+      input {
+        @include registerInputMix();
+        margin-right: 1.2rem;
+      }
+    
+      input::placeholder { 
+        color: #DCDCDC;
+        opacity: 1; 
+      }
+    }
   }
 
-  .button{
-    @include registerButtonMix()
-  }
+  .registerContainerRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #262427;
+    margin: 2rem;
+    // margin: 3rem;
+    width: 40%;
+    height: 70%;
+    border-radius: 10px;
 
-  .secondButton{
-    background-color: #E2E0E3;
-    color: #262427;
-    padding: 0.6rem 2rem;
-  }
+    .loginInputFields {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+
+      input {
+        @include registerInputMix();
+        width: 70%;
+        margin-top: 1rem;
+      }
+
+      input::placeholder { 
+        color: #DCDCDC;
+        opacity: 1; 
+      }
+
+      p {
+        text-align: center;
+        color: rgb(214, 214, 2);
+        padding: 0px;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+
+    }
+
+
+
+
+
+    .signUpButtons{
+      align-self: center;
+      width: 50%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .button{
+      @include registerButtonMix()
+    }
+
+    .secondButton{
+      background-color: #E2E0E3;
+      color: #262427;
+      padding: 0.6rem 2rem;
+    }
+
+  }
 }

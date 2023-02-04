@@ -1,6 +1,9 @@
 import React from 'react'
 import "./login.css"
 import { Link } from "react-router-dom";
+import Navbar from "../../Components/Navbar/Navbar";
+import Modal from "../../Components/Modal/Modal";
+
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -40,25 +43,26 @@ function Login() {
 
   return (
     <>
-      <Link
+      {/* <Link
         to={`/`}
         className="logo"
         style={{ textDecoration: "none" }}
       >
         Leqaa
-      </Link>
+      </Link> */}
+      <Navbar/>
       <hr color="#353535" noshade />
 
       <div className="loginContainer">
         <div className="loginContainerLeft">
           <div className="headers">
-            <h1 className="mainHeader">
+            <h1>
               Video Calls and Meetings for personal Use and organizations.
             </h1>
-            <div className="subHeader">
+            <p >
               Leqaa is a service for secure, high-quality video meetings and
               calls available for everyone.
-            </div>
+            </p>
           </div>
 
           <div className="loginToolbox">
@@ -72,6 +76,13 @@ function Login() {
               <button className="button">Join</button>
             </div>
           </div>
+
+          {/* <Modal /> */}
+
+
+
+
+
         </div>
 
         <form
@@ -79,7 +90,7 @@ function Login() {
           onSubmit={handleSubmit(onSubmitHandler)}
         >
           <div className="loginInputFields">
-            <h1 className="loginText">Log In</h1>
+            <h1>Log In</h1>
             <input
               className="loginInput"
               type="email"
@@ -100,6 +111,7 @@ function Login() {
             )}
           </div>
 
+
           <div className="loginButtons">
             <Link
               to={`/register`}
@@ -112,6 +124,8 @@ function Login() {
               Login
             </button>
           </div>
+
+
         </form>
       </div>
     </>
