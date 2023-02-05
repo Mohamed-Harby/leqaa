@@ -1,74 +1,39 @@
-.logo {
-  font-family: "Leckerli One", cursive;
-  font-size: 2rem;
-  margin-left: 2rem;
-  margin-top: 0.25rem;
-}
-
 a {
   text-decoration: none;
+}
+
+.hrRegister {
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #353535;
 }
 
 .registerContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 52px);
   background: #1B1B1B;
   color: #E2E0E3;
 }
-.registerContainer .registerContainerLeft {
+.registerContainer .left {
   width: 50%;
   height: 70%;
   margin: 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
-.registerContainer .registerContainerLeft .registerHeaders {
-  margin-bottom: 100px;
-}
-.registerContainer .registerContainerLeft .registerHeaders h1 {
+.registerContainer .left h1 {
   font-size: 3.2rem;
 }
-.registerContainer .registerContainerLeft .registerHeaders p {
+.registerContainer .left p {
   margin-top: 10px;
   font-size: 1.5rem;
 }
-.registerContainer .registerContainerLeft .registerToolbox .joinMeetingWithCode {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-.registerContainer .registerContainerLeft .registerToolbox button {
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
-}
-.registerContainer .registerContainerLeft .registerToolbox input {
-  background-color: #656366;
-  color: #DCDCDC;
-  outline: none;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  padding: 0.7rem 2rem;
-  width: 60%;
-  margin-right: 1.2rem;
-}
-.registerContainer .registerContainerLeft .registerToolbox input::-moz-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.registerContainer .registerContainerLeft .registerToolbox input:-ms-input-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.registerContainer .registerContainerLeft .registerToolbox input::placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.registerContainer .registerContainerRight {
+.registerContainer .right {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -78,16 +43,17 @@ a {
   height: 70%;
   border-radius: 10px;
 }
-.registerContainer .registerContainerRight .loginInputFields {
+.registerContainer .right .inputFields {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.registerContainer .registerContainerRight .loginInputFields h1 {
-  font-size: 2.5rem;
+.registerContainer .right .inputFields h1 {
+  font-size: 3rem;
   text-align: center;
+  margin-top: 30px;
 }
-.registerContainer .registerContainerRight .loginInputFields input {
+.registerContainer .right .inputFields input {
   background-color: #656366;
   color: #DCDCDC;
   outline: none;
@@ -95,44 +61,50 @@ a {
   border-radius: 8px;
   padding: 0.7rem 2rem;
   width: 60%;
-  width: 70%;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  width: 75%;
 }
-.registerContainer .registerContainerRight .loginInputFields input::-moz-placeholder {
+.registerContainer .right .inputFields input::-moz-placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.registerContainer .registerContainerRight .loginInputFields input:-ms-input-placeholder {
+.registerContainer .right .inputFields input:-ms-input-placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.registerContainer .registerContainerRight .loginInputFields input::placeholder {
+.registerContainer .right .inputFields input::placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.registerContainer .registerContainerRight .loginInputFields p {
+.registerContainer .right .inputFields p {
   text-align: center;
   color: rgb(214, 214, 2);
   padding: 0px;
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
-.registerContainer .registerContainerRight .signUpButtons {
+.registerContainer .right .buttonsContainer {
   align-self: center;
-  width: 50%;
+  width: 60%;
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  justify-content: space-around;
+  margin: 3rem 0rem;
 }
-.registerContainer .registerContainerRight .button {
+.registerContainer .right .buttonsContainer button {
   background-color: #A379DE;
   padding: 0.6rem 1.5rem;
   border-radius: 8px;
   font-size: 1.2rem;
   color: white;
+  cursor: pointer;
 }
-.registerContainer .registerContainerRight .secondButton {
+.registerContainer .right .buttonsContainer a {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
   background-color: #E2E0E3;
   color: #262427;
   padding: 0.6rem 2rem;

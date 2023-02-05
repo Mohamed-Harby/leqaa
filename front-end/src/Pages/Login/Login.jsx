@@ -1,9 +1,8 @@
-import React from 'react'
-import "./login.css"
+import React from "react";
+import "./login.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import Modal from "../../Components/Modal/Modal";
-
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -39,97 +38,46 @@ function Login() {
     reset();
   };
 
-
-
   return (
     <>
-      {/* <Link
-        to={`/`}
-        className="logo"
-        style={{ textDecoration: "none" }}
-      >
-        Leqaa
-      </Link> */}
-      <Navbar/>
-      <hr color="#353535" noshade />
+      <Navbar />
+      <hr className="hrLogin" noshade />
 
       <div className="loginContainer">
-        <div className="loginContainerLeft">
-          <div className="headers">
+        <div className="left">
+          <div className="container">
             <h1>
               Video Calls and Meetings for personal Use and organizations.
             </h1>
-            <p >
+            <p>
               Leqaa is a service for secure, high-quality video meetings and
               calls available for everyone.
             </p>
           </div>
-
-          <div className="loginToolbox">
-            <button className="button">Create Instant Meeting</button>
-            <div className="joinMeetingWithCode">
-              <input
-                className="loginInput"
-                type="text"
-                placeholder="Meeting Code..."
-              />
-              <button className="button">Join</button>
-            </div>
-          </div>
-
-          {/* <Modal /> */}
-
-
-
-
-
         </div>
 
-        <form
-          className="loginContainerRight"
-          onSubmit={handleSubmit(onSubmitHandler)}
-        >
-          <div className="loginInputFields">
+        <form className="right" onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className="inputFields">
             <h1>Log In</h1>
+
+            <input type="email" placeholder="Email" {...register("email")} />
+            {errors.email && <p>{errors.email.message}</p>}
             <input
-              className="loginInput"
-              type="email"
-              placeholder="Email"
-              {...register("email")}
-            />
-            {errors.email && (
-              <p className="loginError">{errors.email.message}</p>
-            )}
-            <input
-              className="loginInput"
               type="password"
               placeholder="Password"
               {...register("password")}
             />
-            {errors.password && (
-              <p className="loginError">{errors.password.message}</p>
-            )}
+            {errors.password && <p>{errors.password.message}</p>}
           </div>
 
-
-          <div className="loginButtons">
-            <Link
-              to={`/register`}
-              className="button secondButton"
-              style={{ textDecoration: "none" }}
-            >
-              Sign Up
-            </Link>
-            <button className="button" type="submit">
-              Login
-            </button>
+        <div className="buttonsContainer">
+            <Link to={`/register`}>Sign Up</Link>
+            <button type="submit">Login</button>
           </div>
-
-
         </form>
       </div>
     </>
   );
 }
 
-export default Login
+export default Login;

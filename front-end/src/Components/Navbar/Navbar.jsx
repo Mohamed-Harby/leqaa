@@ -9,12 +9,13 @@ function Navbar() {
   const modalClose = () => {
     setModalOpen(false);
   };
+  const pathName = window.location.pathname;
+  const noLoginPath = ["/register", "/login"]
 
   return (
     <>
       <nav>
         <ul>
-
           <li>
             <Link to="/">Leqaa</Link>
           </li>
@@ -29,18 +30,18 @@ function Navbar() {
 
           <li>
             <button onClick={() => setModalOpen(true)}>+</button>
-            {/* <button>Log In</button> */}
-            <Link
-              to={`/login`}
-              className="homeLoginButton"
-              style={{ textDecoration: "none" }}
-            >
-              Log In
-            </Link>
-
-
+            {!noLoginPath.includes(pathName) ? (
+              <Link
+                to={`/login`}
+                className="homeLoginButton"
+                style={{ textDecoration: "none" }}
+              >
+                Log In
+              </Link>
+            ) : (
+              ""
+            )}
           </li>
-          
         </ul>
       </nav>
       {modalOpen && <Modal modalClose={modalClose} />}

@@ -3,7 +3,6 @@ import "./register.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 
-
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -29,7 +28,6 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-
   const {
     register,
     handleSubmit,
@@ -46,48 +44,23 @@ function Register() {
 
   return (
     <>
-      {/* <Link to={`/`} className="logo">
-        Leqaa
-      </Link> */}
       <Navbar />
-      <hr color="#353535" noshade />
-
-      <hr color="#353535" noshade />
+      <hr className="hrRegister" noshade />
 
       <div className="registerContainer">
-        <div className="registerContainerLeft">
-          <div className="registerHeaders">
-            <h1>
-              Video Calls and Meetings for personal Use and organizations.
-            </h1>
-            <p>
-              Leqaa is a service for secure, high-quality video meetings and
-              calls available for everyone.
-            </p>
-          </div>
-
-          <div className="registerToolbox">
-            <button className="button">Create Instant Meeting</button>
-            <div className="joinMeetingWithCode">
-              <input
-                className="registerInput"
-                type="text"
-                placeholder="Meeting Code..."
-              />
-              <button className="button">Join</button>
-            </div>
-          </div>
+        <div className="left">
+          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
+          <p>
+            Leqaa is a service for secure, high-quality video meetings and calls
+            available for everyone.
+          </p>
         </div>
 
-        <form
-          className="registerContainerRight"
-          onSubmit={handleSubmit(onSubmitHandler)}
-        >
-          <div className="loginInputFields">
+        <form className="right" onSubmit={handleSubmit(onSubmitHandler)}>
+          <div className="inputFields">
             <h1>Sign Up</h1>
 
             <input
-              className="registerInput"
               placeholder="Email"
               type="email"
               name="email"
@@ -97,7 +70,6 @@ function Register() {
             {errors.email && <p>{errors.email.message}</p>}
 
             <input
-              className="registerInput"
               placeholder="User Name"
               type="text"
               name="name"
@@ -107,7 +79,6 @@ function Register() {
             {errors.name && <p>{errors.name.message}</p>}
 
             <input
-              className="registerInput"
               placeholder="Password"
               type="password"
               name="password"
@@ -117,7 +88,6 @@ function Register() {
             {errors.password && <p>{errors.password.message}</p>}
 
             <input
-              className="registerInput"
               placeholder="Confirm Password"
               type="password"
               name="confirmPassword"
@@ -127,17 +97,11 @@ function Register() {
             {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
           </div>
 
-          <div className="signUpButtons">
-            <Link
-              to={`/login`}
-              className="button secondButton"
-              style={{ textDecoration: "none" }}
-            >
+          <div className="buttonsContainer">
+            <Link to={`/login`}>
               login
             </Link>
-            <button className="button" type="submit">
-              Sign Up
-            </button>
+            <button type="submit">Sign Up</button>
           </div>
         </form>
       </div>

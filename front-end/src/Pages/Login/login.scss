@@ -1,9 +1,3 @@
-.logo {
-  font-family: 'Leckerli One', cursive;
-  font-size: 2rem;
-  margin-left: 2rem;
-  margin-top: 0.25rem;
-}
 
 @mixin loginInputMix{
   background-color: #656366;
@@ -21,72 +15,52 @@
   border-radius: 8px;
   font-size: 1.2rem;
   color: white;
+  cursor: pointer;
 }
 
-// body {
-//   background: #1B1B1B;
-//   color: #E2E0E3;
-// }
+.hrLogin{
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0; 
+  border-top: 1px solid #353535;
+}
 
 
 .loginContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 52px);
   background: #1B1B1B;
   color: #E2E0E3;
 
 
-  
-  .loginContainerLeft{
-    width: 50%;
-    height: 70%;
-    margin: 2rem;
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-around;
-
-
-    .headers{
-      margin-bottom: 100px;
-      h1 {
-        font-size: 3.2rem;
-      }
+    .left{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%;
+      height: 70%;
+      margin: 2rem;
     
-      p {
-        margin-top: 10px;
-        font-size: 1.5rem;
-      }
 
-
-    }
-
-    .loginToolbox{
-      .joinMeetingWithCode{
-        margin-top: 1.5rem;
+      .container{
         display: flex;
-        justify-content: space-between;
-    
+        flex-direction: column;
+        h1{
+          font-size: 3.2rem;
+        }
+        p {
+          margin-top: 10px;
+          font-size: 1.5rem;
+        }
+
       }
-    
-      .button {
-        @include loginButtonMix()
-      }
-    
-      .loginInput {
-        @include loginInputMix();
-        margin-right: 1.2rem;
-      }
-    
-      .loginInput::placeholder { 
-        color: #DCDCDC;
-        opacity: 1; 
-      }
-    }
   }
 
-  .loginContainerRight{
+
+  .right{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -96,7 +70,7 @@
     height: 70%;
     border-radius: 10px;
     
-    .loginInputFields{
+    .inputFields{
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -104,6 +78,7 @@
       h1{
         font-size: 3rem;
         text-align: center;
+        margin-bottom: 10px;
       }
 
       input{
@@ -126,24 +101,27 @@
       }
     }
 
-    .loginButtons{
+    .buttonsContainer{
       align-self: center;
-      width: 50%;
+      width: 60%;
       display: flex;
-      justify-content: space-between;
-      margin-top: 3rem;
-      margin-bottom: 3rem;
+      justify-content: space-around;
+      margin: 3rem 0rem;
       
-      .button{
+      button{
         @include loginButtonMix()
       }
     
-      .secondButton{
+      a{
+        @include loginButtonMix();
         background-color: #E2E0E3;
         color: #262427;
         padding: 0.6rem 2rem;
+        text-decoration: none;
       }
     }
+
+
   }
 
 

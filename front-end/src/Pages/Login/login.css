@@ -1,70 +1,39 @@
-.logo {
-  font-family: "Leckerli One", cursive;
-  font-size: 2rem;
-  margin-left: 2rem;
-  margin-top: 0.25rem;
+.hrLogin {
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #353535;
 }
 
 .loginContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 52px);
   background: #1B1B1B;
   color: #E2E0E3;
 }
-.loginContainer .loginContainerLeft {
+.loginContainer .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 50%;
   height: 70%;
   margin: 2rem;
+}
+.loginContainer .left .container {
   display: flex;
   flex-direction: column;
 }
-.loginContainer .loginContainerLeft .headers {
-  margin-bottom: 100px;
-}
-.loginContainer .loginContainerLeft .headers h1 {
+.loginContainer .left .container h1 {
   font-size: 3.2rem;
 }
-.loginContainer .loginContainerLeft .headers p {
+.loginContainer .left .container p {
   margin-top: 10px;
   font-size: 1.5rem;
 }
-.loginContainer .loginContainerLeft .loginToolbox .joinMeetingWithCode {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-.loginContainer .loginContainerLeft .loginToolbox .button {
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
-}
-.loginContainer .loginContainerLeft .loginToolbox .loginInput {
-  background-color: #656366;
-  color: #DCDCDC;
-  outline: none;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  padding: 0.7rem 2rem;
-  width: 60%;
-  margin-right: 1.2rem;
-}
-.loginContainer .loginContainerLeft .loginToolbox .loginInput::-moz-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.loginContainer .loginContainerLeft .loginToolbox .loginInput:-ms-input-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.loginContainer .loginContainerLeft .loginToolbox .loginInput::placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.loginContainer .loginContainerRight {
+.loginContainer .right {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -74,16 +43,17 @@
   height: 70%;
   border-radius: 10px;
 }
-.loginContainer .loginContainerRight .loginInputFields {
+.loginContainer .right .inputFields {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.loginContainer .loginContainerRight .loginInputFields h1 {
+.loginContainer .right .inputFields h1 {
   font-size: 3rem;
   text-align: center;
+  margin-bottom: 10px;
 }
-.loginContainer .loginContainerRight .loginInputFields input {
+.loginContainer .right .inputFields input {
   background-color: #656366;
   color: #DCDCDC;
   outline: none;
@@ -94,42 +64,49 @@
   margin-top: 2rem;
   width: 75%;
 }
-.loginContainer .loginContainerRight .loginInputFields input::-moz-placeholder {
+.loginContainer .right .inputFields input::-moz-placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.loginContainer .loginContainerRight .loginInputFields input:-ms-input-placeholder {
+.loginContainer .right .inputFields input:-ms-input-placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.loginContainer .loginContainerRight .loginInputFields input::placeholder {
+.loginContainer .right .inputFields input::placeholder {
   color: #DCDCDC;
   opacity: 1;
 }
-.loginContainer .loginContainerRight .loginInputFields p {
+.loginContainer .right .inputFields p {
   text-align: center;
   color: rgb(214, 214, 2);
   padding: 0px;
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
-.loginContainer .loginContainerRight .loginButtons {
+.loginContainer .right .buttonsContainer {
   align-self: center;
-  width: 50%;
+  width: 60%;
   display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  justify-content: space-around;
+  margin: 3rem 0rem;
 }
-.loginContainer .loginContainerRight .loginButtons .button {
+.loginContainer .right .buttonsContainer button {
   background-color: #A379DE;
   padding: 0.6rem 1.5rem;
   border-radius: 8px;
   font-size: 1.2rem;
   color: white;
+  cursor: pointer;
 }
-.loginContainer .loginContainerRight .loginButtons .secondButton {
+.loginContainer .right .buttonsContainer a {
+  background-color: #A379DE;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
   background-color: #E2E0E3;
   color: #262427;
   padding: 0.6rem 2rem;
+  text-decoration: none;
 }/*# sourceMappingURL=login.css.map */
