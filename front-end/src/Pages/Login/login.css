@@ -36,7 +36,7 @@
 .loginContainer .right {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #262427;
   margin: 2rem;
   width: 40%;
@@ -47,6 +47,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
 .loginContainer .right .inputFields h1 {
   font-size: 3rem;
@@ -83,30 +84,36 @@
   margin-top: 0.5rem;
   margin-bottom: 0;
 }
-.loginContainer .right .buttonsContainer {
+.loginContainer .right .inputFields button {
+  background-color: #A379DE;
+  padding: 0.7rem 3rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  margin-top: 40px;
+}
+.loginContainer .right .linksContainer {
   align-self: center;
-  width: 60%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   margin: 3rem 0rem;
 }
-.loginContainer .right .buttonsContainer button {
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
+.loginContainer .right .linksContainer .activeLink {
+  background-color: #1B1B1B;
   color: white;
-  cursor: pointer;
+  cursor: not-allowed;
 }
-.loginContainer .right .buttonsContainer a {
+.loginContainer .right .linksContainer a {
   background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 3rem;
   border-radius: 8px;
   font-size: 1.2rem;
   color: white;
   cursor: pointer;
-  background-color: #E2E0E3;
+  background-color: #fff;
   color: #262427;
-  padding: 0.6rem 2rem;
+  padding: 0.6rem 5rem;
   text-decoration: none;
 }/*# sourceMappingURL=login.css.map */

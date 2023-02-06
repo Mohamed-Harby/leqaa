@@ -11,7 +11,7 @@
 
 @mixin loginButtonMix{
   background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
+  padding: 0.7rem 3rem;
   border-radius: 8px;
   font-size: 1.2rem;
   color: white;
@@ -63,7 +63,8 @@
   .right{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    // justify-content: space-around;
+    justify-content: space-between; //! test
     background-color: #262427;
     margin: 2rem;
     width: 40%;
@@ -74,6 +75,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 30px; //! test
       
       h1{
         font-size: 3rem;
@@ -99,24 +101,32 @@
         margin-top: 0.5rem;
         margin-bottom: 0;
       }
+
+      button{
+        @include loginButtonMix();
+        margin-top: 40px;
+      }
     }
 
-    .buttonsContainer{
+    .linksContainer{
       align-self: center;
-      width: 60%;
+      width: 100%;
       display: flex;
       justify-content: space-around;
       margin: 3rem 0rem;
       
-      button{
-        @include loginButtonMix()
+      .activeLink{
+        // background-color: #656366;
+        background-color: #1B1B1B;
+        color: white;
+        cursor:not-allowed;
       }
-    
+      
       a{
         @include loginButtonMix();
-        background-color: #E2E0E3;
+        background-color: #fff;
         color: #262427;
-        padding: 0.6rem 2rem;
+        padding: 0.6rem 5rem;
         text-decoration: none;
       }
     }

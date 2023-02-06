@@ -1,0 +1,9 @@
+@use "../../helper/style" as *;
+
+.radiusImg{
+  background-color: $fifthColor;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

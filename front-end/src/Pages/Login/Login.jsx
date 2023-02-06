@@ -23,6 +23,12 @@ const schema = yup.object().shape({
     .required(),
 });
 
+const pathName = window.location.pathname;
+let active = "";
+if (pathName === '/login'){
+  active = "/login"
+} 
+
 function Login() {
   const {
     register,
@@ -68,11 +74,17 @@ function Login() {
               {...register("password")}
             />
             {errors.password && <p>{errors.password.message}</p>}
+            <button type="submit">Submit</button>
           </div>
-
-        <div className="buttonsContainer">
+          {/* <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}></div> */}
+          <div className="linksContainer">
             <Link to={`/register`}>Sign Up</Link>
-            <button type="submit">Login</button>
+            <Link 
+            className={(active === '/login' && "activeLink")}
+            
+            to={`/login`}
+            >login
+            </Link>
           </div>
         </form>
       </div>
