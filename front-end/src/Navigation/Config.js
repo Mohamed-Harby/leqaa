@@ -3,7 +3,8 @@ import { Layout } from "../Layout/Layout";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
-import { ROOT, LOGIN, REGISTER } from './Paths'
+import Settings from "../Pages/Settings/Settings";
+import { ROOT, LOGIN, REGISTER, SETTINGS } from './Paths'
 
 const auth = true
 
@@ -16,20 +17,30 @@ const ProtectedRoutes = ({children}) => {
 
 
 export const RouterConfig = createBrowserRouter([
-    {
+  {
+    path: ROOT,
+    element: (
+      <ProtectedRoutes>
+        <Layout />
+      </ProtectedRoutes>
+    ),
+    children: [
+      {
         path: ROOT,
-        element: <ProtectedRoutes><Layout /></ProtectedRoutes>,
-        children: [
-            {
-                path:ROOT,
-                element: <Home />
-            }
-        ]
-    },{
-        path: LOGIN,
-        element: <Login/>
-    },{
-        path: REGISTER,
-        element: <Register/>
-    }
-])
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    path: LOGIN,
+    element: <Login />,
+  },
+  {
+    path: REGISTER,
+    element: <Register />,
+  },
+  {
+    path: SETTINGS,
+    element: <Settings />,
+  },
+]);

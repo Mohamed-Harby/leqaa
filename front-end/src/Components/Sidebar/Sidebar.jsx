@@ -32,7 +32,7 @@ function Sidebar() {
         </li>
 
         <li class="bottom">
-          <NavLink to="/setting">
+          <NavLink to="/settings">
             <BsGear />
             <span className={closeSidebar ? "hideText" : "text" }>Setting</span>
           </NavLink>
