@@ -1,0 +1,11 @@
+
+version: '3.4'
+
+services:
+  integrationtests:
+    image: integrationtests
+    build:
+      context: .
+      dockerfile: BusinessLogic.Tests/IntegrationTests/Dockerfile
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
