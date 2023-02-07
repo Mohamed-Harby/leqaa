@@ -1,0 +1,24 @@
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #262427;
+  color: #e2e0e3;
+  padding: 0.4rem 0.7rem;
+}
+.statusbar .left {
+  display: flex;
+  gap: 0.7rem;
+}
+.statusbar .left h3 {
+  font-size: 1.2rem;
+}
+.statusbar .left p {
+  margin: -2px 0px;
+  color: #a379de;
+}
+.statusbar .right {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.8rem;
+}/*# sourceMappingURL=Statusbar.css.map */

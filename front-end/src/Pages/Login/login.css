@@ -1,0 +1,119 @@
+.hrLogin {
+  display: block;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #353535;
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: calc(100vh - 52px);
+  background: #1B1B1B;
+  color: #E2E0E3;
+}
+.loginContainer .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  height: 70%;
+  margin: 2rem;
+}
+.loginContainer .left .container {
+  display: flex;
+  flex-direction: column;
+}
+.loginContainer .left .container h1 {
+  font-size: 3.2rem;
+}
+.loginContainer .left .container p {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+.loginContainer .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #262427;
+  margin: 2rem;
+  width: 40%;
+  height: 70%;
+  border-radius: 10px;
+}
+.loginContainer .right .inputFields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+.loginContainer .right .inputFields h1 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.loginContainer .right .inputFields input {
+  background-color: #656366;
+  color: #DCDCDC;
+  outline: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  padding: 0.7rem 2rem;
+  width: 60%;
+  margin-top: 2rem;
+  width: 75%;
+}
+.loginContainer .right .inputFields input::-moz-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainer .right .inputFields input:-ms-input-placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainer .right .inputFields input::placeholder {
+  color: #DCDCDC;
+  opacity: 1;
+}
+.loginContainer .right .inputFields p {
+  text-align: center;
+  color: rgb(214, 214, 2);
+  padding: 0px;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+.loginContainer .right .inputFields button {
+  background-color: #A379DE;
+  padding: 0.7rem 3rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  margin-top: 40px;
+}
+.loginContainer .right .linksContainer {
+  align-self: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 3rem 0rem;
+}
+.loginContainer .right .linksContainer .activeLink {
+  background-color: #1B1B1B;
+  color: white;
+  cursor: not-allowed;
+}
+.loginContainer .right .linksContainer a {
+  background-color: #A379DE;
+  padding: 0.7rem 3rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  background-color: #fff;
+  color: #262427;
+  padding: 0.6rem 5rem;
+  text-decoration: none;
+}/*# sourceMappingURL=login.css.map */
