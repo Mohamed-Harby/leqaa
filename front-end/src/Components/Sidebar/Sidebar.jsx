@@ -12,6 +12,7 @@ function Sidebar() {
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar" }>
       <ul>
+        
         <li class="top">
           <div className="control">
             <FaBars className={closeSidebar ? "showBar" : "bar" } onClick={() => setCloseSidebar(false)} />
@@ -41,6 +42,7 @@ function Sidebar() {
             <span className={closeSidebar ? "hideText" : "text" }>Username</span>
           </NavLink>
         </li>
+
       </ul>
     </div>
   );

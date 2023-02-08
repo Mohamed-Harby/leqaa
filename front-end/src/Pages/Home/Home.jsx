@@ -1,87 +1,30 @@
-import React from 'react'
-// import Statusbar from '../../Components/Statusbar/Statusbar'
+import React, { useEffect, useRef, useState } from "react";
+import AdditionalSidebar from "../../Components/AdditionalSidebar/AdditionalSidebar";
+import Carousel from "../../Components/Carousel/Carousel";
+import Dropdown from "../../Components/Dropdown/Dropdown";
+import RecentActivities from "../../Components/HomeComponents/RecentActivities/RecentActivities";
+import Recomended from "../../Components/HomeComponents/Recomended/Recomended";
+import "./Home.css";
+
+import Statusbar from '../../Components/Statusbar/Statusbar'
 // import CallToolsBar from '../../Components/CallToolsBar/CallToolsBar'
 // import TypingBar from '../../Components/TypingBar/TypingBar';
 
 function Home() {
+  const recentActivities = useRef(null)
+  const recomended = useRef(null)
+  const [components, setComponents] = useState('RecentActivities')
+
   return (
-    <div style={{ flex: "4" }} className="home">
-      {/* <Statusbar/>
-      <CallToolsBar/>
-      <TypingBar /> */}
-      <div>potato</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
-      <div>Home</div>
+    <div className="home" >
+      <AdditionalSidebar />
+        <Carousel show={3} />
+        <button onClick={() => setComponents(recentActivities.current.value)} value='RecentActivities' ref={recentActivities}>Recent Activities</button>
+        <button onClick={() => setComponents(recomended.current.value)} value='Recomended' ref={recomended}>Recomended</button>
+        {components ==  'RecentActivities' && <RecentActivities />}
+        {components ==  'Recomended' && <Recomended />}
+        <Dropdown />
+        <Statusbar />
     </div>
   );
 }

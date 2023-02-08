@@ -1,0 +1,40 @@
+.showAnimation,
+.hideAnimation {
+  width: 80%;
+  height: 100%;
+  background: url(../../assets/search.png) no-repeat 98% center;
+  background-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0 25px;
+  box-shadow: 0px 0px 5px 1px black;
+  color: #e2e0e3;
+  transition: width 0.4s ease-in-out;
+}
+@media screen and (max-width: 768px) {
+  .showAnimation,
+.hideAnimation {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .showAnimation,
+.hideAnimation {
+    width: 100%;
+  }
+}
+.showAnimation::-moz-placeholder, .hideAnimation::-moz-placeholder {
+  color: #e2e0e3;
+}
+.showAnimation:-ms-input-placeholder, .hideAnimation:-ms-input-placeholder {
+  color: #e2e0e3;
+}
+.showAnimation::placeholder,
+.hideAnimation::placeholder {
+  color: #e2e0e3;
+}
+
+.showAnimation:focus {
+  width: 100%;
+  outline: none;
+}/*# sourceMappingURL=Searchbar.css.map */

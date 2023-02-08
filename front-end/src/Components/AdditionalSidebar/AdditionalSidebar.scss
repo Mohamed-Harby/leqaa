@@ -1,0 +1,9 @@
+.additional{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    height: calc(100vh - 50px);
+    flex: 1;
+    color: black;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "../Modal/Modal";
+import Searchbar from "../Searchbar/Searchbar";
 import "./Navbar.css";
 
 function Navbar() {
@@ -10,7 +11,7 @@ function Navbar() {
     setModalOpen(false);
   };
   const pathName = window.location.pathname;
-  const noLoginPath = ["/register", "/login", "/settings" ]
+  const noLoginPath = ["/register", "/login", "/settings"];
 
   return (
     <>
@@ -21,11 +22,7 @@ function Navbar() {
           </li>
 
           <li>
-            <input
-              type="search"
-              placeholder="Search"
-              onChange={(x) => setSearch(x.target.value)}
-            />
+            <Searchbar />
           </li>
 
           <li>
