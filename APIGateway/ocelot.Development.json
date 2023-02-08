@@ -1,0 +1,48 @@
+{
+    "Routes": [
+        {
+          "UpstreamPathTemplate": "/api/v1/authentication/register",
+          "UpstreamHttpMethod": [ "Post" ],
+          "DownstreamScheme": "https",
+          "DownstreamHostAndPorts": [
+            {
+              "Host": "localhost",
+              "Port": 7065
+            }
+          ],
+          "DownstreamPathTemplate": "/api/v1/authentication/register"
+        },
+        {
+            "UpstreamPathTemplate": "/api/v1/authentication/login",
+            "UpstreamHttpMethod": [ "Post" ],
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "localhost",
+                "Port": 7065
+              }
+            ],
+            "DownstreamPathTemplate": "/api/v1/authentication/login"
+          },
+          {
+            "UpstreamPathTemplate": "/swagger",
+            "UpstreamHttpMethod": [ "Get" ],
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+              {
+                "Host": "localhost",
+                "Port": 7065
+              }
+            ],
+            "DownstreamPathTemplate": "/swagger"
+          }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:5001",
+        "RateLimitOptions": {
+          "QuotaExceededMessage": "Request not allowed",
+          "HttpStatusCode": 909
+        }
+      }
+    
+}
