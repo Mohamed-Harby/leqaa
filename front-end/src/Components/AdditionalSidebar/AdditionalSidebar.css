@@ -3,7 +3,10 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  height: calc(100vh - 50px);
+  position: sticky;
+  min-height: 100vh;
   flex: 1;
   color: black;
+  background: wheat;
+  padding: 10px 0px;
 }/*# sourceMappingURL=AdditionalSidebar.css.map */

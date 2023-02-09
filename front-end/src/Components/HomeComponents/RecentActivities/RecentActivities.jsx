@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import Card from "../Card/Card";
-import Searchbar from "../Searchbar/Searchbar";
-import "./AdditionalSidebar.css";
+import React from 'react'
+import Card from "../../Card/Card";
+import './RecentActivities.css'
 
-function AdditionalSidebar() {
+function RecentActivities() {
   const arr = [
     { name: "ch1", status: "live", nameOrg: "org1" },
     { name: "ch2", status: "live", nameOrg: "org1" },
@@ -13,13 +12,15 @@ function AdditionalSidebar() {
     { name: "ch6", status: "live", nameOrg: "org1" },
   ];
   return (
-    <div className="additional">
-      <Searchbar />
+    <div className='recentactivities'>
       {arr.map((item) => {
-        return <Card card={item} />;
+        return (
+          <Card card={item} />
+        )
       })}
+
     </div>
-  );
+  )
 }
 
-export default AdditionalSidebar;
+export default RecentActivities

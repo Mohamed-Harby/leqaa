@@ -1,18 +1,18 @@
 import React from "react";
+import RadiusImg from "../RadiusImg/RadiusImg";
+import "./Card.css";
 
 function Card(props) {
-  const cards = props.cards
-  console.log(cards)
+  const cardInformation = props.card;
+  console.log(cardInformation);
   return (
-    <div>
-      {cards.map((card) => {
-        return (
-          <div className="card">
-            <div>{card.name}</div>
-            <div>{card.status}</div>
-          </div>
-        );
-      })}
+    <div className="card">
+      <RadiusImg size="40px" />
+      <div className="content">
+        <div>{cardInformation?.name}</div>
+        <div>{cardInformation?.status}</div>
+        <div>{cardInformation?.nameOrg}</div>
+      </div>
     </div>
   );
 }

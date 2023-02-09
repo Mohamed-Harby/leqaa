@@ -69,10 +69,6 @@
   color: #DCDCDC;
   opacity: 1;
 }
-.loginContainer .right .inputFields input:-ms-input-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
 .loginContainer .right .inputFields input::placeholder {
   color: #DCDCDC;
   opacity: 1;

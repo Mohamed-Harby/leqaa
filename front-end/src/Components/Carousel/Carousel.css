@@ -14,11 +14,12 @@
 .item {
   display: flex;
   transition: all 250ms linear;
-  -ms-overflow-style: none; /* hide scrollbar in IE and Edge */
-  scrollbar-width: none; /* hide scrollbar in Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-.item::-webkit-scrollbar, .item::-webkit-scrollbar {
+.item::-webkit-scrollbar,
+.item::-webkit-scrollbar {
   display: none;
 }
 
@@ -28,7 +29,8 @@
   flex-grow: 1;
 }
 
-.left-arrow, .right-arrow {
+.left-arrow,
+.right-arrow {
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -53,9 +55,11 @@
 }
 
 .item.show-3 > * {
-  width: 33.3333333333%;
+  width: 30%;
+  margin: 0 1.6666666667%;
 }
 
 .item.show-4 > * {
-  width: 25%;
+  width: 22.5%;
+  margin: 0 1.6666666667%;
 }/*# sourceMappingURL=Carousel.css.map */

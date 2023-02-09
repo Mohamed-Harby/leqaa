@@ -68,10 +68,6 @@ a {
   color: #DCDCDC;
   opacity: 1;
 }
-.registerContainer .right .inputFields input:-ms-input-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
 .registerContainer .right .inputFields input::placeholder {
   color: #DCDCDC;
   opacity: 1;

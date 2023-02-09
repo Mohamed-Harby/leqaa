@@ -1,0 +1,26 @@
+@use "../../helper/style" as *;
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0px;
+  background-color: $secondColor;
+  border-radius: 10px;
+  .content {
+    margin-left: 10px;
+    width: 100%;
+    div {
+      &:first-child {
+        font-size: 20px;
+      }
+      &:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100px;
+      }
+    }
+  }
+}

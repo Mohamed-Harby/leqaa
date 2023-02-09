@@ -1,1 +1,22 @@
-/*# sourceMappingURL=Card.css.map */
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+  margin: 10px 0px;
+  background-color: #262427;
+  border-radius: 10px;
+}
+.card .content {
+  margin-left: 10px;
+  width: 100%;
+}
+.card .content div:first-child {
+  font-size: 20px;
+}
+.card .content div:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100px;
+}/*# sourceMappingURL=Card.css.map */

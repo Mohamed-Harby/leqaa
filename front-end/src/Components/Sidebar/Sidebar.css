@@ -1,6 +1,5 @@
 .sidebar {
   background-color: #1b1b1b;
-  position: -webkit-sticky;
   position: sticky;
   top: 50px;
   height: calc(100vh - 50px);
