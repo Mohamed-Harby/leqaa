@@ -4,7 +4,7 @@ using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
 using Microsoft.AspNetCore.Identity;
 
-namespace Authentication.Application.Queries.LoginQuery;
+namespace Authentication.Application.Queries.Login;
 public class LoginQueryHandler : IHandler<LoginQuery>
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -16,9 +16,9 @@ public class LoginQueryHandler : IHandler<LoginQuery>
         _tokenGenerator = tokenGenerator;
     }
 
-    public async Task<AuthenticationResults> Handle(LoginQuery request, CancellationToken cancellationToken)
+    public async Task<Results> Handle(LoginQuery request, CancellationToken cancellationToken)
     {
-        var authenticationResults = new AuthenticationResults();
+        var authenticationResults = new Results();
         var user = await _userManager.FindByNameAsync(request.UserName);
         if (user is null)
         {

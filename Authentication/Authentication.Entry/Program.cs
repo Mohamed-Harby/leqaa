@@ -8,6 +8,7 @@ using Authentication.Persistence;
 using Authentication.Persistence.DependencyInjection;
 using Authentication.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 Jwt jwt = new();
 builder.Configuration.GetSection("Jwt").Bind(jwt);
-builder.Services.Configure<Jwt>(builder.Configuration.GetSection("Jwt"));
+
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
 
@@ -42,7 +43,7 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
 
 })
-.AddEntityFrameworkStores<ApplicationDbContext>();
+.AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
 builder.Services
     .AddPersistence(builder.Configuration)

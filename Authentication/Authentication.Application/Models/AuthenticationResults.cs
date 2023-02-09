@@ -1,20 +1,16 @@
 namespace Authentication.Application.Models;
-public class AuthenticationResults
+public class Results
 {
-    public AuthenticationResults()
+    public Results()
     {
         ErrorMessages = new List<string>();
     }
     public bool IsSuccess { get; set; }
     public string Token { get; private set; } = string.Empty;
     public List<string> ErrorMessages { get; private set; }
-    public void AddErrorMessages(string errorMessage)
+    public void AddErrorMessages(params string[] errorMessage)
     {
-        ErrorMessages.Add(errorMessage);
-    }
-    public void AddErrorMessages(string[] errorMessages)
-    {
-        ErrorMessages.AddRange(errorMessages);
+        ErrorMessages.AddRange(errorMessage);
     }
     public void SetToken(string token)
     {
