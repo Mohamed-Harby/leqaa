@@ -2,6 +2,7 @@ using Authentication.Application.CommandInterfaces;
 using Authentication.Application.Interfaces;
 using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
+using Authentication.Domain.Entities.ApplicationUser.Errors;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,7 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
         ITokenGenerator tokenGenerator
         )
     {
-        _emailSender = serviceProvider.GetServices<IEmailSender>().First(s => s.GetType().Name.Contains("onfirmation"));
+        _emailSender = serviceProvider.GetServices<IEmailSender>().First(s => s.GetType().Name.Contains("confirmation"));
         _userManager = userManager;
         _tokenGenerator = tokenGenerator;
     }
@@ -31,11 +32,11 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
         var user = request.Adapt<ApplicationUser>();
         if (await _userManager.FindByNameAsync(user.UserName) is not null)
         {
-            authenticationResults.AddErrorMessages("Username already exists, please login");
+            authenticationResults.AddErrorMessages(UserErrors.UserNameAlreadyExists);
         }
         if (await _userManager.FindByEmailAsync(user.Email) is not null)
         {
-            authenticationResults.AddErrorMessages("Email already exists, please login");
+            authenticationResults.AddErrorMessages(UserErrors.EmailAlreadyExists);
         }
         if (authenticationResults.ErrorMessages.Count > 0)
             return authenticationResults;

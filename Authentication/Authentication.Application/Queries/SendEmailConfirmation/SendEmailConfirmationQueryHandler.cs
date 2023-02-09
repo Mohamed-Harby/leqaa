@@ -21,7 +21,7 @@ public class SendEmailConfirmationQueryHandler : IHandler<SendEmailConfirmationQ
         IServiceProvider serviceProvider)
     {
         _userManager = userManager;
-        _emailSender = serviceProvider.GetServices<IEmailSender>().First(o => o.GetType().Name.Contains("onfirmation"));
+        _emailSender = serviceProvider.GetServices<IEmailSender>().First(o => o.GetType().Name.Contains("confirmation"));
         _configuration = configuration;
     }
 

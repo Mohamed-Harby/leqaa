@@ -7,29 +7,29 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 
 namespace Authentication.Infrastructure.NetworkCalls.EmailSender;
-public class ConfirmationEmailSender : IEmailSender
+public class ResetPasswordEmailSender : IEmailSender
 {
     private readonly Smtp Smtp;
     private readonly IConfiguration _configuration;
 
-    public ConfirmationEmailSender(IOptions<Smtp> smtp, IConfiguration configuration)
+    public ResetPasswordEmailSender(IOptions<Smtp> smtp, IConfiguration configuration)
     {
         Smtp = smtp.Value;
         _configuration = configuration;
     }
-    public async Task SendAsync(string toEmail, string confirmationLink, string token )
+    public async Task SendAsync(string toEmail, string changePasswordLink, string token)
     {
         var encodedToken = HttpUtility.UrlEncode(token);
         var encodedEmail = HttpUtility.UrlEncode(toEmail);
         var messageBody =
             _configuration.GetSection("Uri").Value +
-            confirmationLink + '?' + "email=" + encodedEmail +
+            changePasswordLink + '?' + "email=" + encodedEmail +
              '&' + "token=" + encodedToken;
 
         var mailMessage = new MimeMessage();
         mailMessage.From.Add(new MailboxAddress("leqaa.technical", Smtp.Email));
         mailMessage.To.Add(new MailboxAddress("", toEmail));
-        mailMessage.Subject = "Email confirmation link";
+        mailMessage.Subject = "Password reset";
         mailMessage.Body = new TextPart("plain")
         {
             Text = messageBody
@@ -41,5 +41,6 @@ public class ConfirmationEmailSender : IEmailSender
             await smtpClient.SendAsync(mailMessage);
             await smtpClient.DisconnectAsync(quit: true);
         }
+
     }
 }
