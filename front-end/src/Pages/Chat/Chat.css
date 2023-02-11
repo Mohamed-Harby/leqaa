@@ -4,4 +4,7 @@
 }
 .chat .chat-section {
   flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }/*# sourceMappingURL=Chat.css.map */

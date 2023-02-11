@@ -1,109 +1,92 @@
 @use "../../helper/style" as *;
 
-
-
 .settingsPage {
   display: flex;
   flex: 4;
-    background-color: $firstColor;
+  background-color: $firstColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .settings {
+    background-color: $secondColor;
+    color: $fifthColor;
+    width: 40%;
+    height: 70%;
+    border-radius: 1rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 
-    .settings {
-      background-color: $firstColor;
-      color: $fifthColor;
-      width: 40%;
-      height: 70%;
-      border-radius: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-around;
-
-
-      h1 {
-        font-size: 3rem;
-        font-weight: normal;
-      }
-      
-      .inputsContainer{
-        margin-top: -1.5rem;
-        width: 80%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        gap: 2rem;
-
-        div {
-          width: 100%;
-          font-size: 1rem;
-
-          label{
-            font-size: 1.6rem;
-            margin-bottom: 0.5rem;
-            display: block;
-          }
-
-          input {
-            width: 100%;
-            border: none;
-            border-radius: 0.3rem;
-            padding: 0.5em 1rem;
-            background-color: $thirdColor;
-            color: $fifthColor;
-            font-size: 1.1rem;
-          }
-
-          input::placeholder{
-            color: $fifthColor;
-          }
-
-          input:focus{
-            outline: none;
-          }
-
-          
-        }
-
-      }
-
-
-
-
-
-      .buttonsContainer{
-        width: 80%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-
-        button:first-child{
-          background-color: $firstColor;
-          color: $fifthColor;
-          padding: 0.5rem 0rem;
-          border-radius: 0.4rem;
-          font-size: 1.3rem;
-          flex: 1;
-        }
-
-        button:last-child{
-          background-color: $fifthColor;
-          color: $firstColor;
-          padding: 0.5rem 0rem;
-          border-radius: 0.4rem;
-          font-size: 1.3rem;
-          flex: 1;
-        }
-      }
-
-
+    h1 {
+      font-size: 3rem;
+      font-weight: normal;
     }
 
+    .inputsContainer {
+      margin-top: -1.5rem;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      gap: 2rem;
 
+      div {
+        width: 100%;
+        font-size: 1rem;
 
+        label {
+          font-size: 1.6rem;
+          margin-bottom: 0.5rem;
+          display: block;
+        }
 
+        input {
+          width: 100%;
+          border: none;
+          border-radius: 0.3rem;
+          padding: 0.5em 1rem;
+          background-color: $thirdColor;
+          color: $fifthColor;
+          font-size: 1.1rem;
+        }
 
+        input::placeholder {
+          color: $fifthColor;
+        }
+
+        input:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .buttonsContainer {
+      width: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+
+      button:first-child {
+        background-color: $firstColor;
+        color: $fifthColor;
+        padding: 0.5rem 0rem;
+        border-radius: 0.4rem;
+        font-size: 1.3rem;
+        flex: 1;
+      }
+
+      button:last-child {
+        background-color: $fifthColor;
+        color: $firstColor;
+        padding: 0.5rem 0rem;
+        border-radius: 0.4rem;
+        font-size: 1.3rem;
+        flex: 1;
+      }
+    }
+  }
 }
