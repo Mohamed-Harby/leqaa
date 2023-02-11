@@ -1,10 +1,11 @@
 import { createBrowserRouter, Route, Navigate } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
+import Chat from "../Pages/Chat/Chat";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
-import { ROOT, LOGIN, REGISTER, SETTINGS } from './Paths'
+import { ROOT, LOGIN, REGISTER, SETTINGS, CHAT } from './Paths'
 
 const auth = true
 
@@ -29,6 +30,10 @@ export const RouterConfig = createBrowserRouter([
         path: ROOT,
         element: <Home />,
       },
+      {
+        path: CHAT,
+        element: <Chat />,
+      },
     ],
   },
   {
@@ -43,4 +48,5 @@ export const RouterConfig = createBrowserRouter([
     path: SETTINGS,
     element: <Settings />,
   },
+
 ]);

@@ -18,28 +18,31 @@ function Home() {
 
   return (
     <div className="home">
-      {/* <AdditionalSidebar /> */}
-      <Carousel show={3} />
-      <div className="btns">
-        <button
-          onClick={() => setComponents(recentActivities.current.value)}
-          value="RecentActivities"
-          ref={recentActivities}
-        >
-          Recent Activities
-        </button>
-        <button
-          onClick={() => setComponents(recommended.current.value)}
-          value="Recommended"
-          ref={recommended}
-        >
-          Recommended
-        </button>
+      <AdditionalSidebar />
+      <div style={{ flex: 3 }}>
+        <Carousel show={3} />
+        <div className="btns">
+          <button
+            onClick={() => setComponents(recentActivities.current.value)}
+            value="RecentActivities"
+            ref={recentActivities}
+          >
+            Recent Activities
+          </button>
+          <button
+            onClick={() => setComponents(recommended.current.value)}
+            value="Recommended"
+            ref={recommended}
+          >
+            Recommended
+          </button>
+        </div>
+        <div className="cards">
+          {components == "RecentActivities" && <RecentActivities />}
+          {components == "Recommended" && <Recommended />}
+        </div>
       </div>
-      <div className="cards">
-        {components == "RecentActivities" && <RecentActivities />}
-        {components == "Recommended" && <Recommended />}
-      </div>
+
       {/* <Dropdown links={['Link11', 'Link2', 'Link3']} /> */}
     </div>
   );
