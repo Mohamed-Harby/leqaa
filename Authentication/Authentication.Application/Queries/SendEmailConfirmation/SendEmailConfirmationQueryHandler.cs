@@ -13,15 +13,15 @@ public class SendEmailConfirmationQueryHandler : IHandler<SendEmailConfirmationQ
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IConfiguration _configuration;
-    private readonly IEmailSender _emailSender;
+    private readonly IConfirmationEmailSender _emailSender;
 
     public SendEmailConfirmationQueryHandler(
         UserManager<ApplicationUser> userManager,
         IConfiguration configuration,
-        IServiceProvider serviceProvider)
+        IConfirmationEmailSender confirmationEmailSender)
     {
         _userManager = userManager;
-        _emailSender = serviceProvider.GetServices<IEmailSender>().First(o => o.GetType().Name.Contains("confirmation"));
+        _emailSender = confirmationEmailSender;
         _configuration = configuration;
     }
 
@@ -37,7 +37,7 @@ public class SendEmailConfirmationQueryHandler : IHandler<SendEmailConfirmationQ
         var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         try
         {
-            await _emailSender.SendAsync(toEmail: request.Email, request.ConfirmationLink, token);
+            await _emailSender.SendConfirmationAsync(toEmail: request.Email, request.ConfirmationLink, token);
             authenticationResults.IsSuccess = true;
         }
         catch

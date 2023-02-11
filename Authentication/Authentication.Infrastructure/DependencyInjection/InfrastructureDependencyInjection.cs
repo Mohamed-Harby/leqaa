@@ -14,7 +14,9 @@ public static class InfrastructureDependencyInjection
 
         services.AddSingleton<ITokenGenerator, JwtTokenGenerator>();
         services.AddSingleton<IEmailSender, EmailSender>();
-        services.AddSingleton<IEmailSender, ConfirmationEmailSender>();
+        services.AddSingleton<IConfirmationEmailSender, ConfirmationEmailSender>();
+        services.AddSingleton<IResetPasswordEmailSender, ResetPasswordEmailSender>();
+
         return services;
     }
 }

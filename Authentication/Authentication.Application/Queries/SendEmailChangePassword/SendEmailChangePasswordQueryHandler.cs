@@ -10,13 +10,13 @@ namespace Authentication.Application.Queries.SendEmailChangePassword;
 public class SendEmailChangePasswordQueryHandler : IHandler<SendEmailChangePasswordQuery>
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IEmailSender _emailSender;
+    private readonly IResetPasswordEmailSender _emailSender;
 
 
-    public SendEmailChangePasswordQueryHandler(UserManager<ApplicationUser> userManager, IServiceProvider serviceProvider)
+    public SendEmailChangePasswordQueryHandler(UserManager<ApplicationUser> userManager, IResetPasswordEmailSender resetPasswordEmailSender)
     {
         _userManager = userManager;
-        _emailSender = serviceProvider.GetServices<IEmailSender>().First(s => s.GetType().Name.Contains("password"));
+        _emailSender = resetPasswordEmailSender;
     }
 
     public async Task<Results> Handle(SendEmailChangePasswordQuery request, CancellationToken cancellationToken)
@@ -31,7 +31,7 @@ public class SendEmailChangePasswordQueryHandler : IHandler<SendEmailChangePassw
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         try
         {
-            await _emailSender.SendAsync(toEmail: request.Email, request.ChangePasswordLink, token);
+            await _emailSender.SendPasswordResetAsync(toEmail: request.Email, request.ChangePasswordLink, token);
             authenticationResults.IsSuccess = true;
         }
         catch
