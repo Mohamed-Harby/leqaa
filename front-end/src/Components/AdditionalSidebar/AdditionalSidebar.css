@@ -5,7 +5,7 @@
   background-color: #1b1b1b;
   border-right: 1px solid #656366;
   position: sticky;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   flex: 1;
   color: black;
   padding: 10px 0px;
