@@ -4,7 +4,6 @@ using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
 using Authentication.Domain.Entities.ApplicationUser.Errors;
 using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,15 +12,15 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly ITokenGenerator _tokenGenerator;
-    private readonly IEmailSender _emailSender;
+    private readonly IConfirmationEmailSender _emailSender;
 
     public RegisterUserCommandHandler(
         UserManager<ApplicationUser> userManager,
-        IServiceProvider serviceProvider,
+        IConfirmationEmailSender confirmationEmailSender,
         ITokenGenerator tokenGenerator
         )
     {
-        _emailSender = serviceProvider.GetServices<IEmailSender>().First(s => s.GetType().Name.Contains("confirmation"));
+        _emailSender = confirmationEmailSender;
         _userManager = userManager;
         _tokenGenerator = tokenGenerator;
     }
@@ -46,8 +45,7 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
         string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         try
         {
-
-            await _emailSender.SendAsync(request.Email, request.ConfirmationLink, token);
+            await _emailSender.SendConfirmationAsync(request.Email, request.ConfirmationLink, token);
             authenticationResults.IsSuccess = true;
         }
         catch

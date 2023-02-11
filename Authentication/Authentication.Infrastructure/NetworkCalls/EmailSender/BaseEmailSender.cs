@@ -45,15 +45,8 @@ public abstract class BaseEmailSender : IEmailSender, IConfirmationEmailSender, 
 
         await this.SendAsync(toEmail, "Email confirmation link", messageBody);
     }
-    public async Task SendPasswordResetAsync(string toEmail, string changePasswordLink, string token)
+    public async Task SendPasswordResetAsync(string toEmail, string token)
     {
-        var encodedToken = HttpUtility.UrlEncode(token);
-        var encodedEmail = HttpUtility.UrlEncode(toEmail);
-        var messageBody =
-            _configuration.GetSection("Uri").Value +
-            changePasswordLink + '?' + "email=" + encodedEmail +
-             '&' + "token=" + encodedToken;
-
-        await this.SendAsync(toEmail, "Password reset link", messageBody);
+        await this.SendAsync(toEmail, "Password reset token", token);
     }
 }

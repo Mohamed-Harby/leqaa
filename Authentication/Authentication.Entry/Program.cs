@@ -39,11 +39,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-{
+builder.Services.ConfigureOptions<IdentityOptionsSetup>();
 
-})
-.AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
 builder.Services
     .AddPersistence(builder.Configuration)

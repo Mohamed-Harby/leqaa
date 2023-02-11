@@ -12,4 +12,5 @@ public class ConfirmationEmailSender : BaseEmailSender, IConfirmationEmailSender
     public ConfirmationEmailSender(IOptions<Smtp> smtp, IConfiguration configuration) : base(smtp, configuration)
     {
     }
+    
 }

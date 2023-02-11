@@ -6,20 +6,18 @@ using Authentication.Domain.Entities.ApplicationUser.Errors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Authentication.Application.Queries.SendEmailChangePassword;
-public class SendEmailChangePasswordQueryHandler : IHandler<SendEmailChangePasswordQuery>
+namespace Authentication.Application.Queries.SendEmailResetPassword;
+public class SendEmailResetPasswordQueryHandler : IHandler<SendEmailResetPasswordQuery>
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IResetPasswordEmailSender _emailSender;
-
-
-    public SendEmailChangePasswordQueryHandler(UserManager<ApplicationUser> userManager, IResetPasswordEmailSender resetPasswordEmailSender)
+    public SendEmailResetPasswordQueryHandler(UserManager<ApplicationUser> userManager, IResetPasswordEmailSender resetPasswordEmailSender)
     {
         _userManager = userManager;
         _emailSender = resetPasswordEmailSender;
     }
 
-    public async Task<Results> Handle(SendEmailChangePasswordQuery request, CancellationToken cancellationToken)
+    public async Task<Results> Handle(SendEmailResetPasswordQuery request, CancellationToken cancellationToken)
     {
         var authenticationResults = new Results();
         var user = await _userManager.FindByEmailAsync(request.Email);
@@ -31,7 +29,7 @@ public class SendEmailChangePasswordQueryHandler : IHandler<SendEmailChangePassw
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         try
         {
-            await _emailSender.SendPasswordResetAsync(toEmail: request.Email, request.ChangePasswordLink, token);
+            await _emailSender.SendPasswordResetAsync(toEmail: request.Email, token);
             authenticationResults.IsSuccess = true;
         }
         catch

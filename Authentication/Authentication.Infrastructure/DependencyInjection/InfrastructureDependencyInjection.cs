@@ -1,3 +1,4 @@
+using System.Reflection;
 using Authentication.Application.Interfaces;
 using Authentication.Infrastructure.Models;
 using Authentication.Infrastructure.NetworkCalls.EmailSender;
@@ -18,5 +19,6 @@ public static class InfrastructureDependencyInjection
         services.AddSingleton<IResetPasswordEmailSender, ResetPasswordEmailSender>();
 
         return services;
+
     }
 }

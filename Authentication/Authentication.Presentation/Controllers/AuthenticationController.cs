@@ -1,12 +1,15 @@
 using Authentication.Application.Commands.ConfirmEmail;
+using Authentication.Application.Commands.ConfirmResetPasswordToken;
 using Authentication.Application.Commands.RegisterUser;
 using Authentication.Application.Models;
 using Authentication.Application.Queries.Login;
+using Authentication.Application.Queries.SendEmailResetPassword;
 using Authentication.Application.Queries.SendEmailConfirmation;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Authentication.Application.Queries.GetUserByUsername;
 
 namespace Authentication.Presentation.Controllers;
 [ApiController]
@@ -43,14 +46,28 @@ public class AuthenticationController : ControllerBase
             return BadRequest(results);
         return Ok(results);
     }
-    [Authorize]
     [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> GetUserByUsername(string username)
+    {
+        if (User.Claims.FirstOrDefault(c => c.Value == username) is null)
+        {
+            return Unauthorized("you are not authorized");
+        }
+        var getUserByUsernameQuery = new GetUserByUsername(username);
+        Results results = await _sender.Send(getUserByUsernameQuery);
+        if (!results.IsSuccess)
+            return BadRequest(results);
+        return Ok(results);
+    }
+    [HttpGet]
+    [Authorize]
     public IActionResult CheckIfAuthenticated()
     {
         return Ok("You are authenticated");
     }
-    [AllowAnonymous]
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> SendConfirmationEmail(string email)
     {
         var emailConfirmationQuery = new SendEmailConfirmationQuery(email, Url.Action(nameof(ConfirmEmail)));
@@ -59,12 +76,31 @@ public class AuthenticationController : ControllerBase
             return BadRequest(results);
         return Ok(results);
     }
-    [AllowAnonymous]
     [HttpGet]
-    public async Task<IActionResult> ConfirmEmail(string email, string token)
+    [AllowAnonymous]
+    public async Task<IActionResult> SendResetPasswordEmail(string email)
     {
-        var confirmEmailCommand = new ConfirmEmailCommand(email, token);
-        var results = await _sender.Send(confirmEmailCommand);
+        var emailResetPasswordQuery = new SendEmailResetPasswordQuery(email);
+        var results = await _sender.Send(emailResetPasswordQuery);
+        if (!results.IsSuccess)
+            return BadRequest(results);
+        return Ok(results);
+    }
+    [HttpPut]
+    [AllowAnonymous]
+    public async Task<IActionResult> ConfirmEmail(ConfirmEmailCommand confirmEmailRequest)
+    {
+        var results = await _sender.Send(confirmEmailRequest);
+        if (!results.IsSuccess)
+            return BadRequest(results);
+        return Ok(results);
+    }
+    [HttpPut]
+    [AllowAnonymous]
+    public async Task<IActionResult> ResetPassword(ResetPasswordCommand resetPasswordRequest)
+    {
+
+        var results = await _sender.Send(resetPasswordRequest);
         if (!results.IsSuccess)
             return BadRequest(results);
         return Ok(results);
