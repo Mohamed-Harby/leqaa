@@ -5,13 +5,13 @@
 .settingsPage {
   display: flex;
   flex: 4;
-    background-color: $firstColor;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background-color: $firstColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
     .settings {
-      background-color: $firstColor;
+      background-color: $secondColor;
       color: $fifthColor;
       width: 40%;
       height: 70%;
