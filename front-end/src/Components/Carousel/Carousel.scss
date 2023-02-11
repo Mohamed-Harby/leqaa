@@ -1,8 +1,10 @@
+@use "../../helper/style" as *;
+
 .carousel {
   display: flex;
   width: 100%;
   position: relative;
-  background-color: red;
+  background-color: $secondColor;
 }
 
 .inner-carousel {
@@ -32,23 +34,27 @@
 
 .left-arrow,
 .right-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: $thirdColor;
   border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 .left-arrow {
-  left: 24px;
+  left: 0px;
 }
 
 .right-arrow {
-  right: 24px;
+  right: 0px;
 }
 
 .item.show-2 > * {
@@ -57,11 +63,11 @@
 
 .item.show-3 > * {
   width: calc(90% / 3);
-  margin: 0 calc(5% / 3);
+  margin: calc(5% / 3);
 }
 
 .item.show-4 > * {
   width: calc(90% / 4);
-  margin: 0 calc(5% / 3);
+  margin: calc(5% / 3);
 
 }

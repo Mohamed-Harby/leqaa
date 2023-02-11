@@ -18,8 +18,6 @@ function Home() {
 
   return (
     <div className="home">
-      <AdditionalSidebar />
-      <div style={{ flex: 3 }}>
         <Carousel show={3} />
         <div className="btns">
           <button
@@ -40,10 +38,8 @@ function Home() {
         <div className="cards">
           {components == "RecentActivities" && <RecentActivities />}
           {components == "Recommended" && <Recommended />}
-        </div>
       </div>
 
-      {/* <Dropdown links={['Link11', 'Link2', 'Link3']} /> */}
     </div>
   );
 }

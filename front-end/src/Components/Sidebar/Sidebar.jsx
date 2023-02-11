@@ -14,7 +14,7 @@ function Sidebar() {
       <ul>
         
         <li class="top">
-          <div className="control">
+          <div className={closeSidebar ? "edit-control" : "control" }>
             <FaBars className={closeSidebar ? "showBar" : "bar" } onClick={() => setCloseSidebar(false)} />
             <AiFillCloseCircle className={closeSidebar ? "hideClose" : "close" } onClick={() => setCloseSidebar(true)} />
           </div>

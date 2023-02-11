@@ -10,6 +10,7 @@
   background-color: $secondColor;
   border-radius: 10px;
   color: white;
+  border: 1px solid $thirdColor;
   .content {
     margin-left: 10px;
     width: 100%;
@@ -28,6 +29,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
       width: 100px;
+    }
+    .btn{
+      @include Btn(100px, fit-content, 10px, 10px, $fourthColor, $fifthColor, 16px);
     }
     // div {
     //   &:first-child {

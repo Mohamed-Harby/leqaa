@@ -1,14 +1,14 @@
 @use "../../helper/style" as *;
 
-
 .statusbar {
   display: flex;
   justify-content: space-between;
   background-color: $secondColor;
   color: $fifthColor;
-  padding: 0.4rem 0.7rem;
+  height: 70px;
+  padding: 10px;
 
-  .left{
+  .left {
     display: flex;
     gap: 0.7rem;
 
@@ -22,11 +22,13 @@
     }
   }
 
-  .right{
+  .right {
     display: flex;
     align-items: center;
     gap: 0.7rem;
     font-size: 1.8rem;
+    & > *{
+      cursor: pointer;
+    }
   }
-
 }

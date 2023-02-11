@@ -9,13 +9,13 @@
 
   main {
     flex: 4;
-    background-color: $firstColor;
+    background-color: $secondColor;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .settings {
-      background-color: $secondColor;
+      background-color: $firstColor;
       color: $fifthColor;
       width: 40%;
       height: 70%;

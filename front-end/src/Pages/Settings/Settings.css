@@ -3,13 +3,13 @@
 }
 .settingsPage main {
   flex: 4;
-  background-color: #1b1b1b;
+  background-color: #262427;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .settingsPage main .settings {
-  background-color: #262427;
+  background-color: #1b1b1b;
   color: #e2e0e3;
   width: 40%;
   height: 70%;

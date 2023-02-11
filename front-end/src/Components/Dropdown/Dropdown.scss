@@ -1,6 +1,29 @@
+@use "../../helper/style" as *;
+
 .dropdown-content-hide{
     display: none;
 }
 .dropdown-content-show{
-    display: block;
+    // display: block;
+    position: absolute;
+    background: $secondColor;
+    display: flex;
+    flex-direction: column;
+    right: 0;
+    top: 121px;
+    width: 20%;
+    padding: 10px;
+    border-radius: 20px;
+
+    a{
+        color: $fifthColor;
+        padding: 10px;
+        background-color: $thirdColor;
+        margin: 10px 0;
+        border-radius: 20px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 }

@@ -7,6 +7,7 @@ nav {
   top: 0;
   background-color: $firstColor;
   z-index: 1000;
+  border-bottom: 1px solid $thirdColor;
   ul {
     display: flex;
     justify-content: space-between;

@@ -2,7 +2,7 @@
   display: flex;
   width: 100%;
   position: relative;
-  background-color: red;
+  background-color: #262427;
 }
 
 .inner-carousel {
@@ -31,23 +31,27 @@
 
 .left-arrow,
 .right-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #656366;
   border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 .left-arrow {
-  left: 24px;
+  left: 0px;
 }
 
 .right-arrow {
-  right: 24px;
+  right: 0px;
 }
 
 .item.show-2 > * {
@@ -56,10 +60,10 @@
 
 .item.show-3 > * {
   width: 30%;
-  margin: 0 1.6666666667%;
+  margin: 1.6666666667%;
 }
 
 .item.show-4 > * {
   width: 22.5%;
-  margin: 0 1.6666666667%;
+  margin: 1.6666666667%;
 }/*# sourceMappingURL=Carousel.css.map */

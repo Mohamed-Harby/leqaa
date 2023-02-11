@@ -20,11 +20,17 @@
     &::placeholder{
         color: $fifthColor;
     }
+    &:focus{
+      outline: none;
+    }
   }
 
 .showAnimation{
     &:focus{
         width: 100%;
-        outline: none;
     }
-}  
+}
+.hideAnimation{
+  height: 5%;
+  width: 90%;
+}

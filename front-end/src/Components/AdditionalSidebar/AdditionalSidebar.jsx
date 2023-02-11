@@ -16,10 +16,10 @@ function AdditionalSidebar() {
   ];
   return (
     <div className="additional">
-      <Searchbar />
-      {arr.map((item) => {
+        <Searchbar />
+      {/* {arr.map((item) => {
         return <Card card={item} />;
-      })}
+      })} */}
     </div>
   );
 }

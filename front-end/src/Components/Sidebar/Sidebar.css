@@ -4,7 +4,8 @@
   top: 50px;
   height: calc(100vh - 50px);
   flex: 1;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
+  border-right: 1px solid #656366;
 }
 .sidebar ul {
   display: flex;
@@ -18,17 +19,26 @@
   flex-direction: column;
   gap: 20px;
 }
-.sidebar ul li .control {
+.sidebar ul li .control,
+.sidebar ul li .edit-control {
   display: flex;
   justify-content: space-between;
+  color: #e2e0e3;
+  font-size: 20px;
 }
-.sidebar ul li .control .bar {
+.sidebar ul li .control .bar,
+.sidebar ul li .edit-control .bar {
   visibility: hidden;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
 }
-.sidebar ul li .control .close {
+.sidebar ul li .control .close,
+.sidebar ul li .edit-control .close {
   visibility: visible;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.sidebar ul li .edit-control {
+  justify-content: center;
 }
 .sidebar ul li a {
   display: flex;
@@ -41,7 +51,7 @@
   font-size: 30px;
 }
 .sidebar ul li a .text {
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
   margin-left: 25px;
 }
 .sidebar ul li a img {
@@ -64,18 +74,19 @@
 
 .sidebarResponsive {
   flex: 0;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
 }
 .sidebarResponsive .showBar {
   visibility: visible;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 .sidebarResponsive .hideClose {
   display: none;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
 }
 .sidebarResponsive .hideText {
   font-size: 0;
-  transition: 0.7s linear;
+  transition: 0.3s ease-in-out;
   margin-left: 0;
 }/*# sourceMappingURL=Sidebar.css.map */
