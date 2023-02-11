@@ -1,5 +1,24 @@
 .home {
   flex: 4;
   display: flex;
-  overflow: hidden;
+  flex-direction: column;
+}
+.home .btns {
+  width: 95%;
+  margin: 10px auto;
+}
+.home .btns button {
+  width: 150px;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #656366;
+  color: #e2e0e3;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+.home .btns button:first-child {
+  margin-right: 10px;
 }/*# sourceMappingURL=Home.css.map */

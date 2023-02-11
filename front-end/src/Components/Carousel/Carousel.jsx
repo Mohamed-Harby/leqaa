@@ -6,15 +6,14 @@ import Card from "../Card/Card";
 const Carousel = (props) => {
   const { show } = props;
   const arr = [
-    { name: "ch1", status: "live", nameOrg: "org1" },
-    { name: "ch2", status: "live", nameOrg: "org1" },
-    { name: "ch3", status: "live", nameOrg: "org1" },
-    { name: "ch4", status: "live", nameOrg: "org1" },
-    { name: "ch5", status: "live", nameOrg: "org1" },
-  ];
+    { meetingName: "meeting1", existingNumbers: 10},
+    { meetingName: "meeting2", existingNumbers: 12},
+    { meetingName: "meeting3", existingNumbers: 14},
+    { meetingName: "meeting4", existingNumbers: 16},
+    { meetingName: "meeting5", existingNumbers: 18},
+  ]
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(arr.length);
-
   useEffect(() => {
     setLength(arr.length);
   }, [arr]);

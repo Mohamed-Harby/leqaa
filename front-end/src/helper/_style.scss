@@ -21,6 +21,7 @@ $fifthColor: #e2e0e3;
   color: $color;
   font-size: $fontSize;
   cursor: pointer;
+  border: none;
 }
 @mixin bordered($width, $color: $firstColor) {
   border: $width solid $color;

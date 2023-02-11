@@ -12,15 +12,31 @@
   .content {
     margin-left: 10px;
     width: 100%;
-    div {
-      &:first-child {
-        font-size: 20px;
-      }
-      &:last-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 100px;
-      }
+    display: flex;
+    flex-direction: column;
+    .meeting,
+    .post,
+    .member {
+      display: flex;
+      justify-content: space-between;
     }
+    .join {
+      align-self: flex-end;
+    }
+    .msg {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100px;
+    }
+    // div {
+    //   &:first-child {
+    //     font-size: 20px;
+    //   }
+    //   &:last-child {
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    //     width: 100px;
+    //   }
+    // }
   }
 }

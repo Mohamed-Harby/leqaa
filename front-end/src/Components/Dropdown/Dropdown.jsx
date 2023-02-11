@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import {IoIosArrowDropdown} from 'react-icons/io'
 import './Dropdown.css'
 
-function Dropdown() {
+function Dropdown(props) {
   const [showDropdown, setShowDropdown] = useState(false)
+  const {links} = props
   const enableDropdown = () => {
     setShowDropdown(!showDropdown);
   }
@@ -12,9 +13,11 @@ function Dropdown() {
     <div className='dropdown' onClick={() => enableDropdown()}>
       <IoIosArrowDropdown />
       <div className={showDropdown ? 'dropdown-content-show' : 'dropdown-content-hide'}>
-        <Link to='/'>Link1</Link>
-        <Link to='/'>Link2</Link>
-        <Link to='/'>Link3</Link>
+        {links.map((link)=>{
+          return(
+            <Link to={`/${link}`}>{link}</Link>
+          )
+        })}
       </div>
     </div>
   )

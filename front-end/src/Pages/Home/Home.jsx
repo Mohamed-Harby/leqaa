@@ -3,7 +3,7 @@ import AdditionalSidebar from "../../Components/AdditionalSidebar/AdditionalSide
 import Carousel from "../../Components/Carousel/Carousel";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import RecentActivities from "../../Components/HomeComponents/RecentActivities/RecentActivities";
-import Recomended from "../../Components/HomeComponents/Recomended/Recomended";
+import Recommended from "../../Components/HomeComponents/Recommended/Recommended";
 import "./Home.css";
 
 import Statusbar from "../../Components/Statusbar/Statusbar";
@@ -13,14 +13,14 @@ import Card from "../../Components/Card/Card";
 
 function Home() {
   const recentActivities = useRef(null);
-  const recomended = useRef(null);
+  const recommended = useRef(null);
   const [components, setComponents] = useState("RecentActivities");
 
   return (
     <div className="home">
-      <AdditionalSidebar />
-      <div className="content" style={{ flex: "3" }}>
-        <Carousel show={3} />
+      {/* <AdditionalSidebar /> */}
+      <Carousel show={3} />
+      <div className="btns">
         <button
           onClick={() => setComponents(recentActivities.current.value)}
           value="RecentActivities"
@@ -29,15 +29,18 @@ function Home() {
           Recent Activities
         </button>
         <button
-          onClick={() => setComponents(recomended.current.value)}
-          value="Recomended"
-          ref={recomended}
+          onClick={() => setComponents(recommended.current.value)}
+          value="Recommended"
+          ref={recommended}
         >
-          Recomended
+          Recommended
         </button>
-        {components == "RecentActivities" && <RecentActivities />}
-        {components == "Recomended" && <Recomended />}
       </div>
+      <div className="cards">
+        {components == "RecentActivities" && <RecentActivities />}
+        {components == "Recommended" && <Recommended />}
+      </div>
+      {/* <Dropdown links={['Link11', 'Link2', 'Link3']} /> */}
     </div>
   );
 }
