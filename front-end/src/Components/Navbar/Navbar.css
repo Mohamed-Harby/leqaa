@@ -6,6 +6,7 @@ nav {
   top: 0;
   background-color: #1b1b1b;
   z-index: 1000;
+  border-bottom: 1px solid #656366;
 }
 nav ul {
   display: flex;

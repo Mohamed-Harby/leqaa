@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {IoIosArrowDropdown} from 'react-icons/io'
+import { BsGear } from "react-icons/bs";
 import './Dropdown.css'
 
 function Dropdown(props) {
@@ -11,11 +11,11 @@ function Dropdown(props) {
   }
   return (
     <div className='dropdown' onClick={() => enableDropdown()}>
-      <IoIosArrowDropdown />
+      <BsGear />
       <div className={showDropdown ? 'dropdown-content-show' : 'dropdown-content-hide'}>
         {links.map((link)=>{
           return(
-            <Link to={`/${link}`}>{link}</Link>
+            <Link to={`/${link.to}`}>{link.name}</Link>
           )
         })}
       </div>

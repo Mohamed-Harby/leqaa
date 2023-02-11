@@ -29,8 +29,16 @@
 .hideAnimation::placeholder {
   color: #e2e0e3;
 }
+.showAnimation:focus,
+.hideAnimation:focus {
+  outline: none;
+}
 
 .showAnimation:focus {
   width: 100%;
-  outline: none;
+}
+
+.hideAnimation {
+  height: 5%;
+  width: 90%;
 }/*# sourceMappingURL=Searchbar.css.map */

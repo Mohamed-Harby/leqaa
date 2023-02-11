@@ -19,7 +19,7 @@ function Card(props) {
         <div className="meeting">
           <div className="meeting-name">{cardInformation?.meetingName}</div>
           {cardInformation?.meetingCreatedTime && (
-            <button>
+            <button className="btn">
               {cardInformation?.meetingCreatedBy.includes("scheduled")
                 ? "notify me"
                 : "join"}
@@ -33,7 +33,7 @@ function Card(props) {
           {cardInformation?.meetingCreatedTime}
         </div>
         {cardInformation?.existingNumbers && (
-          <button className="join">join</button>
+          <button className="join btn">join</button>
         )}
         <div className="post">
           <div className="post-created-by">{cardInformation?.postCreatedBy}</div>
@@ -48,7 +48,7 @@ function Card(props) {
         <div className="channel-status">{cardInformation?.channelStatus}</div>
         <div className="member">
           <div className="member-name">{cardInformation?.memberName}</div>
-          {cardInformation?.memberName && <button>Follow</button>}
+          {cardInformation?.memberName && <button className="btn">Follow</button>}
         </div>
         <div className="member-bio">{cardInformation?.memberBio}</div>
         <div className="announcement">

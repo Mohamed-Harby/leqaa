@@ -13,7 +13,7 @@ function Sidebar() {
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
         <li class="top">
-          <div className="control">
+          <div className={closeSidebar ? "edit-control" : "control"}>
             <FaBars
               className={closeSidebar ? "showBar" : "bar"}
               onClick={() => setCloseSidebar(false)}

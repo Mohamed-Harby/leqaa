@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: #1b1b1b;
+  border-right: 1px solid #656366;
   position: sticky;
   min-height: 100vh;
   flex: 1;
   color: black;
-  background: wheat;
   padding: 10px 0px;
 }/*# sourceMappingURL=AdditionalSidebar.css.map */

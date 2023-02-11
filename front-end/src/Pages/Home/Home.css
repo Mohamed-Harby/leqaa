@@ -2,6 +2,7 @@
   flex: 4;
   display: flex;
   flex-direction: column;
+  background-color: #1b1b1b;
 }
 .home .btns {
   width: 95%;
