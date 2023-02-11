@@ -11,7 +11,7 @@ function Navbar() {
     setModalOpen(false);
   };
   const pathName = window.location.pathname;
-  const noLoginPath = ["/register", "/login", "/settings"];
+  const noLoginPath = ["/register", "/login", "/settings", "/meeting"];
 
   return (
     <>

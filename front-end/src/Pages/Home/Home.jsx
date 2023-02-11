@@ -40,7 +40,7 @@ function Home() {
         {components == "RecentActivities" && <RecentActivities />}
         {components == "Recommended" && <Recommended />}
       </div>
-      {/* <Dropdown links={['Link11', 'Link2', 'Link3']} /> */}
+      <Dropdown links={['Link11', 'Link2', 'Link3']} />
     </div>
   );
 }

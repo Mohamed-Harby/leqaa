@@ -4,7 +4,8 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
-import { ROOT, LOGIN, REGISTER, SETTINGS } from './Paths'
+import Meeting from "../Pages/Meeting/Meeting";
+import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING } from "./Paths";
 
 const auth = true
 
@@ -29,6 +30,14 @@ export const RouterConfig = createBrowserRouter([
         path: ROOT,
         element: <Home />,
       },
+      {
+        path: SETTINGS,
+        element: <Settings />,
+      },
+      {
+        path: MEETING,
+        element: <Meeting />,
+      },
     ],
   },
   {
@@ -38,9 +47,5 @@ export const RouterConfig = createBrowserRouter([
   {
     path: REGISTER,
     element: <Register />,
-  },
-  {
-    path: SETTINGS,
-    element: <Settings />,
   },
 ]);
