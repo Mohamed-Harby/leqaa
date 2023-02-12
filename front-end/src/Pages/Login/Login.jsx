@@ -27,14 +27,9 @@ const schema = yup.object().shape({
     .required(),
 });
 
-const pathName = window.location.pathname;
-let active = "";
-if (pathName === "/login") {
-  active = "/login";
-}
+
 
 function Login() {
-  const { pathname } = useLocation();
 
   const {
     register,
@@ -68,7 +63,7 @@ function Login() {
         <div className="right">
           <div className="links">
             <Link to={`/register`}>Sign Up</Link>
-            <Link className={pathname == "/login" ? "active" : ""}>Login</Link>
+            <Link className="active">Login</Link>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>

@@ -1,38 +1,12 @@
 .callPage {
-  display: flex;
   flex: 4;
+  position: relative;
   background-color: #1b1b1b;
   color: #e2e0e3;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.callPage .callToolsBar {
+.callPage .content {
   display: flex;
-  justify-content: space-between;
-  background-color: #1b1b1b;
-  color: #e2e0e3;
-  padding: 1rem 1rem;
-  font-size: 2rem;
-  position: sticky;
-  bottom: 0;
-  z-index: 1000;
-}
-.callPage .callToolsBar .left {
-  background-color: #262427;
-  padding: 0.7rem 3rem;
-  border-radius: 0.6rem;
-  font-size: 1.2rem;
-}
-.callPage .callToolsBar .middle {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-left: -9rem;
-}
-.callPage .callToolsBar .right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }/*# sourceMappingURL=Meeting.css.map */

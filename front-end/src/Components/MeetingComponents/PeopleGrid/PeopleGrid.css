@@ -4,4 +4,5 @@
   gap: 1rem;
   margin: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  flex: 4;
 }/*# sourceMappingURL=PeopleGrid.css.map */

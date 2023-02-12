@@ -2,9 +2,12 @@
   background-color: #1b1b1b;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem 0.7rem;
   gap: 1rem;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
 }
 .typingBar input {
   flex: 1;
