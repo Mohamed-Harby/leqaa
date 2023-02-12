@@ -1,6 +1,7 @@
 using Authentication.Application.CommandInterfaces;
 using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Application.Queries.GetUserByUsername;
@@ -18,7 +19,7 @@ public class GetUserByUsernameQueryHandler : IHandler<GetUserByUsername>
         var user = await _userManager.FindByNameAsync(request.UserName);
         return new Results
         {
-            User = user,
+            User = user.Adapt<UserReadModel>(),
             IsSuccess = true
         };
     }

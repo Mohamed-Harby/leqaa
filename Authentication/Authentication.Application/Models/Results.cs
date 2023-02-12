@@ -10,7 +10,7 @@ public class Results
     public bool IsSuccess { get; set; }
     public string Token { get; private set; } = string.Empty;
     public List<string> ErrorMessages { get; private set; }
-    public ApplicationUser? User { get; set; }
+    public UserReadModel? User { get; set; }
     public void AddErrorMessages(params string[] errorMessage)
     {
         ErrorMessages.AddRange(errorMessage);

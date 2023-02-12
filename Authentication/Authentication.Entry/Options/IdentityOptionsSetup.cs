@@ -6,6 +6,6 @@ public class IdentityOptionsSetup : IConfigureOptions<IdentityOptions>
 {
     public void Configure(IdentityOptions options)
     {
-        
+        options.Password.RequireNonAlphanumeric = false;
     }
 }

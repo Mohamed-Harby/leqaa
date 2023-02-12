@@ -2,6 +2,7 @@ using Authentication.Application.CommandInterfaces;
 using Authentication.Application.Interfaces;
 using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Application.Queries.Login;
@@ -33,6 +34,7 @@ public class LoginQueryHandler : IHandler<LoginQuery>
         var token = _tokenGenerator.Generate(user);
         authenticationResults.SetToken(token);
         authenticationResults.IsSuccess = true;
+        authenticationResults.User = user.Adapt<UserReadModel>();
         return authenticationResults;
     }
 }
