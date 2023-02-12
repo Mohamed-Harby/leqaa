@@ -41,6 +41,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+string CorsPolicyName = "MyPolicy";
+builder.Services.AddCors();
 
 builder.Services.ConfigureOptions<IdentityOptionsSetup>();
 
@@ -73,6 +75,7 @@ app.UseSwaggerUI();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(CorsPolicyName);
 app.MapControllers();
 
 app.Run();
