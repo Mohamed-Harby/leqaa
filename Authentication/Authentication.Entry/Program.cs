@@ -9,7 +9,9 @@ using Authentication.Persistence.DependencyInjection;
 using Authentication.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +41,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+
 builder.Services.ConfigureOptions<IdentityOptionsSetup>();
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -51,15 +54,21 @@ builder.Services
     .AddApplication();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var context = serviceScope?.ServiceProvider.GetRequiredService<ApplicationDbContext>()!;
+
+    context.Database.Migrate();
+
 }
 
-app.UseHttpsRedirection();
+// Configure the HTTP request pipeline.
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI();
+// }
+
 
 app.UseAuthentication();
 app.UseAuthorization();
