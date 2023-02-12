@@ -2,10 +2,13 @@ import React from "react";
 import "./register.css";
 import { Link } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
+import { BsCameraVideo } from "react-icons/bs";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "../../Custom/useAuth";
+import { useSelector } from "react-redux";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -16,7 +19,6 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .min(8)
-    .max(20)
     .matches(/\d+/)
     .matches(/[a-z]+/)
     .matches(/[A-Z]+/)
@@ -28,6 +30,9 @@ const schema = yup.object().shape({
 });
 
 function Register() {
+  const auth = useAuth()
+  const {responseMsg} = useSelector((state) => state.auth)
+  console.log(responseMsg);
   const {
     register,
     handleSubmit,
@@ -38,7 +43,7 @@ function Register() {
   });
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    auth.signup(data)
     reset();
   };
 
@@ -48,7 +53,10 @@ function Register() {
 
       <div className="register">
         <div className="left">
-          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
+          <h1>
+            <BsCameraVideo />
+            Video Calls and Meetings for personal Use and organizations.
+          </h1>
           <p>
             Leqaa is a service for secure, high-quality video meetings and calls
             available for everyone.
@@ -66,8 +74,18 @@ function Register() {
 
             <div className="input">
               <input
+                placeholder="Name"
+                type="text"
+                name="name"
+                {...register("name")}
+              />
+              {errors.name && <p>{errors.name.message}</p>}
+            </div>
+
+            <div className="input">
+              <input
                 type="email"
-                id="email"
+                name="email"
                 placeholder="Email"
                 {...register("email")}
               />
@@ -79,7 +97,7 @@ function Register() {
                 placeholder="User Name"
                 type="text"
                 name="name"
-                {...register("name")}
+                {...register("username")}
               />
               {errors.name && <p>{errors.name.message}</p>}
             </div>

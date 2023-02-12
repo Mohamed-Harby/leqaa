@@ -15,6 +15,10 @@
 .register .left h1 {
   color: #a379de;
 }
+.register .left h1 svg {
+  font-size: 25px;
+  margin-right: 5px;
+}
 .register .left p {
   margin-top: 10px;
 }

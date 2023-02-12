@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const post = createAsyncThunk(
-    'crud/post',
+    'auth/post',
     async (url, payload) => {
         try {
             const res = await axios.post(url, payload)
@@ -14,7 +14,7 @@ export const post = createAsyncThunk(
 )
 
 // export const get = createAsyncThunk(
-//     'crud/get',
+//     'auth/get',
 //     async (url) => {
 //         try {
 //             // const res = await axios.get(url)
@@ -26,7 +26,7 @@ export const post = createAsyncThunk(
 // )
 
 // export const remove = createAsyncThunk(
-//     'crud/remove',
+//     'auth/remove',
 //     async (url) => {
 //         try {
 //             const res = await axios.delete(url)
@@ -38,7 +38,7 @@ export const post = createAsyncThunk(
 // )
 
 // export const update = createAsyncThunk(
-//     'crud/update',
+//     'auth/update',
 //     async (url, payload) => {
 //         try {
 //             const res = await axios.patch(url, payload)
@@ -52,8 +52,7 @@ export const post = createAsyncThunk(
 export const authSlice = createSlice({
     name: 'data',
     initialState: {
-        responseMsg: null,
-        msgs: []
+        responseMsg: {},
     },
     reducers: {},
     extraReducers: {
