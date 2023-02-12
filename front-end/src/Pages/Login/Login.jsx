@@ -2,15 +2,12 @@ import React from "react";
 import "./login.css";
 import { Link, useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
-import Modal from "../../Components/Modal/Modal";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useAuth } from "../../Custom/useAuth";
+import { useSelector } from "react-redux";
 
-import { useRef } from "react";
-import { motion } from "framer-motion";
-import { useMousePosition } from "../../Custom/useMousePosition";
 
 const schema = yup.object().shape({
   email: yup
@@ -27,14 +24,12 @@ const schema = yup.object().shape({
     .required(),
 });
 
-const pathName = window.location.pathname;
-let active = "";
-if (pathName === "/login") {
-  active = "/login";
-}
-
 function Login() {
   const { pathname } = useLocation();
+  const auth = useAuth();
+  const { responseMsg } = useSelector((state) => state.auth);
+
+  console.log(responseMsg);
 
   const {
     register,
@@ -46,7 +41,8 @@ function Login() {
   });
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
+    console.log( data );
+    auth.signin(data)
     reset();
   };
 

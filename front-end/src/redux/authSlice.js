@@ -3,39 +3,15 @@ import axios from 'axios'
 
 export const post = createAsyncThunk(
     'crud/post',
-    async (payload) => {
+    async (url, payload) => {
         try {
-            console.log(payload);
-            return payload
+            const res = await axios.post(url, payload)
+            return res.data
         } catch (error) {
             console.log(error);
         }
     }
 )
-
-export const get = createAsyncThunk(
-    'crud/get',
-    async (url) => {
-        try {
-            // const res = await axios.get(url)
-            // return res.data
-        } catch (error) {
-            console.log(error);
-        }
-    }
-)
-
-// export const post = createAsyncThunk(
-//     'crud/post',
-//     async (url, payload) => {
-//         try {
-//             const res = await axios.post(url, payload)
-//             return res.data
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// )
 
 // export const get = createAsyncThunk(
 //     'crud/get',
@@ -86,23 +62,23 @@ export const authSlice = createSlice({
             state.responseMsg = 'loading'
         },
         [post.fulfilled]: (state, action) => {
-            // state.responseMsg = action.payload
-            state.msgs.push(action.payload)
+            state.responseMsg = action.payload
+            // state.msgs.push(action.payload)
         },
         [post.rejected]: (state, action) => {
             state.responseMsg = 'failed'
         },
-        // /////////////////////////////////////////////////////////////////
-        // get
-        [get.pending]: (state, action) => {
-            state.responseMsg = 'loading'
-        },
-        [get.fulfilled]: (state, action) => {
-            state.responseMsg = action.payload
-        },
-        [get.rejected]: (state, action) => {
-            state.responseMsg = 'failed'
-        },
+        // // /////////////////////////////////////////////////////////////////
+        // // get
+        // [get.pending]: (state, action) => {
+        //     state.responseMsg = 'loading'
+        // },
+        // [get.fulfilled]: (state, action) => {
+        //     state.responseMsg = action.payload
+        // },
+        // [get.rejected]: (state, action) => {
+        //     state.responseMsg = 'failed'
+        // },
         // /////////////////////////////////////////////////////////////////
         // // remove
         // [remove.pending]: (state, action) => {

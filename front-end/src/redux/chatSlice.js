@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const post = createAsyncThunk(
-    'crud/post',
+    'chat/post',
     async (payload) => {
         try {
             console.log(payload);
@@ -14,7 +14,7 @@ export const post = createAsyncThunk(
 )
 
 export const get = createAsyncThunk(
-    'crud/get',
+    'chat/get',
     async (url) => {
         try {
             // const res = await axios.get(url)
@@ -26,7 +26,7 @@ export const get = createAsyncThunk(
 )
 
 // export const post = createAsyncThunk(
-//     'crud/post',
+//     'chat/post',
 //     async (url, payload) => {
 //         try {
 //             const res = await axios.post(url, payload)
@@ -38,7 +38,7 @@ export const get = createAsyncThunk(
 // )
 
 // export const get = createAsyncThunk(
-//     'crud/get',
+//     'chat/get',
 //     async (url) => {
 //         try {
 //             // const res = await axios.get(url)
@@ -50,7 +50,7 @@ export const get = createAsyncThunk(
 // )
 
 // export const remove = createAsyncThunk(
-//     'crud/remove',
+//     'chat/remove',
 //     async (url) => {
 //         try {
 //             const res = await axios.delete(url)
@@ -62,7 +62,7 @@ export const get = createAsyncThunk(
 // )
 
 // export const update = createAsyncThunk(
-//     'crud/update',
+//     'chat/update',
 //     async (url, payload) => {
 //         try {
 //             const res = await axios.patch(url, payload)
