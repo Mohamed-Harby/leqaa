@@ -42,6 +42,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 string CorsPolicyName = "MyPolicy";
+builder.Services.ConfigureOptions<CorsPolicyOptionsSetup>();
 builder.Services.AddCors();
 
 builder.Services.ConfigureOptions<IdentityOptionsSetup>();

@@ -15,9 +15,10 @@ COPY ["Authentication/Authentication.Entry/Authentication.Entry.csproj", "Authen
 RUN dotnet restore "Authentication/Authentication.Entry/Authentication.Entry.csproj"
 COPY . .
 WORKDIR "/src/Authentication/Authentication.Entry"
-RUN dotnet build "Authentication.Entry.csproj" -c Release -o /app/build
 
 FROM build AS publish
+WORKDIR "/src/Authentication/Authentication.Entry"
+
 RUN dotnet publish "Authentication.Entry.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
