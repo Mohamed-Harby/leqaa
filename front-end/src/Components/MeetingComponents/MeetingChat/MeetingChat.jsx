@@ -1,9 +1,15 @@
 import React from 'react'
 import "./MeetingChat.css"
+import TypingBar from "../../TypingBar/TypingBar"
 
 function MeetingChat() {
   return (
-    <div>MeetingChat</div>
+    <div className='meetingChat'>
+      <div className="messages">
+
+      </div>
+      <TypingBar/>
+    </div>
   )
 }
 

@@ -64,7 +64,7 @@ function Login() {
         <div className="right">
           <div className="links">
             <Link to={`/register`}>Sign Up</Link>
-            <Link className={pathname == "/login" ? "active" : ""}>Login</Link>
+            <Link className="active">Login</Link>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>

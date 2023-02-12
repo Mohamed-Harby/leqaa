@@ -45,9 +45,8 @@ function Register() {
   return (
     <>
       <Navbar />
-      <hr className="hrRegister" noshade />
 
-      <div className="registerContainer">
+      <div className="register">
         <div className="left">
           <h1>Video Calls and Meetings for personal Use and organizations.</h1>
           <p>
@@ -56,54 +55,62 @@ function Register() {
           </p>
         </div>
 
-        <form className="right" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div className="inputFields">
+        <div className="right">
+          <div className="links">
+            <Link className="active">Sign Up</Link>
+            <Link to={`/login`}>Login</Link>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmitHandler)}>
             <h1>Sign Up</h1>
 
-            <input
-              placeholder="Email"
-              type="email"
-              name="email"
-              {...register("email")}
-            />
+            <div className="input">
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
 
-            {errors.email && <p>{errors.email.message}</p>}
+            <div className="input">
+              <input
+                placeholder="User Name"
+                type="text"
+                name="name"
+                {...register("name")}
+              />
+              {errors.name && <p>{errors.name.message}</p>}
+            </div>
 
-            <input
-              placeholder="User Name"
-              type="text"
-              name="name"
-              {...register("name")}
-            />
+            <div className="input">
+              <input
+                placeholder="Password"
+                type="password"
+                name="password"
+                {...register("password")}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
 
-            {errors.name && <p>{errors.name.message}</p>}
+            <div className="input">
+              <input
+                placeholder="Confirm Password"
+                type="password"
+                name="confirmPassword"
+                {...register("confirmPassword")}
+              />
+              {errors.confirmPassword && (
+                <p>{errors.confirmPassword.message}</p>
+              )}
+            </div>
 
-            <input
-              placeholder="Password"
-              type="password"
-              name="password"
-              {...register("password")}
-            />
-
-            {errors.password && <p>{errors.password.message}</p>}
-
-            <input
-              placeholder="Confirm Password"
-              type="password"
-              name="confirmPassword"
-              {...register("confirmPassword")}
-            />
-
-            {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-          </div>
-
-          <div className="buttonsContainer">
-            <Link to={`/login`}>
-              login
-            </Link>
-            <button type="submit">Sign Up</button>
-          </div>
-        </form>
+            <div className="input">
+              <button type="submit">Submit</button>{" "}
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

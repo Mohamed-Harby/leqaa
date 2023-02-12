@@ -1,107 +1,91 @@
-a {
-  text-decoration: none;
-}
-
-.hrRegister {
-  display: block;
-  height: 1px;
-  padding: 0;
-  border: 0;
-  border-top: 1px solid #353535;
-}
-
-.registerContainer {
+.register {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  height: calc(100vh - 52px);
-  background: #1B1B1B;
-  color: #E2E0E3;
+  height: calc(100vh - 50px);
+  background: #1b1b1b;
+  color: #e2e0e3;
 }
-.registerContainer .left {
-  width: 50%;
-  height: 70%;
-  margin: 2rem;
+.register .left {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 40vw;
 }
-.registerContainer .left h1 {
-  font-size: 3.2rem;
+.register .left h1 {
+  color: #a379de;
 }
-.registerContainer .left p {
+.register .left p {
   margin-top: 10px;
-  font-size: 1.5rem;
 }
-.registerContainer .right {
+.register .right {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  text-align: center;
   background-color: #262427;
-  margin: 2rem;
-  width: 40%;
-  height: 70%;
-  border-radius: 10px;
+  border-radius: 20px;
+  width: 40vw;
+  height: calc((100vh - 50px) / 2);
 }
-.registerContainer .right .inputFields {
+.register .right .links {
+  display: flex;
+}
+.register .right .links a {
+  text-decoration: none;
+  background-color: #656366;
+  color: #e2e0e3;
+  width: 50%;
+  padding: 15px;
+}
+.register .right .links a:first-child {
+  border-top-left-radius: 20px;
+}
+.register .right .links a:last-child {
+  border-top-right-radius: 20px;
+}
+.register .right .links .active {
+  background-color: #a379de;
+}
+.register .right form {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.registerContainer .right .inputFields h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-top: 30px;
-}
-.registerContainer .right .inputFields input {
-  background-color: #656366;
-  color: #DCDCDC;
-  outline: none;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  padding: 0.7rem 2rem;
-  width: 60%;
-  margin-top: 2rem;
-  width: 75%;
-}
-.registerContainer .right .inputFields input::-moz-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.registerContainer .right .inputFields input::placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.registerContainer .right .inputFields p {
-  text-align: center;
-  color: rgb(214, 214, 2);
-  padding: 0px;
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-}
-.registerContainer .right .buttonsContainer {
-  align-self: center;
-  width: 60%;
-  display: flex;
   justify-content: space-around;
-  margin: 3rem 0rem;
+  height: 100%;
 }
-.registerContainer .right .buttonsContainer button {
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
-  cursor: pointer;
+.register .right form .input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
 }
-.registerContainer .right .buttonsContainer a {
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
+.register .right form .input input {
+  background-color: #262427;
+  color: #e2e0e3;
+  border: none;
+  border-bottom: 1px solid #656366;
+  height: 100%;
+}
+.register .right form .input input::-moz-placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.register .right form .input input::placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.register .right form .input input:focus {
+  outline: none;
+}
+.register .right form .input p {
+  color: #e2e0e3;
+}
+.register .right form .input button {
+  background-color: #a379de;
+  border-radius: 20px;
+  color: #e2e0e3;
   cursor: pointer;
-  background-color: #E2E0E3;
-  color: #262427;
-  padding: 0.6rem 2rem;
+  align-self: flex-end;
+  padding: 10px;
+  border: none;
+  width: 25%;
 }/*# sourceMappingURL=register.css.map */
