@@ -1,12 +1,16 @@
 import React from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import Modal from "../../Components/Modal/Modal";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { useMousePosition } from "../../Custom/useMousePosition";
 
 const schema = yup.object().shape({
   email: yup
@@ -25,11 +29,13 @@ const schema = yup.object().shape({
 
 const pathName = window.location.pathname;
 let active = "";
-if (pathName === '/login'){
-  active = "/login"
-} 
+if (pathName === "/login") {
+  active = "/login";
+}
 
 function Login() {
+  const { pathname } = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -44,49 +50,52 @@ function Login() {
     reset();
   };
 
+  
+
   return (
     <>
       <Navbar />
-      <hr className="hrLogin" noshade />
-
-      <div className="loginContainer">
+      <div className="login">
+        
         <div className="left">
-          <div className="container">
-            <h1>
-              Video Calls and Meetings for personal Use and organizations.
-            </h1>
-            <p>
-              Leqaa is a service for secure, high-quality video meetings and
-              calls available for everyone.
-            </p>
-          </div>
+          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
+          <p>
+            Leqaa is a service for secure, high-quality video meetings and calls
+            available for everyone.
+          </p>
         </div>
 
-        <form className="right" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div className="inputFields">
-            <h1>Log In</h1>
-
-            <input type="email" placeholder="Email" {...register("email")} />
-            {errors.email && <p>{errors.email.message}</p>}
-            <input
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
-            {errors.password && <p>{errors.password.message}</p>}
-            <button type="submit">Submit</button>
-          </div>
-          {/* <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}></div> */}
-          <div className="linksContainer">
+        <div className="right">
+          <div className="links">
             <Link to={`/register`}>Sign Up</Link>
-            <Link 
-            className={(active === '/login' && "activeLink")}
-            
-            to={`/login`}
-            >login
-            </Link>
+            <Link className={pathname == "/login" ? "active" : ""}>Login</Link>
           </div>
-        </form>
+
+          <form onSubmit={handleSubmit(onSubmitHandler)}>
+            <h1>Log In</h1>
+            <div className="input">
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div className="input">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
+            <div className="input">
+              <button type="submit">Submit</button>{" "}
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

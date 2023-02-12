@@ -1,115 +1,91 @@
-.hrLogin {
-  display: block;
-  height: 1px;
-  padding: 0;
-  border: 0;
-  border-top: 1px solid #353535;
-}
-
-.loginContainer {
+.login {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  height: calc(100vh - 52px);
-  background: #1B1B1B;
-  color: #E2E0E3;
+  height: calc(100vh - 50px);
+  background: #1b1b1b;
+  color: #e2e0e3;
 }
-.loginContainer .left {
+.login .left {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
-  height: 70%;
-  margin: 2rem;
+  width: 40vw;
 }
-.loginContainer .left .container {
-  display: flex;
-  flex-direction: column;
+.login .left h1 {
+  color: #a379de;
 }
-.loginContainer .left .container h1 {
-  font-size: 3.2rem;
-}
-.loginContainer .left .container p {
+.login .left p {
   margin-top: 10px;
-  font-size: 1.5rem;
 }
-.loginContainer .right {
+.login .right {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  text-align: center;
   background-color: #262427;
-  margin: 2rem;
-  width: 40%;
-  height: 70%;
-  border-radius: 10px;
+  border-radius: 20px;
+  width: 40vw;
+  height: calc((100vh - 50px) / 2);
 }
-.loginContainer .right .inputFields {
+.login .right .links {
+  display: flex;
+}
+.login .right .links a {
+  text-decoration: none;
+  background-color: #656366;
+  color: #e2e0e3;
+  width: 50%;
+  padding: 15px;
+}
+.login .right .links a:first-child {
+  border-top-left-radius: 20px;
+}
+.login .right .links a:last-child {
+  border-top-right-radius: 20px;
+}
+.login .right .links .active {
+  background-color: #a379de;
+}
+.login .right form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-}
-.loginContainer .right .inputFields h1 {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 10px;
-}
-.loginContainer .right .inputFields input {
-  background-color: #656366;
-  color: #DCDCDC;
-  outline: none;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  padding: 0.7rem 2rem;
-  width: 60%;
-  margin-top: 2rem;
-  width: 75%;
-}
-.loginContainer .right .inputFields input::-moz-placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.loginContainer .right .inputFields input::placeholder {
-  color: #DCDCDC;
-  opacity: 1;
-}
-.loginContainer .right .inputFields p {
-  text-align: center;
-  color: rgb(214, 214, 2);
-  padding: 0px;
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-}
-.loginContainer .right .inputFields button {
-  background-color: #A379DE;
-  padding: 0.7rem 3rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
-  cursor: pointer;
-  margin-top: 40px;
-}
-.loginContainer .right .linksContainer {
-  align-self: center;
-  width: 100%;
-  display: flex;
   justify-content: space-around;
-  margin: 3rem 0rem;
+  height: 100%;
 }
-.loginContainer .right .linksContainer .activeLink {
-  background-color: #1B1B1B;
-  color: white;
-  cursor: not-allowed;
+.login .right form .input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
 }
-.loginContainer .right .linksContainer a {
-  background-color: #A379DE;
-  padding: 0.7rem 3rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
+.login .right form .input input {
+  background-color: #262427;
+  color: #e2e0e3;
+  border: none;
+  border-bottom: 1px solid #656366;
+  height: 100%;
+}
+.login .right form .input input::-moz-placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.login .right form .input input::placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.login .right form .input input:focus {
+  outline: none;
+}
+.login .right form .input p {
+  color: #e2e0e3;
+}
+.login .right form .input button {
+  background-color: #a379de;
+  border-radius: 20px;
+  color: #e2e0e3;
   cursor: pointer;
-  background-color: #fff;
-  color: #262427;
-  padding: 0.6rem 5rem;
-  text-decoration: none;
+  align-self: flex-end;
+  padding: 10px;
+  border: none;
+  width: 25%;
 }/*# sourceMappingURL=login.css.map */

@@ -2,11 +2,14 @@
 import './App.css';
 import { RouterConfig } from './Navigation/Config';
 import { RouterProvider } from 'react-router-dom';
+import { ProvideAuth } from './Custom/useAuth';
 
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={RouterConfig} />
+      <ProvideAuth>
+        <RouterProvider router={RouterConfig} />
+      </ProvideAuth>
     </div>
   );
 }

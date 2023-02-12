@@ -90,36 +90,36 @@ nav {
               height: 25px;
             }
         }
-        // &:last-child{
-        //     height: 100%;
-        //     border-radius: 10px;
-        //     background-color: $thirdColor;
-        //     font-size: 18px;
-        //     // padding: 5px 20px;
-        //     color: $fifthColor;
-        //     @media screen and (max-width: 768px) {
-        //       font-size: 16px;
-        //       padding: 3px;
-        //     }
-        // }
+        &:last-child{
+            height: 100%;
+            border-radius: 10px;
+            background-color: $thirdColor;
+            font-size: 18px;
+            // padding: 5px 20px;
+            color: $fifthColor;
+            @media screen and (max-width: 768px) {
+              font-size: 16px;
+              padding: 3px;
+            }
+        }
       }
     }
   }
 }
 
 
-.homeLoginButton {
-  height: 100%;
-  border-radius: 10px;
-  background-color: $thirdColor;
-  font-size: 18px;
-  padding: 5px 18px;
-  display: flex;
-  align-items: center;
-  color: $fifthColor;
+// .homeLoginButton {
+//   height: 100%;
+//   border-radius: 10px;
+//   background-color: $thirdColor;
+//   font-size: 18px;
+//   padding: 5px 18px;
+//   display: flex;
+//   align-items: center;
+//   color: $fifthColor;
 
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
-    padding: 3px;
-  }
-}
+//   @media screen and (max-width: 768px) {
+//     font-size: 16px;
+//     padding: 3px;
+//   }
+// }
