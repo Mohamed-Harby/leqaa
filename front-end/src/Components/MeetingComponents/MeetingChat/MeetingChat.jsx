@@ -6,7 +6,7 @@ function MeetingChat() {
   return (
     <div className='meetingChat'>
       <div className="messages">
-
+        Meeting Chat
       </div>
       <TypingBar/>
     </div>

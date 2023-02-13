@@ -1,29 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Meeting.css"
-import CallToolsBar from "../../Components/CallToolsBar/CallToolsBar";
 import PeopleGrid from '../../Components/MeetingComponents/PeopleGrid/PeopleGrid';
-import MeetingZoom from '../../Components/MeetingComponents/MeetingZoom/MeetingZoom';
-import MeetingChat from '../../Components/MeetingComponents/MeetingChat/MeetingChat';
+import SmPeopleGrid from '../../Components/MeetingComponents/SmPeopleGrid/SmPeopleGrid';
 
+import CallToolsBar from "../../Components/CallToolsBar/CallToolsBar";
+import MeetingChat from '../../Components/MeetingComponents/MeetingChat/MeetingChat';
+import MeetingMembers from "../../Components/MeetingComponents/MeetingMembers/MeetingMembers";
+import ShareScreen from '../../Components/MeetingComponents/ShareScreen/ShareScreen';
+import OpenCamera from '../../Components/MeetingComponents/OpenCamera/OpenCamera';
+
+
+import { MeetingContext } from '../../Components/MeetingComponents/MeetingUtilities/MeetingContext';
 
 
 
 
 function Meeting() {
-  return (
-    <>
-      <div className="callPage">
+  const [toggleChat, setToggleChat] = useState(false)
+  const [toggleMembers, setToggleMembers] = useState(false);
+  const [toggleShareScreen, setToggleShareScreen] = useState(false);
+  const [toggleOpenCamera, setToggleOpenCamera] = useState(false);
 
+  
+  
+
+  console.log("toggle chat is " + toggleChat)
+  console.log("toggle Members is " + toggleMembers);
+
+  return (
+    <MeetingContext.Provider
+      value={{
+        toggleChat,
+        setToggleChat,
+        toggleMembers,
+        setToggleMembers,
+        toggleShareScreen,
+        setToggleShareScreen,
+        toggleOpenCamera,
+        setToggleOpenCamera,
+      }}
+    >
+      <div className="callPage">
         <div className="content">
-          <PeopleGrid />
-          <MeetingChat/>
-          {/* <MeetingZoom/> */}
+          {(!toggleShareScreen && !toggleOpenCamera)  && <PeopleGrid />}
+          {toggleShareScreen  && <ShareScreen />}
+          {toggleOpenCamera  && <OpenCamera />}
+          {toggleChat && <MeetingChat />}
+          {toggleMembers && <MeetingMembers />}
+
+          {(toggleShareScreen || toggleOpenCamera) && !toggleChat && !toggleMembers && (
+            <SmPeopleGrid />
+          )}
+
+          {/* <SmPeopleGrid/> */}
         </div>
 
-        
-        <CallToolsBar/>
+        <CallToolsBar />
       </div>
-    </>
+    </MeetingContext.Provider>
   );
 }
 

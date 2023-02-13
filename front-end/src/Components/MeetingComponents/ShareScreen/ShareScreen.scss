@@ -1,0 +1,11 @@
+@use "../../../helper/style" as *;
+
+
+.shareScreen{
+  display: flex;
+  flex: 4;
+  background-color: $secondColor;
+  border-radius: 1rem;
+  margin: 1rem 0.8rem;
+
+}
