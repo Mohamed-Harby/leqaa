@@ -1,0 +1,36 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  authenticationentry:
+    image: authenticationentry
+    build:
+      context: .
+      dockerfile: Authentication/Authentication.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=server=authenticationdb;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
+      - Uri=http://localhost:5002
+    ports:
+      - 5002:5002
+    depends_on:
+      - authenticationdb
+    healthcheck:
+      test: ["CMD","curl","-f","http://authenticationdb:3306"]
+      timeout: 1s
+      interval: 1s
+      retries: 3
+
+  authenticationdb:
+    image: mysql/mysql-server:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=LeqaaAuthentication
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+    volumes:
+      - dbvolume4:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+volumes:
+  dbvolume4:
+
