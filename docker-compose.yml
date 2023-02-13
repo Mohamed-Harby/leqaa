@@ -3,23 +3,72 @@
 version: '3.4'
 
 services:
-  authenticationentry:
-    image: authenticationentry
+  frontend:
+    image: frontend-dev
+    build:
+      context: .
+      dockerfile: front-end/Dockerfile
+    ports:
+      - 3000:3000
+
+  businessdomain:
+    image: bussinesslogic-dev
+    build:
+      context: .
+      dockerfile: BusinessDomain/BusinessLogic.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=businessdomaindb;Port=3307;Database=BusinessLogicDb;Uid=root;Pwd=2510203121;
+    ports:
+      - 5001:5001
+    volumes:
+      - ./BusinessDomain:/src/BusinessDomain
+    depends_on:
+      - businessdomaindb
+    healthcheck:
+      test: ["CMD","curl","-f","http://businessdomaindb:3307"]
+      timeout: 1s
+      interval: 1s
+      retries: 10
+
+  businessdomainunittests:
+    image: unittests:v1.0
+    build:
+      context: .
+      dockerfile: BusinessDomain/BusinessLogic.Tests/UnitTests/Dockerfile
+    volumes:
+      - ./BusinessDomain/BusinessLogic.Tests/UnitTests:/src/BusinessDomain/BusinessLogic.Tests/UnitTests
+
+  businessdomaindb:
+    image: mysql/mysql-server:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=BusinessLogicDb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3307
+
+    volumes:
+      - businessdbvolume:/var/lib/mysql
+    ports:
+      - 3307:3307
+
+  authentication:
+    image: authentication-dev
     build:
       context: .
       dockerfile: Authentication/Authentication.Entry/Dockerfile
     environment:
-      - ConnectionStrings__Default=server=authenticationdb;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
+      - ConnectionStrings__Default=server=authenticationdb;Port=3308;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
       - Uri=http://localhost:5002
     ports:
       - 5002:5002
     depends_on:
       - authenticationdb
     healthcheck:
-      test: ["CMD","curl","-f","http://authenticationdb:3306"]
+      test: ["CMD","curl","-f","http://authenticationdb:3308"]
       timeout: 1s
       interval: 1s
-      retries: 3
+      retries: 10
 
   authenticationdb:
     image: mysql/mysql-server:latest
@@ -28,9 +77,13 @@ services:
       - MYSQL_DATABASE=LeqaaAuthentication
       - MYSQL_USER=root
       - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3308
     volumes:
-      - dbvolume4:/var/lib/mysql
-      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+      - authenticationdbvolume:/var/lib/mysql
+    ports:
+      - 3308:3308
+
 volumes:
-  dbvolume4:
+  businessdbvolume:
+  authenticationdbvolume:
 
