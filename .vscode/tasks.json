@@ -92,6 +92,19 @@
             "netCore": {
                 "appProject": "${workspaceFolder}/Authentication/Authentication.Entry/Authentication.Entry.csproj"
             }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build",
+            "platform": "node",
+            "dockerBuild": {
+                "dockerfile": "${workspaceFolder}/front-end/Dockerfile",
+                "context": "${workspaceFolder}/front-end",
+                "pull": true
+            },
+            "node": {
+                "package": "${workspaceFolder}/front-end/package.json"
+            }
         }
     ]
 }

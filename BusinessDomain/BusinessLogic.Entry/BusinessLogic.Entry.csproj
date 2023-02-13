@@ -20,5 +20,7 @@
     <ProjectReference Include="../BusinessLogic.Application/BusinessLogic.Application.csproj" />
     <ProjectReference Include="../BusinessLogic.Presentation/BusinessLogic.Presentation.csproj" />
     <ProjectReference Include="../BusinessLogic.Infrastructure/BusinessLogic.Infrastructure.csproj"/>
+    <ProjectReference Include="../BusinessLogic.Persistence/BusinessLogic.Persistence.csproj"/>
+
   </ItemGroup>
 </Project>

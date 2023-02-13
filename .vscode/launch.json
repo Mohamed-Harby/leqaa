@@ -34,6 +34,17 @@
             "netCore": {
                 "appProject": "${workspaceFolder}/Authentication/Authentication.Entry/Authentication.Entry.csproj"
             }
+        },
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/front-end/package.json",
+                "localRoot": "${workspaceFolder}/front-end"
+            }
         }
     ]
 }
