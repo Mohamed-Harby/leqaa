@@ -10,14 +10,14 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.AddHub;
-public class AddHubCommandHandler : IHandler<AddHubCommand, ErrorOr<Hub>>
+public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<Hub>>
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IFileManager _fileManager;
     private readonly IValidator<AddHubCommand> _validator;
-    public AddHubCommandHandler(
+    public AddRoomCommandHandler(
         IHubRepository hubRepository,
         IUnitOfWork unitOfWork,
         IUserRepository userRepository,

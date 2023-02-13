@@ -1,5 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using ErrorOr;
+using Microsoft.AspNetCore.Mvc;
+
 namespace BusinessLogic.Presentation;
 [ApiController]
 [Route("[controller]/[action]")]

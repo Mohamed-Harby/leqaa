@@ -1,3 +1,5 @@
+using System.Threading.Channels;
+
 namespace BusinessLogic.Domain;
 public class Channel : BaseEntity
 {
@@ -6,6 +8,18 @@ public class Channel : BaseEntity
         Rooms = new HashSet<Room>();
         Users = new HashSet<User>();
         Announcements = new HashSet<Announcement>();
+
+    }
+
+    public Channel(string name, Guid hubId, string description = "")
+    {
+        Name = name;
+        Description = description;
+        HubId = hubId;
+        Rooms = new HashSet<Room>();
+        Users = new HashSet<User>();
+        Announcements = new HashSet<Announcement>();
+
 
     }
     public string Name { get; set; } = string.Empty;

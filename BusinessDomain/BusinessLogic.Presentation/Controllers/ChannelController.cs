@@ -22,7 +22,9 @@ public class ChannelController : BaseController
         var addChannelCommand = new AddChannelCommand(
             channelWriteModel.name,
             channelWriteModel.description,
-            channelWriteModel.hubId,
+         channelWriteModel.ChannelId,
+         channelWriteModel.hubId,
+       
             username);
 
         ErrorOr<Channel> result = await _sender.Send(addChannelCommand);

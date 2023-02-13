@@ -1,6 +1,11 @@
 namespace BusinessLogic.Domain;
-public class Post : BaseEntity
+public class Post: BaseEntity
 {
+
+
+
+
+
     public string Title { get; set; } = string.Empty;
     public string? Content { get; set; }
     public byte[]? Image { get; set; }

@@ -1,15 +1,23 @@
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
+using BusinessLogic.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Persistence.UnitsOfWork;
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
-    private readonly DbContext _context;
+    private ApplicationDbContext _context;
     public UnitOfWork(ApplicationDbContext context)
+
     {
+
         _context = context;
+
     }
+
+
+
+
     public async Task<int> Save()
     {
         //returns how many rows were affected
@@ -20,6 +28,22 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         await _context.DisposeAsync();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
