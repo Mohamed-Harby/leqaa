@@ -8,7 +8,10 @@ using Authentication.Persistence;
 using Authentication.Persistence.DependencyInjection;
 using Authentication.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +24,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 Jwt jwt = new();
 builder.Configuration.GetSection("Jwt").Bind(jwt);
-builder.Services.Configure<Jwt>(builder.Configuration.GetSection("Jwt"));
+
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
 
@@ -38,11 +41,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-{
+string CorsPolicyName = "MyPolicy";
+builder.Services.ConfigureOptions<CorsPolicyOptionsSetup>();
+builder.Services.AddCors();
 
-})
-.AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.ConfigureOptions<IdentityOptionsSetup>();
+
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider);
 
 builder.Services
     .AddPersistence(builder.Configuration)
@@ -50,19 +57,26 @@ builder.Services
     .AddApplication();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var context = serviceScope?.ServiceProvider.GetRequiredService<ApplicationDbContext>()!;
+
+    context.Database.Migrate();
+
 }
 
-app.UseHttpsRedirection();
+// Configure the HTTP request pipeline.
+// if (app.Environment.IsDevelopment())
+// {
+app.UseSwagger();
+app.UseSwaggerUI();
+// }
+
 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors(CorsPolicyName);
 app.MapControllers();
 
 app.Run();

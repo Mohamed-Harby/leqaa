@@ -1,7 +1,8 @@
 using Authentication.Domain.Entities.ApplicationUser.Enums;
 
 namespace Authentication.Application.Models;
-public record UserWriteModel(
+public record UserReadModel(
+    Guid Id,
     string Name,
     string Email,
     string Password,

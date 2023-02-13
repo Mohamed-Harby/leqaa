@@ -2,40 +2,57 @@ using Authentication.Application.CommandInterfaces;
 using Authentication.Application.Interfaces;
 using Authentication.Application.Models;
 using Authentication.Domain.Entities.ApplicationUser;
+using Authentication.Domain.Entities.ApplicationUser.Errors;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Authentication.Application.Commands.RegisterUser;
 public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly ITokenGenerator _tokenGenerator;
+    private readonly IConfirmationEmailSender _emailSender;
 
     public RegisterUserCommandHandler(
         UserManager<ApplicationUser> userManager,
-        ITokenGenerator tokenGenerator)
+        IConfirmationEmailSender confirmationEmailSender,
+        ITokenGenerator tokenGenerator
+        )
     {
+        _emailSender = confirmationEmailSender;
         _userManager = userManager;
         _tokenGenerator = tokenGenerator;
     }
 
-    public async Task<AuthenticationResults> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<Results> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var authenticationResults = new AuthenticationResults();
+        var authenticationResults = new Results();
         var user = request.Adapt<ApplicationUser>();
         if (await _userManager.FindByNameAsync(user.UserName) is not null)
         {
-            authenticationResults.AddErrorMessages("Username already exists, please login");
+            authenticationResults.AddErrorMessages(UserErrors.UserNameAlreadyExists);
         }
         if (await _userManager.FindByEmailAsync(user.Email) is not null)
         {
-            authenticationResults.AddErrorMessages("Email already exists, please login");
+            authenticationResults.AddErrorMessages(UserErrors.EmailAlreadyExists);
         }
         if (authenticationResults.ErrorMessages.Count > 0)
             return authenticationResults;
 
-        var result = await _userManager.CreateAsync(user, request.Password);
+        var resultTask = _userManager.CreateAsync(user, request.Password);
 
+        string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        try
+        {
+            await _emailSender.SendConfirmationAsync(request.Email, request.ConfirmationLink, token);
+            authenticationResults.IsSuccess = true;
+        }
+        catch
+        {
+            authenticationResults.AddErrorMessages("Couldn't send confirmation email, try to confirm your email later");
+        }
+        var result = await resultTask;
         if (!result.Succeeded)
         {
             authenticationResults.AddErrorMessages(result.Errors.Select(e => e.Description).ToArray());
@@ -43,7 +60,7 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
         }
 
         authenticationResults.IsSuccess = true;
-        authenticationResults.SetToken(_tokenGenerator.Generate(user));
+        authenticationResults.SetToken(_tokenGenerator.Generate(user)); //TODO : remove for business needs if needed
 
         return authenticationResults;
     }

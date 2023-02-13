@@ -10,6 +10,5 @@ public static class ApplicationDependencyInjection
     {
         services.AddMediatR(typeof(RegisterUserCommand).Assembly);
         return services;
-
     }
 }

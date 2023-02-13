@@ -7,5 +7,6 @@ public record RegisterUserCommand(
     string Password,
     string Email,
     Gender Gender,
-    string Name
+    string Name,
+    string ConfirmationLink
 ) : ICommand;
