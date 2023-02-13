@@ -34,7 +34,7 @@ public class AddChannelCommandHandler : IHandler<AddChannelCommand, ErrorOr<Chan
         {
             return DomainErrors.User.NotFound;
         }
-        Hub hub = await _hubRepository.GetByIdAsync(request.HubId);
+        Hub hub = await _hubRepository.GetByIdAsync(request.hubId);
         if (hub is null)
         {
             return DomainErrors.Hub.NotFound;

@@ -18,8 +18,8 @@ public class ApplicationDbContext : DbContext
         if (!optionsBuilder.IsConfigured)
         {
             optionsBuilder.UseMySql("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121",
-                              ServerVersion.AutoDetect("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121"))
-                              .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+                            ServerVersion.AutoDetect("server=localhost;database=LeqaaBusiness;Uid=root;pwd=2510203121"))
+                            .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
         }
         base.OnConfiguring(optionsBuilder);
 

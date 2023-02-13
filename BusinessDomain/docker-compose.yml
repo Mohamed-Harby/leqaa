@@ -11,8 +11,7 @@ services:
       - ConnectionStrings__Default=Server=mysql;Database=BusinessLogicTestDb;Uid=root;Pwd=2510203121;
     depends_on:
       - mysql
-    
-
+  
   integrationtests:
     image: integrationtests:v1.0
     build:

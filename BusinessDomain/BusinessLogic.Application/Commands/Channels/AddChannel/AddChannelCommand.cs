@@ -7,6 +7,7 @@ namespace BusinessLogic.Application.Commands.Channels.AddChannel;
 public record AddChannelCommand(
     string Name,
     string? Description,
-    Guid HubId,
-    string Username
+    Guid ChannelId,
+    string Username,
+    string hubId
 ) : ICommand<ErrorOr<Channel>>;
