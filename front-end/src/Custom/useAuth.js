@@ -22,13 +22,8 @@ function useProvideAuth(params) {
     }
 
     function signup(payload) {
-        // let email = payload.email
-
-        // stytchClient.passwords.create({
-        //     email,
-        //     password,
-        //     session_duration_minutes: 60,
-        // })
+        dispatch(post('http://localhost:5002/api/v1/authentication/Register', payload))
+        console.log(payload);
     }
 
     function logout() {
