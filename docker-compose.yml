@@ -82,8 +82,18 @@ services:
       - authenticationdbvolume:/var/lib/mysql
     ports:
       - 3308:3308
+  apigateway:
+    image: apigateway
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
+    ports:
+      - 5001:5001
+    volumes:
+      - ./APIGateway:/src/APIGateway
 
 volumes:
   businessdbvolume:
   authenticationdbvolume:
 
+  

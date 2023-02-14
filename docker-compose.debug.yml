@@ -10,6 +10,13 @@ services:
       dockerfile: Authentication/Authentication.Entry/Dockerfile
     ports:
       - 5003:5003
+  apigateway:
+    image: apigateway
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
+    ports:
+      - 5001:5001
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
