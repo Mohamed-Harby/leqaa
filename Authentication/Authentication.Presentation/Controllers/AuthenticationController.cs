@@ -10,6 +10,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Authentication.Application.Queries.GetUserByUsername;
+using System.Security.Claims;
 
 namespace Authentication.Presentation.Controllers;
 [ApiController]
@@ -48,9 +49,10 @@ public class AuthenticationController : ControllerBase
     }
     [HttpGet]
     [Authorize]
-    public async Task<IActionResult> GetUserByUsername(string username)
+    public async Task<IActionResult> GetUser()
     {
-        if (User.Claims.FirstOrDefault(c => c.Value == username) is null)
+        string username = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        if (username is null)
         {
             return Unauthorized("you are not authorized");
         }
