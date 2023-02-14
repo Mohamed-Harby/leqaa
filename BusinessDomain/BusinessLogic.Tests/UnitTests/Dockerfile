@@ -8,13 +8,13 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["BusinessLogic.Tests/UnitTests/UnitTests.csproj", "BusinessLogic.Tests/UnitTests/"]
-RUN dotnet restore "BusinessLogic.Tests/UnitTests/UnitTests.csproj"
+COPY ["BusinessDomain/BusinessLogic.Tests/UnitTests/UnitTests.csproj", "BusinessDomain/BusinessLogic.Tests/UnitTests/"]
+RUN dotnet restore "BusinessDomain/BusinessLogic.Tests/UnitTests/UnitTests.csproj"
 COPY . .
-WORKDIR "/src/BusinessLogic.Tests/UnitTests"
+WORKDIR "/src/BusinessDomain/BusinessLogic.Tests/UnitTests"
 RUN dotnet build "UnitTests.csproj" -c Release -o /app/build
 
 FROM build AS final
-WORKDIR /src/BusinessLogic.Tests/UnitTests
-COPY --from=build /src/BusinessLogic.Tests/UnitTests .
+WORKDIR /src/BusinessDomain/BusinessLogic.Tests/UnitTests
+COPY --from=build /src/BusinessDomain/BusinessLogic.Tests/UnitTests .
 ENTRYPOINT ["dotnet", "test"]

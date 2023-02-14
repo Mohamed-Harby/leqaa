@@ -2,21 +2,34 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using CommonGenericClasses;
 
-namespace BusinessLogic.Persistence.Repositories
+namespace BusinessLogic.Persistence.Repositories;
+
+public class PostRepository : BaseRepo<Post>, IPostRepository
 {
-    public class PostRepository : BaseRepo<Post>, IPostRepository
+
+
+    private readonly ApplicationDbContext _context;
+    public PostRepository(ApplicationDbContext context) : base(context)
     {
-        public PostRepository(ApplicationDbContext context) : base(context)
-        {
-        }
 
-        public async Task<Post> AddPostWithUser(Post post, User user)
-        {
+        _context = context;
+    }
 
-            post.User = user;
-            await db.Set<Post>().AddAsync(post);
-            return post;
-                }
+    public Task<Post> AddPostWithUser(Post post, User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Post> DeletePostWithUser(Post Post, User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Post> UpdatePostWithUser(Post Post, User user)
+    {
+        throw new NotImplementedException();
+
+        
     }
 
 

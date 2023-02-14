@@ -3,7 +3,7 @@ using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Rooms.AddRoom;
+namespace BusinessLogic.Application.Commands.Rooms.DeleteRoom;
 public record AddRoomCommand(
     string Name,
     string? Description,

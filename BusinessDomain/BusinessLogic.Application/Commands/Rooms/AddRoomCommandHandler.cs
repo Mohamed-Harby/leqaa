@@ -7,7 +7,7 @@ using ErrorOr;
 using Mapster;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Rooms.AddRoom;
+namespace BusinessLogic.Application.Commands.Rooms.DeleteRoom;
 public class AddRoomCommandHandler : IHandler<AddRoomCommand, ErrorOr<Room>>
 {
     private readonly IRoomRepository _RoomRepository;

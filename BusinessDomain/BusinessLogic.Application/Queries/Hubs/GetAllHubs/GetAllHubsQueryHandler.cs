@@ -20,5 +20,6 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
             .Adapt<List<HubReadModel>>();
     }
 
+   
     
 }
