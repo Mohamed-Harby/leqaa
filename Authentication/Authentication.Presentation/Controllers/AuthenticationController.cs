@@ -88,7 +88,7 @@ public class AuthenticationController : ControllerBase
     }
     [HttpPut]
     [AllowAnonymous]
-    public async Task<IActionResult> ConfirmEmail(ConfirmEmailCommand confirmEmailRequest)
+    public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand confirmEmailRequest)
     {
         var results = await _sender.Send(confirmEmailRequest);
         if (!results.IsSuccess)
