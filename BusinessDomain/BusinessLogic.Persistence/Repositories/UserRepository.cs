@@ -1,5 +1,6 @@
 using BusinessLogic.Domain;
 using CommonGenericClasses;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Persistence.Repositories;
 public class UserRepository : BaseRepo<User>, IUserRepository
@@ -9,5 +10,12 @@ public class UserRepository : BaseRepo<User>, IUserRepository
     {
 
         _context = context;
+    }
+
+    public async Task<User> GetUserWithRooms(string username)
+    {
+        User user = (await _context.Set<User>().Where(u => u.Username == username).FirstOrDefaultAsync())!;
+        return user;
+
     }
 }
