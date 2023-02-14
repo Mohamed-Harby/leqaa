@@ -28,5 +28,9 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
     public Task<Post> UpdatePostWithUser(Post Post, User user)
     {
         throw new NotImplementedException();
+
+        
     }
+
+
 }

@@ -27,4 +27,11 @@ public class RoomRepository : BaseRepo<Room>, IRoomRepository
     {
         throw new NotImplementedException();
     }
+
+    public async  Task<Room> AddRoomWithUser(Room room, User user)
+    {
+        room.AddUser(user);
+        await db.Set<Room>().AddAsync(room);
+        return room;
+    }
 }

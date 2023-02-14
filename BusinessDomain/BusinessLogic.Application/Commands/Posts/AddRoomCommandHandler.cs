@@ -7,44 +7,44 @@ using ErrorOr;
 using Mapster;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Channels.AddChannel;
-public class AddRoomCommandHandler : IHandler<AddChannelCommand, ErrorOr<Channel>>
+namespace BusinessLogic.Application.Commands.Posts.AddPost;
+public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<Post>>
 {
-    private readonly IChannelRepository _channelRepository;
+    private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public AddRoomCommandHandler(
-        IChannelRepository channelRepository,
+    public AddPostCommandHandler(
+        IPostRepository postRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
-        _channelRepository = channelRepository;
+        _PostRepository = postRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Channel>> Handle(AddChannelCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Post>> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
         User creatorUser = (await _userRepository.GetAsync(u => u.Username == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;
         }
-        Hub hub = await _hubRepository.GetByIdAsync(request.hubId);
+        Hub hub = await _hubRepository.GetByIdAsync(request.HubId);
         if (hub is null)
         {
             return DomainErrors.Hub.NotFound;
         }
-        var channel = request.Adapt<Channel>();
-        await _channelRepository.AddChannelWithUser(channel, creatorUser);
+        var post = request.Adapt<Post>();
+        await _PostRepository.AddPostWithUser(post, creatorUser);
         if (await _unitOfWork.Save() == 0)
         {
-            return DomainErrors.Channel.InvalidChannel;
+            return DomainErrors.Post.InvalidPost;
         }
-        return channel;
+        return post;
     }
 }

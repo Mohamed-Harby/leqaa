@@ -15,3 +15,4 @@ namespace BusinessLogic.Application.Models.Posts
     string? logo
 );
 }
+
