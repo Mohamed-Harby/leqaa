@@ -18,8 +18,5 @@
   <ItemGroup>
     <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\Posts\" />
-  </ItemGroup>
 
 </Project>

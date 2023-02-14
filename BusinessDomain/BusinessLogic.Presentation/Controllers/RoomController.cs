@@ -1,5 +1,4 @@
 
-using BusinessLogic.Application.Commands.Channels.AddChannel;
 using BusinessLogic.Application.Commands.Rooms.AddRoom;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Rooms;
@@ -27,7 +26,7 @@ public class RoomController : BaseController
             roomWriteModel.description,
            roomWriteModel.hubId,
            roomWriteModel.channelId,
-           
+
             username);
 
         ErrorOr<Room> result = await _sender.Send(addRoomCommand);
