@@ -28,7 +28,7 @@ public class HubController : BaseController
         var addHubCommand = new AddHubCommand(hub.name, hub.description, hub.logo, username);
         ErrorOr<Hub> results = await _sender.Send(addHubCommand);
         return results.Match(
-            hub1 => Ok(hub),
+            hub => Ok(hub),
             errors => Problem(errors)
         );
     }

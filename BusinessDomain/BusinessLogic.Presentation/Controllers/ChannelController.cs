@@ -27,9 +27,15 @@ public class ChannelController : BaseController
 
         ErrorOr<Channel> result = await _sender.Send(addChannelCommand);
         return result.Match(
-             channel => Ok(channelWriteModel),//TODO : change this later
+             channel => Ok(channelWriteModel),//TODO
              errors => Problem(errors)
          );
 
     }
+
+ /*   [HttpDelete]
+    public async */
+
+
+
 }

@@ -15,4 +15,10 @@ public class ChannelRepository : BaseRepo<Channel>, IChannelRepository
         await db.Set<Channel>().AddAsync(channel);
         return channel;
     }
+
+    public async Task DeleteChannel(Channel channel)
+    {
+        db.Set<Channel>().Remove(channel);
+
+    }
 }
