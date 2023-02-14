@@ -1,3 +1,5 @@
+using static BusinessLogic.Domain.DomainErrors.DomainErrors;
+
 namespace BusinessLogic.Domain;
 public class Room : BaseEntity
 {
@@ -12,5 +14,10 @@ public class Room : BaseEntity
     public Guid ChannelId { get; set; }
     public Channel Channel { get; set; } = null!;
     public virtual ICollection<User> JoinedUsers { get; set; }
+
+    public void AddUser(User user)
+    {
+        JoinedUsers.Add(user);
+    }
 
 }
