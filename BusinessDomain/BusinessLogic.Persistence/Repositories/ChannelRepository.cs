@@ -21,20 +21,8 @@ public class ChannelRepository : BaseRepo<Channel>, IChannelRepository
         return channel;
     }
 
-<<<<<<< HEAD
-    public async Task DeleteChannel(Channel channel)
-    {
-        db.Set<Channel>().Remove(channel);
-
-=======
-    public Task<Channel> DeleteChannelWithUser(Channel channel, User user)
-    {
-        throw new NotImplementedException();
-    }
-
     public Task<Channel> UpdateChannelWithUser(Channel channel, User user)
     {
         throw new NotImplementedException();
->>>>>>> cd65d9bef45cdce8006c7353066b595fe454f625
     }
 }

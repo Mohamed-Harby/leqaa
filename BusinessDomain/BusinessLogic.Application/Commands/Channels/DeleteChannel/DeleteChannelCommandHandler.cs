@@ -8,22 +8,14 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.DeleteChannel;
-<<<<<<< HEAD
 public class DeleteRoomCommandHandler : IHandler<DeleteChannelCommand, ErrorOr<Channel>>
-=======
-public class DeleteChannelCommandHandler : IHandler<DeleteChannelCommand, ErrorOr<Channel>>
->>>>>>> cd65d9bef45cdce8006c7353066b595fe454f625
 {
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-<<<<<<< HEAD
     public DeleteRoomCommandHandler(
-=======
-    public DeleteChannelCommandHandler(
->>>>>>> cd65d9bef45cdce8006c7353066b595fe454f625
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
@@ -48,7 +40,7 @@ public class DeleteChannelCommandHandler : IHandler<DeleteChannelCommand, ErrorO
             return DomainErrors.Hub.NotFound;
         }
         var channel = request.Adapt<Channel>();
-        await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
+        // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
         if (await _unitOfWork.Save() == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
