@@ -88,7 +88,7 @@ public class AuthenticationController : ControllerBase
             return BadRequest(results);
         return Ok(results);
     }
-    [HttpPut]
+    [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand confirmEmailRequest)
     {
