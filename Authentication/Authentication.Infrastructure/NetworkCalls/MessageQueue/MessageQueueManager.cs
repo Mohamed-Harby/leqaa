@@ -1,6 +1,6 @@
 using System.Text;
 using Authentication.Application.Interfaces;
-using Authentication.Domain.Entities.ApplicationUser;
+using Authentication.Application.Models;
 using Authentication.Infrastructure.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -23,7 +23,7 @@ public class MessageQueueManager : IMessageQueueManager
         channel = connectionFactory.CreateConnection().CreateModel();
 
     }
-    public void PublishUser(ApplicationUser user)
+    public void PublishUser(UserReadModel userReadModel)
     {
         channel.ExchangeDeclare(
             exchange: RabbitMQConstants.AuthenticationExchange,
@@ -46,7 +46,7 @@ public class MessageQueueManager : IMessageQueueManager
         props.ContentType = "application/json";
         props.DeliveryMode = 2;
 
-        string serializedUser = JsonConvert.SerializeObject(user);
+        string serializedUser = JsonConvert.SerializeObject(userReadModel);
         byte[] convertedUser = Encoding.UTF32.GetBytes(serializedUser);
 
         channel.BasicPublish(
