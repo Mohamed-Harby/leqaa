@@ -11,7 +11,7 @@ namespace CommonGenericClasses
 {
 
 
-    public abstract class BaseRepo<TEntity> : IDisposable, IBaseRepo<TEntity> where TEntity : BaseEntity
+    public abstract class BaseRepo<TEntity> :  IBaseRepo<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext db;
         protected readonly DbSet<TEntity> table;
@@ -90,15 +90,6 @@ namespace CommonGenericClasses
         public virtual async Task Save()
         {
             await db.SaveChangesAsync();
-        }
-
-        public void Dispose()
-        {
-            if (_isDisposed != true)
-            {
-                db.Dispose();
-                _isDisposed = true;
-            }
         }
     }
 }

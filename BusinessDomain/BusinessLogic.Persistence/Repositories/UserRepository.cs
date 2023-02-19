@@ -1,3 +1,4 @@
+using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using CommonGenericClasses;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ public class UserRepository : BaseRepo<User>, IUserRepository
 
     public async Task<User> GetUserWithRooms(string username)
     {
-        User user = (await _context.Set<User>().Where(u => u.Username == username).FirstOrDefaultAsync())!;
+        User user = (await _context.Set<User>().Where(u => u.UserName == username).FirstOrDefaultAsync())!;
         return user;
 
     }

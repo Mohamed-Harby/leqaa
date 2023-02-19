@@ -2,10 +2,8 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
-using BusinessLogic.Persistence.Repositories;
 using ErrorOr;
 using Mapster;
-using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.AddChannel;
 public class AddRoomCommandHandler : IHandler<AddChannelCommand, ErrorOr<Channel>>
@@ -29,7 +27,7 @@ public class AddRoomCommandHandler : IHandler<AddChannelCommand, ErrorOr<Channel
 
     public async Task<ErrorOr<Channel>> Handle(AddChannelCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.Username == request.Username)).FirstOrDefault()!;
+        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;

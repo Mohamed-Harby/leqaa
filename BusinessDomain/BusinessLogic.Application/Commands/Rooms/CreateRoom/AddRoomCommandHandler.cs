@@ -3,7 +3,6 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Rooms;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
-using BusinessLogic.Persistence.Repositories;
 using ErrorOr;
 using FluentValidation;
 using Mapster;
@@ -51,7 +50,7 @@ public class AddRoomCommandHandler : IHandler<AddRoomCommand, ErrorOr<Room>>
         var Room = request.Adapt<Room>();
         //Room.Logo = request.Logo is null ? image : request.Logo;
 
-        var creatorUser = (await _userRepository.GetAsync(u => u.Username == request.Username)).FirstOrDefault();
+        var creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;

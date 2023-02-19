@@ -1,4 +1,4 @@
-using BusinessLogic.Persistence.Repositories;
+using BusinessLogic.Application.Interfaces;
 
 namespace BusinessLogic.Application.Interfaces
 {

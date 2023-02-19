@@ -9,7 +9,6 @@ public static class InfrastructureDependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddSingleton<IFileManager, FileManager>();
-        services.AddScoped<IMessageQueueHelper, MessageQueueHelper>();
         return services;
     }
 }

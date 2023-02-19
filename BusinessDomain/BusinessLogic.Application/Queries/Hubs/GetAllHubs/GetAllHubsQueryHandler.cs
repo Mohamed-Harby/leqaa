@@ -8,6 +8,7 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
 {
     private readonly IHubRepository _hubRepository;
 
+
     public GetAllHubsQueryHandler(IHubRepository hubRepository)
     {
         _hubRepository = hubRepository;
@@ -15,11 +16,14 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
 
     public async Task<List<HubReadModel>> Handle(GetAllHubsQuery request, CancellationToken cancellationToken)
     {
+        // await _hubRepository.Save();
+        // await _hubRepository.Save();
+
         return (await _hubRepository.GetAllAsync())
-            .ToList()
-            .Adapt<List<HubReadModel>>();
+           .ToList()
+           .Adapt<List<HubReadModel>>();
     }
 
-   
-    
+
+
 }

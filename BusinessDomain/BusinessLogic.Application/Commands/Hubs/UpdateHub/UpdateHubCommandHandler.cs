@@ -3,7 +3,6 @@ using BusinessLogic.Application.Commands.Hubs.AddHub;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
-using BusinessLogic.Persistence.Repositories;
 using ErrorOr;
 using Mapster;
 using MediatR;
@@ -30,7 +29,7 @@ public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<Hub>>
 
     public async Task<ErrorOr<Hub>> Handle(UpdateHubCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.Username == request.Username)).FirstOrDefault()!;
+        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;

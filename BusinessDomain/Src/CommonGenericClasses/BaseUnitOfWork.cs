@@ -10,7 +10,7 @@ namespace CommonGenericClasses
 {
 
 #nullable disable
-    public abstract class BaseUnitOfWork<TEntity> : IDisposable, IBaseUnitOfWork<TEntity> where TEntity : BaseEntity
+    public abstract class BaseUnitOfWork<TEntity> :  IBaseUnitOfWork<TEntity> where TEntity : BaseEntity
     {
         protected readonly IBaseRepo<TEntity> _repo;
 
@@ -61,9 +61,6 @@ namespace CommonGenericClasses
 
         }
 
-        public void Dispose()
-        {
-            _repo.Dispose();
-        }
+        
     }
 }

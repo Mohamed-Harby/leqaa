@@ -1,6 +1,8 @@
 namespace BusinessLogic.Application.Models.Channels;
-public record UserlWriteModel(
-    string name,
-    string description,
-    Guid userId
+public record UserWriteModel(
+    Guid Id,
+    string Name,
+    string Email,
+    string Password,
+    string UserName
 );

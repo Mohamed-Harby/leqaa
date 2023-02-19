@@ -43,7 +43,7 @@ public class UserConfiguration : BaseConfiguration<User>
             .HasIndex(u => u.Email)
             .IsUnique();
         builder
-            .HasIndex(u => u.Username)
+            .HasIndex(u => u.UserName)
             .IsUnique();
 
         //fields that are required
@@ -51,7 +51,7 @@ public class UserConfiguration : BaseConfiguration<User>
         .HasMaxLength(50);
         builder.Property(p => p.Email).IsRequired();
         builder.Property(p => p.Gender).IsRequired();
-        builder.Property(p => p.Username).IsRequired()
+        builder.Property(p => p.UserName).IsRequired()
         .HasMaxLength(30);
         builder.Property(p => p.Password).IsRequired()
         .HasMaxLength(50);

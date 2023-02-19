@@ -23,7 +23,7 @@ public class UserRepositoryTests : IClassFixture<DbContextMySqlFixture>
             Email = "test2",
             Password = "test",
             Gender = Gender.male,
-            Username = "etst2"
+            UserName = "etst2"
         };
         await _userRepository.AddAsync(user);
         user = new User
@@ -32,7 +32,7 @@ public class UserRepositoryTests : IClassFixture<DbContextMySqlFixture>
             Email = "test",
             Password = "test",
             Gender = Gender.male,
-            Username = "test"
+            UserName = "test"
         };
         await _userRepository.AddAsync(user);
 

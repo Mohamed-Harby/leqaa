@@ -1,6 +1,6 @@
 using System.Security.Claims;
+using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
-using BusinessLogic.Persistence.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

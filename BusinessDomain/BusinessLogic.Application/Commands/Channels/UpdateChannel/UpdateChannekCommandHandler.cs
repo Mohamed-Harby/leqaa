@@ -2,7 +2,6 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
-using BusinessLogic.Persistence.Repositories;
 using ErrorOr;
 using Mapster;
 using MediatR;
@@ -29,7 +28,7 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
 
     public async Task<ErrorOr<Channel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.Username == request.Username)).FirstOrDefault()!;
+        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;

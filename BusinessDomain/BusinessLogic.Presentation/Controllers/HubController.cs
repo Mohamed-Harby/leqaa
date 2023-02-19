@@ -36,7 +36,7 @@ public class HubController : BaseController
     [HttpGet]
     public async Task<ActionResult<IQueryable<Hub>>> GetAll()
     {
-        var getAllHubsQuery = new GetAllChannelsQuery();
+        var getAllHubsQuery = new GetAllHubsQuery();
         var result = await _sender.Send(getAllHubsQuery);
 
         return Ok(result);
@@ -49,7 +49,7 @@ public class HubController : BaseController
 
 
 
- 
+
 
 
 

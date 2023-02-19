@@ -18,14 +18,14 @@ public class User : BaseEntity
         Name = name;
         Email = email;
         Password = password;
-        Username = username;
+        UserName = username;
         Gender = gender;
     }
 
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
-    public string Username { get; set; } = string.Empty;
+    public string UserName { get; set; } = string.Empty;
     public Gender Gender { get; set; }
     public byte[]? ProfileImage { get; set; }
     public virtual ICollection<Room>? Rooms { get; set; }

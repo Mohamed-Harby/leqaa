@@ -1,42 +1,36 @@
 using System.Text;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Domain;
 using BusinessLogic.Infrastructure.Models;
+using BusinessLogic.Persistence;
+using BusinessLogic.Persistence.Repositories;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
-public class MessageQueueHelper : IMessageQueueHelper
+public class MessageQueueHelper
 {
-    private readonly IModel channel;
-    private readonly RabbitMQConnection connection;
-
-    public MessageQueueHelper(IOptions<RabbitMQConnection> rabbitMQConnectionOptions)
+    public static Task SubscribeToRegisterUsersQueue(IModel channel)
     {
-        connection = rabbitMQConnectionOptions.Value;
-        this.channel = RabbitMQConnector.ConnectAsync(
-            connection.Host,
-            connection.Port,
-            connection.Username,
-            connection.Password);
-    }
-    public void SendTestMessage()
-    {
-        channel.ExchangeDeclare(
-            "testExchange",
-            type: ExchangeType.Direct,
-            durable: false,
-            autoDelete: false);
+        var consumer = new EventingBasicConsumer(channel);
+        var options = new DbContextOptions<ApplicationDbContext>();
+        var dbcontext = new ApplicationDbContext(options);
+        IUserRepository userRepository = new UserRepository(dbcontext);
+        consumer.Received += async (ch, ea) =>
+         {
+             var userEncoded = ea.Body.ToArray();
+             var userDecoded = Encoding.UTF32.GetString(userEncoded);
+             UserWriteModel userDeserialialized = JsonConvert.DeserializeObject<UserWriteModel>(userDecoded);
+             await userRepository.AddAsync(userDeserialialized.Adapt<User>());
+             await userRepository.Save();
 
-        channel.QueueDeclare(
-            "testQueue3",
-            durable: false,
-            exclusive: false,
-            autoDelete: false);
-
-        channel.QueueBind("testQueue2", "testExchange", "testRoutingKey");
-
-        var message = Encoding.UTF8.GetBytes("Hello World!");
-        channel.BasicPublish("testExchange", "testRoutingKey", false, null, message);
-        channel.Close();
+         };
+        var channelTag = channel.BasicConsume("Authentication.User", true, consumer);
+        return Task.CompletedTask;
     }
 }
