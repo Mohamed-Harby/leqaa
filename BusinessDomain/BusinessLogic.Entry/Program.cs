@@ -58,15 +58,16 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("CanJoinRoom", policyBuilder => policyBuilder.AddRequirements(new CanJoinRoomRequirement()));
 });
-RabbitMQConnection rabbit = new();
-builder.Configuration.GetSection("RabbitMQConnection").Bind(rabbit);
-var connectionFactory = new ConnectionFactory();
-connectionFactory.HostName = rabbit.Host;
-connectionFactory.Port = rabbit.Port;
-connectionFactory.UserName = rabbit.Username;
-connectionFactory.Password = rabbit.Password;
-IModel channel = connectionFactory.CreateConnection().CreateModel();
-MessageQueueHelper.SubscribeToRegisterUsersQueue(channel);
+
+try
+{
+    IModel channel = RabbitMQConfiguration.ConnectToRabbitMQ(builder.Configuration);
+    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel);
+}
+catch
+{
+
+}
 var app = builder.Build();
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
 {
