@@ -3,12 +3,14 @@ using BusinessLogic.Entry.Models;
 using BusinessLogic.Entry.ServiceConfigurations;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.DependencyInjection;
+using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.DependencyInjection;
 using BusinessLogic.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +46,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
     };
 });
+
+builder.Services.Configure<RabbitMQConnection>(
+    builder.Configuration.GetSection("RabbitMQConnection")
+    );
 
 builder.Services.AddCorsConfiguration();
 builder.Services.AddAuthorization(options =>

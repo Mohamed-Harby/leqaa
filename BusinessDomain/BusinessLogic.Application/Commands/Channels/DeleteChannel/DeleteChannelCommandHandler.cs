@@ -45,7 +45,7 @@ public class DeleteChannelCommandHandler : IHandler<DeleteChannelCommand, ErrorO
             return DomainErrors.Hub.NotFound;
         }
         var channel = request.Adapt<Channel>();
-        await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
+        // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
         if (await _unitOfWork.Save() == 0)
         {
             return DomainErrors.Channel.InvalidChannel;

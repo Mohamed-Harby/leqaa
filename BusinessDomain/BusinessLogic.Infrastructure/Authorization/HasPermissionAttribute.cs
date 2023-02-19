@@ -18,10 +18,12 @@ public class HasPermissionAttribute : TypeFilterAttribute
 public class HasPermissionFilter : IAuthorizationFilter
 {
     private IUserRepository _userRepository;
+    
 
-    public HasPermissionFilter(IUserRepository userRepository)
+    public HasPermissionFilter(IUserRepository userRepository, Func<int, int> func)
     {
         _userRepository = userRepository;
+        
     }
 
     public async void OnAuthorization(AuthorizationFilterContext context)
