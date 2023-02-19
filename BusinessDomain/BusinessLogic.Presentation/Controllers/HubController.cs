@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
+
 public class HubController : BaseController
 {
     private readonly ISender _sender;
@@ -39,5 +40,25 @@ public class HubController : BaseController
         var result = await _sender.Send(getAllHubsQuery);
 
         return Ok(result);
+
+
     }
 }
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
