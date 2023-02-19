@@ -5,7 +5,6 @@ using Authentication.Domain.Entities.ApplicationUser;
 using Authentication.Domain.Entities.ApplicationUser.Errors;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Authentication.Application.Commands.RegisterUser;
 public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
@@ -13,16 +12,19 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly ITokenGenerator _tokenGenerator;
     private readonly IConfirmationEmailSender _emailSender;
+    private readonly IMessageQueueManager _messageQueueManager;
 
     public RegisterUserCommandHandler(
         UserManager<ApplicationUser> userManager,
         IConfirmationEmailSender confirmationEmailSender,
         ITokenGenerator tokenGenerator
-        )
+,
+        IMessageQueueManager messageQueueManager)
     {
         _emailSender = confirmationEmailSender;
         _userManager = userManager;
         _tokenGenerator = tokenGenerator;
+        _messageQueueManager = messageQueueManager;
     }
 
     public async Task<Results> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -58,7 +60,7 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
             authenticationResults.AddErrorMessages(result.Errors.Select(e => e.Description).ToArray());
             return authenticationResults;
         }
-
+        _messageQueueManager.PublishUser(user);
         authenticationResults.IsSuccess = true;
         authenticationResults.SetToken(_tokenGenerator.Generate(user)); //TODO : remove for business needs if needed
 
