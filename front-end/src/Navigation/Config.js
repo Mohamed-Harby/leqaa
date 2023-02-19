@@ -6,7 +6,18 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
 import Meeting from "../Pages/Meeting/Meeting";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING , CHAT } from "./Paths";
+import Channels from "../Pages/Channels/Channels";
+import {
+  ROOT,
+  LOGIN,
+  REGISTER,
+  SETTINGS,
+  MEETING,
+  CHAT,
+  CHANNELS,
+  ORGANIZATION,
+} from "./Paths";
+import Organization from "../Pages/Organization/Organization";
 
 
 const auth = true
@@ -43,6 +54,14 @@ export const RouterConfig = createBrowserRouter([
       {
         path: CHAT,
         element: <Chat />,
+      },
+      {
+        path: CHANNELS,
+        element: <Channels />,
+      },
+      {
+        path: ORGANIZATION,
+        element: <Organization />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-.meetingPersonCard {
+.channelCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,6 +6,6 @@
   background-color: #262427;
   color: #e2e0e3;
   border-radius: 1rem;
-  gap: 0.3rem;
-  padding: 1rem;
-}/*# sourceMappingURL=MeetingPersonCard.css.map */
+  gap: 0.5rem;
+  height: 12rem;
+}/*# sourceMappingURL=ChannelCard.css.map */

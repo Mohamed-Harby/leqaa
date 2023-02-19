@@ -21,6 +21,8 @@ function CallToolsBar() {
     setToggleShareScreen,
     toggleOpenCamera,
     setToggleOpenCamera,
+    toggleMic,
+    setToggleMic,
   } = useContext(MeetingContext); 
 
   return (
@@ -28,22 +30,33 @@ function CallToolsBar() {
       <h3 className="left">Meeting Code</h3>
 
       <div className="middle">
-        <BsMicFill />
-        <BsCameraVideo onClick={() => {
-          setToggleOpenCamera(!toggleOpenCamera)
-          setToggleShareScreen(false)
-        }} />
-        <FaRegHandPaper />
-        <TbScreenShare
+        <BsMicFill 
+          className="icon" 
           onClick={() => {
-            setToggleShareScreen(!toggleShareScreen)
-            setToggleOpenCamera(false)
-          }}/>
-        <ImPhoneHangUp />
+            setToggleMic(!toggleMic)
+          }}  
+        />
+        <BsCameraVideo
+          className="icon"
+          onClick={() => {
+            setToggleOpenCamera(!toggleOpenCamera);
+            setToggleShareScreen(false);
+          }}
+        />
+        <FaRegHandPaper className="icon" />
+        <TbScreenShare
+          className="icon"
+          onClick={() => {
+            setToggleShareScreen(!toggleShareScreen);
+            setToggleOpenCamera(false);
+          }}
+        />
+        <ImPhoneHangUp className="icon" />
       </div>
 
       <div className="right">
         <BsPeople
+          className="icon"
           onClick={() => {
             setToggleMembers(!toggleMembers);
             if (toggleChat) {
@@ -52,6 +65,7 @@ function CallToolsBar() {
           }}
         />
         <BsChatLeftText
+          className="icon"
           onClick={() => {
             setToggleChat(!toggleChat);
             if (toggleMembers) {
