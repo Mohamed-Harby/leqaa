@@ -61,10 +61,6 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
             return authenticationResults;
         }
         var userReadModel = user.Adapt<UserReadModel>();
-        userReadModel = userReadModel with
-        {
-            Password = request.Password
-        };
         _messageQueueManager.PublishUser(userReadModel);
         authenticationResults.IsSuccess = true;
         authenticationResults.SetToken(_tokenGenerator.Generate(user)); //TODO : remove for business needs if needed
