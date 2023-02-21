@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { BsHouseDoor, BsPeople, BsGear, BsCameraVideo } from "react-icons/bs";
+import { VscOrganization } from "react-icons/vsc";
 import { AiOutlineYoutube, AiFillCloseCircle } from "react-icons/ai";
 import profilepicture from "../../assets/badea.jpg";
 import { useAuth } from "../../Custom/useAuth";
@@ -36,6 +37,12 @@ function Sidebar() {
           <NavLink to="/channels">
             <AiOutlineYoutube />
             <span className={closeSidebar ? "hideText" : "text"}>Channels</span>
+          </NavLink>
+          <NavLink to="/organization">
+            <VscOrganization />
+            <span className={closeSidebar ? "hideText" : "text"}>
+              Organization
+            </span>
           </NavLink>
           <NavLink to="/meeting">
             <BsCameraVideo />

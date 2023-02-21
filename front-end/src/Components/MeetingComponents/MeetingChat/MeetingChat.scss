@@ -2,8 +2,6 @@
 
 .meetingChat{
   flex: 1.5;
-  
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -13,7 +11,14 @@
   background-color: $secondColor;
   height: 100%;
 
-  
+  .messages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
   
   
 

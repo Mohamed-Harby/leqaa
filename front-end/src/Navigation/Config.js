@@ -6,7 +6,9 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Settings from "../Pages/Settings/Settings";
 import Meeting from "../Pages/Meeting/Meeting";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, PROFILE } from "./Paths";
+import Channels from "../Pages/Channels/Channels";
+import Organization from "../Pages/Organization/Organization";
+import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE } from "./Paths";
 import { useAuth } from "../Custom/useAuth";
 import { useEffect } from "react";
 import { getStatus, getUser } from "../redux/authSlice";
@@ -65,6 +67,14 @@ export const RouterConfig = createBrowserRouter([
       {
         path: PROFILE,
         element: <Profile />,
+      },
+      {
+        path: CHANNELS,
+        element: <Channels />,
+      },
+      {
+        path: ORGANIZATION,
+        element: <Organization />,
       },
     ],
   },
