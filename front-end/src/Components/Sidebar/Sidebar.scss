@@ -1,0 +1,90 @@
+@use "../../helper/style" as *;
+
+.sidebar {
+  background-color: $firstColor;
+  position: sticky;
+  top: 50px;
+  height: calc(100vh - 50px);
+  flex: 1;
+  transition: 0.3s ease-in-out;
+  border-right: 1px solid $thirdColor;
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .control,
+      .edit-control {
+        display: flex;
+        justify-content: space-between;
+        color: $fifthColor;
+        font-size: 20px;
+        .bar {
+          visibility: hidden;
+          transition: 0.3s ease-in-out;
+        }
+        .close {
+          visibility: visible;
+          transition: 0.3s ease-in-out;
+          cursor: pointer;
+        }
+      }
+      .edit-control{
+        justify-content: center;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 5px;
+        color: $fifthColor;
+        svg {
+          font-size: 30px;
+        }
+        .text {
+            transition: 0.3s ease-in-out;
+            margin-left: 25px;
+        }
+        img {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+        &:hover {
+          background-color: $fifthColor;
+          color: $firstColor;
+          border-radius: 10px;
+        }
+      }
+      .active {
+        background-color: $fifthColor;
+        color: $firstColor;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+.sidebarResponsive {
+  flex: 0;
+  transition: 0.3s ease-in-out;
+  .showBar {
+    visibility: visible;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+  .hideClose {
+    display: none;
+    transition: 0.3s ease-in-out;
+  }
+  .hideText {
+    font-size: 0;
+    transition: 0.3s ease-in-out;
+    margin-left: 0;
+  }
+}

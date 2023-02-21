@@ -1,0 +1,92 @@
+.sidebar {
+  background-color: #1b1b1b;
+  position: sticky;
+  top: 50px;
+  height: calc(100vh - 50px);
+  flex: 1;
+  transition: 0.3s ease-in-out;
+  border-right: 1px solid #656366;
+}
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
+}
+.sidebar ul li {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar ul li .control,
+.sidebar ul li .edit-control {
+  display: flex;
+  justify-content: space-between;
+  color: #e2e0e3;
+  font-size: 20px;
+}
+.sidebar ul li .control .bar,
+.sidebar ul li .edit-control .bar {
+  visibility: hidden;
+  transition: 0.3s ease-in-out;
+}
+.sidebar ul li .control .close,
+.sidebar ul li .edit-control .close {
+  visibility: visible;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.sidebar ul li .edit-control {
+  justify-content: center;
+}
+.sidebar ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 5px;
+  color: #e2e0e3;
+}
+.sidebar ul li a svg {
+  font-size: 30px;
+}
+.sidebar ul li a .text {
+  transition: 0.3s ease-in-out;
+  margin-left: 25px;
+}
+.sidebar ul li a img {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+.sidebar ul li a:hover {
+  background-color: #e2e0e3;
+  color: #1b1b1b;
+  border-radius: 10px;
+}
+.sidebar ul li .active {
+  background-color: #e2e0e3;
+  color: #1b1b1b;
+  border-radius: 10px;
+}
+
+.sidebarResponsive {
+  flex: 0;
+  transition: 0.3s ease-in-out;
+}
+.sidebarResponsive .showBar {
+  visibility: visible;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.sidebarResponsive .hideClose {
+  display: none;
+  transition: 0.3s ease-in-out;
+}
+.sidebarResponsive .hideText {
+  font-size: 0;
+  transition: 0.3s ease-in-out;
+  margin-left: 0;
+}/*# sourceMappingURL=Sidebar.css.map */

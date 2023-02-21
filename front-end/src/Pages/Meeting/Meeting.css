@@ -1,0 +1,12 @@
+.callPage {
+  flex: 4;
+  position: relative;
+  background-color: #1b1b1b;
+  color: #e2e0e3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.callPage .content {
+  display: flex;
+}/*# sourceMappingURL=Meeting.css.map */

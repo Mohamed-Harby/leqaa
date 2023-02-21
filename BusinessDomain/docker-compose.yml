@@ -1,0 +1,50 @@
+
+version: '3.4'
+
+services:
+  server:
+    image: leqaa.bussinesslogic.server-dev
+    build:
+      context: .
+      dockerfile: BusinessLogic.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=mysql;Database=BusinessLogicTestDb;Uid=root;Pwd=2510203121;
+    depends_on:
+      - mysql
+  
+  integrationtests:
+    image: integrationtests:v1.0
+    build:
+      context: .
+      dockerfile: BusinessLogic.Tests/IntegrationTests/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=mysql;Database=BusinessLogicTestDb;Uid=root;Pwd=2510203121;
+    depends_on:
+      - mysql
+    volumes:
+      - ./BusinessLogic.Tests/IntegrationTests:/src/BusinessLogic.Tests/IntegrationTests
+    healthcheck:
+      test: ["CMD","curl","-f","http://mysql:3306"]
+      timeout: 5s
+      interval: 3s
+      retries: 3
+  unittests:
+    image: unittests:v1.0
+    build:
+      context: .
+      dockerfile: BusinessLogic.Tests/UnitTests/Dockerfile
+    volumes:
+      - ./BusinessLogic.Tests/UnitTests:/src/BusinessLogic.Tests/UnitTests
+  mysql:
+    image: mysql/mysql-server
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=BusinessLogicTestDb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+    volumes:
+      - dbvolume:/var/lib/mysql
+      - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+volumes:
+  dbvolume:
+     

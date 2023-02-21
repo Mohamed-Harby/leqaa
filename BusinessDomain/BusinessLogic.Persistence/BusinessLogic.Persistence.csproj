@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Graph" Version="4.53.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+  </ItemGroup>
+   <ItemGroup>
+    <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
+    <ProjectReference Include="../Src/CommonGenericClasses/Common.csproj" />
+    <ProjectReference Include="../BusinessLogic.Application/BusinessLogic.Application.csproj" />
+  </ItemGroup>
+
+</Project>

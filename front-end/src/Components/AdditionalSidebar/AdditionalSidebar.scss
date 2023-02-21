@@ -1,0 +1,23 @@
+@use "../../helper/style" as *;
+
+.additional{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $firstColor;
+    border-right: 1px solid $thirdColor;
+    position: sticky;
+    min-height: calc(100vh - 50px);
+    flex: 1;
+    color: black;
+    padding: 10px 0px;
+    .search{
+        height: 5%;
+    }
+    .cards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+}
