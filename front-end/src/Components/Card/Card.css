@@ -9,12 +9,18 @@
   border-radius: 10px;
   color: white;
   border: 1px solid #656366;
+  text-decoration: none;
 }
 .card .content {
   margin-left: 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+@media screen and (max-width: 480px) {
+  .card .content {
+    font-size: 14px;
+  }
 }
 .card .content .meeting,
 .card .content .post,
@@ -41,4 +47,10 @@
   font-size: 16px;
   cursor: pointer;
   border: none;
+}
+@media screen and (max-width: 480px) {
+  .card .content .btn {
+    width: 50px;
+    font-size: 12px;
+  }
 }/*# sourceMappingURL=Card.css.map */

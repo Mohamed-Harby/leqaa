@@ -8,9 +8,19 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 
 // we will need to fetch the user data and display it here in the future, img is for testing only
 import profilePicture from "../../assets/badea.jpg";
+import ModalCalling from "../ModalCalling/ModalCalling";
+import ModalVideoCalling from "../ModalVideoCalling/ModalVideoCalling";
 
 function Statusbar() {
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [modalOpenCalling, setModalOpenCalling] = useState(false);
+  const [modalOpenVideoCalling, setModalOpenVideoCalling] = useState(false);
+  const modalCloseCalling = () => {
+    setModalOpenCalling(false);
+  };
+
+  const modalCloseVideoCalling = () => {
+    setModalOpenVideoCalling(false);
+  };
   return (
     <div className="statusbar">
       <div className="left">
@@ -22,17 +32,20 @@ function Statusbar() {
       </div>
 
       <div className="right">
-        <FiPhoneCall />
-        <BsCameraVideo />
+        <FiPhoneCall onClick={() => {setModalOpenCalling(true)}}  />
+        <BsCameraVideo onClick={() => {setModalOpenVideoCalling(true)}} />
         <Dropdown
           links={[
-            { name: "Link1", to: "Link1" },
-            { name: "Link2", to: "Link2" },
-            { name: "Link3", to: "Link3" },
+            { name: "View Profile", to: "profile" },
+            { name: "Pin Chat", to: "Link2" },
+            { name: "Clear Chat", to: "Link3" },
           ]}
         />
       </div>
+      {modalOpenVideoCalling && <ModalVideoCalling modalCloseVideoCalling={modalCloseVideoCalling} modalOpenVideoCalling={modalOpenVideoCalling} />}
+      {modalOpenCalling && <ModalCalling modalCloseCalling={modalCloseCalling} />}
     </div>
+    
   );
 }
 

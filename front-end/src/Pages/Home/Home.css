@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   background-color: #1b1b1b;
+  align-items: center;
 }
 .home .btns {
   width: 95%;
   margin: 10px auto;
+  display: flex;
 }
 .home .btns button {
   width: 150px;
@@ -22,4 +24,11 @@
 }
 .home .btns button:first-child {
   margin-right: 10px;
+}
+@media screen and (max-width: 480px) {
+  .home .btns button {
+    width: 100%;
+    font-size: 14px;
+    height: 100%;
+  }
 }/*# sourceMappingURL=Home.css.map */

@@ -5,10 +5,12 @@ import { FaBars } from "react-icons/fa";
 import { BsHouseDoor, BsPeople, BsGear, BsCameraVideo } from "react-icons/bs";
 import { AiOutlineYoutube, AiFillCloseCircle } from "react-icons/ai";
 import profilepicture from "../../assets/badea.jpg";
+import { useAuth } from "../../Custom/useAuth";
 
 function Sidebar() {
   const id = null;
   const [closeSidebar, setCloseSidebar] = useState(false)
+  const auth = useAuth()
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
@@ -46,9 +48,9 @@ function Sidebar() {
             <BsGear />
             <span className={closeSidebar ? "hideText" : "text"}>Setting</span>
           </NavLink>
-          <NavLink to={`/profile/${id}`}>
+          <NavLink to={`/profile/${auth.user.user?.userName}`}>
             <img src={profilepicture} alt="user" />
-            <span className={closeSidebar ? "hideText" : "text"}>Username</span>
+            <span className={closeSidebar ? "hideText" : "text"}>{auth.user.user?.userName}</span>
           </NavLink>
         </li>
       </ul>

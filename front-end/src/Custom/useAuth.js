@@ -1,28 +1,55 @@
-import { useStytch } from "@stytch/react"
+import { useEffect } from "react"
 import { useContext, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { authContext } from "../helper/authContext"
-import { post } from "../redux/authSlice"
+import { checkAuth, getAuth, getError, getResponse, getStatus, getUser, login, post, signup } from "../redux/authSlice"
+import { setCookies } from "./useCookies"
 
 
-export function ProvideAuth({ children }) {
-    const auth = useProvideAuth();
-    return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
 
 export const useAuth = () => {
     return useContext(authContext)
 }
+
 function useProvideAuth(params) {
     const dispatch = useDispatch()
+    const response = useSelector(getResponse);
+    // const auth = useSelector(getAuth);
+    const [user, setUser] = useState({})
+    console.log(response);
 
-    function signin(payload) {
-        dispatch(post('https://fakestoreapi.com/auth/login', payload))
+
+    useEffect(() => {
+        console.log(response);
+        setUser(response)
+        response.token && setCookies('token', response.token, 1);
+    }, [response])
+
+    function useLogin(payload) {
+        dispatch(login(payload))
         console.log(payload);
     }
 
-    function signup(payload) {
-        dispatch(post('http://localhost:5002/api/v1/authentication/Register', payload))
+    function useSignup(payload) {
+        dispatch(signup(payload))
+        console.log(payload);
+    }
+    function useGetUser(payload) {
+        dispatch(getUser(payload))
+        console.log(payload);
+    }
+    function useCheckAuth(payload) {
+        dispatch(checkAuth(payload))
+        console.log(payload);
+    }
+
+    function useCheckAuth(payload) {
+        dispatch(checkAuth(payload))
+        console.log(payload);
+    }
+    
+    function useCheckAuth(payload) {
+        dispatch(checkAuth(payload))
         console.log(payload);
     }
 
@@ -30,5 +57,10 @@ function useProvideAuth(params) {
         localStorage.clear();
     }
 
-    return { signin, signup, logout }
+    return { useSignup, useLogin, useGetUser, useCheckAuth,logout, user, setUser }
+}
+
+export function ProvideAuth({ children }) {
+    const auth = useProvideAuth();
+    return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }

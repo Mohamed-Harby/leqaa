@@ -1,38 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useMousePosition } from "../../Custom/useMousePosition";
 import './Searchbar.css'
+import {useForm} from 'react-hook-form'
 
 function Searchbar() {
-  const [search, setSearch] = useState("");
-  const [mousePos, setMousePos] = useState({});
+  const {register, handleSubmit} = useForm();
+  const mousePos = useMousePosition()
   const [showAnimation, setShowAnimation] = useState(false);
-
-
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener(
-        'mousemove',
-        handleMouseMove
-      );
-    };
-  }, []);
-
   const animation = () => {
     if(mousePos.y < 50){
       setShowAnimation(true)
     }
   }
+  const onSubmitHandler = (data) => {
+    console.log(data);
+  }
 
   return (
-    <>
-      <input onFocus={() => animation()} className={showAnimation ? 'showAnimation' : 'hideAnimation'} type="search" placeholder="Search" onChange={(x) => setSearch(x.target.value)}/>
-    </>
+    <form className="search" onSubmit={handleSubmit(onSubmitHandler)}>
+      <input onFocus={() => animation()} className={showAnimation ? 'showAnimation' : 'hideAnimation'} type="search" placeholder="Search" {...register('search')}/>
+    </form>
   );
 }
 

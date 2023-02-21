@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import { BsCameraVideo } from "react-icons/bs";
 
@@ -8,7 +8,14 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../Custom/useAuth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import {
+  getError,
+  getResponse,
+  getStatus,
+  signup,
+} from "../../redux/authSlice";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -30,9 +37,13 @@ const schema = yup.object().shape({
 });
 
 function Register() {
-  const auth = useAuth()
-  const {responseMsg} = useSelector((state) => state.auth)
-  console.log(responseMsg);
+  const response = useSelector(getResponse);
+  const status = useSelector(getStatus);
+  const error = useSelector(getError);
+  const dispatch = useDispatch();
+  const auth = useAuth();
+  const navigate = useNavigate()
+
   const {
     register,
     handleSubmit,
@@ -43,9 +54,22 @@ function Register() {
   });
 
   const onSubmitHandler = (data) => {
-    auth.signup(data)
-    reset();
+    const sendRequest = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      userName: data.userName,
+      gender: Number(data.gender),
+    };
+    console.log(sendRequest);
+    auth.useSignup(sendRequest);
+    // reset();
   };
+
+  useEffect(()=>{
+    console.log(auth.user.isSuccess);
+    auth.user.isSuccess && navigate('/');
+  },[auth.user])
 
   return (
     <>
@@ -97,9 +121,20 @@ function Register() {
                 placeholder="User Name"
                 type="text"
                 name="name"
-                {...register("username")}
+                {...register("userName")}
               />
               {errors.name && <p>{errors.name.message}</p>}
+            </div>
+
+            <div className="input">
+              <select {...register("gender")}>
+                <option value="">Select Gender</option>
+                <option value={0}>Male</option>
+                <option value={1}>Female</option>
+              </select>
+              {errors.confirmPassword && (
+                <p>{errors.confirmPassword.message}</p>
+              )}
             </div>
 
             <div className="input">

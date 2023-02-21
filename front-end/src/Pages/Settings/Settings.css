@@ -9,8 +9,8 @@
 .settingsPage .settings {
   background-color: #262427;
   color: #e2e0e3;
-  width: 40%;
-  height: 70%;
+  width: 40vw;
+  height: calc((100vh - 50px) / 2 + 10vh);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
