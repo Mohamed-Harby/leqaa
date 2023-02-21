@@ -7,118 +7,95 @@ nav {
   top: 0;
   background-color: $firstColor;
   z-index: 1000;
+  border-bottom: 1px solid $thirdColor;
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+  }
+
   ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+
     li {
       display: flex;
       justify-content: start;
       align-items: center;
       flex: 1;
       height: 100%;
-      &:nth-child(2) {
-        flex: 2;
-        justify-content: center;
+      &:first-child{
         @media screen and (max-width: 768px) {
-          flex: 3;
+          justify-content: center;
         }
       }
+
+      &:nth-child(2) {
+        flex: 3;
+        justify-content: center;
+        @media screen and (max-width: 768px) {
+          flex: 2;
+        }
+      }
+
       &:last-child{
         gap: 10px;
         justify-content: end;
         @media screen and (max-width: 768px) {
           gap: 5px;
         }
-      }
-      a {
-        text-decoration: none;
-        color: $fifthColor;
-        height: 100%;
-        font: {
-          family: "Leckerli One";
-          size: 25px;
-        }
-        @media screen and (max-width: 768px) {
-          font-size: 20px;
-        }
-      }
-      input[type="search"] {
-        width: 80%;
-        height: 100%;
-        background: url(../../assets/search.png) no-repeat 98% center;
-        background-size: 20px;
-        border: 2px solid black;
-        border-radius: 5px;
-        padding: 0 25px;
-        box-shadow: 0px 0px 5px 1px black;
-        color: $fifthColor;
-        transition: width 0.4s ease-in-out;
-        @media screen and (max-width: 768px) {
-          width: 90%;
-        }
-        @media screen and (max-width: 480px) {
-          width: 100%;
-        }
-        &:focus{
-            width: 100%;
-            outline: none;
-        }
-        &::placeholder{
-            color: $fifthColor;
-        }
-      }
-      button {
-        border: none;
-        color: $fifthColor;
-        cursor: pointer;
-        &:first-child{
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        a {
+          &:last-child {
+            border-radius: 10px;
             background-color: $secondColor;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
-            color: $fifthColor;
-            padding: 10px;
-            @media screen and (max-width: 480px) {
-              width: 25px;
-              height: 25px;
+            padding: 15px;
+            // font-size: 20px;
+            @media screen and (max-width: 768px) {
+              padding: 10px;
             }
+            @media screen and (max-width: 480px) {
+              font-size: 15px;
+              padding: 5px;
+            }
+          }
         }
-        // &:last-child{
-        //     height: 100%;
-        //     border-radius: 10px;
-        //     background-color: $thirdColor;
-        //     font-size: 18px;
-        //     // padding: 5px 20px;
-        //     color: $fifthColor;
-        //     @media screen and (max-width: 768px) {
-        //       font-size: 16px;
-        //       padding: 3px;
-        //     }
-        // }
       }
+
+      a {
+        text-decoration: none;
+        color: $fifthColor;
+        height: 100%;
+        font-size: 25px;
+        font-family: "Leckerli One";
+        @media screen and (max-width: 768px) {
+          font-size: 20px;
+        }
+      }
+
+
+      button {
+        border: none;
+        color: $fifthColor;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: $secondColor;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        color: $fifthColor;
+        padding: 10px;
+        @media screen and (max-width: 480px) {
+          width: 25px;
+          height: 25px;
+        }
+      }
+      
     }
-  }
-}
-
-
-.homeLoginButton {
-  height: 100%;
-  border-radius: 10px;
-  background-color: $thirdColor;
-  font-size: 18px;
-  padding: 5px 18px;
-  display: flex;
-  align-items: center;
-  color: $fifthColor;
-
-  @media screen and (max-width: 768px) {
-    font-size: 16px;
-    padding: 3px;
   }
 }

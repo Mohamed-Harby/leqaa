@@ -61,9 +61,6 @@
 .modal .modal-content form input[type=text]::-moz-placeholder {
   color: #e2e0e3;
 }
-.modal .modal-content form input[type=text]:-ms-input-placeholder {
-  color: #e2e0e3;
-}
 .modal .modal-content form input[type=text]::placeholder {
   color: #e2e0e3;
 }

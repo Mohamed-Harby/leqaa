@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
-import Modal from "../../Components/Modal/Modal";
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useAuth } from "../../Custom/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { getError, getResponse, getStatus, getUser } from "../../redux/authSlice";
+import useCookies from "react-cookie/cjs/useCookies";
+import {  getCookies } from "../../Custom/useCookies";
+import axios from "axios";
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Write your email rightly")
-    .required("Email is required"),
   password: yup
     .string()
     .min(8)
@@ -23,13 +23,16 @@ const schema = yup.object().shape({
     .required(),
 });
 
-const pathName = window.location.pathname;
-let active = "";
-if (pathName === '/login'){
-  active = "/login"
-} 
-
 function Login() {
+  const { pathname } = useLocation();
+  const dispatch = useDispatch()
+  const auth = useAuth();
+  const [cookies, setCookie] = useCookies(["token"]);
+  const status = useSelector(getStatus);
+  const error = useSelector(getError);
+  const navigate = useNavigate()
+  const token = getCookies('token')
+
   const {
     register,
     handleSubmit,
@@ -40,53 +43,57 @@ function Login() {
   });
 
   const onSubmitHandler = (data) => {
-    console.log({ data });
-    reset();
+    auth.useLogin(data);
   };
+
+  useEffect(()=>{
+    console.log(auth.user.isSuccess);
+    auth.user.isSuccess && navigate('/');
+  },[auth.user])
 
   return (
     <>
       <Navbar />
-      <hr className="hrLogin" noshade />
-
-      <div className="loginContainer">
+      <div className="login">
         <div className="left">
-          <div className="container">
-            <h1>
-              Video Calls and Meetings for personal Use and organizations.
-            </h1>
-            <p>
-              Leqaa is a service for secure, high-quality video meetings and
-              calls available for everyone.
-            </p>
-          </div>
+          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
+          <p>
+            Leqaa is a service for secure, high-quality video meetings and calls
+            available for everyone.
+          </p>
         </div>
 
-        <form className="right" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div className="inputFields">
-            <h1>Log In</h1>
-
-            <input type="email" placeholder="Email" {...register("email")} />
-            {errors.email && <p>{errors.email.message}</p>}
-            <input
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
-            {errors.password && <p>{errors.password.message}</p>}
-            <button type="submit">Submit</button>
-          </div>
-          {/* <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}></div> */}
-          <div className="linksContainer">
+        <div className="right">
+          <div className="links">
             <Link to={`/register`}>Sign Up</Link>
-            <Link 
-            className={(active === '/login' && "activeLink")}
-            
-            to={`/login`}
-            >login
-            </Link>
+            <Link className="active">Login</Link>
           </div>
-        </form>
+
+          <form onSubmit={handleSubmit(onSubmitHandler)}>
+            <h1>Log In</h1>
+            <div className="input">
+              <input
+                placeholder="User Name"
+                type="text"
+                name="name"
+                {...register("userName")}
+              />
+              {(errors.name || auth.user.errorMessages) && <p>{errors.name?.message || auth.user.errorMessages[0]?.includes('username') && auth.user?.errorMessages[0]}</p>}
+            </div>
+            <div className="input">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              {(errors.password || auth.user.errorMessages) && <p>{errors.password?.message || auth.user.errorMessages[0]?.includes('password') && auth.user?.errorMessages[0]}</p>}
+            </div>
+            <div className="input">
+              <button type="submit">Submit</button>{" "}
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

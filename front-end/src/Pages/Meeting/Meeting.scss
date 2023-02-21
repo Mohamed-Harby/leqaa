@@ -1,0 +1,24 @@
+@use "../../helper/style" as *;
+
+
+.callPage {
+  flex: 4;
+
+  position: relative;
+  background-color: $firstColor;
+  color: $fifthColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .content {
+    display: flex;
+  }
+
+
+
+  
+  
+  
+
+}

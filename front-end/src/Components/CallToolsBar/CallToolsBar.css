@@ -3,8 +3,14 @@
   justify-content: space-between;
   background-color: #1b1b1b;
   color: #e2e0e3;
-  padding: 1rem 1rem;
+  padding: 1rem;
   font-size: 2rem;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+}
+.callToolsBar .icon {
+  cursor: pointer;
 }
 .callToolsBar .left {
   background-color: #262427;
@@ -16,7 +22,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-left: -12rem;
+  margin-left: -9rem;
 }
 .callToolsBar .right {
   display: flex;

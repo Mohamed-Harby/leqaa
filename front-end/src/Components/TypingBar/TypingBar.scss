@@ -4,10 +4,15 @@
   background-color: $firstColor;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   padding: 1rem 0.7rem;
   gap: 1rem;
+  width: 100%;
 
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+  
 
   input {
     flex: 1;
@@ -36,6 +41,7 @@
     font-size: 2rem;
     display: flex;
     align-items: center;
+
   }
 
 }

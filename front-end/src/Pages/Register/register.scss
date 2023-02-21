@@ -1,63 +1,35 @@
 
-a {
-  text-decoration: none;
-}
+
+@use "../../helper/style" as *;
 
 
-@mixin registerInputMix{
-  background-color: #656366;
-  color: #DCDCDC;
-  outline: none;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  padding: 0.7rem 2rem;
-  width: 60%;
-}
-
-@mixin registerButtonMix{
-  background-color: #A379DE;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  color: white;
-  cursor: pointer;
-}
-
-.hrRegister{
-  display: block;
-  height: 1px;
-  padding: 0;
-  border: 0; 
-  border-top: 1px solid #353535;
-}
 
 
-.registerContainer {
+
+.register {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  height: calc(100vh - 52px);
-  background: #1B1B1B;
-  color: #E2E0E3;
+  height: calc(100vh - 50px);
+  background: $firstColor;
+  color: $fifthColor;
 
   
-  .left{
-    width: 50%;
-    height: 70%;
-    margin: 2rem;
+  .left {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    width: 40vw;
     h1 {
-      font-size: 3.2rem;
+      color: $fourthColor;
+      svg{
+        font-size: 25px;
+        margin-right: 5px;
+      }
     }
-  
     p {
       margin-top: 10px;
-      font-size: 1.5rem;
     }
-
   }
 
 
@@ -67,68 +39,83 @@ a {
   .right{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    background-color: #262427;
-    margin: 2rem;
-    width: 40%;
-    height: 70%;
-    border-radius: 10px;
+    text-align: center;
+    background-color: $secondColor;
+    border-radius: 20px;
+    width: 40vw;
+    height: calc(((100vh - 50px) / 2) + 10vh);
 
-    .inputFields {
+    .links {
+      display: flex;
+      a {
+        text-decoration: none;
+        background-color: $thirdColor;
+        color: $fifthColor;
+        width: 50%;
+        padding: 15px;
+        &:first-child {
+          border-top-left-radius: 20px;
+        }
+        &:last-child {
+          border-top-right-radius: 20px;
+        }
+      }
+      .active {
+        background-color: $fourthColor;
+      }
+    }
+
+    form {
       display: flex;
       flex-direction: column;
       align-items: center;
-
-      h1{
-        font-size: 3rem;
-        text-align: center;
-        margin-top: 30px;
-      }
-
-      input {
-        @include registerInputMix();
-        margin-top: 2rem;
-        width: 75%;
-      }
-
-      input::placeholder { 
-        color: #DCDCDC;
-        opacity: 1; 
-      }
-
-      p {
-        text-align: center;
-        color: rgb(214, 214, 2);
-        padding: 0px;
-        margin-top: 0.5rem;
-        margin-bottom: 0;
-      }
-
-    }
-
-
-
-
-
-    .buttonsContainer{
-      align-self: center;
-      width: 60%;
-      display: flex;
       justify-content: space-around;
-      margin: 3rem 0rem;
+      height: 100%;
 
-      button{
-        @include registerButtonMix()
-      }
-      
-      a{
-        @include registerButtonMix();
-        background-color: #E2E0E3;
-        color: #262427;
-        padding: 0.6rem 2rem;
-      }
+      .input {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
 
+        input, select {
+          background-color: $secondColor;
+          color: $fifthColor;
+          border: none;
+          border-bottom: 1px solid $thirdColor;
+          height: 100%;
+          &::placeholder {
+            color: #dcdcdc;
+            opacity: 1;
+          }
+          &:focus {
+            outline: none;
+            
+          }
+        }
+        p {
+          color: $fifthColor;
+        }
+        button {
+          background-color: $fourthColor;
+          border-radius: 20px;
+          color: $fifthColor;
+          cursor: pointer;
+          align-self: flex-end;
+          padding: 10px;
+          border: none;
+          width: 25%;
+        }
+      }
     }
+
+    
+
+
+
+
+
+    
 
 
   }
