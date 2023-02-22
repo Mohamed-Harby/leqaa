@@ -3,8 +3,7 @@
 version: '3.4'
 
 services:
-  authentication:
-    image: authentication-dev
+  authentication2:
     build:
       context: .
       dockerfile: Authentication/Authentication.Entry/Dockerfile
@@ -13,15 +12,19 @@ services:
       - Uri=http://localhost:5002
     ports:
       - 5002:5002
+      - 5003:5003
     depends_on:
       - authenticationdb
-    volumes:
-      - ./Authentication:/src/Authentication
+      - rabbitmq
+    # volumes:
+      # - ./Authentication:/src/Authentication
     healthcheck:
       test: ["CMD","curl","-f","http://authenticationdb:3308"]
       timeout: 1s
       interval: 1s
       retries: 10
+    networks:
+      - network1
 
   authenticationdb:
     image: mysql/mysql-server:latest
@@ -35,7 +38,31 @@ services:
       - authenticationdbvolume:/var/lib/mysql
     ports:
       - 3308:3308
+    networks:
+      - network1
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: "rabbitmq"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      - network1
+    
+networks:
+  network1:
+    name: my-pre-existing-network
+    external: false
+  
 volumes:
   businessdbvolume:
   authenticationdbvolume:
