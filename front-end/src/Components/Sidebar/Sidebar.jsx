@@ -13,7 +13,7 @@ function Sidebar() {
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
-        <li class="top">
+        <li className="top">
           <div className={closeSidebar ? "edit-control" : "control"}>
             <FaBars
               className={closeSidebar ? "showBar" : "bar"}
@@ -48,7 +48,7 @@ function Sidebar() {
           </NavLink>
         </li>
 
-        <li class="bottom">
+        <li className="bottom">
           <NavLink to="/settings">
             <BsGear />
             <span className={closeSidebar ? "hideText" : "text"}>Setting</span>
