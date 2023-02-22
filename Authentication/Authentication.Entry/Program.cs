@@ -17,9 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 //builder.Services.AddControllersWithViews();
-builder.Services.AddControllersWithViews().AddApplicationPart(typeof(AuthenticationController).Assembly)
-    .AddControllersAsServices()
-    .AddViewComponentsAsServices();
+builder.Services.AddControllers().AddApplicationPart(typeof(AuthenticationController).Assembly)
+    .AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -83,12 +82,5 @@ app.MapControllers();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseEndpoints(endpoints =>
-//{
-//    // Map your library's controllers to the appropriate routes
-//    endpoints.MapControllerRoute(
-//        name: "default",
-//        pattern: "{controller=Home}/{action=Index}/{id?}");
-//});
 
 app.Run();
