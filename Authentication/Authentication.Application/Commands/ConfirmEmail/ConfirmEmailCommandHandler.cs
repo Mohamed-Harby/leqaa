@@ -31,7 +31,7 @@ public class ConfirmEmailCommandHandler : IHandler<ConfirmEmailCommand>
             return authenticationResults;
         }
         authenticationResults.IsSuccess = true;
-        authenticationResults.IsConfirmed = true;
+    
 
         return authenticationResults;
     }
