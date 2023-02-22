@@ -45,10 +45,6 @@ public class AuthenticationController : Controller
         Results results = await _sender.Send(loginQuery);
         if (!results.IsSuccess)
             return BadRequest(results);
-<<<<<<< HEAD
-
-=======
->>>>>>> fdf1172c0e967a55d997abe4dae42ae2f50a76b1
         return Ok(results);
     }
     [HttpGet]
@@ -99,11 +95,7 @@ public class AuthenticationController : Controller
         var results = await _sender.Send(confirmEmailRequest);
         if (!results.IsSuccess)
             return BadRequest(results);
-<<<<<<< HEAD
         
-=======
-
->>>>>>> fdf1172c0e967a55d997abe4dae42ae2f50a76b1
         return View(results);
     }
     [HttpPut]
