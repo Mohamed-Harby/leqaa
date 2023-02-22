@@ -12,19 +12,19 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly ITokenGenerator _tokenGenerator;
     private readonly IConfirmationEmailSender _emailSender;
-    private readonly IMessageQueueManager _messageQueueManager;
+  /*  private readonly IMessageQueueManager _messageQueueManager;*//**/
 
     public RegisterUserCommandHandler(
         UserManager<ApplicationUser> userManager,
         IConfirmationEmailSender confirmationEmailSender,
         ITokenGenerator tokenGenerator
-,
-        IMessageQueueManager messageQueueManager)
+
+        /*IMessageQueueManager messageQueueManager*/)
     {
         _emailSender = confirmationEmailSender;
         _userManager = userManager;
         _tokenGenerator = tokenGenerator;
-        _messageQueueManager = messageQueueManager;
+    /*    _messageQueueManager = messageQueueManager;*/
     }
 
     public async Task<Results> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
@@ -61,7 +61,7 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
             return authenticationResults;
         }
         var userReadModel = user.Adapt<UserReadModel>();
-        _messageQueueManager.PublishUser(userReadModel);
+       /* _messageQueueManager.PublishUser(userReadModel);*/
         authenticationResults.IsSuccess = true;
         authenticationResults.SetToken(_tokenGenerator.Generate(user)); //TODO : remove for business needs if needed
 

@@ -16,7 +16,7 @@ namespace Authentication.Presentation.Controllers;
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
 [Authorize(AuthenticationSchemes = "Bearer")]
-public class AuthenticationController : ControllerBase
+public class AuthenticationController : Controller
 {
     private readonly ISender _sender;
     public AuthenticationController(ISender sender)
@@ -45,6 +45,13 @@ public class AuthenticationController : ControllerBase
         Results results = await _sender.Send(loginQuery);
         if (!results.IsSuccess)
             return BadRequest(results);
+
+        if (!results.IsConfirmed)
+        {
+
+            return Ok($"confirm your email ");
+
+        }
         return Ok(results);
     }
     [HttpGet]
@@ -95,7 +102,8 @@ public class AuthenticationController : ControllerBase
         var results = await _sender.Send(confirmEmailRequest);
         if (!results.IsSuccess)
             return BadRequest(results);
-        return Ok(results);
+        
+        return View(Path.Combine(Environment.CurrentDirectory,@"/Views/Authentication/ConfirmEmail.cshtml"));
     }
     [HttpPut]
     [AllowAnonymous]

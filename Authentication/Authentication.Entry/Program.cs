@@ -15,10 +15,11 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers().AddApplicationPart(typeof(AuthenticationController).Assembly)
-    .AddControllersAsServices();
+// Add services to the container
+//builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddApplicationPart(typeof(AuthenticationController).Assembly)
+    .AddControllersAsServices()
+    .AddViewComponentsAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -73,10 +74,21 @@ app.UseSwaggerUI();
 // }
 
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 app.UseCors(CorsPolicyName);
 app.MapControllers();
+
+
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+//app.UseEndpoints(endpoints =>
+//{
+//    // Map your library's controllers to the appropriate routes
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
 
 app.Run();
