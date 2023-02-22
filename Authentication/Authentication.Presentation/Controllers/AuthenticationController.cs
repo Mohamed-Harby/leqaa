@@ -45,13 +45,6 @@ public class AuthenticationController : Controller
         Results results = await _sender.Send(loginQuery);
         if (!results.IsSuccess)
             return BadRequest(results);
-
-        if (!results.IsConfirmed)
-        {
-
-            return Ok($"confirm your email ");
-
-        }
         return Ok(results);
     }
     [HttpGet]
@@ -102,7 +95,7 @@ public class AuthenticationController : Controller
         var results = await _sender.Send(confirmEmailRequest);
         if (!results.IsSuccess)
             return BadRequest(results);
-        
+
         return View(results);
     }
     [HttpPut]
