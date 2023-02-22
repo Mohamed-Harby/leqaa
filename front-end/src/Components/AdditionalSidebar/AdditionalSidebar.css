@@ -9,4 +9,13 @@
   flex: 1;
   color: black;
   padding: 10px 0px;
+}
+.additional .search {
+  height: 5%;
+}
+.additional .cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }/*# sourceMappingURL=AdditionalSidebar.css.map */

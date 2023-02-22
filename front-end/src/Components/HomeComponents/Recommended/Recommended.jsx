@@ -51,7 +51,6 @@ function Recommended() {
       ];
       return (
         <div className="recommended">
-          <h1>recommended</h1>
           {arr.map((item) => {
             return <Card card={item} />;
           })}

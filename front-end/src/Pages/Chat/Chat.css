@@ -7,4 +7,61 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: #1b1b1b;
+}
+@media screen and (max-width: 480px) {
+  .chat .chat-section {
+    display: none;
+  }
+}
+.chat .chat-section .messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.chat .chat-section .messages > * {
+  max-width: 45%;
+  word-break: break-all;
+  padding: 1%;
+  border-radius: 10px;
+  margin: 10px 0px;
+}
+.chat .chat-section .messages .sender {
+  align-self: flex-end;
+  background-color: #656366;
+  position: relative;
+  right: 20px;
+  border-bottom-right-radius: 0;
+}
+.chat .chat-section .messages .sender::after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  right: -20px;
+  bottom: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #e2e0e3;
+}
+.chat .chat-section .messages .receiver {
+  align-self: flex-start;
+  background-color: #262427;
+  position: relative;
+  left: 20px;
+  border-bottom-left-radius: 0;
+}
+.chat .chat-section .messages .receiver::after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  left: -20px;
+  bottom: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent #e2e0e3 transparent transparent;
 }/*# sourceMappingURL=Chat.css.map */

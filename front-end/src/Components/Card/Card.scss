@@ -11,11 +11,15 @@
   border-radius: 10px;
   color: white;
   border: 1px solid $thirdColor;
+  text-decoration: none;
   .content {
     margin-left: 10px;
     width: 100%;
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 480px) {
+      font-size: 14px;
+    }
     .meeting,
     .post,
     .member {
@@ -32,6 +36,10 @@
     }
     .btn{
       @include Btn(100px, fit-content, 10px, 10px, $fourthColor, $fifthColor, 16px);
+      @media screen and (max-width: 480px) {
+        width: 50px;
+        font-size: 12px;
+      }
     }
     // div {
     //   &:first-child {

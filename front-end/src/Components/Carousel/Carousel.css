@@ -3,6 +3,72 @@
   width: 100%;
   position: relative;
   background-color: #262427;
+  border-radius: 10px;
+}
+@media screen and (max-width: 1025px) {
+  .carousel {
+    width: 80vw;
+  }
+}
+@media screen and (max-width: 750px) {
+  .carousel {
+    width: 79vw;
+  }
+}
+@media screen and (max-width: 725px) {
+  .carousel {
+    width: 78vw;
+  }
+}
+@media screen and (max-width: 700px) {
+  .carousel {
+    width: 77vw;
+  }
+}
+@media screen and (max-width: 675px) {
+  .carousel {
+    width: 76vw;
+  }
+}
+@media screen and (max-width: 650px) {
+  .carousel {
+    width: 75vw;
+  }
+}
+@media screen and (max-width: 625px) {
+  .carousel {
+    width: 74vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .carousel {
+    width: 73vw;
+  }
+}
+@media screen and (max-width: 575px) {
+  .carousel {
+    width: 72vw;
+  }
+}
+@media screen and (max-width: 550px) {
+  .carousel {
+    width: 71vw;
+  }
+}
+@media screen and (max-width: 525px) {
+  .carousel {
+    width: 70vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .carousel {
+    width: 69vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .carousel {
+    display: none;
+  }
 }
 
 .inner-carousel {
@@ -55,7 +121,8 @@
 }
 
 .item.show-2 > * {
-  width: 50%;
+  width: 45%;
+  margin: 2.5%;
 }
 
 .item.show-3 > * {

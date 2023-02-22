@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./login.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar/Navbar";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../Custom/useAuth";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getError, getResponse, getStatus, getUser } from "../../redux/authSlice";
+import useCookies from "react-cookie/cjs/useCookies";
+import {  getCookies } from "../../Custom/useCookies";
+import axios from "axios";
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Write your email rightly")
-    .required("Email is required"),
   password: yup
     .string()
     .min(8)
@@ -26,10 +25,13 @@ const schema = yup.object().shape({
 
 function Login() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch()
   const auth = useAuth();
-  const { responseMsg } = useSelector((state) => state.auth);
-
-  console.log(responseMsg);
+  const [cookies, setCookie] = useCookies(["token"]);
+  const status = useSelector(getStatus);
+  const error = useSelector(getError);
+  const navigate = useNavigate()
+  const token = getCookies('token')
 
   const {
     register,
@@ -41,18 +43,18 @@ function Login() {
   });
 
   const onSubmitHandler = (data) => {
-    console.log( data );
-    auth.signin(data)
-    reset();
+    auth.useLogin(data);
   };
 
-  
+  useEffect(()=>{
+    console.log(auth.user.isSuccess);
+    auth.user.isSuccess && navigate('/');
+  },[auth.user])
 
   return (
     <>
       <Navbar />
       <div className="login">
-        
         <div className="left">
           <h1>Video Calls and Meetings for personal Use and organizations.</h1>
           <p>
@@ -71,12 +73,12 @@ function Login() {
             <h1>Log In</h1>
             <div className="input">
               <input
-                type="email"
-                id="email"
-                placeholder="Email"
-                {...register("email")}
+                placeholder="User Name"
+                type="text"
+                name="name"
+                {...register("userName")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {(errors.name || auth.user.errorMessages) && <p>{errors.name?.message || auth.user.errorMessages[0]?.includes('username') && auth.user?.errorMessages[0]}</p>}
             </div>
             <div className="input">
               <input
@@ -85,7 +87,7 @@ function Login() {
                 placeholder="Password"
                 {...register("password")}
               />
-              {errors.password && <p>{errors.password.message}</p>}
+              {(errors.password || auth.user.errorMessages) && <p>{errors.password?.message || auth.user.errorMessages[0]?.includes('password') && auth.user?.errorMessages[0]}</p>}
             </div>
             <div className="input">
               <button type="submit">Submit</button>{" "}

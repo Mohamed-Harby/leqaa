@@ -51,7 +51,6 @@ function RecentActivities() {
   ];
   return (
     <div className="recentactivities">
-      <h1>recent activities</h1>
       {arr.map((item) => {
         return <Card card={item} />;
       })}

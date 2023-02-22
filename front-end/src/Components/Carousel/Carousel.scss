@@ -5,6 +5,20 @@
   width: 100%;
   position: relative;
   background-color: $secondColor;
+  border-radius: 10px;
+  @media screen and (max-width: 1025px) {
+    width: 80vw;
+  }
+
+  @for $i from 0 through 10 {
+    @media screen and (max-width: #{750px - ($i * 25)}) {
+      width: #{79vw - $i};
+    }  
+  }
+  
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 }
 
 .inner-carousel {
@@ -58,7 +72,8 @@
 }
 
 .item.show-2 > * {
-  width: 50%;
+  width: calc(90% / 2);
+  margin: calc(5% / 2);
 }
 
 .item.show-3 > * {
@@ -69,5 +84,4 @@
 .item.show-4 > * {
   width: calc(90% / 4);
   margin: calc(5% / 4);
-
 }
