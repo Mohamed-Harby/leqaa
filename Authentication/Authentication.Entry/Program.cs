@@ -9,7 +9,9 @@ using Authentication.Persistence.DependencyInjection;
 using Authentication.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -57,6 +59,8 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
 
+
+
 var app = builder.Build();
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())
 {
@@ -83,12 +87,15 @@ app.MapControllers();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseEndpoints(endpoints =>
-//{
-//    // Map your library's controllers to the appropriate routes
-//    endpoints.MapControllerRoute(
-//        name: "default",
-//        pattern: "{controller=Home}/{action=Index}/{id?}");
-//});
+app.UseEndpoints(endpoints =>
+{
+    // Map your library's controllers to the appropriate routes
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
+
+
+
 
 app.Run();

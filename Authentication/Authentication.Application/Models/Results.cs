@@ -8,7 +8,7 @@ public class Results
         ErrorMessages = new List<string>();
     }
     public bool IsSuccess { get; set; }
-    public bool IsConfirmed { get; set; }=false;
+ 
     public string Token { get; private set; } = string.Empty;
     public List<string> ErrorMessages { get; private set; }
     public UserReadModel? User { get; set; }

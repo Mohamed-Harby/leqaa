@@ -1,1 +1,47 @@
-<h1>Your email has been confirmed</h1>
+@model Authentication.Application.Models.Results
+
+<link rel="stylesheet" href="style.css" />
+<div id="email-confirmation-animation">
+    @if (Model.IsSuccess)
+    {
+        <p style="color:#0078D7;">Your email is confirmed. You can now access your account.</p>
+        <div class="animation-container" style="background-color:#F3F2F1;">
+            <div class="animation-circle" style="background-color:#0078D7;"></div>
+            <div class="animation-circle" style="background-color:#00BCF2;"></div>
+            <div class="animation-circle" style="background-color:#7D3C98;"></div>
+            <div class="animation-circle" style="background-color:#FF8C00;"></div>
+        </div>
+    }
+    else
+    {
+        <p style="color:#0078D7;">Your email is not confirmed. Please check your inbox and follow the instructions to confirm your email.</p>
+        <div class="animation-container" style="background-color:#F3F2F1;">
+            <div class="animation-circle" style="background-color:#FF0000;"></div>
+            <div class="animation-circle" style="background-color:#FF8C00;"></div>
+            <div class="animation-circle" style="background-color:#0078D7;"></div>
+            <div class="animation-circle" style="background-color:#00BCF2;"></div>
+        </div>
+    }
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        // Animate the circles only if email is confirmed
+        if (@Model.IsSuccess) {
+            // Select the animation circles and loop through them
+            $(".animation-circle").each(function (index) {
+                // Set a delay for each circle based on its position in the loop
+                var delay = 500 * index;
+                // Animate the circle using CSS transitions
+                $(this).css({
+                    "transition-delay": delay + "ms",
+                    "transform": "scale(1.5)"
+                });
+            });
+        }
+    });
+
+
+</script>

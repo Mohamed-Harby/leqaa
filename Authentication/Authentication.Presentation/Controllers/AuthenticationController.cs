@@ -46,12 +46,6 @@ public class AuthenticationController : Controller
         if (!results.IsSuccess)
             return BadRequest(results);
 
-        if (!results.IsConfirmed)
-        {
-
-            return Ok($"confirm your email ");
-
-        }
         return Ok(results);
     }
     [HttpGet]
@@ -103,7 +97,7 @@ public class AuthenticationController : Controller
         if (!results.IsSuccess)
             return BadRequest(results);
         
-        return View();
+        return View(results);
     }
     [HttpPut]
     [AllowAnonymous]
