@@ -103,7 +103,7 @@ public class AuthenticationController : Controller
         if (!results.IsSuccess)
             return BadRequest(results);
         
-        return View(Path.Combine(Environment.CurrentDirectory,@"/Views/Authentication/ConfirmEmail.cshtml"));
+        return View();
     }
     [HttpPut]
     [AllowAnonymous]

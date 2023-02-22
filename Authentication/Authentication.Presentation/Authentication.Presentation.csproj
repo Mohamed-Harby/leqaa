@@ -11,6 +11,7 @@
     <EmbeddedResource Remove="Views\NewFolder\**" />
     <None Remove="Views\NewFolder\**" />
   </ItemGroup>
+  
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="11.1.0" />
