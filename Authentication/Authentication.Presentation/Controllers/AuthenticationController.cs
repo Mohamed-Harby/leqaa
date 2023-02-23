@@ -48,7 +48,6 @@ public class AuthenticationController : Controller
         return Ok(results);
     }
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> GetUser()
     {
         string username = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
@@ -95,7 +94,7 @@ public class AuthenticationController : Controller
         var results = await _sender.Send(confirmEmailRequest);
         if (!results.IsSuccess)
             return BadRequest(results);
-        
+
         return View(results);
     }
     [HttpPut]
