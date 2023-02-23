@@ -8,6 +8,7 @@ import {
   BsPeople,
   BsChatLeftText,
   BsMicFill,
+  BsMicMuteFill,
 } from "react-icons/bs";
 import { MeetingContext } from '../MeetingComponents/MeetingUtilities/MeetingContext';
 
@@ -22,7 +23,8 @@ function CallToolsBar() {
     toggleOpenCamera,
     setToggleOpenCamera,
     toggleMic,
-    setToggleMic,
+    // setToggleMic,
+    toggleMicFunc,
   } = useContext(MeetingContext); 
 
   return (
@@ -30,12 +32,22 @@ function CallToolsBar() {
       <h3 className="left">Meeting Code</h3>
 
       <div className="middle">
-        <BsMicFill 
-          className="icon" 
-          onClick={() => {
-            setToggleMic(!toggleMic)
-          }}  
-        />
+        {toggleMic ? (
+          <BsMicMuteFill
+            className="icon"
+            onClick={() => {
+              toggleMicFunc();
+            }}
+          />
+        ) : (
+          <BsMicFill
+            className="icon"
+            onClick={() => {
+              toggleMicFunc();
+            }}
+          />
+        )}
+
         <BsCameraVideo
           className="icon"
           onClick={() => {

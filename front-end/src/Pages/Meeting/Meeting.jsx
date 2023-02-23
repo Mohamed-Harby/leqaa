@@ -22,32 +22,34 @@ function Meeting() {
   const [toggleMic, setToggleMic] = useState(false)
   const pageRef = useRef(null)
 
+
+  const [audioStream, setAudioStream] = useState(null)
+  const getMic = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true,})
+      setAudioStream(mediaStream)
+    } catch(err) {
+      console.log(err)
+    }
+    console.log("mic running")
+  }
   
-  //audio is not working. will be working on it next. however video is working great.  
-  const closeAudio = async (audio) => {
-    audio.getTracks().forEach(function (track) {
-      if (track.readyState === "live" && track.kind === "audio") {
-        track.stop();
+  const toggleMicFunc = async () => {
+    if (audioStream) {
+      const audioTracks = audioStream.getAudioTracks();
+      if(audioTracks.length > 0){
+        audioTracks[0].enabled = !audioTracks[0].enabled
+        setToggleMic(!audioTracks[0].enabled)
       }
-    });
-  };
-
-  useEffect(() => {
-    let audio;
-    const getAudio = async () => {
-      try {
-        audio = await navigator.mediaDevices.getUserMedia({ audio: true });
-        const playAudio = pageRef.current;
-        playAudio.srcObject = audio;
-        playAudio.play();
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    }
+  }
     
-    toggleMic ? getAudio() : closeAudio()
+    
+  
+  useEffect( () => {
+    getMic()
+  }, [])
 
-  }, [toggleMic]);
   
 
 
@@ -64,6 +66,7 @@ function Meeting() {
         setToggleOpenCamera,
         toggleMic,
         setToggleMic,
+        toggleMicFunc,
       }}
     >
       <div className="callPage" ref={pageRef}>

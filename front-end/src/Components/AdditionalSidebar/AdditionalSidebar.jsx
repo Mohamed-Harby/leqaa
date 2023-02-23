@@ -18,7 +18,7 @@ function AdditionalSidebar({ cards }) {
 
   return (
     <div className="additional">
-      <Searchbar />
+      <Searchbar  />
       <div className="cards">
         {arr?.map((item) => {
           return <Card card={item} />;
