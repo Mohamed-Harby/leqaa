@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useContext, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { authContext } from "../helper/authContext"
-import { checkAuth, getAuth, getError, getResponse, getStatus, getUser, login, post, signup } from "../redux/authSlice"
+import { checkAuth, getAuth, getError, getResponse, getStatus, getUser, login, post, resetPassword, sendResetPasswordEmail, signup } from "../redux/authSlice"
 import { setCookies } from "./useCookies"
 
 
@@ -38,18 +38,13 @@ function useProvideAuth(params) {
         dispatch(getUser(payload))
         console.log(payload);
     }
-    function useCheckAuth(payload) {
-        dispatch(checkAuth(payload))
+    function useSendResetPasswordEmail(payload) {
+        dispatch(sendResetPasswordEmail(payload))
         console.log(payload);
     }
 
-    function useCheckAuth(payload) {
-        dispatch(checkAuth(payload))
-        console.log(payload);
-    }
-    
-    function useCheckAuth(payload) {
-        dispatch(checkAuth(payload))
+    function useResetPassword(payload) {
+        dispatch(resetPassword(payload))
         console.log(payload);
     }
 
@@ -57,7 +52,7 @@ function useProvideAuth(params) {
         localStorage.clear();
     }
 
-    return { useSignup, useLogin, useGetUser, useCheckAuth,logout, user, setUser }
+    return { useSignup, useLogin, useGetUser, useSendResetPasswordEmail, useResetPassword, logout, user, setUser }
 }
 
 export function ProvideAuth({ children }) {

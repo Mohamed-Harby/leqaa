@@ -8,15 +8,16 @@ import Settings from "../Pages/Settings/Settings";
 import Meeting from "../Pages/Meeting/Meeting";
 import Channels from "../Pages/Channels/Channels";
 import Organization from "../Pages/Organization/Organization";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE } from "./Paths";
+import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD } from "./Paths";
 import { useAuth } from "../Custom/useAuth";
 import { useEffect } from "react";
-import { getStatus, getUser } from "../redux/authSlice";
+import { baseUrl, getStatus, getUser } from "../redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import useCookies from "react-cookie/cjs/useCookies";
 import { getCookies } from "../Custom/useCookies";
 import axios from "axios";
 import Profile from "../Pages/Profile/Profile";
+import ResetPassword from "../Pages/ResetPassword/ResetPassword";
 
 
 const ProtectedRoutes = ({ children }) => {
@@ -24,15 +25,21 @@ const ProtectedRoutes = ({ children }) => {
   const navigate = useNavigate()
   const auth = useAuth()
   useEffect(() => {
-    axios.get('http://localhost:5002/api/v1/Authentication/GetUser', {
+    axios.get(baseUrl + 'GetUser', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).then((res) => {
       console.log(res);
       auth.setUser(res.data)
-    }).catch((error)=>{
+    }).catch((error) => {
       console.log(error);
+      auth.setUser({
+        "isSuccess": false,
+        "token": "",
+        "errorMessages": [],
+        "user": null
+      })
       navigate('/login')
     })
   }, [children])
@@ -85,5 +92,9 @@ export const RouterConfig = createBrowserRouter([
   {
     path: REGISTER,
     element: <Register />,
+  },
+  {
+    path: RESETPASSWORD,
+    element: <ResetPassword />,
   },
 ]);

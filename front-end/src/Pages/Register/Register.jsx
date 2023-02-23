@@ -32,7 +32,7 @@ const schema = yup.object().shape({
     .required(),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null])
+    .oneOf([yup.ref("password"), null], 'Passwords must match')
     .required(),
 });
 
@@ -42,7 +42,7 @@ function Register() {
   const error = useSelector(getError);
   const dispatch = useDispatch();
   const auth = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,
@@ -66,10 +66,10 @@ function Register() {
     // reset();
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(auth.user.isSuccess);
-    auth.user.isSuccess && navigate('/');
-  },[auth.user])
+    auth.user.isSuccess && navigate("/");
+  }, [auth.user]);
 
   return (
     <>
@@ -113,7 +113,13 @@ function Register() {
                 placeholder="Email"
                 {...register("email")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {(errors.name || auth.user.errorMessages) && (
+                <p>
+                  {errors.name?.message ||
+                    (auth.user.errorMessages[0]?.includes("Email") &&
+                      auth.user?.errorMessages[0])}
+                </p>
+              )}
             </div>
 
             <div className="input">
@@ -123,18 +129,22 @@ function Register() {
                 name="name"
                 {...register("userName")}
               />
-              {errors.name && <p>{errors.name.message}</p>}
+              {(errors.name || auth.user.errorMessages) && (
+                <p>
+                  {errors.name?.message ||
+                    (auth.user.errorMessages[0]?.includes("Username") &&
+                      auth.user?.errorMessages[0])}
+                </p>
+              )}
             </div>
 
             <div className="input">
-              <select {...register("gender")}>
+              <select {...register("gender")} name="gender">
                 <option value="">Select Gender</option>
                 <option value={0}>Male</option>
                 <option value={1}>Female</option>
               </select>
-              {errors.confirmPassword && (
-                <p>{errors.confirmPassword.message}</p>
-              )}
+              {errors.gender && <p>{errors.gender.message}</p>}
             </div>
 
             <div className="input">
@@ -144,7 +154,13 @@ function Register() {
                 name="password"
                 {...register("password")}
               />
-              {errors.password && <p>{errors.password.message}</p>}
+              {(errors.password || auth.user.errorMessages) && (
+                <p>
+                  {errors.password?.message ||
+                    (auth.user.errorMessages[0]?.includes("password") &&
+                      auth.user?.errorMessages[0])}
+                </p>
+              )}
             </div>
 
             <div className="input">

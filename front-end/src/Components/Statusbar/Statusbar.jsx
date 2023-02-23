@@ -14,6 +14,7 @@ import ModalVideoCalling from "../ModalVideoCalling/ModalVideoCalling";
 function Statusbar() {
   const [modalOpenCalling, setModalOpenCalling] = useState(false);
   const [modalOpenVideoCalling, setModalOpenVideoCalling] = useState(false);
+  
   const modalCloseCalling = () => {
     setModalOpenCalling(false);
   };
@@ -21,6 +22,7 @@ function Statusbar() {
   const modalCloseVideoCalling = () => {
     setModalOpenVideoCalling(false);
   };
+
   return (
     <div className="statusbar">
       <div className="left">
