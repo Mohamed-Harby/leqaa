@@ -1,6 +1,0 @@
-.peopleGrid {
-  display: grid;
-  gap: 1rem;
-  margin: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-}/*# sourceMappingURL=PeopleGrid.css.map */

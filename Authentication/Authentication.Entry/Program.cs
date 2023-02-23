@@ -86,7 +86,6 @@ app.MapControllers();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-<<<<<<< HEAD
 app.UseEndpoints(endpoints =>
 {
     // Map your library's controllers to the appropriate routes
@@ -97,7 +96,5 @@ app.UseEndpoints(endpoints =>
 
 
 
-=======
->>>>>>> fdf1172c0e967a55d997abe4dae42ae2f50a76b1
 
 app.Run();

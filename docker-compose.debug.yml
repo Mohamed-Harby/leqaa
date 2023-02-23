@@ -1,0 +1,59 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  authentication:
+    image: authentication-dev
+    build:
+      context: .
+      dockerfile: Authentication/Authentication.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=server=authenticationdb;Port=3308;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
+      - Uri=http://localhost:5002
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__UserName=guest
+      - RabbitMQ__Password=guest
+    ports:
+      - 5002:5002
+    
+    depends_on:
+      - authenticationdb
+      # - rabbitmq
+    volumes:
+      - ./Authentication:/src/Authentication
+    healthcheck:
+      test: ["CMD","curl","-f","http://authenticationdb:3308"]
+      timeout: 1s
+      interval: 1s
+      retries: 10
+
+  authenticationdb:
+    image: mysql/mysql-server:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=LeqaaAuthentication
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3308
+    volumes:
+      - authenticationdbvolume:/var/lib/mysql
+    ports:
+      - 3308:3308
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    tty: true
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - 5672:5672
+      - 15672:15672
+    
+
+volumes:
+  businessdbvolume:
+  authenticationdbvolume:
+

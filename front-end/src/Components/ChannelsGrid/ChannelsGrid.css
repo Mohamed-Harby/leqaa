@@ -1,8 +1,0 @@
-.channelsGrid {
-  display: grid;
-  gap: 1rem;
-  margin: 1.5rem;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  flex: 4;
-  height: calc(100% - 4rem);
-}/*# sourceMappingURL=ChannelsGrid.css.map */
