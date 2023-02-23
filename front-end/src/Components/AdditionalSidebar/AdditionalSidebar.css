@@ -1,0 +1,21 @@
+.additional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1b1b1b;
+  border-right: 1px solid #656366;
+  position: sticky;
+  min-height: calc(100vh - 50px);
+  flex: 1;
+  color: black;
+  padding: 10px 0px;
+}
+.additional .search {
+  max-height: 2.5rem;
+}
+.additional .cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}/*# sourceMappingURL=AdditionalSidebar.css.map */

@@ -1,0 +1,8 @@
+@use "../../helper/style" as *;
+
+.membersContainer {
+  color: $fifthColor;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

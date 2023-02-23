@@ -1,0 +1,34 @@
+@use "../../helper/style" as *;
+
+.statusbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: $secondColor;
+  color: $fifthColor;
+  height: 70px;
+  padding: 10px;
+
+  .left {
+    display: flex;
+    gap: 0.7rem;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: -2px 0px;
+      color: $fourthColor;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.8rem;
+    & > *{
+      cursor: pointer;
+    }
+  }
+}

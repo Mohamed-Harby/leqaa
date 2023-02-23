@@ -1,0 +1,103 @@
+@use "../../helper/style" as *;
+
+.wait{
+    height: calc(100vh - 50px);
+    background-color: $firstColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    color: $fifthColor;
+    .p1, .p2, .p3{
+        color: $fourthColor;
+    }
+    .l1{
+        animation: letter1 2.5s linear 0s infinite alternate;
+
+        @keyframes letter1 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l2{
+        animation: letter2 2.5s linear 0.5s infinite alternate;
+
+        @keyframes letter2 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l3{
+        animation: letter3 2.5s linear 1s infinite alternate;
+
+        @keyframes letter3 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l4{
+        animation: letter4 2.5s linear 1.5s infinite alternate;
+
+        @keyframes letter4 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l5{
+        animation: letter5 2.5s linear 2s infinite alternate;
+
+        @keyframes letter5 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l6{
+        animation: letter6 2.5s linear 2.5s infinite alternate;
+
+        @keyframes letter6 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .l7{
+        animation: letter7 2.5s linear 3s infinite alternate;
+
+        @keyframes letter7 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .p1{
+        animation: point1 2.5s linear 3.5s infinite alternate;
+
+        @keyframes point1 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+    .p2{
+        animation: point2 2.5s linear 4s infinite alternate;
+        @keyframes point2 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+
+    }
+    .p3{
+        animation: point3 2.5s linear 4.5s infinite alternate;
+        @keyframes point3 {
+            0%   {opacity: 0, }
+            50%  {opacity: 0.5}
+            100% {opacity: 1}
+          }
+    }
+}

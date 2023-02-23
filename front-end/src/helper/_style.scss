@@ -1,0 +1,77 @@
+$firstColor: #1b1b1b;
+$secondColor: #262427;
+$thirdColor: #656366;
+$fourthColor: #a379de;
+$fifthColor: #e2e0e3;
+
+@mixin Btn(
+  $width,
+  $height,
+  $radius,
+  $padding,
+  $backgroundColor,
+  $color,
+  $fontSize
+) {
+  width: $width;
+  height: $height;
+  border-radius: $radius;
+  padding: $padding;
+  background-color: $backgroundColor;
+  color: $color;
+  font-size: $fontSize;
+  cursor: pointer;
+  border: none;
+}
+@mixin bordered($width, $color: $firstColor) {
+  border: $width solid $color;
+}
+@mixin borderedTop($width, $color: $firstColor) {
+  border-top: $width solid $color;
+}
+@mixin borderedRight($width, $color: $firstColor) {
+  border-right: $width solid $color;
+}
+@mixin borderedBottom($width, $color: $firstColor) {
+  border-bottom: $width solid $color;
+}
+@mixin borderedLeft($width, $color: $firstColor) {
+  border-left: $width solid $color;
+}
+@mixin transitioned($element, $duration, $function: ease-in-out) {
+  transition: $element $duration $function;
+}
+@mixin flex($direction, $justifyContent, $alignItems) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+@mixin selectSize($width, $height, $radius) {
+  width: $width;
+  height: $height;
+  border-radius: $radius;
+}
+@mixin positioned($position, $top, $right, $bottom, $left, $zIndex) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: $zIndex;
+}
+@mixin selectBackground(
+  $backgroundColor,
+  $backgroundImage: unset,
+  $backgroundRepeat: unset,
+  $backgroundPosition: unset,
+  $backgroundSize: unset,
+  $backgroundAttachment: unset
+) {
+  background-color: $backgroundColor;
+  background-image: $backgroundImage;
+  background-repeat: $backgroundRepeat;
+  background-position: $backgroundPosition;
+  background-size: $backgroundSize;
+  background-attachment: $backgroundAttachment;
+}

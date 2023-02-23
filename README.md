@@ -1,1 +1,1 @@
-# LEQAA Authentication service
+# leqaa

@@ -1,0 +1,31 @@
+.callToolsBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1b1b1b;
+  color: #e2e0e3;
+  padding: 1rem;
+  font-size: 2rem;
+  position: sticky;
+  bottom: 0;
+  z-index: 1000;
+}
+.callToolsBar .icon {
+  cursor: pointer;
+}
+.callToolsBar .left {
+  background-color: #262427;
+  padding: 0.7rem 3rem;
+  border-radius: 0.6rem;
+  font-size: 1.2rem;
+}
+.callToolsBar .middle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: -9rem;
+}
+.callToolsBar .right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}/*# sourceMappingURL=CallToolsBar.css.map */
