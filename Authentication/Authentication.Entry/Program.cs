@@ -26,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 Jwt jwt = new();
 builder.Configuration.GetSection("Jwt").Bind(jwt);
+builder.Services.AddMvc();
 
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
