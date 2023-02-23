@@ -22,7 +22,7 @@ function Navbar() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Leqaa</Link>
+            <Link to={auth.user.user ? '/' : '/login'}>Leqaa</Link>
           </li>
 
           <li>{auth.user.user && <Searchbar />}</li>
