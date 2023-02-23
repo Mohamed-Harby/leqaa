@@ -1,0 +1,477 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Entry\\Authentication.Entry.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj",
+        "projectName": "Authentication.Application",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.3.0, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj",
+        "projectName": "Authentication.Domain",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Entry\\Authentication.Entry.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Entry\\Authentication.Entry.csproj",
+        "projectName": "Authentication.Entry",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Entry\\Authentication.Entry.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Entry\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj"
+              },
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj"
+              },
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\Authentication.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\Authentication.Infrastructure.csproj"
+              },
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\Authentication.Persistence.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\Authentication.Persistence.csproj"
+              },
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\Authentication.Presentation.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\Authentication.Presentation.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\Authentication.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\Authentication.Infrastructure.csproj",
+        "projectName": "Authentication.Infrastructure",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\Authentication.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\Authentication.Persistence.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\Authentication.Persistence.csproj",
+        "projectName": "Authentication.Persistence",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\Authentication.Persistence.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Persistence\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Domain\\Authentication.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Microsoft.AspNetCore.Mvc.ViewFeatures": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\Authentication.Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\Authentication.Presentation.csproj",
+        "projectName": "Authentication.Presentation",
+        "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\Authentication.Presentation.csproj",
+        "packagesPath": "C:\\Users\\abazi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Presentation\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\abazi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj": {
+                "projectPath": "C:\\Users\\abazi\\OneDrive\\Desktop\\GraduationProject\\Code\\leqaa\\Authentication\\Authentication.Application\\Authentication.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[11.1.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
