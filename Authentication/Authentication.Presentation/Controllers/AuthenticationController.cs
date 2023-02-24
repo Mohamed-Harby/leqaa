@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Authentication.Application.Queries.GetUserByUsername;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Presentation.Controllers;
 [ApiController]
@@ -43,8 +44,10 @@ public class AuthenticationController : Controller
     {
         var loginQuery = credentials.Adapt<LoginQuery>();
         Results results = await _sender.Send(loginQuery);
+
+       
         if (!results.IsSuccess)
-            return BadRequest(results);
+            return Ok("you must confirm yout email first");
         return Ok(results);
     }
     [HttpGet]
@@ -86,7 +89,7 @@ public class AuthenticationController : Controller
         var emailResetPasswordQuery = new SendEmailResetPasswordQuery(email);
         var results = await _sender.Send(emailResetPasswordQuery);
         if (!results.IsSuccess)
-            return BadRequest(results);
+            return Ok("please confirm your email first");
         return Ok(results);
     }
     [HttpGet]
