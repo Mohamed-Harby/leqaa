@@ -30,6 +30,8 @@ public class ConfirmEmailCommandHandler : IHandler<ConfirmEmailCommand>
             authenticationResults.AddErrorMessages(result.Errors.Select(e => e.Description).ToArray());
             return authenticationResults;
         }
+
+
         authenticationResults.IsSuccess = true;
     
 
