@@ -11,7 +11,7 @@ namespace CommonGenericClasses
 {
 
 
-    public abstract class BaseRepo<TEntity> :  IBaseRepo<TEntity> where TEntity : BaseEntity
+    public abstract class BaseRepo<TEntity> : IBaseRepo<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext db;
         protected readonly DbSet<TEntity> table;
@@ -75,7 +75,7 @@ namespace CommonGenericClasses
             table.Remove(entityToRemove);
             return entityToRemove;
         }
-        public virtual async Task<TEntity> Edit(TEntity entity)
+        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var retrievedEntity = await table.FirstOrDefaultAsync(e => e.Id == entity.Id);
             db.Entry(retrievedEntity).State = EntityState.Detached;
@@ -87,9 +87,9 @@ namespace CommonGenericClasses
         {
             return Task.FromResult<IQueryable<TEntity>>(table);
         }
-        public virtual async Task Save()
+        public virtual async Task<int> SaveAsync()
         {
-            await db.SaveChangesAsync();
+            return await db.SaveChangesAsync();
         }
     }
 }

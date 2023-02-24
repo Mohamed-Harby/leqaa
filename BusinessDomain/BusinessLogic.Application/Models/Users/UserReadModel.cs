@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Application.Models.Users
 {
     public record UserReadModel(
-    Guid Id,
-    string name,
-    string description
-  
+      Guid Id,
+    string Name,
+    string Email,
+    string UserName,
+    byte[]? ProfilePicture
+
 );
 }

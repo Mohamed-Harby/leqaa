@@ -14,7 +14,7 @@ public class HasPermissionAttribute : TypeFilterAttribute
 
     }
 }
-[Authorize(AuthenticationSchemes = "Bearer")]
+
 public class HasPermissionFilter : IAuthorizationFilter
 {
     private IUserRepository _userRepository;

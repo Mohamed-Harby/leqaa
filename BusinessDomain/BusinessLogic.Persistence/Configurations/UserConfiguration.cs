@@ -25,6 +25,11 @@ public class UserConfiguration : BaseConfiguration<User>
         .HasForeignKey(a => a.UserId);
 
         builder
+        .HasMany(u => u.Plans)
+        .WithOne(p => p.User)
+        .HasForeignKey(p => p.UserId);
+
+        builder
         .HasMany(u => u.Followers)
         .WithMany(u => u.FollowedUsers).UsingEntity<UserUser>(
             join => join

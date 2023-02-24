@@ -49,15 +49,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<RabbitMQConnection>(
     builder.Configuration.GetSection("RabbitMQConnection")
     );
 
 builder.Services.AddCorsConfiguration();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("CanJoinRoom", policyBuilder => policyBuilder.AddRequirements(new CanJoinRoomRequirement()));
-});
+builder.Services.AddAuthorization();
 
 try
 {

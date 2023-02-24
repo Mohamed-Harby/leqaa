@@ -26,6 +26,7 @@ public class HubController : BaseController
     [HttpPost]
     public async Task<IActionResult> Post(HubWriteModel hub, string username)
     {
+        
         var addHubCommand = new AddHubCommand(hub.name, hub.description, hub.logo, username);
         ErrorOr<Hub> results = await _sender.Send(addHubCommand);
         return results.Match(

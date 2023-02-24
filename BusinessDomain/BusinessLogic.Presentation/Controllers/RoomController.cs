@@ -26,7 +26,7 @@ public class RoomController : BaseController
 
 
     [Authorize]
-    [HasPermission]
+    [HasPermissionTest("permission")]
     [HttpGet]
     public async Task<IActionResult> GetRoom(string roomId)
     {
