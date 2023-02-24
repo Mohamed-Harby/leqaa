@@ -53,7 +53,9 @@ public class AuthenticationController : Controller
         string username = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         if (username is null)
         {
-            return Unauthorized("you are not authorized");
+            var error = new Results();
+            error.AddErrorMessages("You are not authorized");
+            return Unauthorized(error);
         }
         var getUserByUsernameQuery = new GetUserByUsername(username);
         Results results = await _sender.Send(getUserByUsernameQuery);
@@ -92,9 +94,6 @@ public class AuthenticationController : Controller
     public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand confirmEmailRequest)
     {
         var results = await _sender.Send(confirmEmailRequest);
-        if (!results.IsSuccess)
-            return BadRequest(results);
-
         return View(results);
     }
     [HttpPut]
