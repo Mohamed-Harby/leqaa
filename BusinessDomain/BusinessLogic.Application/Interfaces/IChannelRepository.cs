@@ -12,4 +12,8 @@ public interface IChannelRepository : IBaseRepo<Channel>
     Task<Channel> DeleteChannelWithUser(Channel channel, User user);
 
     Task<Channel> UpdateChannelWithUser(Channel channel, User user);
+
+
+  
+  
 }

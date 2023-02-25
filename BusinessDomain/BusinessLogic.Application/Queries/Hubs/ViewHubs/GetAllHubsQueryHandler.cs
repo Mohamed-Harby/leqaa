@@ -1,5 +1,6 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using Mapster;
 
@@ -16,12 +17,16 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
 
     public async Task<List<HubReadModel>> Handle(GetAllHubsQuery request, CancellationToken cancellationToken)
     {
-        // await _hubRepository.Save();
-        // await _hubRepository.Save();
+    
+        var hubs = (await _hubRepository.GetAllAsync())
 
-        return (await _hubRepository.GetAllAsync())
-           .ToList()
-           .Adapt<List<HubReadModel>>();
+                     .Where(c => c.Id.CompareTo(request.Cursor) > 0)
+                     .OrderBy(c => c.Id)
+                     .Take(request.Limit)
+                     .ToList()
+                     .Adapt<List<HubReadModel>>();
+
+        return hubs;
     }
 
 

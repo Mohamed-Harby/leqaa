@@ -1,5 +1,6 @@
 using BusinessLogic.Application.Commands.Hubs.AddHub;
 using BusinessLogic.Application.Models.Hubs;
+using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Domain;
 using ErrorOr;
@@ -33,15 +34,17 @@ public class HubController : BaseController
             errors => Problem(errors)
         );
     }
+
+
+
+
     [HttpGet]
-    public async Task<ActionResult<IQueryable<Hub>>> GetAll()
+    public async Task<IActionResult> ViewHubs([FromQuery] string cursor, int limit = 10)
     {
-        var getAllHubsQuery = new GetAllHubsQuery();
-        var result = await _sender.Send(getAllHubsQuery);
+        var query = new GetAllHubsQuery(limit, cursor);
+        var hubs = await _sender.Send(query);
 
-        return Ok(result);
-
-
+        return Ok(hubs);
     }
 }
 
