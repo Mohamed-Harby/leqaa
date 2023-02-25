@@ -20,6 +20,8 @@ public class MessageQueueManager : IMessageQueueManager
             UserName = rabbitMQConnectionModel.Username,
             Password = rabbitMQConnectionModel.Password
         };
+        System.Console.WriteLine(rabbitMQConnectionModel.Host);
+        System.Console.WriteLine(rabbitMQConnectionModel.Username);
         channel = connectionFactory.CreateConnection().CreateModel();
 
     }
