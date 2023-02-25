@@ -8,6 +8,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Infrastructure.Authorization;
+using BusinessLogic.Infrastructure.Authorization.Enums;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
@@ -26,7 +27,7 @@ public class RoomController : BaseController
 
 
     [Authorize]
-    [HasPermissionTest("permission")]
+    [HasPermission(Permission.CanJoinRoom)]
     [HttpGet]
     public async Task<IActionResult> GetRoom(string roomId)
     {

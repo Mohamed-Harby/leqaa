@@ -24,9 +24,9 @@ public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand
         }
         user.ProfilePicture = request.ProfilePicture;
         await _userRepository.UpdateAsync(user);
-        if (await _userRepository.SaveAsync() == 0)
+        if (await _userRepository.SaveAsync(cancellationToken) == 0)
         {
-            return Error.Failure("User.Failure", "Failed to save changes, please check the format of the picture");
+            return Error.Failure("User.Failure", "Failed to save changes, please check the picture format");
         }
         return user.Adapt<UserReadModel>();
 

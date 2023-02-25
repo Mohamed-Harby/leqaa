@@ -9,6 +9,7 @@ public class UserConfiguration : BaseConfiguration<User>
     public override void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("users");
+        base.Configure(builder);
         //relations
         builder
         .HasMany(u => u.Posts)
@@ -16,7 +17,6 @@ public class UserConfiguration : BaseConfiguration<User>
         .HasForeignKey(p => p.UserId);
 
         builder.HasMany(u => u.Channels).WithMany(c => c.Users);
-        builder.HasMany(u => u.Hubs).WithMany(h => h.Users);
         builder.HasMany(u => u.Rooms).WithMany(r => r.JoinedUsers);
 
         builder
@@ -24,10 +24,7 @@ public class UserConfiguration : BaseConfiguration<User>
         .WithOne(a => a.User)
         .HasForeignKey(a => a.UserId);
 
-        builder
-        .HasMany(u => u.Plans)
-        .WithOne(p => p.User)
-        .HasForeignKey(p => p.UserId);
+
 
         builder
         .HasMany(u => u.Followers)
@@ -62,7 +59,6 @@ public class UserConfiguration : BaseConfiguration<User>
         .HasMaxLength(50);
         // builder.Property(p => p.ProfileImage).IsRequired();
 
-        base.Configure(builder);
 
     }
 }

@@ -1,7 +1,10 @@
+using System.Security.Claims;
 using BusinessLogic.Application.Commands.Hubs.AddHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Domain;
+using BusinessLogic.Infrastructure.Authorization;
+using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using Mapster;
 using MediatR;
@@ -24,11 +27,13 @@ public class HubController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(HubWriteModel hub, string username)
+    [HasPermission(Permission.CanDeployHubs)]
+    public async Task<IActionResult> Post(HubWriteModel hub)
     {
-        
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
         var addHubCommand = new AddHubCommand(hub.name, hub.description, hub.logo, username);
-        ErrorOr<Hub> results = await _sender.Send(addHubCommand);
+        ErrorOr<HubReadModel> results = await _sender.Send(addHubCommand);
         return results.Match(
             hub => Ok(hub),
             errors => Problem(errors)

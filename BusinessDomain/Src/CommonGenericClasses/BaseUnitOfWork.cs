@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using BusinessLogic.Domain;
 using ErrorOr;
@@ -53,10 +54,10 @@ namespace CommonGenericClasses
             return await _repo.UpdateAsync(entity);
         }
 
-        public virtual async Task<string> SaveAsync()
+        public virtual async Task<string> SaveAsync(CancellationToken cancellationToken = default)
         {
 
-            await _repo.SaveAsync();
+            await _repo.SaveAsync(cancellationToken);
             return "Done";
 
         }

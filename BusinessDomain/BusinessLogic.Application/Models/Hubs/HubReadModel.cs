@@ -3,5 +3,5 @@ public record HubReadModel(
     Guid Id,
     string name,
     string description,
-    string? logo
+    byte[]? logo
 );

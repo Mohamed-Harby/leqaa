@@ -1,10 +1,11 @@
+using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
 namespace BusinessLogic.Infrastructure.Authorization;
-public class PermissionAuthorizationPolicyProvider : DefaultAuthorizationPolicyProvider
+public class CanDeployHubsPolicyProvider : DefaultAuthorizationPolicyProvider
 {
-    public PermissionAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options) : base(options)
+    public CanDeployHubsPolicyProvider(IOptions<AuthorizationOptions> options) : base(options)
     {
     }
     public async override Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
@@ -15,7 +16,7 @@ public class PermissionAuthorizationPolicyProvider : DefaultAuthorizationPolicyP
             return policy;
         }
         return new AuthorizationPolicyBuilder()
-        .AddRequirements(new CanJoinRoomRequirement(policyName))
+        .AddRequirements(new CanDeployHubsRequirements(policyName))
         .Build();
     }
 }

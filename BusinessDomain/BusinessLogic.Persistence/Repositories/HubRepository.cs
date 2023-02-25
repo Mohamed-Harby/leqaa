@@ -8,13 +8,12 @@ public class HubRepository : BaseRepo<Hub>, IHubRepository
     private readonly ApplicationDbContext _context;
     public HubRepository(ApplicationDbContext context) : base(context)
     {
-
         _context = context;
     }
     public async Task<Hub> AddHubWithUserAsync(Hub hub, User user)
     {
         hub.AddUser(user);
-        await db.Set<Hub>().AddAsync(hub);
+        await table.AddAsync(hub);
         return hub;
     }
 

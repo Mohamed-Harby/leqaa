@@ -16,6 +16,21 @@ public class HubConfiguration : BaseConfiguration<Hub>
         .HasMany(r => r.Channels)
         .WithOne(u => u.Hub);
 
+        builder
+        .HasMany(h => h.Users)
+        .WithMany(u => u.Hubs)
+        .UsingEntity<UserHub>(
+            join => join
+            .HasOne(uh => uh.User)
+            .WithMany()
+            .HasForeignKey(uh => uh.UserId),
+            join => join
+            .HasOne(uh => uh.Hub)
+            .WithMany()
+            .HasForeignKey(uh => uh.HubId)
+        );
+
+
         builder.Property(t => t.Name).IsRequired()
         .HasMaxLength(100);
         builder.Property(t => t.Description).HasMaxLength(4000);

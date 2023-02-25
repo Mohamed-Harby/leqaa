@@ -9,28 +9,28 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.AddHub;
-public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<Hub>>
+public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<HubReadModel>>
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IFileManager _fileManager;
     private readonly IValidator<AddHubCommand> _validator;
+    private readonly IUserHubRepository _userHubRepository;
     public AddRoomCommandHandler(
         IHubRepository hubRepository,
-        IUnitOfWork unitOfWork,
         IUserRepository userRepository,
         IValidator<AddHubCommand> validator,
-        IFileManager fileManager)
+        IFileManager fileManager,
+        IUserHubRepository userHubRepository)
     {
         _hubRepository = hubRepository;
-        _unitOfWork = unitOfWork;
         _userRepository = userRepository;
         _validator = validator;
         _fileManager = fileManager;
+        _userHubRepository = userHubRepository;
     }
 
-    public async Task<ErrorOr<Hub>> Handle(AddHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<HubReadModel>> Handle(AddHubCommand request, CancellationToken cancellationToken)
     {
         var result = await _validator.ValidateAsync(request);
         if (!result.IsValid)
@@ -50,17 +50,24 @@ public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<Hub>>
         var hub = request.Adapt<Hub>();
         hub.Logo = request.Logo is null ? image : request.Logo;
 
-        var creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
+        var creatorUser = (await _userRepository.GetUserWithHubsAsync(request.Username));
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;
         }
-
-        await _hubRepository.AddHubWithUserAsync(hub, creatorUser);
-        if (await _unitOfWork.Save() == 0)
+        var UserHub = new UserHub
+        {
+            User = creatorUser,
+            Hub = hub,
+            Role = "Creator"
+        };
+        await _userHubRepository.UpdateAsync(UserHub);
+        creatorUser.Hubs.Add(hub);
+        if (await _userRepository.SaveAsync() == 0)
         {
             return DomainErrors.Hub.InvalidHub;
         }
-        return hub;
+
+        return hub.Adapt<HubReadModel>();
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BusinessLogic.Persistence.Repositories;
 public class PlanRepository : BaseRepo<Plan>, IPlanRepository
 {
-    public PlanRepository(DbContext db) : base(db)
+    public PlanRepository(ApplicationDbContext db) : base(db)
     {
     }
 }

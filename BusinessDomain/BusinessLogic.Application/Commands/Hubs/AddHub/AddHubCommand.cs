@@ -1,4 +1,5 @@
 using BusinessLogic.Application.CommandInterfaces;
+using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Domain;
 using ErrorOr;
 
@@ -7,4 +8,4 @@ public record AddHubCommand(
     string Name,
     string Description,
     byte[]? Logo,
-    string Username) : ICommand<ErrorOr<Hub>>;
+    string Username) : ICommand<ErrorOr<HubReadModel>>;
