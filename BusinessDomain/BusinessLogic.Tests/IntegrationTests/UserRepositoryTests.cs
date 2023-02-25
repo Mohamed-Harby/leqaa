@@ -39,7 +39,7 @@ public class UserRepositoryTests : IClassFixture<DbContextMySqlFixture>
 
         await Assert.ThrowsAnyAsync<Exception>(async () =>
         {
-            await _userRepository.Save();
+            await _userRepository.SaveAsync();
         });
     }
 

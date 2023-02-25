@@ -1,3 +1,4 @@
+using Authentication.Entry.Options;
 using BusinessLogic.Application.DependencyInjection;
 using BusinessLogic.Entry.Models;
 using BusinessLogic.Entry.ServiceConfigurations;
@@ -28,6 +29,9 @@ builder.Services.AddControllers().AddApplicationPart(typeof(HubController).Assem
 .AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
+
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddPersistence(builder.Configuration)
@@ -49,15 +53,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<RabbitMQConnection>(
     builder.Configuration.GetSection("RabbitMQConnection")
     );
 
 builder.Services.AddCorsConfiguration();
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("CanJoinRoom", policyBuilder => policyBuilder.AddRequirements(new CanJoinRoomRequirement()));
-});
+builder.Services.AddAuthorization();
 
 try
 {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using BusinessLogic.Domain;
 using ErrorOr;
@@ -11,7 +12,7 @@ namespace CommonGenericClasses
 {
 
 
-    public abstract class BaseRepo<TEntity> :  IBaseRepo<TEntity> where TEntity : BaseEntity
+    public abstract class BaseRepo<TEntity> : IBaseRepo<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext db;
         protected readonly DbSet<TEntity> table;
@@ -45,7 +46,7 @@ namespace CommonGenericClasses
             table.Remove(entityToRemove);
             return entityToRemove;
         }
-        public virtual async Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null,
+        public virtual Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null,
                                                             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
                                                             string include = ""
                                                             )
@@ -63,7 +64,7 @@ namespace CommonGenericClasses
                 query = query.Include(property);
             }
 
-            return await query.ToListAsync();
+            return Task.FromResult(query.AsNoTracking<TEntity>());
         }
         public virtual async Task<TEntity> GetByIdAsync(object id)
         {
@@ -75,21 +76,18 @@ namespace CommonGenericClasses
             table.Remove(entityToRemove);
             return entityToRemove;
         }
-        public virtual async Task<TEntity> Edit(TEntity entity)
+        public virtual Task<TEntity> UpdateAsync(TEntity entity)
         {
-            var retrievedEntity = await table.FirstOrDefaultAsync(e => e.Id == entity.Id);
-            db.Entry(retrievedEntity).State = EntityState.Detached;
-            retrievedEntity = entity;
-            db.Entry(retrievedEntity).State = EntityState.Modified;
-            return entity;
+            table.Update(entity);
+            return Task.FromResult(entity);
         }
         public virtual Task<IQueryable<TEntity>> GetAllAsync()
         {
             return Task.FromResult<IQueryable<TEntity>>(table);
         }
-        public virtual async Task Save()
+        public virtual async Task<int> SaveAsync(CancellationToken cancellationToken = default)
         {
-            await db.SaveChangesAsync();
+            return await db.SaveChangesAsync(cancellationToken);
         }
     }
 }

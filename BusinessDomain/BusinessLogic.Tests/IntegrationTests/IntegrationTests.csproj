@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="../../BusinessLogic.Persistence/BusinessLogic.Persistence.csproj" />
     <ProjectReference Include="../../BusinessLogic.Infrastructure/BusinessLogic.Infrastructure.csproj" />
-
+    <ProjectReference Include="../../BusinessLogic.Application/BusinessLogic.Application.csproj" />
     <ProjectReference Include="../../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
     <ProjectReference Include="../../Src/CommonGenericClasses/Common.csproj" />
   </ItemGroup>

@@ -17,7 +17,7 @@ namespace CommonGenericClasses
         Task<IQueryable<TEntity>> ReadAllAsync();
         Task<IEnumerable<TEntity>> ReadAsync(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string include = "");
         Task<TEntity> ReadByIdAsync(object id);
-        Task<string> SaveAsync();
+        Task<string> SaveAsync(CancellationToken cancellationToken = default);
         Task<TEntity> Update(TEntity entity);
     }
 }

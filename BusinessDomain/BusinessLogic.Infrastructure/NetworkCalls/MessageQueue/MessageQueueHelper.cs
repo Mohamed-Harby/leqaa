@@ -27,7 +27,7 @@ public class MessageQueueHelper
              var userDecoded = Encoding.UTF32.GetString(userEncoded);
              UserWriteModel userDeserialialized = JsonConvert.DeserializeObject<UserWriteModel>(userDecoded);
              await userRepository.AddAsync(userDeserialialized.Adapt<User>());
-             await userRepository.Save();
+             await userRepository.SaveAsync();
          };
         var channelTag = channel.BasicConsume("Authentication.User", true, consumer);
         return Task.CompletedTask;

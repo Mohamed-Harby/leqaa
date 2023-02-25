@@ -13,9 +13,21 @@ public class UserRepository : BaseRepo<User>, IUserRepository
         _context = context;
     }
 
-    public async Task<User> GetUserWithRooms(string username)
+    public async Task<User> GetUserWithHubsAsync(string username)
     {
-        User user = (await _context.Set<User>().Where(u => u.UserName == username).FirstOrDefaultAsync())!;
+        User user = (await table.Where(u => u.UserName == username).Include(u => u.Hubs).FirstOrDefaultAsync())!;
+        return user;
+    }
+
+    public async Task<User?> GetUserWithPlansAsync(string username)
+    {
+        User? user = (await table.Where(u => u.UserName == username).AsNoTracking().Include(u => u.Plans).FirstOrDefaultAsync());
+        return user;
+    }
+
+    public async Task<User> GetUserWithRoomsAsync(string username)
+    {
+        User user = (await table.Where(u => u.UserName == username).Include(u => u.Rooms).FirstOrDefaultAsync())!;
         return user;
 
     }

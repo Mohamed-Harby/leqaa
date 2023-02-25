@@ -23,6 +23,9 @@ public static class PersistenceDependencyInjection
         services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
         services.AddScoped<IPostRepository, PostRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPlanRepository, PlanRepository>();
+        services.AddScoped<IUserHubRepository, UserHubRepository>();
+
         return services;
     }
 }
