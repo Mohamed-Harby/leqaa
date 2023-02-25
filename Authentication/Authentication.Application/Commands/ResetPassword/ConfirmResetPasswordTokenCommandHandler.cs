@@ -18,6 +18,12 @@ public class ConfirmResetPasswordTokenCommandHandler : IHandler<ResetPasswordCom
     {
         var authenticationResults = new Results();
         var user = await _userManager.FindByEmailAsync(request.Email);
+
+        if (!user.EmailConfirmed)
+        {
+            authenticationResults.ErrorMessages.Add("you email is not confirmed please confirm it first");
+            return authenticationResults;
+        }
         if (user is null)
         {
             authenticationResults.AddErrorMessages(UserErrors.EmailDoesNotExist);

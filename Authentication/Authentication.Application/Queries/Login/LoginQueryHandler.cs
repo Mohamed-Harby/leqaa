@@ -31,6 +31,12 @@ public class LoginQueryHandler : IHandler<LoginQuery>
             authenticationResults.AddErrorMessages("Incorrect password");
             return authenticationResults;
         }
+
+        if(!user.EmailConfirmed)
+        {
+            authenticationResults.ErrorMessages.Add("you email is not confirmed please confirm it first");
+            return authenticationResults;
+        }
         var token = _tokenGenerator.Generate(user);
         authenticationResults.SetToken(token);
         authenticationResults.IsSuccess = true;

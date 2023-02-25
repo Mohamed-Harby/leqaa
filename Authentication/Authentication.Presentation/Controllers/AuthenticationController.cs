@@ -47,7 +47,10 @@ public class AuthenticationController : Controller
 
        
         if (!results.IsSuccess)
-            return Ok("you must confirm yout email first");
+            return BadRequest(results);
+
+
+
         return Ok(results);
     }
     [HttpGet]
@@ -89,7 +92,7 @@ public class AuthenticationController : Controller
         var emailResetPasswordQuery = new SendEmailResetPasswordQuery(email);
         var results = await _sender.Send(emailResetPasswordQuery);
         if (!results.IsSuccess)
-            return Ok("please confirm your email first");
+            return BadRequest(results);
         return Ok(results);
     }
     [HttpGet]
