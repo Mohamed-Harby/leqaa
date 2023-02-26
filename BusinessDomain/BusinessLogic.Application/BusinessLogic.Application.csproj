@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
+    <ProjectReference Include="../BusinessLogic.Shared/BusinessLogic.Shared.csproj" />
   </ItemGroup>
 
 </Project>

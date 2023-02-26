@@ -3,6 +3,7 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Rooms;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Shared;
 using ErrorOr;
 using FluentValidation;
 using Mapster;

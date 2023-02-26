@@ -20,7 +20,7 @@ public class User : BaseEntity
         Announcements = new HashSet<Announcement>();
         Plans = new List<Plan.Plan>();
     }
-    public User(string name, string email, string password, string username, Gender gender)
+    public User(string name, string email, string username, Gender gender)
     {
         Rooms = new HashSet<Room>();
         FollowedUsers = new HashSet<User>();
@@ -33,14 +33,12 @@ public class User : BaseEntity
 
         Name = name;
         Email = email;
-        Password = password;
         UserName = username;
         Gender = gender;
     }
 
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
     public Gender Gender { get; set; }
     public byte[]? ProfilePicture { get; set; }

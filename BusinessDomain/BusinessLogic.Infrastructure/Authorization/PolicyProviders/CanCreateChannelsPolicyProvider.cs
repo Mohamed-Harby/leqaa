@@ -2,10 +2,10 @@ using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 
-namespace BusinessLogic.Infrastructure.Authorization;
-public class CanDeployHubsPolicyProvider : DefaultAuthorizationPolicyProvider
+namespace BusinessLogic.Infrastructure.Authorization.PolicyProviders;
+public class CanCreateChannelsPolicyProvider : DefaultAuthorizationPolicyProvider
 {
-    public CanDeployHubsPolicyProvider(IOptions<AuthorizationOptions> options) : base(options)
+    public CanCreateChannelsPolicyProvider(IOptions<AuthorizationOptions> options) : base(options)
     {
     }
     public async override Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
@@ -16,7 +16,7 @@ public class CanDeployHubsPolicyProvider : DefaultAuthorizationPolicyProvider
             return policy;
         }
         return new AuthorizationPolicyBuilder()
-        .AddRequirements(new CanDeployHubsRequirement(policyName))
+        .AddRequirements(new CanCreateChannelsRequirement(policyName))
         .Build();
     }
 }

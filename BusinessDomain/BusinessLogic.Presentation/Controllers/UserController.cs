@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using BusinessLogic.Application.Commands.Users.BuyPlan;
 using BusinessLogic.Application.Commands.Users.SetProfilePicture;
+using BusinessLogic.Application.Models.Plans;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -16,8 +19,11 @@ public class UserController : BaseController
         _sender = sender;
     }
     [HttpPost]
-    public async Task<IActionResult> BuyPlan(BuyPlanCommand buyPlanCommand)
+    [Authorize]
+    public async Task<IActionResult> BuyPlan(PlanWriteModel planWriteModel)
     {
+        var username = User.FindFirst(u => u.Type == ClaimTypes.NameIdentifier)!.Value;
+        var buyPlanCommand = new BuyPlanCommand(planWriteModel.planType, username);
         var result = await _sender.Send(buyPlanCommand);
         return result.Match(
             plan => Ok(plan),

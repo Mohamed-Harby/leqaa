@@ -29,7 +29,7 @@ public class HubController : BaseController
 
     [HttpPost]
     [HasPermission(Permission.CanDeployHubs)]
-    public async Task<IActionResult> Post(HubWriteModel hub)
+    public async Task<IActionResult> DeployHub(HubWriteModel hub)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
@@ -40,9 +40,6 @@ public class HubController : BaseController
             errors => Problem(errors)
         );
     }
-
-
-
 
     [HttpGet]
     public async Task<IActionResult> ViewHubs([FromQuery] string cursor, int limit = 10)

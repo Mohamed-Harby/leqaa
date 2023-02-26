@@ -4,20 +4,21 @@ using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using BusinessLogic.Domain.SharedEnums;
+using BusinessLogic.Shared;
 using ErrorOr;
 using FluentValidation;
 using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.DeployHub;
-public class AddRoomCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubReadModel>>
+public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubReadModel>>
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IFileManager _fileManager;
     private readonly IValidator<DeployHubCommand> _validator;
     private readonly IUserHubRepository _userHubRepository;
-    public AddRoomCommandHandler(
+    public DeployHubCommandHandler(
         IHubRepository hubRepository,
         IUserRepository userRepository,
         IValidator<DeployHubCommand> validator,
@@ -49,7 +50,7 @@ public class AddRoomCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubReadM
             );
 
         var hub = request.Adapt<Hub>();
-        hub.Logo = request.Logo is null ? image : request.Logo;
+        hub.Logo = request.Logo ?? image;
 
         var creatorUser = (await _userRepository.GetUserWithHubsAsync(request.Username));
         if (creatorUser is null)

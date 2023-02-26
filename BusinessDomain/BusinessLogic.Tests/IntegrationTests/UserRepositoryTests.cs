@@ -21,7 +21,6 @@ public class UserRepositoryTests : IClassFixture<DbContextMySqlFixture>
         {
             Name = "test",
             Email = "test2",
-            Password = "test",
             Gender = Gender.male,
             UserName = "etst2"
         };
@@ -30,7 +29,6 @@ public class UserRepositoryTests : IClassFixture<DbContextMySqlFixture>
         {
             Name = "test",
             Email = "test",
-            Password = "test",
             Gender = Gender.male,
             UserName = "test"
         };

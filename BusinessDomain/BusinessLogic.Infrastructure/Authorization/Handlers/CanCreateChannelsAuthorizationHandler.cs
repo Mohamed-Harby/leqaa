@@ -1,23 +1,22 @@
 using System.Security.Claims;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Domain.DomainErrors;
 using BusinessLogic.Domain.Plan;
-using BusinessLogic.Infrastructure.Authorization.Requirements;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
-public class CanDeployHubsAuthorizationHandler : AuthorizationHandler<CanDeployHubsRequirement>
+public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCreateChannelsRequirement>
 {
-    private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-
-    public CanDeployHubsAuthorizationHandler(IHubRepository hubRepository, IUserRepository userRepository)
+    private readonly IPlanRepository _planRepository;
+    public CanCreateChannelAuthorizationHandler(IUserRepository userRepository, IPlanRepository planRepository)
     {
-        _hubRepository = hubRepository;
         _userRepository = userRepository;
+        _planRepository = planRepository;
     }
 
-    protected async override Task HandleRequirementAsync(AuthorizationHandlerContext context, CanDeployHubsRequirement requirements)
+    protected async override Task HandleRequirementAsync(AuthorizationHandlerContext context, CanCreateChannelsRequirement requirement)
     {
         var userNameClaim = context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier);
         if (userNameClaim is null)
@@ -25,28 +24,31 @@ public class CanDeployHubsAuthorizationHandler : AuthorizationHandler<CanDeployH
             context.Fail(new AuthorizationFailureReason(this, "Not authorized"));
             return;
         }
-        var user = await _userRepository.GetUserWithPlansWithHubsAsync(userNameClaim.Value);
+        var user = await _userRepository.GetUserWithPlansWithChannelsAsync(userNameClaim.Value);
         if (user is null)
         {
             context.Fail(new AuthorizationFailureReason(this, DomainErrors.User.NotFound.Description));
             return;
         }
         var plans = user.Plans;
-        var hubs = user.Hubs;
-        if (hubs.Count >= 1)
+        var channels = user.Channels;
+        if (channels.Count >= 37)
         {
             context.Fail(new AuthorizationFailureReason(
                 this,
-                "Can't create more than one hub"));
+                "Can't create more than 37 channels"));
             return;
         }
         if (!plans.Select(p => p.Type).Contains(PlanType.Premium))
         {
             context.Fail(new AuthorizationFailureReason(
                 this,
-                "You are not authorized to deploy hubs, consider upgrading your plan"));
+                "You are not authorized to Create channels, consider upgrading your plan"));
             return;
         }
-        context.Succeed(requirements);
+        context.Succeed(requirement);
+
+
+
     }
 }

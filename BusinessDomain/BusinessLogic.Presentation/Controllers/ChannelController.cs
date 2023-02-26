@@ -1,4 +1,4 @@
-using BusinessLogic.Application.Commands.Channels.AddChannel;
+using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 
@@ -22,12 +22,12 @@ public class ChannelController : BaseController
     [HttpPost]
     public async Task<IActionResult> Post(ChannelWriteModel channelWriteModel, string username)
     {
-        var addChannelCommand = new AddChannelCommand(
+        var addChannelCommand = new CreateChannelCommand(
             channelWriteModel.name,
             channelWriteModel.description,
          channelWriteModel.ChannelId,
          channelWriteModel.hubId,
-       
+
             username);
 
         ErrorOr<Channel> result = await _sender.Send(addChannelCommand);
@@ -51,7 +51,7 @@ public class ChannelController : BaseController
     [HttpGet]
     public async Task<IActionResult> ViewChannels([FromQuery] string cursor, int limit = 10)
     {
-        var query = new ViewRoomQuery(limit,cursor);
+        var query = new ViewRoomQuery(limit, cursor);
         var channels = await _sender.Send(query);
 
         return Ok(channels);

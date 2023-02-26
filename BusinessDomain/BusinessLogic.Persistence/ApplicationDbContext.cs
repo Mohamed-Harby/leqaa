@@ -24,9 +24,10 @@ public class ApplicationDbContext : DbContext
         base.OnConfiguring(optionsBuilder);
 
     }
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected async override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        await modelBuilder.SeedDataAsync();
         base.OnModelCreating(modelBuilder);
     }
 }

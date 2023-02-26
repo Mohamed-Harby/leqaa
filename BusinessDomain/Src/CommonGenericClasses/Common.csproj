@@ -17,12 +17,11 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="FluentValidation" Version="11.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../BusinessLogic.Domain/BusinessLogic.Domain.csproj"/>
-    <ProjectReference Include="../../BusinessLogic.Application/BusinessLogic.Application.csproj"/>
+    <ProjectReference Include="../../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
+    <ProjectReference Include="../../BusinessLogic.Application/BusinessLogic.Application.csproj" />
   </ItemGroup>
 
 </Project>

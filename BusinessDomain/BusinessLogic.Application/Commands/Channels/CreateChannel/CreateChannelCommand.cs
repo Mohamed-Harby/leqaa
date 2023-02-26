@@ -3,11 +3,11 @@ using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Channels.AddChannel;
-public record AddChannelCommand(
+namespace BusinessLogic.Application.Commands.Channels.CreateChannel;
+public record CreateChannelCommand(
     string Name,
     string? Description,
     Guid ChannelId,
     string Username,
-    string hubId
+    string? hubId
 ) : ICommand<ErrorOr<Channel>>;

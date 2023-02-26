@@ -55,8 +55,6 @@ public class UserConfiguration : BaseConfiguration<User>
         builder.Property(p => p.Gender).IsRequired();
         builder.Property(p => p.UserName).IsRequired()
         .HasMaxLength(30);
-        builder.Property(p => p.Password).IsRequired()
-        .HasMaxLength(50);
         // builder.Property(p => p.ProfileImage).IsRequired();
 
 
