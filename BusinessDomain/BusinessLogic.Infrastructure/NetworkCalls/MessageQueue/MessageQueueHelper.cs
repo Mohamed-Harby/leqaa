@@ -28,9 +28,10 @@ public class MessageQueueHelper
              UserWriteModel userDeserialialized = JsonConvert.DeserializeObject<UserWriteModel>(userDecoded);
              await userRepository.AddAsync(userDeserialialized.Adapt<User>());
              await userRepository.SaveAsync();
+             channel.BasicAck(ea.DeliveryTag, false);
          };
+        var channelTag = channel.BasicConsume("Authentication.User", false, consumer);
 
-        var channelTag = channel.BasicConsume("Authentication.User", true, consumer);
         return Task.CompletedTask;
     }
 }
