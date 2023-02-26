@@ -3,23 +3,24 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.SharedEnums;
 using ErrorOr;
 using FluentValidation;
 using Mapster;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Hubs.AddHub;
-public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<HubReadModel>>
+namespace BusinessLogic.Application.Commands.Hubs.DeployHub;
+public class AddRoomCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubReadModel>>
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IFileManager _fileManager;
-    private readonly IValidator<AddHubCommand> _validator;
+    private readonly IValidator<DeployHubCommand> _validator;
     private readonly IUserHubRepository _userHubRepository;
     public AddRoomCommandHandler(
         IHubRepository hubRepository,
         IUserRepository userRepository,
-        IValidator<AddHubCommand> validator,
+        IValidator<DeployHubCommand> validator,
         IFileManager fileManager,
         IUserHubRepository userHubRepository)
     {
@@ -30,7 +31,7 @@ public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<HubReadMode
         _userHubRepository = userHubRepository;
     }
 
-    public async Task<ErrorOr<HubReadModel>> Handle(AddHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<HubReadModel>> Handle(DeployHubCommand request, CancellationToken cancellationToken)
     {
         var result = await _validator.ValidateAsync(request);
         if (!result.IsValid)
@@ -59,7 +60,7 @@ public class AddRoomCommandHandler : IHandler<AddHubCommand, ErrorOr<HubReadMode
         {
             User = creatorUser,
             Hub = hub,
-            Role = "Creator"
+            Role = GroupRole.Founder
         };
         await _userHubRepository.UpdateAsync(UserHub);
         creatorUser.Hubs.Add(hub);

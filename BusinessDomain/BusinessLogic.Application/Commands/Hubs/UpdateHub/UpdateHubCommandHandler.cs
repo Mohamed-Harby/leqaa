@@ -1,5 +1,5 @@
 using BusinessLogic.Application.CommandInterfaces;
-using BusinessLogic.Application.Commands.Hubs.AddHub;
+using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;

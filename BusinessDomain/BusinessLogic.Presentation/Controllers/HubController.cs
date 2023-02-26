@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using BusinessLogic.Application.Commands.Hubs.AddHub;
+using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Domain;
@@ -32,8 +32,8 @@ public class HubController : BaseController
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var addHubCommand = new AddHubCommand(hub.name, hub.description, hub.logo, username);
-        ErrorOr<HubReadModel> results = await _sender.Send(addHubCommand);
+        var deployHubCommand = new DeployHubCommand(hub.name, hub.description, hub.logo, username);
+        ErrorOr<HubReadModel> results = await _sender.Send(deployHubCommand);
         return results.Match(
             hub => Ok(hub),
             errors => Problem(errors)
