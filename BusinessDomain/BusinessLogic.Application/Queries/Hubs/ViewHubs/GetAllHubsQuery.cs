@@ -3,4 +3,9 @@ using BusinessLogic.Application.Models.Hubs;
 using MediatR;
 
 namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
-public record GetAllHubsQuery() : IQuery<List<HubReadModel>>;
+public record GetAllHubsQuery(
+
+     int Limit,
+ string Cursor
+
+    ) : IQuery<List<HubReadModel>>;

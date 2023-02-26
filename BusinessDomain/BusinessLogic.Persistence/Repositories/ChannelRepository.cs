@@ -26,8 +26,12 @@ public class ChannelRepository : BaseRepo<Channel>, IChannelRepository
         throw new NotImplementedException();
     }
 
+
+
     public Task<Channel> UpdateChannelWithUser(Channel channel, User user)
     {
         throw new NotImplementedException();
     }
+
+    
 }

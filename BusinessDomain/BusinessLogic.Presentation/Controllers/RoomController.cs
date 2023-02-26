@@ -8,7 +8,13 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Infrastructure.Authorization;
+<<<<<<< HEAD
+using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using BusinessLogic.Application.Queries.Rooms.ViewRooms;
+=======
 using BusinessLogic.Infrastructure.Authorization.Enums;
+>>>>>>> dcc044f3b2725d3b0599d1df11d0fd21f8cbc448
 
 namespace BusinessLogic.Presentation.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
@@ -34,5 +40,12 @@ public class RoomController : BaseController
         return Ok("You can join this room");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> ViewRooms([FromQuery] string cursor, int limit = 10)
+    {
+        var query = new ViewRoomsQuery(limit, cursor);
+        var rooms = await _sender.Send(query);
 
+        return Ok(rooms);
+    }
 }

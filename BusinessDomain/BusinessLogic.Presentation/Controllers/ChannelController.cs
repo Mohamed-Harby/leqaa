@@ -1,9 +1,12 @@
 using BusinessLogic.Application.Commands.Channels.AddChannel;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Queries.channels.ViewChannels;
+
 using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -35,9 +38,22 @@ public class ChannelController : BaseController
 
     }
 
- /*   [HttpDelete]
-    public async */
+    /*[HttpGet]
+    public async Task<IEnumerable<GetAllChannelsQuery>> ViewChannels()
+    {
+        var result =new List<GetAllChannelsQuery>();
+        await _sender.Send(result);
+        return result;
 
+    }
+*/
 
+    [HttpGet]
+    public async Task<IActionResult> ViewChannels([FromQuery] string cursor, int limit = 10)
+    {
+        var query = new ViewRoomQuery(limit,cursor);
+        var channels = await _sender.Send(query);
 
+        return Ok(channels);
+    }
 }
