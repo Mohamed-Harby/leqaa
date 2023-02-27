@@ -24,7 +24,18 @@ public class UserConfiguration : BaseConfiguration<User>
         builder
         .HasMany(u => u.Rooms)
         .WithMany(r => r.JoinedUsers)
-        .UsingEntity<UserRoom>();
+        .UsingEntity<UserRoom>(
+            join =>
+            join
+            .HasOne(ur => ur.Room)
+            .WithMany()
+            .HasForeignKey(ur => ur.RoomId),
+            join =>
+            join
+            .HasOne(ur => ur.User)
+            .WithMany()
+            .HasForeignKey(ur => ur.UserId)
+        );
 
         builder
         .HasMany(u => u.Announcements)
