@@ -64,11 +64,11 @@ builder.Services.AddAuthorization();
 try
 {
     IModel channel = RabbitMQConfiguration.ConnectToRabbitMQ(builder.Configuration);
-    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel);
+    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Configuration);
 }
-catch
+catch (Exception ex)
 {
-
+    System.Console.WriteLine(ex.ToString());
 }
 var app = builder.Build();
 using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope())

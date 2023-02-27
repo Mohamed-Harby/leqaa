@@ -42,7 +42,7 @@ public class ChannelRepositoryTests : IClassFixture<DbContextMySqlFixture>
         var configuration = ConfigurationInitializer.InitializeConfiguration();
         var connectionString = configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
         var builder = new DbContextOptionsBuilder<ApplicationDbContext>().UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-        var dbContext = new ApplicationDbContext(builder.Options);
+        var dbContext = new ApplicationDbContext(builder.Options,configuration);
         await dbContext.Database.EnsureCreatedAsync();
 
         var channel = new Channel

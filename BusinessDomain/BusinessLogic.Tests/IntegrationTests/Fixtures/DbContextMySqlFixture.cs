@@ -14,7 +14,7 @@ public class DbContextMySqlFixture
         var builder = new DbContextOptionsBuilder<ApplicationDbContext>()
         .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options => options.EnableRetryOnFailure())
         .EnableSensitiveDataLogging();
-        dbContext = new ApplicationDbContext(builder.Options);
+        dbContext = new ApplicationDbContext(builder.Options,configuration);
         // dbContext.Database.EnsureDeleted();
         dbContext.Database.EnsureCreated();
     }

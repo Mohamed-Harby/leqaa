@@ -6,6 +6,7 @@ using BusinessLogic.Application.Models.Plans;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Application.Queries.Users.ViewUserProfile;
+using BusinessLogic.Application.Models.Users;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -32,8 +33,11 @@ public class UserController : BaseController
         );
     }
     [HttpPut]
-    public async Task<IActionResult> SetProfilePicture(SetProfilePictureCommand setProfilePictureCommand)
+    [Authorize]
+    public async Task<IActionResult> SetProfilePicture([FromBody] ProfilePictureWriteModel profilePictureWriteModel)
     {
+        var username = User.FindFirst(u => u.Type == ClaimTypes.NameIdentifier)!.Value;
+        var setProfilePictureCommand = new SetProfilePictureCommand(profilePictureWriteModel.ProfilePicture, username);
         var result = await _sender.Send(setProfilePictureCommand);
         return result.Match(
             user => Ok(user),

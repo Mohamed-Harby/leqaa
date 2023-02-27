@@ -68,7 +68,7 @@ public class RoomRepositoryTests : IClassFixture<DbContextMySqlFixture>
             .UseMySql(connectionString,
                       ServerVersion.AutoDetect(connectionString));
 
-        var dbContext = new ApplicationDbContext(builder.Options);
+        var dbContext = new ApplicationDbContext(builder.Options, configuration);
         await dbContext.Database.EnsureCreatedAsync();
         var roomRepository = new RoomRepository(dbContext);
         var room = new Room

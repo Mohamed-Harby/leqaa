@@ -9,7 +9,7 @@ public class DbContextMemoryFixture : IDisposable
     {
         var builder = new DbContextOptionsBuilder<ApplicationDbContext>()
         .UseInMemoryDatabase(nameof(DbContextMemoryFixture));
-        dbContext = new ApplicationDbContext(builder.Options);
+        dbContext = new ApplicationDbContext();
     }
     public void Dispose()
     {
