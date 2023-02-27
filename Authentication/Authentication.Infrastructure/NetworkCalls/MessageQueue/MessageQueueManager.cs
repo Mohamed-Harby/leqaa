@@ -30,7 +30,7 @@ public class MessageQueueManager : IMessageQueueManager
         channel.ExchangeDeclare(
             exchange: RabbitMQConstants.AuthenticationExchange,
             type: ExchangeType.Topic,
-            durable: true,
+            durable: false,
             autoDelete: false
         );
         channel.QueueDeclare(
