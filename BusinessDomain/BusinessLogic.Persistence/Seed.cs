@@ -1,6 +1,7 @@
 using BusinessLogic.Application;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Enums;
 using BusinessLogic.Shared;
 using Microsoft.EntityFrameworkCore;
 

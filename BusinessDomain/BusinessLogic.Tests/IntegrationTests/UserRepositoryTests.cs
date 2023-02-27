@@ -1,4 +1,5 @@
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Enums;
 using BusinessLogic.IntegrationTests.Fixtures;
 using BusinessLogic.Persistence.Repositories;
 

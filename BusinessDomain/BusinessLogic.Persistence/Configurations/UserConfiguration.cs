@@ -16,8 +16,15 @@ public class UserConfiguration : BaseConfiguration<User>
         .WithOne(p => p.User)
         .HasForeignKey(p => p.UserId);
 
-        builder.HasMany(u => u.Channels).WithMany(c => c.Users);
-        builder.HasMany(u => u.Rooms).WithMany(r => r.JoinedUsers);
+        builder
+        .HasMany(u => u.Channels)
+        .WithMany(c => c.Users)
+        .UsingEntity<UserChannel>();
+
+        builder
+        .HasMany(u => u.Rooms)
+        .WithMany(r => r.JoinedUsers)
+        .UsingEntity<UserRoom>();
 
         builder
         .HasMany(u => u.Announcements)

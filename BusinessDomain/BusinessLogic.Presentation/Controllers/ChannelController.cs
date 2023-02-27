@@ -1,12 +1,13 @@
+using System.Security.Claims;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 
-using BusinessLogic.Domain;
+using BusinessLogic.Infrastructure.Authorization;
+using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -14,25 +15,25 @@ namespace BusinessLogic.Presentation.Controllers;
 public class ChannelController : BaseController
 {
     private readonly ISender _sender;
-
     public ChannelController(ISender sender)
     {
         _sender = sender;
     }
     [HttpPost]
-    public async Task<IActionResult> Post(ChannelWriteModel channelWriteModel, string username)
+    [HasPermission(Permission.CanCreateChannel)]
+    public async Task<IActionResult> CreateChannel(ChannelWriteModel channelWriteModel)
     {
-        var addChannelCommand = new CreateChannelCommand(
-            channelWriteModel.name,
-            channelWriteModel.description,
-         channelWriteModel.ChannelId,
-         channelWriteModel.hubId,
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
+        var addChannelCommand = new CreateChannelCommand(
+            channelWriteModel.Name,
+            channelWriteModel.Description,
+            channelWriteModel.HubId,
             username);
 
-        ErrorOr<Channel> result = await _sender.Send(addChannelCommand);
+        ErrorOr<ChannelReadModel> result = await _sender.Send(addChannelCommand);
         return result.Match(
-             channel => Ok(channelWriteModel),//TODO
+             channel => Ok(channel),
              errors => Problem(errors)
          );
 

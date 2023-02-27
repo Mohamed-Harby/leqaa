@@ -19,7 +19,7 @@ public class RoomConfiguration : BaseConfiguration<Room>
 
         builder.Property(p => p.Description).IsRequired()
         .HasMaxLength(100);
-        builder.Property(p => p.StartedAt).IsRequired();
+        builder.Property(p => p.StartedAt).HasDefaultValue(DateTime.Now);
     }
 
 }

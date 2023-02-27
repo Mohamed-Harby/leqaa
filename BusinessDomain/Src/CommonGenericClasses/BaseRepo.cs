@@ -64,7 +64,7 @@ namespace CommonGenericClasses
                 query = query.Include(property);
             }
 
-            return Task.FromResult(query.AsNoTracking<TEntity>());
+            return Task.FromResult(query);
         }
         public virtual async Task<TEntity> GetByIdAsync(object id)
         {
