@@ -1,0 +1,65 @@
+@use "../../../helper/style" as *;
+
+.plans {
+  height: 100%;
+  width: 100%;
+  h1 {
+    align-self: start;
+    border-bottom: 1px solid;
+    width: 80%;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    .input {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+
+      label {
+        margin-bottom: 20px;
+      }
+
+      input,
+      select {
+        background-color: $secondColor;
+        color: $fifthColor;
+        border: none;
+        border-bottom: 1px solid $thirdColor;
+        height: 100%;
+        &::placeholder {
+          color: #dcdcdc;
+          opacity: 1;
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      p {
+        color: $fifthColor;
+      }
+      button {
+        background-color: $fourthColor;
+        border-radius: 20px;
+        color: $fifthColor;
+        cursor: pointer;
+        align-self: flex-end;
+        padding: 10px;
+        border: none;
+        width: 25%;
+        margin-top: 20px;
+      }
+    }
+  }
+  div {
+    h3 {
+      margin-left: 20px;
+    }
+  }
+}

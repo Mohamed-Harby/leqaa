@@ -113,7 +113,7 @@ function Register() {
                 placeholder="Email"
                 {...register("email")}
               />
-              {(errors.name || auth.user.errorMessages) && (
+              {(errors.email || auth.user.errorMessages) && (
                 <p>
                   {errors.name?.message ||
                     (auth.user.errorMessages[0]?.includes("Email") &&
@@ -126,10 +126,10 @@ function Register() {
               <input
                 placeholder="User Name"
                 type="text"
-                name="name"
+                name="username"
                 {...register("userName")}
               />
-              {(errors.name || auth.user.errorMessages) && (
+              {(errors.username || auth.user.errorMessages) && (
                 <p>
                   {errors.name?.message ||
                     (auth.user.errorMessages[0]?.includes("Username") &&

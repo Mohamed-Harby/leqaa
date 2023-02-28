@@ -4,18 +4,28 @@
     display: flex;
     justify-content: space-between;
     background-color: $secondColor;
-    height: 50px;
+    height: 70px;
     padding: 10px;
     .left{
         display: flex;
         align-items: center;
-        span{
-            margin-left: 10px;
-            font-weight: 800;
-            color: $fifthColor;
+        div{
+            display: flex;
+            flex-direction: column;
+            span{
+                margin-left: 15px;
+                font-weight: 800;
+                color: $fifthColor;
+                &:last-child{
+                    color: $fourthColor;
+                    font-weight: 600;
+                }
+            }
         }
     }
     .right{
+        display: flex;
+        align-items: center;
         svg{
             font-size: 30px;
             color: $fifthColor;
