@@ -1,0 +1,64 @@
+.plans {
+  height: 100%;
+  width: 100%;
+}
+.plans h1 {
+  align-self: start;
+  border-bottom: 1px solid;
+  width: 80%;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.plans form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.plans form .input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.plans form .input label {
+  margin-bottom: 20px;
+}
+.plans form .input input,
+.plans form .input select {
+  background-color: #262427;
+  color: #e2e0e3;
+  border: none;
+  border-bottom: 1px solid #656366;
+  height: 100%;
+}
+.plans form .input input::-moz-placeholder, .plans form .input select::-moz-placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.plans form .input input::placeholder,
+.plans form .input select::placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.plans form .input input:focus,
+.plans form .input select:focus {
+  outline: none;
+}
+.plans form .input p {
+  color: #e2e0e3;
+}
+.plans form .input button {
+  background-color: #a379de;
+  border-radius: 20px;
+  color: #e2e0e3;
+  cursor: pointer;
+  align-self: flex-end;
+  padding: 10px;
+  border: none;
+  width: 25%;
+  margin-top: 20px;
+}
+.plans div h3 {
+  margin-left: 20px;
+}/*# sourceMappingURL=Account.css.map */

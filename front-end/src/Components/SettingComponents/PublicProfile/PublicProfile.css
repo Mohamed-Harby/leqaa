@@ -1,0 +1,87 @@
+.publicprofile {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.publicprofile form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
+.publicprofile form h1 {
+  align-self: start;
+  border-bottom: 1px solid;
+  width: 80%;
+  margin-left: 20px;
+}
+.publicprofile form label {
+  margin-bottom: 20px;
+}
+.publicprofile form .input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+.publicprofile form .input input,
+.publicprofile form .input select {
+  background-color: #262427;
+  color: #e2e0e3;
+  border: none;
+  border-bottom: 1px solid #656366;
+  height: 100%;
+}
+.publicprofile form .input input::-moz-placeholder, .publicprofile form .input select::-moz-placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.publicprofile form .input input::placeholder,
+.publicprofile form .input select::placeholder {
+  color: #dcdcdc;
+  opacity: 1;
+}
+.publicprofile form .input input:focus,
+.publicprofile form .input select:focus {
+  outline: none;
+}
+.publicprofile form .input p {
+  color: #e2e0e3;
+}
+.publicprofile form .input button {
+  background-color: #a379de;
+  border-radius: 20px;
+  color: #e2e0e3;
+  cursor: pointer;
+  align-self: flex-end;
+  padding: 10px;
+  border: none;
+  width: 25%;
+}
+.publicprofile .image {
+  display: flex;
+  position: relative;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 50px 25px 0 0;
+}
+.publicprofile .image label {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.publicprofile .image label span {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #a379de;
+}
+.publicprofile .image label span svg {
+  font-size: 25px;
+}
+.publicprofile .image label input {
+  display: none;
+}/*# sourceMappingURL=PublicProfile.css.map */

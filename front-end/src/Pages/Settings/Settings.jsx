@@ -1,60 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./Settings.css";
 import { getCookies } from "../../Custom/useCookies";
+import PublicProfile from "../../Components/SettingComponents/PublicProfile/PublicProfile";
+import Account from "../../Components/SettingComponents/Account/Account";
 
 
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8)
-    .max(20)
-    .matches(/\d+/)
-    .matches(/[a-z]+/)
-    .matches(/[A-Z]+/)
-    .required(),
-});
 
 function Settings() {
-  const token = getCookies('token')
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const token = getCookies("token");
+  const publicProfile = useRef(null);
+  const billingAndPlans = useRef(null);
+  const [components, setComponents] = useState("Public Profile");
 
-  const onSubmitHandler = (data) => {
-    console.log(data);
-    const sendRequest = {email: data.email, token: token, newPassword: data.password}
-    console.log(sendRequest);
-    // auth.useLogin(data);
-  };
+
+  // const onClick = (event) => {
+  //   event.currentTarget.classList.toggle('active');
+  // }
 
   return (
     <div className="settingsPage">
+      <div className="sidebar">
+        <ul>
+          <li>
+            <button ref={publicProfile} value="Public Profile" onClick={() => setComponents(publicProfile.current.value)}>Public Profile</button>
+          </li>
+          <li>
+            <button ref={billingAndPlans} value="Billing And Plans" onClick={() => setComponents(billingAndPlans.current.value)}>Billing And Plans</button>
+          </li>
+        </ul>
+      </div>
       <div className="settings">
-        <h1>Settings</h1>
-
-        <form className="inputsContainer" onSubmit={handleSubmit(onSubmitHandler)}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Email" {...register("email")}/>
-          </div>
-
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Password" {...register("password")} />
-          </div>
-          <div className="buttonsContainer">
-            <button>Delete Account</button>
-            <button type="submit">Reset Password</button>
-          </div>
-        </form>
+        {components == "Public Profile" && <PublicProfile />}
+        {components == "Billing And Plans" && <Account />}
       </div>
     </div>
   );

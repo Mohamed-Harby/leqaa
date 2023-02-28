@@ -7,11 +7,27 @@ import { VscOrganization } from "react-icons/vsc";
 import { AiOutlineYoutube, AiFillCloseCircle } from "react-icons/ai";
 import profilepicture from "../../assets/badea.jpg";
 import { useAuth } from "../../Custom/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { getResponse, getStatus, viewUserProfile } from "../../redux/userSlice";
+import RadiusImg from "../RadiusImg/RadiusImg";
+import { getCookies } from "../../Custom/useCookies";
+import { useEffect } from "react";
 
 function Sidebar() {
   const id = null;
   const [closeSidebar, setCloseSidebar] = useState(false)
   const auth = useAuth()
+  const [user, setUser] = useState({}) 
+  const response = useSelector(getResponse)
+  const status = useSelector(getStatus)
+  const token = getCookies("token");
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(viewUserProfile(token))
+  }, [])
+  useEffect(() => {
+    setUser(response)
+  }, [status])
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
@@ -56,7 +72,7 @@ function Sidebar() {
             <span className={closeSidebar ? "hideText" : "text"}>Setting</span>
           </NavLink>
           <NavLink to={`/profile/${auth.user.user?.userName}`}>
-            <img src={profilepicture} alt="user" />
+            <RadiusImg img={user?.profilePicture ? "data:image/png;base64," + user.profilePicture : null} size={40} />
             <span className={closeSidebar ? "hideText" : "text"}>{auth.user.user?.userName}</span>
           </NavLink>
         </li>

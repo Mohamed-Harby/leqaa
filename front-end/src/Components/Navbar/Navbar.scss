@@ -90,10 +90,17 @@ nav {
         font-size: 20px;
         color: $fifthColor;
         padding: 10px;
+        &:last-child{
+          width: fit-content;
+          height: fit-content;
+          border-radius: 20px;
+          padding: 5px 10px;
+        }
         @media screen and (max-width: 480px) {
           width: 25px;
           height: 25px;
         }
+        
       }
       
     }

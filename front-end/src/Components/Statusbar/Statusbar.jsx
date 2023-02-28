@@ -10,10 +10,13 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 import profilePicture from "../../assets/badea.jpg";
 import ModalCalling from "../ModalCalling/ModalCalling";
 import ModalVideoCalling from "../ModalVideoCalling/ModalVideoCalling";
+import { useAuth } from "../../Custom/useAuth";
 
 function Statusbar() {
   const [modalOpenCalling, setModalOpenCalling] = useState(false);
   const [modalOpenVideoCalling, setModalOpenVideoCalling] = useState(false);
+  const auth = useAuth()
+  
   const modalCloseCalling = () => {
     setModalOpenCalling(false);
   };
@@ -21,6 +24,7 @@ function Statusbar() {
   const modalCloseVideoCalling = () => {
     setModalOpenVideoCalling(false);
   };
+
   return (
     <div className="statusbar">
       <div className="left">
@@ -36,7 +40,7 @@ function Statusbar() {
         <BsCameraVideo onClick={() => {setModalOpenVideoCalling(true)}} />
         <Dropdown
           links={[
-            { name: "View Profile", to: "profile" },
+            { name: "View Profile", to: `profile/${auth.user.user?.userName}` },
             { name: "Pin Chat", to: "Link2" },
             { name: "Clear Chat", to: "Link3" },
           ]}

@@ -95,6 +95,14 @@ nav ul li button {
   color: #e2e0e3;
   padding: 10px;
 }
+nav ul li button:last-child {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
 @media screen and (max-width: 480px) {
   nav ul li button {
     width: 25px;

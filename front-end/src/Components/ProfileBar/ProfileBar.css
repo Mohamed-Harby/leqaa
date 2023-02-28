@@ -2,17 +2,29 @@
   display: flex;
   justify-content: space-between;
   background-color: #262427;
-  height: 50px;
+  height: 70px;
   padding: 10px;
 }
 .profilebar .left {
   display: flex;
   align-items: center;
 }
-.profilebar .left span {
-  margin-left: 10px;
+.profilebar .left div {
+  display: flex;
+  flex-direction: column;
+}
+.profilebar .left div span {
+  margin-left: 15px;
   font-weight: 800;
   color: #e2e0e3;
+}
+.profilebar .left div span:last-child {
+  color: #a379de;
+  font-weight: 600;
+}
+.profilebar .right {
+  display: flex;
+  align-items: center;
 }
 .profilebar .right svg {
   font-size: 30px;

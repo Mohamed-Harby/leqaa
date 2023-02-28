@@ -11,7 +11,7 @@
   padding: 10px 0px;
 }
 .additional .search {
-  height: 5%;
+  max-height: 2.5rem;
 }
 .additional .cards {
   display: flex;

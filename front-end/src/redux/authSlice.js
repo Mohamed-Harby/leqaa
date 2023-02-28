@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
 
-const baseUrl = 'http://localhost:5002/api/v1/Authentication/'
+export const baseUrl = 'http://localhost:5002/api/v1/Authentication/'
 
 
 const initialState = {
@@ -49,13 +49,16 @@ export const getUser = createAsyncThunk("auth/getuser", async (payload) => {
     return response?.data
 })
 
-export const checkAuth = createAsyncThunk("auth/checkAuth", async (payload) => {
-    const checkAuthUrl = 'CheckIfAuthenticated'
-    const response = await axios.get(baseUrl + checkAuthUrl,{
-        headers:{
-            Authorization: `Bearer ${payload}`
-        }
-    })
+export const sendResetPasswordEmail = createAsyncThunk("auth/sendResetPasswordEmail", async (payload) => {
+    const sendResetPasswordEmailUrl = `SendResetPasswordEmail?email=${payload.email}`
+    const response = await axios.get(baseUrl + sendResetPasswordEmailUrl)
+    console.log(response.data)
+    return response?.data
+})
+
+export const resetPassword = createAsyncThunk("auth/resetpassword", async (payload) => {
+    const resetPasswordUrl = 'ResetPassword'
+    const response = await axios.put(baseUrl + resetPasswordUrl,payload)
     console.log(response.data)
     return response?.data
 })
@@ -102,17 +105,30 @@ const authSlice = createSlice({
                 state.error = action.error.message
             })
             ////////////////////////////////////////////////
-            .addCase(checkAuth.pending, (state, action) => {
+            .addCase(sendResetPasswordEmail.pending, (state, action) => {
                 state.status = "loading"
             })
-            .addCase(checkAuth.fulfilled, (state, action) => {
+            .addCase(sendResetPasswordEmail.fulfilled, (state, action) => {
                 state.status = "succeeded"
-                state.auth = action.payload == 'You are authenticated' ? true : false
+                state.response = action.payload;
             })
-            .addCase(checkAuth.rejected, (state, action) => {
+            .addCase(sendResetPasswordEmail.rejected, (state, action) => {
                 state.status = "failed"
                 state.error = action.error.message
             })
+            ////////////////////////////////////////////////
+            .addCase(resetPassword.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(resetPassword.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.response = action.payload;
+            })
+            .addCase(resetPassword.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            ////////////////////////////////////////////////
     }
 })
 

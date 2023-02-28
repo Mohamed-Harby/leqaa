@@ -7,10 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../Custom/useAuth";
 import { useDispatch, useSelector } from "react-redux";
-import { getError, getResponse, getStatus, getUser } from "../../redux/authSlice";
+import {
+  getError,
+  getResponse,
+  getStatus,
+  getUser,
+} from "../../redux/authSlice";
 import useCookies from "react-cookie/cjs/useCookies";
-import {  getCookies } from "../../Custom/useCookies";
-import axios from "axios";
+import { getCookies } from "../../Custom/useCookies";
+import { BsCameraVideo } from "react-icons/bs";
 
 const schema = yup.object().shape({
   password: yup
@@ -25,13 +30,13 @@ const schema = yup.object().shape({
 
 function Login() {
   const { pathname } = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const auth = useAuth();
   const [cookies, setCookie] = useCookies(["token"]);
   const status = useSelector(getStatus);
   const error = useSelector(getError);
-  const navigate = useNavigate()
-  const token = getCookies('token')
+  const navigate = useNavigate();
+  const token = getCookies("token");
 
   const {
     register,
@@ -46,17 +51,20 @@ function Login() {
     auth.useLogin(data);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(auth.user.isSuccess);
-    auth.user.isSuccess && navigate('/');
-  },[auth.user])
+    auth.user.isSuccess && navigate("/");
+  }, [auth.user]);
 
   return (
     <>
       <Navbar />
       <div className="login">
         <div className="left">
-          <h1>Video Calls and Meetings for personal Use and organizations.</h1>
+          <h1>
+            <BsCameraVideo />
+            Video Calls and Meetings for personal Use and organizations.
+          </h1>
           <p>
             Leqaa is a service for secure, high-quality video meetings and calls
             available for everyone.
@@ -78,7 +86,13 @@ function Login() {
                 name="name"
                 {...register("userName")}
               />
-              {(errors.name || auth.user.errorMessages) && <p>{errors.name?.message || auth.user.errorMessages[0]?.includes('username') && auth.user?.errorMessages[0]}</p>}
+              {(errors.name || auth.user.errorMessages) && (
+                <p>
+                  {errors.name?.message ||
+                    (auth.user.errorMessages[0]?.includes("username") &&
+                      auth.user?.errorMessages[0])}
+                </p>
+              )}
             </div>
             <div className="input">
               <input
@@ -87,8 +101,15 @@ function Login() {
                 placeholder="Password"
                 {...register("password")}
               />
-              {(errors.password || auth.user.errorMessages) && <p>{errors.password?.message || auth.user.errorMessages[0]?.includes('password') && auth.user?.errorMessages[0]}</p>}
+              {(errors.password || auth.user.errorMessages) && (
+                <p>
+                  {errors.password?.message ||
+                    (auth.user.errorMessages[0]?.includes("password") &&
+                      auth.user?.errorMessages[0])}
+                </p>
+              )}
             </div>
+            <Link to={"/resetpassword"}>ResetPassword</Link>
             <div className="input">
               <button type="submit">Submit</button>{" "}
             </div>
