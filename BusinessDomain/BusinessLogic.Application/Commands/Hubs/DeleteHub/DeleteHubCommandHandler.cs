@@ -7,7 +7,7 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.DeleteHub;
-public class DeleteHubCommandHandler : IHandler<DeleteHubCommand, ErrorOr<Hub>>
+public class DeleteHubCommandHandler : IHandler<DeleteHubCommand, ErrorOr<Unit>>
 {
     private readonly IHubRepository _HubRepository;
     private readonly IHubRepository _hubRepository;
@@ -26,24 +26,21 @@ public class DeleteHubCommandHandler : IHandler<DeleteHubCommand, ErrorOr<Hub>>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Hub>> Handle(DeleteHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Unit>> Handle(DeleteHubCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
-        if (creatorUser is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
-        Hub hub = await _hubRepository.GetByIdAsync(request.HubId);
+
+        var hub = await _HubRepository.GetByIdAsync(request.hubId);
         if (hub is null)
         {
             return DomainErrors.Hub.NotFound;
         }
-        var Hub = request.Adapt<Hub>();
-        await _HubRepository.DeleteHubWithUserAsync(Hub, creatorUser);
+      
+        _hubRepository.Remove(hub);
+
         if (await _unitOfWork.Save() == 0)
         {
             return DomainErrors.Hub.InvalidHub;
         }
-        return Hub;
+        return Unit.Value;
     }
 }

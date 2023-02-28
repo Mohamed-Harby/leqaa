@@ -14,7 +14,8 @@ public class RoomConfiguration : BaseConfiguration<Room>
 
         builder
         .HasOne(r => r.Channel)
-        .WithMany(u => u.Rooms);
+        .WithMany(u => u.Rooms)
+        .OnDelete(DeleteBehavior.Cascade);
 
 
         builder.Property(p => p.Description).IsRequired()

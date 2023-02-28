@@ -5,6 +5,7 @@ public static partial class DomainErrors
 {
     public static class Channel
     {
+        public static Error NotFound => Error.NotFound("Channel.NotFound", "channel not found, create channel");
         public static Error InvalidChannel => Error.Failure("Channel.InvalidChannel", "Invalid Channel, couldn't complete your request");
     }
 

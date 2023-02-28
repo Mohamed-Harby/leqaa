@@ -5,8 +5,5 @@ using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.DeleteHub;
 public record DeleteHubCommand(
-    string Name,
-    string? Description,
-    Guid HubId,
-    string Username
-) : ICommand<ErrorOr<Hub>>;
+     Guid hubId
+) : ICommand<ErrorOr<Unit>>;

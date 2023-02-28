@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using BusinessLogic.Application.Commands.Channels.DeleteChannel;
+using BusinessLogic.Application.Commands.Hubs.DeleteHub;
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
@@ -48,6 +50,17 @@ public class HubController : BaseController
         var hubs = await _sender.Send(query);
 
         return Ok(hubs);
+    }
+
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteHub(Guid id)
+    {
+
+        var DeleteModel = new DeleteHubCommand(id);
+        await _sender.Send(DeleteModel);
+
+        return NoContent();
     }
 }
 

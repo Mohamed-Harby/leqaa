@@ -1,5 +1,6 @@
 using BusinessLogic.Domain.Plan;
 using CommonGenericClasses;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BusinessLogic.Persistence.Configurations;
@@ -12,6 +13,7 @@ public class PlanConfiguration : BaseConfiguration<Plan>
         builder
         .HasOne(p => p.User)
         .WithMany(u => u.Plans)
-        .HasForeignKey(p => p.UserId);
+        .HasForeignKey(p => p.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
     }
 }

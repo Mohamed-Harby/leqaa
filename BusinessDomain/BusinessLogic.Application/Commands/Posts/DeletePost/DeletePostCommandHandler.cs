@@ -8,7 +8,8 @@ using ErrorOr;
 using Mapster;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Channels.DeleteChannel;
+namespace BusinessLogic.Application.Commands.Posts.DeletePost;
+
 
 
 public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit>>
@@ -17,32 +18,30 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
+    private readonly IPostRepository _postRepository;
     private readonly IUnitOfWork _unitOfWork;
 
 
     public DeletePostCommandHandler(
-
-        IChannelRepository channelRepository,
+        IPostRepository postRepository,
         IHubRepository hubRepository,
-        IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
-        _channelRepository = channelRepository;
         _hubRepository = hubRepository;
-        _userRepository = userRepository;
+        _postRepository= postRepository;
         _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<Unit>> Handle(DeletePostCommand request, CancellationToken cancellationToken)
     {
-       var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
-        if (channel is null)
+       var post = await _postRepository.GetByIdAsync(request.PostId);
+        if (post is null)
         {
             return DomainErrors.Channel.NotFound;
         }
 
 
-        _channelRepository.Remove(channel);
+        _postRepository.Remove(post);
        
 
         // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);

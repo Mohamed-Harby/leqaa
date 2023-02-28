@@ -1,13 +1,16 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
 using Mapster;
 using MediatR;
+using System.Runtime.CompilerServices;
 
-namespace BusinessLogic.Application.Commands.Posts.AddPost;
-public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<Post>>
+namespace BusinessLogic.Application.Commands.Posts.AddaPost;
+public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostReadModel>>
 {
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
@@ -26,24 +29,27 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<Post>>
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Post>> Handle(AddPostCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostReadModel>> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
         User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;
         }
-        Hub hub = await _hubRepository.GetByIdAsync(request.HubId);
-        if (hub is null)
-        {
-            return DomainErrors.Hub.NotFound;
-        }
+
+
         var post = request.Adapt<Post>();
-        await _PostRepository.AddPostWithUser(post, creatorUser);
-        if (await _unitOfWork.Save() == 0)
-        {
-            return DomainErrors.Post.InvalidPost;
-        }
-        return post;
+        creatorUser.Posts.Add(post);
+
+        post.User = creatorUser;
+
+
+
+
+
+        var postmodel = post.Adapt<PostReadModel>();
+        return postmodel;
     }
+
+
 }

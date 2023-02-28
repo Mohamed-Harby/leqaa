@@ -15,9 +15,11 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
         _context = context;
     }
 
-    public Task<Post> AddPostWithUser(Post post, User user)
+    public async Task<Post> AddPostWithUser(Post post, User user)
     {
-        throw new NotImplementedException();
+        post.AddUser(user);
+        await db.Set<Post>().AddAsync(post);
+        return post;
     }
 
     public Task<Post> DeletePostWithUser(Post Post, User user)

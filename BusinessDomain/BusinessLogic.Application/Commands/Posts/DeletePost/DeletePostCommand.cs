@@ -4,7 +4,7 @@ using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 
-namespace BusinessLogic.Application.Commands.Channels.DeleteChannel;
+namespace BusinessLogic.Application.Commands.Posts.DeletePost;
 public record DeletePostCommand(
- Guid ChannelId
+ Guid PostId
 ) : ICommand<ErrorOr<Unit>>;

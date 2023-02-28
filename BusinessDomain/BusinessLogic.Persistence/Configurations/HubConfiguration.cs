@@ -14,7 +14,8 @@ public class HubConfiguration : BaseConfiguration<Hub>
 
         builder
         .HasMany(r => r.Channels)
-        .WithOne(u => u.Hub);
+        .WithOne(u => u.Hub)
+        .OnDelete(DeleteBehavior.Cascade);
 
         builder
         .HasMany(h => h.Users)
@@ -24,10 +25,12 @@ public class HubConfiguration : BaseConfiguration<Hub>
             .HasOne(uh => uh.User)
             .WithMany()
             .HasForeignKey(uh => uh.UserId),
+
             join => join
             .HasOne(uh => uh.Hub)
             .WithMany()
             .HasForeignKey(uh => uh.HubId)
+            .OnDelete(DeleteBehavior.Cascade)
         );
 
 

@@ -14,12 +14,15 @@ public class UserConfiguration : BaseConfiguration<User>
         builder
         .HasMany(u => u.Posts)
         .WithOne(p => p.User)
-        .HasForeignKey(p => p.UserId);
+        .HasForeignKey(p => p.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
 
         builder
         .HasMany(u => u.Channels)
         .WithMany(c => c.Users)
+        
         .UsingEntity<UserChannel>();
+
 
         builder
         .HasMany(u => u.Rooms)
@@ -35,12 +38,14 @@ public class UserConfiguration : BaseConfiguration<User>
             .HasOne(ur => ur.User)
             .WithMany()
             .HasForeignKey(ur => ur.UserId)
-        );
+            .OnDelete(DeleteBehavior.Cascade)
+        ) ;
 
         builder
         .HasMany(u => u.Announcements)
         .WithOne(a => a.User)
-        .HasForeignKey(a => a.UserId);
+        .HasForeignKey(a => a.UserId)
+        .OnDelete(DeleteBehavior.Cascade);
 
 
 
@@ -51,11 +56,13 @@ public class UserConfiguration : BaseConfiguration<User>
             .HasOne<User>()
             .WithMany()
             .HasForeignKey(uu => uu.FollowerId)
+            .OnDelete(DeleteBehavior.Cascade)
             ,
             join => join
             .HasOne<User>()
             .WithMany()
             .HasForeignKey(uu => uu.FollowedId)
+            .OnDelete(DeleteBehavior.Cascade)
         );
 
         //fields that are unique

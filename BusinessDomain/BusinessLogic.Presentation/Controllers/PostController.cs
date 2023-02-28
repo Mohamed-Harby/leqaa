@@ -1,10 +1,14 @@
-﻿
-using BusinessLogic.Application.Commands.Posts.AddPost;
+﻿using BusinessLogic.Application.Commands.Channels.CreateChannel;
+
+using BusinessLogic.Application.Commands.Posts.AddaPost;
+using BusinessLogic.Application.Commands.Posts.DeletePost;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -18,21 +22,36 @@ public class PostController : BaseController
         _sender = sender;
     }
     [HttpPost]
-    public async Task<IActionResult> Post(PostWriteModel postWriteModel, string username)
+    public async Task<IActionResult> AddNewPost(PostWriteModel postWriteModel)
     {
-        var addPostCommand = new AddPostCommand(
-            postWriteModel.name,
-            postWriteModel.description,
-           postWriteModel.hubId,
-           postWriteModel.channelId,
 
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var addPostCommand = new AddPostCommand(
+            postWriteModel.Title,
+            postWriteModel.Image,
+            postWriteModel.Content,
             username);
 
-        ErrorOr<Post> result = await _sender.Send(addPostCommand);
+        ErrorOr<PostReadModel> result = await _sender.Send(addPostCommand);
         return result.Match(
-             post => Ok(postWriteModel),//TODO : change this later
+             post => Ok(post),
              errors => Problem(errors)
          );
 
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> RemovePost(Guid id)
+    {
+
+        var DeleteModel = new DeletePostCommand(id);
+        await _sender.Send(DeleteModel);
+
+        return NoContent();
     }
 }

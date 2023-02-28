@@ -13,6 +13,12 @@ public class Post: BaseEntity
     public User User { get; set; } = null!;
 
 
+    public void AddUser(User user)
+    {
+        User = user;
+    }
+
+
 
 
 

@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
+using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 
@@ -56,5 +57,16 @@ public class ChannelController : BaseController
         var channels = await _sender.Send(query);
 
         return Ok(channels);
+    }
+
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+
+        var DeleteModel=new DeletePostCommand(id);
+        await _sender.Send(DeleteModel);
+
+        return NoContent();
     }
 }

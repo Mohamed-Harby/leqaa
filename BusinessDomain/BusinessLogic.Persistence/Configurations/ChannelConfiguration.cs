@@ -14,11 +14,12 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
 
         builder
         .HasOne(r => r.Hub)
-        .WithMany(u => u.Channels);
+        .WithMany(u => u.Channels)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        builder
-        .HasMany(r => r.Announcements)
-        .WithOne(a => a.Channel);
+        builder.HasMany(r => r.Announcements)
+            .WithOne(a => a.Channel)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(t=>t.Name).IsRequired()
         .HasMaxLength(30);
