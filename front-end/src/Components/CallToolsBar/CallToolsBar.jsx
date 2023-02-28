@@ -9,6 +9,7 @@ import {
   BsChatLeftText,
   BsMicFill,
   BsMicMuteFill,
+  BsGear,
 } from "react-icons/bs";
 import { MeetingContext } from '../MeetingComponents/MeetingUtilities/MeetingContext';
 
@@ -25,6 +26,8 @@ function CallToolsBar() {
     toggleMic,
     // setToggleMic,
     toggleMicFunc,
+    toggleSettings,
+    setToggleSettings,
   } = useContext(MeetingContext); 
 
   return (
@@ -75,7 +78,7 @@ function CallToolsBar() {
               setToggleChat(false);
             }
           }}
-        />
+          />
         <BsChatLeftText
           className="icon"
           onClick={() => {
@@ -84,6 +87,13 @@ function CallToolsBar() {
               setToggleMembers(false);
             }
           }}
+          />
+        <BsGear
+          className="icon"
+          onClick={() => {
+            setToggleSettings(!toggleSettings)
+          }}
+        
         />
       </div>
     </div>

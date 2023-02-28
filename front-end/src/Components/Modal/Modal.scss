@@ -25,45 +25,81 @@
     flex-direction: column;
     gap: 20px;
     box-shadow: 0 0 10px 1px black;
-    svg{
-        color: $fifthColor;
-        font-size: 20px;
-        width: 100%;
-        cursor: pointer;
-        position: relative;
-        right: -16vw;
-    }
-    button{
-        background-color: $fourthColor;
-        color: $fifthColor;
-        padding: 10px;
-        cursor: pointer;
-        border: none;
-        border-radius: 10px;
-        width: 60%;
-        margin: auto;
-    }
-    form{
+    
+    
+
+    .modalNav {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        gap: 10px;
-        input[type="text"]{
-            flex: 1;
-            border:none;
-            background-color: $thirdColor;
+        
+        svg {
             color: $fifthColor;
-            border-radius: 10px;
-            padding: 0 10px;
-            &:focus{
-                outline: none;
-            }
-            &::placeholder{
-                color: $fifthColor;
-            }
-        }
-        button{
-            width: 20%;
+            font-size: 20px;
+            cursor: pointer;
+
         }
     }
+
+    .modalNavEnd {
+        justify-content: flex-end;
+    }
+
+    .defaultModal {
+        
+        button{
+            background-color: $fourthColor;
+            color: $fifthColor;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+
+
+        .createPlaces{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            
+            & > button {
+                width: 48%;
+                background-color: $secondColor;
+                color: $fifthColor;
+                
+                &:nth-child(1), &:nth-child(4){
+                    background-color: $fifthColor;
+                    color: $secondColor;
+                }
+            }
+        }
+
+        form{
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            
+            input[type="text"]{
+                flex: 1;
+                border:none;
+                background-color: $thirdColor;
+                color: $fifthColor;
+                border-radius: 10px;
+                padding: 0 10px;
+                &:focus{
+                    outline: none;
+                }
+                &::placeholder{
+                    color: $fifthColor;
+                }
+            }
+            button{
+                width: 20%;
+            }
+        }
+    }
+
+
   }
 }

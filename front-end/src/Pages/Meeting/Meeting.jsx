@@ -1,15 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react'
-import "./Meeting.css"
-import PeopleGrid from '../../Components/MeetingComponents/PeopleGrid/PeopleGrid';
-
-import CallToolsBar from "../../Components/CallToolsBar/CallToolsBar";
-import MeetingChat from '../../Components/MeetingComponents/MeetingChat/MeetingChat';
-import MeetingMembers from "../../Components/MeetingComponents/MeetingMembers/MeetingMembers";
-import ShareScreen from '../../Components/MeetingComponents/ShareScreen/ShareScreen';
-import OpenCamera from '../../Components/MeetingComponents/OpenCamera/OpenCamera';
-
+import "./Meeting.css";
 
 import { MeetingContext } from '../../Components/MeetingComponents/MeetingUtilities/MeetingContext';
+import CallToolsBar from "../../Components/CallToolsBar/CallToolsBar";
+import MeetingSettings from '../../Components/MeetingComponents/MeetingSettings/MeetingSettings';
+import MeetingContent from '../../Components/MeetingComponents/MeetingContent/MeetingContent';
+
 
 
 
@@ -20,6 +16,8 @@ function Meeting() {
   const [toggleShareScreen, setToggleShareScreen] = useState(false);
   const [toggleOpenCamera, setToggleOpenCamera] = useState(false);
   const [toggleMic, setToggleMic] = useState(false)
+  const [toggleSettings, setToggleSettings] = useState(false)
+  const [userDevices, setUserDevices] = useState({})
   const pageRef = useRef(null)
 
 
@@ -31,7 +29,6 @@ function Meeting() {
     } catch(err) {
       console.log(err)
     }
-    console.log("mic running")
   }
   
   const toggleMicFunc = async () => {
@@ -67,24 +64,14 @@ function Meeting() {
         toggleMic,
         setToggleMic,
         toggleMicFunc,
+        toggleSettings,
+        setToggleSettings,
+        userDevices,
+        setUserDevices,
       }}
     >
       <div className="callPage" ref={pageRef}>
-        <div className="content">
-          {!toggleShareScreen && !toggleOpenCamera && (
-            <PeopleGrid numberOfPeopleDisplayed={12} size={4} />
-          )}
-          {toggleShareScreen && <ShareScreen />}
-          {toggleOpenCamera && <OpenCamera />}
-          {toggleChat && <MeetingChat />}
-          {toggleMembers && <MeetingMembers />}
-
-          {(toggleShareScreen || toggleOpenCamera) &&
-            !toggleChat &&
-            !toggleMembers && (
-              <PeopleGrid numberOfPeopleDisplayed={4} size={1.5} />
-            )}
-        </div>
+        {toggleSettings ? <MeetingSettings /> : <MeetingContent />}
 
         <CallToolsBar />
       </div>

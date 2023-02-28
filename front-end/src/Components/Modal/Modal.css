@@ -24,30 +24,48 @@
   gap: 20px;
   box-shadow: 0 0 10px 1px black;
 }
-.modal .modal-content svg {
+.modal .modal-content .modalNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal .modal-content .modalNav svg {
   color: #e2e0e3;
   font-size: 20px;
-  width: 100%;
   cursor: pointer;
-  position: relative;
-  right: -16vw;
 }
-.modal .modal-content button {
+.modal .modal-content .modalNavEnd {
+  justify-content: flex-end;
+}
+.modal .modal-content .defaultModal button {
   background-color: #a379de;
   color: #e2e0e3;
   padding: 10px;
   cursor: pointer;
   border: none;
   border-radius: 10px;
-  width: 60%;
-  margin: auto;
 }
-.modal .modal-content form {
+.modal .modal-content .defaultModal .createPlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.modal .modal-content .defaultModal .createPlaces > button {
+  width: 48%;
+  background-color: #262427;
+  color: #e2e0e3;
+}
+.modal .modal-content .defaultModal .createPlaces > button:nth-child(1), .modal .modal-content .defaultModal .createPlaces > button:nth-child(4) {
+  background-color: #e2e0e3;
+  color: #262427;
+}
+.modal .modal-content .defaultModal form {
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
-.modal .modal-content form input[type=text] {
+.modal .modal-content .defaultModal form input[type=text] {
   flex: 1;
   border: none;
   background-color: #656366;
@@ -55,15 +73,15 @@
   border-radius: 10px;
   padding: 0 10px;
 }
-.modal .modal-content form input[type=text]:focus {
+.modal .modal-content .defaultModal form input[type=text]:focus {
   outline: none;
 }
-.modal .modal-content form input[type=text]::-moz-placeholder {
+.modal .modal-content .defaultModal form input[type=text]::-moz-placeholder {
   color: #e2e0e3;
 }
-.modal .modal-content form input[type=text]::placeholder {
+.modal .modal-content .defaultModal form input[type=text]::placeholder {
   color: #e2e0e3;
 }
-.modal .modal-content form button {
+.modal .modal-content .defaultModal form button {
   width: 20%;
 }/*# sourceMappingURL=Modal.css.map */

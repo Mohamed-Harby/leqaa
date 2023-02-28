@@ -1,0 +1,37 @@
+.modalCreateHub {
+  color: #e2e0e3;
+  margin-top: -1rem;
+}
+.modalCreateHub h1 {
+  margin-bottom: 1rem;
+}
+.modalCreateHub form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modalCreateHub form input {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #656366;
+  color: #e2e0e3;
+  border-radius: 3px;
+}
+.modalCreateHub form input:focus {
+  outline: none;
+}
+.modalCreateHub form input::-moz-placeholder {
+  color: #e2e0e3;
+}
+.modalCreateHub form input::placeholder {
+  color: #e2e0e3;
+}
+.modalCreateHub form button {
+  background-color: #262427;
+  color: #e2e0e3;
+  padding: 0.7rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+}/*# sourceMappingURL=ModalCreateHub.css.map */

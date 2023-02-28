@@ -11,6 +11,10 @@
   width: 100%;
   height: 100%;
   border-radius: 1rem;
-  -o-object-fit: cover;
-     object-fit: cover;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+.openCamera video::-webkit-media-controls-panel {
+  display: none !important;
+  opacity: 1 !important;
 }/*# sourceMappingURL=OpenCamera.css.map */

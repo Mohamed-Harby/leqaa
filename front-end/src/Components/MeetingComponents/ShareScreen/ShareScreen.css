@@ -4,4 +4,17 @@
   background-color: #262427;
   border-radius: 1rem;
   margin: 1rem 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+.shareScreen video {
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+.shareScreen video::-webkit-media-controls-panel {
+  display: none !important;
+  opacity: 1 !important;
 }/*# sourceMappingURL=ShareScreen.css.map */

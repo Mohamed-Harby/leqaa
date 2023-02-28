@@ -1,0 +1,37 @@
+.modalCreateChannel {
+  color: #e2e0e3;
+  margin-top: -1rem;
+}
+.modalCreateChannel h1 {
+  margin-bottom: 1rem;
+}
+.modalCreateChannel form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modalCreateChannel form input {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #656366;
+  color: #e2e0e3;
+  border-radius: 3px;
+}
+.modalCreateChannel form input:focus {
+  outline: none;
+}
+.modalCreateChannel form input::-moz-placeholder {
+  color: #e2e0e3;
+}
+.modalCreateChannel form input::placeholder {
+  color: #e2e0e3;
+}
+.modalCreateChannel form button {
+  background-color: #262427;
+  color: #e2e0e3;
+  padding: 0.7rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+}/*# sourceMappingURL=ModalCreateChannel.css.map */
