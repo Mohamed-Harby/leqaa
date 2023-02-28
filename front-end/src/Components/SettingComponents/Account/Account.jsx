@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import "./Account.css";
 import {
   buyPlan,
+  getPlan,
   getResponse,
   getStatus,
   viewUserProfile,
@@ -12,9 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "../../../Custom/useCookies";
 
 const Account = () => {
-
   const [user, setUser] = useState({});
   const response = useSelector(getResponse);
+  const plan = useSelector(getPlan);
   const status = useSelector(getStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
@@ -31,8 +32,13 @@ const Account = () => {
     reset,
   } = useForm();
   const onSubmitHandler = (data) => {
-    data.planType && dispatch(buyPlan({ data: { planType: data.planType }, token: token }));
+    data.planType &&
+      dispatch(buyPlan({ data: { planType: data.planType }, token: token }));
   };
+  console.log(response);
+  useEffect(() => {
+    plan.type && window.location.reload();
+  }, [plan]);
   return (
     <div className="plans">
       <form onSubmit={handleSubmit(onSubmitHandler)}>

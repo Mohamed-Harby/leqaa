@@ -1,7 +1,7 @@
 @use "../../helper/style" as *;
 
 .wait{
-    height: calc(100vh - 50px);
+    min-height: 100vh;
     background-color: $firstColor;
     display: flex;
     justify-content: center;

@@ -109,6 +109,12 @@ function Login() {
                 </p>
               )}
             </div>
+            {auth.user.errorMessages && (
+              <p>
+                {auth.user.errorMessages[0]?.includes("email") &&
+                  auth.user?.errorMessages[0]}
+              </p>
+            )}
             <Link to={"/resetpassword"}>ResetPassword</Link>
             <div className="input">
               <button type="submit">Submit</button>{" "}

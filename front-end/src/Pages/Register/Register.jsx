@@ -68,7 +68,7 @@ function Register() {
 
   useEffect(() => {
     console.log(auth.user.isSuccess);
-    auth.user.isSuccess && navigate("/");
+    auth.user.isSuccess && navigate("/login");
   }, [auth.user]);
 
   return (

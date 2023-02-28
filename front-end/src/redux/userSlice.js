@@ -7,6 +7,7 @@ export const baseUrl = 'http://localhost:5004/api/v1/User/'
 
 const initialState = {
     response: {},
+    plan: {},
     status: "idle",
     error: "",
 }
@@ -73,7 +74,7 @@ const userSlice = createSlice({
             })
             .addCase(buyPlan.fulfilled, (state, action) => {
                 state.status = "succeeded"
-                state.response = action.payload;
+                state.plan = action.payload;
             })
             .addCase(buyPlan.rejected, (state, action) => {
                 state.status = "failed"
@@ -109,5 +110,6 @@ const userSlice = createSlice({
 export default userSlice.reducer
 
 export const getResponse = (state) => state.user.response
+export const getPlan = (state) => state.user.plan
 export const getError = (state) => state.user.error
 export const getStatus = (state) => state.user.status

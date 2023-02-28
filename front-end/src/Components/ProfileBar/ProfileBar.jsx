@@ -24,7 +24,7 @@ function ProfileBar({ user }) {
     <div className="profilebar">
       <div className="left">
         <RadiusImg
-          img={"data:image/png;base64," + user.profilePicture}
+          img={user?.profilePicture ? "data:image/png;base64," + user.profilePicture : null}
           size={40}
         />
         <div>
