@@ -10,24 +10,27 @@ const initialState = {
   error: "",
 };
 
-export const deployHub = createAsyncThunk(
-  "hub/deployHub",
-  async (payload) => {
-    const deployHubUrl = "DeployHub";
-    try {
-      const response = await axios.post(baseUrl + deployHubUrl, {
-        headers: {
-          Authorization: `Bearer ${payload}`,
-        },
-      });
-      console.log(response.data);
-      return response?.data;
-    } catch (error) {
-      console.log(error.response.data);
-      return error.response.data;
-    }
+export const deployHub = createAsyncThunk("hub/deployHub", async (payload) => {
+  const deployHubUrl = "DeployHub";
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${payload.token}`,
+  };
+  const data = {
+    name: payload.name,
+    description: payload.description,
+  };
+  try {
+    const response = await axios.post(baseUrl + deployHubUrl, data, {
+      headers: headers,
+    });
+    console.log(response.data);
+    return response?.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
   }
-);
+});
 
 const hubSlice = createSlice({
   name: "hub",
