@@ -1,8 +1,11 @@
-using Authentication.Entry.Options;
+using BusinessLogic.Entry.Options;
 using BusinessLogic.Application.DependencyInjection;
 using BusinessLogic.Entry.Models;
+using BusinessLogic.Entry.Options;
 using BusinessLogic.Entry.ServiceConfigurations;
 using BusinessLogic.Infrastructure.Authorization;
+using BusinessLogic.Infrastructure.Authorization.Enums;
+using BusinessLogic.Infrastructure.Authorization.Requirements;
 using BusinessLogic.Infrastructure.DependencyInjection;
 using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
@@ -31,6 +34,7 @@ builder.Services.AddControllers().AddApplicationPart(typeof(HubController).Assem
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
+builder.Services.ConfigureOptions<AuthorizationOptionsSetup>();
 
 builder.Services.AddSwaggerGen();
 builder.Services

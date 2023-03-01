@@ -15,9 +15,9 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<IAuthorizationHandler, CanJoinRoomAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanDeployHubsAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanCreateChannelAuthorizationHandler>();
-        services.AddSingleton<IAuthorizationPolicyProvider, CanJoinRoomPolicyProvider>();
-        services.AddSingleton<IAuthorizationPolicyProvider, CanDeployHubsPolicyProvider>();
-        services.AddSingleton<IAuthorizationPolicyProvider, CanCreateChannelsPolicyProvider>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanJoinRoomPolicyProvider>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanDeployHubsPolicyProvider>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanCreateChannelsPolicyProvider>();
         return services;
     }
 }

@@ -38,18 +38,33 @@ public class UserRepository : BaseRepo<User>, IUserRepository
         return user;
     }
 
-    public Task<User?> GetUserWithPlansWithHubsAsync(string username)
+    public Task<User?> GetUserWithPlansWithChannelsWithHubsAsync(string username)
     {
-        User? user = (
+        var userTask = (
              table
             .Where(u => u.UserName == username)
             .AsNoTracking()
             .Include(u => u.Plans)
+            .Include(u => u.Channels)
             .Include(u => u.Hubs)
             .AsSplitQuery()
-            .AsParallel()
-            .FirstOrDefault());
-        return Task.FromResult(user);
+            .FirstOrDefaultAsync());
+        return userTask;
+    }
+
+    public async Task<User?> GetUserWithPlansWithHubsAsync(string username)
+    {
+        var user = await GetAsync(u => u.UserName == username, null!, "Plans,Hubs");
+        // User? user = (
+        //      table
+        //     .Where(u => u.UserName == username)
+        //     .AsNoTracking()
+        //     .Include(u => u.Plans)
+        //     .Include(u => u.Hubs)
+        //     .AsSplitQuery()
+        //     .AsParallel()
+        //     .FirstOrDefault());
+        return await user.FirstOrDefaultAsync();
     }
 
     public async Task<User> GetUserWithRoomsAsync(string username)

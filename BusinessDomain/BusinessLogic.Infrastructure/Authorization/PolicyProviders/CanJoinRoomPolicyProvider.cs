@@ -1,3 +1,4 @@
+using BusinessLogic.Infrastructure.Authorization.Enums;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
@@ -16,7 +17,9 @@ public class CanJoinRoomPolicyProvider : DefaultAuthorizationPolicyProvider
             return policy;
         }
         return new AuthorizationPolicyBuilder()
-        .AddRequirements(new CanJoinRoomRequirement(policyName))
+        .AddRequirements(new CanDeployHubsRequirement(Permission.CanDeployHubs.ToString()))
+        .AddRequirements(new CanCreateChannelsRequirement(Permission.CanCreateChannel.ToString()))
+        // .AddRequirements(new CanJoinRoomRequirement(Permission.CanJoinRoom.ToString()))
         .Build();
     }
 }
