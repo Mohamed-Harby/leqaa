@@ -44,9 +44,11 @@ public class HubController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> ViewHubs([FromQuery] string cursor, int limit = 10)
+    [HasPermission(Permission.CanViewHubs)]
+
+    public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
-        var query = new GetAllHubsQuery(limit, cursor);
+        var query = new GetAllPostsQuery(pageNumber, pageSize);
         var hubs = await _sender.Send(query);
 
         return Ok(hubs);
@@ -54,11 +56,12 @@ public class HubController : BaseController
 
 
     [HttpDelete("{id}")]
+    [HasPermission(Permission.CanDeleteHub)]
     public async Task<IActionResult> DeleteHub(Guid id)
     {
 
         var DeleteModel = new DeleteHubCommand(id);
-        await _sender.Send(DeleteModel);
+       var result= await _sender.Send(DeleteModel);
 
         return NoContent();
     }

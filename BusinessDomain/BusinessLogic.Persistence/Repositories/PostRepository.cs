@@ -1,6 +1,8 @@
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using CommonGenericClasses;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BusinessLogic.Persistence.Repositories;
 
@@ -25,6 +27,14 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
     public Task<Post> DeletePostWithUser(Post Post, User user)
     {
         throw new NotImplementedException();
+    }
+
+
+    public async Task<Post> GetPostAsync(Expression<Func<Post, bool>> predicate)
+    {
+        var post = await db.Set<Post>().SingleOrDefaultAsync(predicate);
+
+        return post;
     }
 
     public Task<Post> UpdatePostWithUser(Post Post, User user)

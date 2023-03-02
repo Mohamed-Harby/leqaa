@@ -20,5 +20,8 @@ public static partial class DomainErrors
     public static class Post
     {
         public static Error InvalidPost => Error.Failure(".InvalidPost", "Invalid Post, couldn't complete your request");
+  
+        public static Error NotFound => Error.NotFound("post.NotFound", "post not found, create post");
+
     }
 }

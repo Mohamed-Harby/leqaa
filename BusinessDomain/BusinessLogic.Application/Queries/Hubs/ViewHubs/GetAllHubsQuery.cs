@@ -5,7 +5,7 @@ using MediatR;
 namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 public record GetAllHubsQuery(
 
-     int Limit,
- string Cursor
+ int PageNumber,
+int PageSize
 
     ) : IQuery<List<HubReadModel>>;

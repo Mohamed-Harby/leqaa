@@ -16,8 +16,13 @@ public class GetAllPostsQueryHandler : IHandler<GetAllPostsQuery, List<PostReadM
 
     public async Task<List<PostReadModel>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
     {
+
+
+        var skip = (request.PageNumber - 1) * request.PageSize;
         return (await _PostsRepository.GetAllAsync())
-            .ToList()
+            .Skip(skip)
+            .Take(request.PageSize)
+             .ToList()
             .Adapt<List<PostReadModel>>();
     }
 

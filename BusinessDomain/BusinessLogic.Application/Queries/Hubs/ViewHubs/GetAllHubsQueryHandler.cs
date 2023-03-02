@@ -2,6 +2,7 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
+using BusinessLogic.Application.Models.Posts;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
@@ -17,16 +18,19 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
 
     public async Task<List<HubReadModel>> Handle(GetAllHubsQuery request, CancellationToken cancellationToken)
     {
-    
-        var hubs = (await _hubRepository.GetAllAsync())
 
-                     .Where(c => c.Id.CompareTo(request.Cursor) > 0)
-                     .OrderBy(c => c.Id)
-                     .Take(request.Limit)
-                     .ToList()
-                     .Adapt<List<HubReadModel>>();
 
-        return hubs;
+
+
+
+        var skip = (request.PageNumber - 1) * request.PageSize;
+        return (await _hubRepository.GetAllAsync())
+            .Skip(skip)
+            .Take(request.PageSize)
+             .ToList()
+              .Adapt<List<HubReadModel>>();
+
+
     }
 
 

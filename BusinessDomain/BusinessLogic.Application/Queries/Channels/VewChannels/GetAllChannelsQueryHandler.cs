@@ -4,8 +4,8 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using Mapster;
 
-namespace BusinessLogic.Application.Queries.channels.GetAllchannels;
-public class GetAllChannelsQueryHandler : IHandler<ViewRoomQuery, List<ChannelReadModel>>
+namespace BusinessLogic.Application.Queries.Channels.VewChannels;
+public class GetAllChannelsQueryHandler : IHandler<ViewChannelQuery, List<ChannelReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
 
@@ -14,17 +14,19 @@ public class GetAllChannelsQueryHandler : IHandler<ViewRoomQuery, List<ChannelRe
         _channelRepository = channelRepository;
     }
 
-    public async Task<List<ChannelReadModel>> Handle(ViewRoomQuery request, CancellationToken cancellationToken)
+    public async Task<List<ChannelReadModel>> Handle(ViewChannelQuery request, CancellationToken cancellationToken)
     {
-        var channels = (await _channelRepository.GetAllAsync())
 
-            .Where(c => c.Id.CompareTo(request.Cursor) > 0)
-            .OrderBy(c => c.Id)
-            .Take(request.Limit)
-            .ToList()
+
+
+        var skip = (request.PageNumber - 1) * request.PageSize;
+        return (await _channelRepository.GetAllAsync())
+            .Skip(skip)
+            .Take(request.PageSize)
+             .ToList()
             .Adapt<List<ChannelReadModel>>();
 
-        return channels;
+
     }
 
 

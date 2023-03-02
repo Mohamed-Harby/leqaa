@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Domain;
 using ErrorOr;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 #nullable disable
 namespace CommonGenericClasses
 {
@@ -16,12 +17,15 @@ namespace CommonGenericClasses
     {
         protected readonly DbContext db;
         protected readonly DbSet<TEntity> table;
+
+
         private static bool _isDisposed;
 
         public BaseRepo(DbContext db)
         {
             this.db = db;
             this.table = db.Set<TEntity>();
+            
         }
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
@@ -47,9 +51,9 @@ namespace CommonGenericClasses
             return entityToRemove;
         }
         public virtual Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null,
-                                                            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                                            string include = ""
-                                                            )
+                                                                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+                                                                    string include = ""
+                                                                    )
         {
             IQueryable<TEntity> query = table;
             if (predicate != null)
@@ -69,6 +73,17 @@ namespace CommonGenericClasses
         public virtual async Task<TEntity> GetByIdAsync(object id)
         {
             return await table.FindAsync(id);
+        }
+
+        public virtual async Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
+        {
+
+
+          IQueryable < TEntity > query = table;
+            if (predicate != null)
+                query = table.Where<TEntity>(predicate);
+            return query;
+
         }
         public virtual async Task<TEntity> RemoveByIdAsync(object id)
         {

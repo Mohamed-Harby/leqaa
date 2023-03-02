@@ -3,13 +3,12 @@ using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
-using System.Reflection.Metadata;
 
-namespace BusinessLogic.Application.Commands.Posts.AddaPost;
-
-public record AddPostCommand(
-    string Title,
+namespace BusinessLogic.Application.Commands.Posts.UpdatePost;
+public record UpdatePostCommand(
+    Guid GuidpostId,
+     string Title,
     byte[]? Image,
    string Content,
     string Username
-) : ICommand<ErrorOr<PostWriteModel>>;
+) : ICommand<ErrorOr<PostReadModel>>;

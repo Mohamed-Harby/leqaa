@@ -40,28 +40,22 @@ public class ChannelController : BaseController
 
     }
 
-    /*[HttpGet]
-    public async Task<IEnumerable<GetAllChannelsQuery>> ViewChannels()
-    {
-        var result =new List<GetAllChannelsQuery>();
-        await _sender.Send(result);
-        return result;
-
-    }
-*/
 
     [HttpGet]
-    public async Task<IActionResult> ViewChannels([FromQuery] string cursor, int limit = 10)
-    {
-        var query = new ViewRoomQuery(limit, cursor);
-        var channels = await _sender.Send(query);
+    [HasPermission(Permission.CanViewChannels)]
 
-        return Ok(channels);
+    public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
+    {
+        var query = new ViewChannelQuery(pageNumber, pageSize);
+        var hubs = await _sender.Send(query);
+
+        return Ok(hubs);
     }
 
-
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HasPermission(Permission.CanDeleteChannel)]
+
+    public async Task<IActionResult> DeleteChannel(Guid id)
     {
 
         var DeleteModel=new DeletePostCommand(id);

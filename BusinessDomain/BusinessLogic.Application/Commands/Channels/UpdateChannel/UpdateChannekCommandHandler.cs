@@ -7,7 +7,7 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.UpdateChannel;
-public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorOr<Channel>>
+public class UpdateChannelCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Channel>>
 {
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
@@ -26,7 +26,7 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Channel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Channel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
     {
         User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
         if (creatorUser is null)
