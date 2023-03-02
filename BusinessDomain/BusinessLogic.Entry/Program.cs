@@ -1,11 +1,7 @@
 using BusinessLogic.Entry.Options;
 using BusinessLogic.Application.DependencyInjection;
 using BusinessLogic.Entry.Models;
-using BusinessLogic.Entry.Options;
 using BusinessLogic.Entry.ServiceConfigurations;
-using BusinessLogic.Infrastructure.Authorization;
-using BusinessLogic.Infrastructure.Authorization.Enums;
-using BusinessLogic.Infrastructure.Authorization.Requirements;
 using BusinessLogic.Infrastructure.DependencyInjection;
 using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
@@ -68,7 +64,7 @@ builder.Services.AddAuthorization();
 try
 {
     IModel channel = RabbitMQConfiguration.ConnectToRabbitMQ(builder.Configuration);
-    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Configuration);
+    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
 }
 catch (Exception ex)
 {

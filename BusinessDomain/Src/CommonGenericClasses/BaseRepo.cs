@@ -25,7 +25,7 @@ namespace CommonGenericClasses
         {
             this.db = db;
             this.table = db.Set<TEntity>();
-            
+
         }
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
@@ -75,14 +75,14 @@ namespace CommonGenericClasses
             return await table.FindAsync(id);
         }
 
-        public virtual async Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
+        public virtual Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
         {
 
 
-          IQueryable < TEntity > query = table;
+            IQueryable<TEntity> query = table;
             if (predicate != null)
                 query = table.Where<TEntity>(predicate);
-            return query;
+            return Task.FromResult(query);
 
         }
         public virtual async Task<TEntity> RemoveByIdAsync(object id)

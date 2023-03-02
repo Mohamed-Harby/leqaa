@@ -9,7 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Hub>? Hubs { get; set; }
     public DbSet<Channel>? Channels { get; set; }
     public DbSet<Room>? Rooms { get; set; }
-    private readonly IConfiguration configuration;
+    private readonly IConfiguration? configuration;
     public ApplicationDbContext()
     {
 
@@ -28,7 +28,6 @@ public class ApplicationDbContext : DbContext
                             .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
         }
         base.OnConfiguring(optionsBuilder);
-
     }
     protected async override void OnModelCreating(ModelBuilder modelBuilder)
     {

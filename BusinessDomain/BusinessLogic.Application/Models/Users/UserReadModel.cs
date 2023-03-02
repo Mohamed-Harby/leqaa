@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Application.Models.Hubs;
+﻿using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Plans;
 
 
@@ -11,5 +12,7 @@ public record UserReadModel(
     string UserName,
     byte[]? ProfilePicture,
     List<PlanReadModel> Plans,
-    List<HubReadModel> Hubs);
+    List<HubReadModel> Hubs,
+    List<ChannelReadModel> Channels
+    );
 

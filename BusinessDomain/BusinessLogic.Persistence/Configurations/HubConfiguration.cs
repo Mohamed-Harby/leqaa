@@ -30,7 +30,6 @@ public class HubConfiguration : BaseConfiguration<Hub>
             .HasOne(uh => uh.Hub)
             .WithMany()
             .HasForeignKey(uh => uh.HubId)
-            .OnDelete(DeleteBehavior.Cascade)
         );
 
 

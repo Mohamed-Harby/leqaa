@@ -37,7 +37,11 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
         var channelWriteModelSerialized = (await requestBody.ReadToEndAsync());
         var channelWriteModel = JsonConvert.DeserializeObject<ChannelWriteModel>(channelWriteModelSerialized)!;
 
-        var user = await _userRepository.GetUserWithPlansWithChannelsWithHubsAsync(userNameClaim.Value);
+        var user = (await _userRepository
+                    .GetAsync(
+                        u => u.UserName == userNameClaim.Value,
+                         orderBy: null!, "Plans,Channels,Hubs"))
+                    .FirstOrDefault();
         if (user is null)
         {
             context.Fail(new AuthorizationFailureReason(this, DomainErrors.User.NotFound.Description));
@@ -46,7 +50,7 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
         var plans = user.Plans;
         var channels = user.Channels;
         var hubs = user.Hubs;
-        if (!hubs.Select(h => h.Id).Any(guid => guid == channelWriteModel.HubId))
+        if (!(hubs.Select(h => h.Id).Any(guid => guid == channelWriteModel.HubId)) && channelWriteModel.HubId is not null)
         {
             context.Fail(new AuthorizationFailureReason(
                this,
@@ -69,8 +73,5 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
             return;
         }
         context.Succeed(requirement);
-
-
-
     }
 }

@@ -1,3 +1,5 @@
+using BusinessLogic.Domain.SharedEnums;
+
 namespace BusinessLogic.Domain;
 public class UserRoom : BaseEntity
 {
@@ -5,6 +7,6 @@ public class UserRoom : BaseEntity
     public Guid RoomId { get; set; }
     public User User { get; set; } = null!;
     public Room Room { get; set; } = null!;
-    public string Role { get; set; } = string.Empty;
+    public GroupRole Role { get; set; } = GroupRole.Member;
 
 }

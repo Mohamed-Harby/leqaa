@@ -17,7 +17,7 @@ public class ViewUserProfileQueryHandler : IHandler<ViewUserProfileQuery, ErrorO
 
     public async Task<ErrorOr<UserReadModel>> Handle(ViewUserProfileQuery request, CancellationToken cancellationToken)
     {
-        var user = await _userRepository.GetUserWithPlansWithHubsAsync(request.UserName);
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs,Plans,Channels")).FirstOrDefault();
         if (user is null)
         {
             return DomainErrors.User.NotFound;

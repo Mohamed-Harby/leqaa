@@ -12,11 +12,12 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
 public class MessageQueueHelper
 {
-    public static Task SubscribeToRegisterUsersQueue(IModel channel, IConfiguration configuration)
+    public static Task SubscribeToRegisterUsersQueue(IModel channel, IServiceProvider serviceProvider)
     {
 
 
@@ -37,10 +38,11 @@ public class MessageQueueHelper
             exchange: "Authentication",
             "Authentication.User");
         var consumer = new EventingBasicConsumer(channel);
-        var options = new DbContextOptions<ApplicationDbContext>();
         consumer.Received += async (ch, ea) =>
          {
-             var dbcontext = new ApplicationDbContext(options, configuration);
+
+             var options = new DbContextOptions<ApplicationDbContext>();
+             var dbcontext = new ApplicationDbContext(options, serviceProvider.GetRequiredService<IConfiguration>());
              IUserRepository userRepository = new UserRepository(dbcontext);
              var userEncoded = ea.Body.ToArray();
              var userDecoded = Encoding.UTF32.GetString(userEncoded);

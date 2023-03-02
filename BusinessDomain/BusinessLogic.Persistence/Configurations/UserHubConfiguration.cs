@@ -10,7 +10,7 @@ public class UserHubConfiguration : BaseConfiguration<UserHub>
     {
 
         builder.HasKey(uh => new { uh.UserId, uh.HubId });
-        builder.Property(uh => uh.Id).HasDefaultValue(Guid.NewGuid()).ValueGeneratedOnAdd();
+        builder.Property(uh => uh.Id).HasDefaultValue(Guid.NewGuid());
         builder.Property(h => h.CreationDate).HasDefaultValue(DateTime.Now);
     }
 }

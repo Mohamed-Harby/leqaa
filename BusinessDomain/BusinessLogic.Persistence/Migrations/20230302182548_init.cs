@@ -5,135 +5,305 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusinessLogic.Persistence.Migrations
 {
-    public partial class AddedSeedDataFix : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Password",
-                table: "users");
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserUser",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 515, DateTimeKind.Local).AddTicks(3774),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 230, DateTimeKind.Local).AddTicks(3198));
+            migrationBuilder.CreateTable(
+                name: "hubs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "varchar(4000)", maxLength: 4000, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Logo = table.Column<byte[]>(type: "longblob", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(7234))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_hubs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "users",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 510, DateTimeKind.Utc).AddTicks(5883),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 222, DateTimeKind.Utc).AddTicks(2720));
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserName = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    ProfilePicture = table.Column<byte[]>(type: "longblob", nullable: true),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 735, DateTimeKind.Utc).AddTicks(6856))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserRoom",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 515, DateTimeKind.Local).AddTicks(1729),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 229, DateTimeKind.Local).AddTicks(8205));
+            migrationBuilder.CreateTable(
+                name: "Channels",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Name = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    HubId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(4688))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Channels", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Channels_hubs_HubId",
+                        column: x => x.HubId,
+                        principalTable: "hubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "UserHub",
-                type: "char(36)",
-                nullable: false,
-                defaultValue: new Guid("7f3dd0ff-5ac4-4115-a2fe-e50e8a9a6892"),
-                collation: "ascii_general_ci",
-                oldClrType: typeof(Guid),
-                oldType: "char(36)",
-                oldDefaultValue: new Guid("1666ca24-48b6-4cdd-9f3a-4c89ccd478a7"))
-                .OldAnnotation("Relational:Collation", "ascii_general_ci");
+            migrationBuilder.CreateTable(
+                name: "Plan",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(3630))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Plan", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Plan_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserHub",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 513, DateTimeKind.Local).AddTicks(6028),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 226, DateTimeKind.Local).AddTicks(5188));
+            migrationBuilder.CreateTable(
+                name: "posts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "varchar(30)", maxLength: 30, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Content = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Image = table.Column<byte[]>(type: "longblob", nullable: true),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(5554))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_posts_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserChannel",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 510, DateTimeKind.Local).AddTicks(5078),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 222, DateTimeKind.Local).AddTicks(1693));
+            migrationBuilder.CreateTable(
+                name: "UserHub",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    HubId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("5117c944-ee5e-4bcd-b141-92a3c50ebba8"), collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(4169))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserHub", x => new { x.UserId, x.HubId });
+                    table.ForeignKey(
+                        name: "FK_UserHub_hubs_HubId",
+                        column: x => x.HubId,
+                        principalTable: "hubs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserHub_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "rooms",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(5552),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 220, DateTimeKind.Utc).AddTicks(2811));
+            migrationBuilder.CreateTable(
+                name: "UserUser",
+                columns: table => new
+                {
+                    FollowerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    FollowedId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    FollowerId1 = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    FollowedId1 = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(8125))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserUser", x => new { x.FollowerId, x.FollowedId });
+                    table.ForeignKey(
+                        name: "FK_UserUser_users_FollowedId",
+                        column: x => x.FollowedId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserUser_users_FollowedId1",
+                        column: x => x.FollowedId1,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserUser_users_FollowerId",
+                        column: x => x.FollowerId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserUser_users_FollowerId1",
+                        column: x => x.FollowerId1,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "posts",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(4723),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 220, DateTimeKind.Utc).AddTicks(1659));
+            migrationBuilder.CreateTable(
+                name: "announcements",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    RoleName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    content = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Image = table.Column<byte[]>(type: "longblob", nullable: true),
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(3634))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_announcements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_announcements_Channels_ChannelId",
+                        column: x => x.ChannelId,
+                        principalTable: "Channels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_announcements_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "Plan",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(2951),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 219, DateTimeKind.Utc).AddTicks(9746));
+            migrationBuilder.CreateTable(
+                name: "rooms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    NumberOfJoinedUsers = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StartedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 733, DateTimeKind.Local).AddTicks(7749)),
+                    EndedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(6408))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_rooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_rooms_Channels_ChannelId",
+                        column: x => x.ChannelId,
+                        principalTable: "Channels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "hubs",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 506, DateTimeKind.Utc).AddTicks(3677),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 218, DateTimeKind.Utc).AddTicks(2409));
+            migrationBuilder.CreateTable(
+                name: "UserChannel",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 735, DateTimeKind.Local).AddTicks(6005))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserChannel", x => new { x.UserId, x.ChannelId });
+                    table.ForeignKey(
+                        name: "FK_UserChannel_Channels_ChannelId",
+                        column: x => x.ChannelId,
+                        principalTable: "Channels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserChannel_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "Channels",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 506, DateTimeKind.Utc).AddTicks(506),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 217, DateTimeKind.Utc).AddTicks(9674));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "announcements",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 505, DateTimeKind.Utc).AddTicks(9496),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 217, DateTimeKind.Utc).AddTicks(8759));
+            migrationBuilder.CreateTable(
+                name: "UserRoom",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    RoomId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Role = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(6032))
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoom", x => new { x.UserId, x.RoomId });
+                    table.ForeignKey(
+                        name: "FK_UserRoom_rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoom_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "hubs",
@@ -152,162 +322,116 @@ namespace BusinessLogic.Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "rooms",
-                columns: new[] { "Id", "ChannelId", "Description", "EndedAt", "NumberOfJoinedUsers", "StartedAt" },
-                values: new object[] { new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"), new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"), "First room", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "Id", "ChannelId", "Description", "EndedAt", "NumberOfJoinedUsers" },
+                values: new object[] { new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"), new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"), "First room", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_announcements_ChannelId",
+                table: "announcements",
+                column: "ChannelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_announcements_UserId",
+                table: "announcements",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Channels_HubId",
+                table: "Channels",
+                column: "HubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Plan_UserId",
+                table: "Plan",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_posts_UserId",
+                table: "posts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_rooms_ChannelId",
+                table: "rooms",
+                column: "ChannelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserChannel_ChannelId",
+                table: "UserChannel",
+                column: "ChannelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserHub_HubId",
+                table: "UserHub",
+                column: "HubId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoom_RoomId",
+                table: "UserRoom",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_Email",
+                table: "users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_UserName",
+                table: "users",
+                column: "UserName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserUser_FollowedId",
+                table: "UserUser",
+                column: "FollowedId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserUser_FollowedId1",
+                table: "UserUser",
+                column: "FollowedId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserUser_FollowerId1",
+                table: "UserUser",
+                column: "FollowerId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DeleteData(
-                table: "rooms",
-                keyColumn: "Id",
-                keyValue: new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"));
+            migrationBuilder.DropTable(
+                name: "announcements");
 
-            migrationBuilder.DeleteData(
-                table: "users",
-                keyColumn: "Id",
-                keyValue: new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"));
+            migrationBuilder.DropTable(
+                name: "Plan");
 
-            migrationBuilder.DeleteData(
-                table: "Channels",
-                keyColumn: "Id",
-                keyValue: new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"));
+            migrationBuilder.DropTable(
+                name: "posts");
 
-            migrationBuilder.DeleteData(
-                table: "hubs",
-                keyColumn: "Id",
-                keyValue: new Guid("d33b1e60-0a85-45bf-afda-7e6e21ca7da6"));
+            migrationBuilder.DropTable(
+                name: "UserChannel");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserUser",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 230, DateTimeKind.Local).AddTicks(3198),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 515, DateTimeKind.Local).AddTicks(3774));
+            migrationBuilder.DropTable(
+                name: "UserHub");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "users",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 222, DateTimeKind.Utc).AddTicks(2720),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 510, DateTimeKind.Utc).AddTicks(5883));
+            migrationBuilder.DropTable(
+                name: "UserRoom");
 
-            migrationBuilder.AddColumn<string>(
-                name: "Password",
-                table: "users",
-                type: "varchar(50)",
-                maxLength: 50,
-                nullable: false,
-                defaultValue: "")
-                .Annotation("MySql:CharSet", "utf8mb4");
+            migrationBuilder.DropTable(
+                name: "UserUser");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserRoom",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 229, DateTimeKind.Local).AddTicks(8205),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 515, DateTimeKind.Local).AddTicks(1729));
+            migrationBuilder.DropTable(
+                name: "rooms");
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "UserHub",
-                type: "char(36)",
-                nullable: false,
-                defaultValue: new Guid("1666ca24-48b6-4cdd-9f3a-4c89ccd478a7"),
-                collation: "ascii_general_ci",
-                oldClrType: typeof(Guid),
-                oldType: "char(36)",
-                oldDefaultValue: new Guid("7f3dd0ff-5ac4-4115-a2fe-e50e8a9a6892"))
-                .OldAnnotation("Relational:Collation", "ascii_general_ci");
+            migrationBuilder.DropTable(
+                name: "users");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserHub",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 226, DateTimeKind.Local).AddTicks(5188),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 513, DateTimeKind.Local).AddTicks(6028));
+            migrationBuilder.DropTable(
+                name: "Channels");
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "UserChannel",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 18, 14, 13, 222, DateTimeKind.Local).AddTicks(1693),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 22, 9, 40, 510, DateTimeKind.Local).AddTicks(5078));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "rooms",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 220, DateTimeKind.Utc).AddTicks(2811),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(5552));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "posts",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 220, DateTimeKind.Utc).AddTicks(1659),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(4723));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "Plan",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 219, DateTimeKind.Utc).AddTicks(9746),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 508, DateTimeKind.Utc).AddTicks(2951));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "hubs",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 218, DateTimeKind.Utc).AddTicks(2409),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 506, DateTimeKind.Utc).AddTicks(3677));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "Channels",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 217, DateTimeKind.Utc).AddTicks(9674),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 506, DateTimeKind.Utc).AddTicks(506));
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "CreationDate",
-                table: "announcements",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(2023, 2, 25, 16, 14, 13, 217, DateTimeKind.Utc).AddTicks(8759),
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldDefaultValue: new DateTime(2023, 2, 26, 20, 9, 40, 505, DateTimeKind.Utc).AddTicks(9496));
+            migrationBuilder.DropTable(
+                name: "hubs");
         }
     }
 }

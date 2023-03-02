@@ -61,7 +61,7 @@ public class HubController : BaseController
     {
 
         var DeleteModel = new DeleteHubCommand(id);
-       var result= await _sender.Send(DeleteModel);
+        var result = await _sender.Send(DeleteModel);
 
         return NoContent();
     }

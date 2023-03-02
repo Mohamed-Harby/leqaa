@@ -15,7 +15,8 @@ public static class PersistenceDependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
         options.UseMySql(connectionString,
                           ServerVersion.AutoDetect(connectionString))
-                          .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll).EnableSensitiveDataLogging());
+                          .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll).EnableSensitiveDataLogging()
+                          , ServiceLifetime.Scoped);
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IHubRepository, HubRepository>();
         services.AddScoped<IChannelRepository, ChannelRepository>();
