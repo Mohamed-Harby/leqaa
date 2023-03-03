@@ -54,7 +54,7 @@ public class ViewUserPostsQueryHandler : IHandler<ViewUserPostsQuery, ErrorOr<Li
        
             if(posts.Count== 0)
             {
-                return DomainErrors.Hub.NotFound;
+                return DomainErrors.Post.NotFound;
             }
 
          

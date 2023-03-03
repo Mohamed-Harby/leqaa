@@ -6,9 +6,8 @@ using MediatR;
 
 namespace BusinessLogic.Application.Commands.Posts.UpdatePost;
 public record UpdatePostCommand(
-    Guid GuidpostId,
+    Guid postId,
      string Title,
     byte[]? Image,
-   string Content,
-    string Username
-) : ICommand<ErrorOr<PostReadModel>>;
+   string Content
+) : ICommand<ErrorOr<PostUpdateModel>>;

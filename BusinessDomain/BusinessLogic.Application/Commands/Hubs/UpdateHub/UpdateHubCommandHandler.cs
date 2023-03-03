@@ -1,6 +1,8 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
@@ -8,9 +10,8 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.UpdateHub;
-public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<Hub>>
+public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<HubUpdateModel>>
 {
-    private readonly IHubRepository _HubRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -21,30 +22,28 @@ public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<Hub>>
         IUserRepository userRepository,
         IUnitOfWork unitOfWork)
     {
-        _HubRepository = HubRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<Hub>> Handle(UpdateHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<HubUpdateModel>> Handle(UpdateHubCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
-        if (creatorUser is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
-        Hub hub = await _hubRepository.GetByIdAsync(request.HubId);
-        if (hub is null)
+        var hub = await _hubRepository.GetByIdAsync(request.hubId);
+
+        if (request.Name != null)
+            hub.Name = request.Name;
+
+
+        if (request.Description != null)
+            hub.Description = request.Description;
+
+        await _hubRepository.UpdateAsync(hub);
+        if (await _hubRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Hub.NotFound;
         }
-        var Hub = request.Adapt<Hub>();
-        await _HubRepository.UpdateHubWithUserAsync(Hub, creatorUser);
-        if (await _unitOfWork.Save() == 0)
-        {
-            return DomainErrors.Hub.InvalidHub;
-        }
-        return Hub;
+
+        return hub.Adapt<HubUpdateModel>();
     }
 }

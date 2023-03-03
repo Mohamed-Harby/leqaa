@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Commands.Channels.DeleteChannel;
+using BusinessLogic.Application.Commands.Channels.UpdateChannel;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 
@@ -62,5 +63,17 @@ public class ChannelController : BaseController
         await _sender.Send(DeleteModel);
 
         return NoContent();
+    }
+
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<ChannelWriteModel>> UpdateChannel(Guid id, ChannelWriteModel channelReadModel)
+    {
+        var UpdateChannelCommand = new UpdateChannelCommand(id, channelReadModel.Name, channelReadModel.Description);
+      
+
+        var UpdateChannel = await _sender.Send(UpdateChannelCommand);
+
+        return Ok(UpdateChannel);
     }
 }

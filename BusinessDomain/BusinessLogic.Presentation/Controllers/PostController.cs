@@ -5,6 +5,7 @@ using BusinessLogic.Application.Commands.Posts.AddaPost;
 using BusinessLogic.Application.Commands.Posts.DeletePost;
 using BusinessLogic.Application.Commands.Posts.UpdatePost;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
@@ -75,17 +76,19 @@ public class PostController : BaseController
 
 
 
+
+
+
+
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePost(Guid id, UpdatePostCommand command)
+    public async Task<ActionResult<PostUpdateModel>> EditPost(Guid id, PostUpdateModel PostUpdateModel)
     {
-        if (id != command.GuidpostId)
-        {
-            return BadRequest();
-        }
+        var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
 
-        await _sender.Send(command);
 
-        return NoContent();
+        var UpdatePost = await _sender.Send(UpdatePostCommand);
+
+        return Ok(UpdatePost);
     }
 }
 

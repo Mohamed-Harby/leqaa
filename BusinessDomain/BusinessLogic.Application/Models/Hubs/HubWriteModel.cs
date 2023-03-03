@@ -4,3 +4,4 @@ public record HubWriteModel(
     string description,
     byte[]? logo
 );
+

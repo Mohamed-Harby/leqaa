@@ -2,6 +2,8 @@ using System.Security.Claims;
 using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Commands.Hubs.DeleteHub;
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
+using BusinessLogic.Application.Commands.Hubs.UpdateHub;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
@@ -64,6 +66,19 @@ public class HubController : BaseController
         var result = await _sender.Send(DeleteModel);
 
         return NoContent();
+    }
+
+
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<HubWriteModel>> EditHub(Guid id, HubUpdateModel hubReadModel)
+    { 
+        var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
+
+
+        var UpdateHub = await _sender.Send(UpdateHubCommand);
+
+        return Ok(UpdateHub);
     }
 }
 

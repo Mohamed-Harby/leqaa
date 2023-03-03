@@ -1,5 +1,7 @@
 using BusinessLogic.Application.CommandInterfaces;
+using BusinessLogic.Application.Commands.Channels.UpdateChannel;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
@@ -8,7 +10,7 @@ using Mapster;
 using MediatR;
 namespace BusinessLogic.Application.Commands.Posts.UpdatePost;
 
-public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<PostReadModel>>
+public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<PostUpdateModel>>
 {
     private readonly IPostRepository _postRepository;
     private readonly IHubRepository _hubRepository;
@@ -27,34 +29,35 @@ public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Post
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<ErrorOr<PostReadModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
-    {
-        var postToUpdate = await _postRepository.GetByIdAsync(request.GuidpostId);
 
-        if (postToUpdate is null)
+        public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            return DomainErrors.Post.NotFound;
-        }
-        postToUpdate.Id = request.GuidpostId;
-        postToUpdate.Title = request.Title;
-        postToUpdate.Content= request.Content;
-        postToUpdate.Image = request.Image;
+            var post = await _postRepository.GetByIdAsync(request.postId);
 
-        if (await _postRepository.SaveAsync(cancellationToken) == 0)
+        if (request.Title != null)
         {
-            return DomainErrors.Post.InvalidPost;
+            post.Title = request.Title;
         }
 
-        return postToUpdate.Adapt<PostReadModel>();
-  
-        
-  
+        if (request.Image != null)
+        {
+            post.Image = request.Image;
+        }
+        if (request.Content != null)
+        {
+            post.Content = request.Content;
+        }
+            await _postRepository.UpdateAsync(post);
+            if (await _postRepository.SaveAsync(cancellationToken) == 0)
+            {
+                return DomainErrors.Channel.InvalidChannel;
+            }
 
+            return post.Adapt<PostUpdateModel>();
 
-
-
+        }
 
 
 
     }
-}
+

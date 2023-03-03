@@ -1,12 +1,13 @@
 using BusinessLogic.Application.CommandInterfaces;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
 using ErrorOr;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.UpdateChannel;
-public record UpdatePostCommand(
+public record UpdateChannelCommand(
+       Guid Id,
     string Name,
-    string? Description,
-    Guid HubId,
-    string Username
-) : ICommand<ErrorOr<Channel>>;
+    string? Description
+ 
+) : ICommand<ErrorOr<ChannelWriteModel>>;
