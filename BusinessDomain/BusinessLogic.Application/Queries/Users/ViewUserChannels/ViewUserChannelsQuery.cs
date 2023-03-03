@@ -14,4 +14,4 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels;
 
      string userName
 
-     ) : IQuery<List<ChannelReadModel>>;
+     ) : IQuery<ErrorOr<List<ChannelReadModel>>>;

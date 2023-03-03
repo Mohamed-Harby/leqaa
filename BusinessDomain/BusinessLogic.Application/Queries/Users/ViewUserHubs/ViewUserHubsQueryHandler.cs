@@ -2,6 +2,8 @@
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Models.Hubs;
+using BusinessLogic.Application.Queries.Users.ViewUserHubs;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
@@ -14,52 +16,49 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
+namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 {
-public class ViewUserChannelsQueryHandler : IHandler<ViewUserChannelsQuery, ErrorOr<List<ChannelReadModel>>>
+public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<List<HubReadModel>>>
     {
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserChannelRepository _userChannelRepository;
-        private readonly IValidator<CreateChannelCommand> _validator;
 
-        public ViewUserChannelsQueryHandler(
+        public ViewUserPostsQueryHandler(
             IChannelRepository channelRepository,
             IHubRepository hubRepository,
             IUserRepository userRepository,
-            IUserChannelRepository userChannelRepository,
-            IValidator<CreateChannelCommand> validator)
+            IUserChannelRepository userChannelRepository)
         {
             _channelRepository = channelRepository;
             _hubRepository = hubRepository;
             _userRepository = userRepository;
             _userChannelRepository = userChannelRepository;
-            _validator = validator;
         }
-        public async Task<ErrorOr<List<ChannelReadModel>>> Handle(ViewUserChannelsQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<List<HubReadModel>>> Handle(ViewUserHubsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _userRepository.GetUserAsync(u => u.UserName == request.userName, "Channels");
+            var user = await _userRepository.GetUserAsync(u => u.UserName == request.userName, "Hubs");
             if (user is null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-            var channels=user.Channels.ToList();
+            var Hubs=user.Hubs.ToList();
 
             
   
        
-            if(channels.Count== 0)
+            if(Hubs.Count== 0)
             {
-                return DomainErrors.Channel.NotFound;
+                return DomainErrors.Hub.NotFound;
             }
 
          
 
-            return channels
-            .Adapt<List<ChannelReadModel>>();
+            return Hubs
+            .Adapt<List<HubReadModel>>();
 
 
 

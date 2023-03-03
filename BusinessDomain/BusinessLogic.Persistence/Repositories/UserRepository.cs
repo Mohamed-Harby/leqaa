@@ -2,11 +2,13 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using CommonGenericClasses;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BusinessLogic.Persistence.Repositories;
 public class UserRepository : BaseRepo<User>, IUserRepository
 {
     private readonly ApplicationDbContext _context;
+   
     public UserRepository(ApplicationDbContext context) : base(context)
     {
 
@@ -70,6 +72,15 @@ public class UserRepository : BaseRepo<User>, IUserRepository
     public async Task<User> GetUserWithRoomsAsync(string username)
     {
         User user = (await table.Where(u => u.UserName == username).Include(u => u.Rooms).FirstOrDefaultAsync())!;
+        return user;
+
+    }
+
+
+    public async Task<User> GetUserAsync(Expression<Func<User, bool>> predicate = null, string include = "")
+
+    {
+        User user = (await table.Where(predicate).Include(include).FirstOrDefaultAsync())!;
         return user;
 
     }
