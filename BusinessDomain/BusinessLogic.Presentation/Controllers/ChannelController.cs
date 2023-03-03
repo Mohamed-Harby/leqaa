@@ -67,9 +67,9 @@ public class ChannelController : BaseController
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelReadModel)
+    public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
     {
-        var UpdateChannelCommand = new UpdateChannelCommand(id, channelReadModel.Name, channelReadModel.Description);
+        var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
       
 
         var UpdateChannel = await _sender.Send(UpdateChannelCommand);

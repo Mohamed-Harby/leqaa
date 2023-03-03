@@ -63,6 +63,20 @@ public class PostController : BaseController
         return Ok(posts);
     }
 
+
+
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult<PostUpdateModel>> EditPost(Guid id, PostUpdateModel PostUpdateModel)
+    {
+        var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
+
+
+        var UpdatePost = await _sender.Send(UpdatePostCommand);
+
+        return Ok(UpdatePost);
+    }
+
     [HttpDelete("{id}")]
     //[HasPermission(Permission.CanDeletePost)]
     public async Task<IActionResult> RemovePost(Guid id)
@@ -80,16 +94,6 @@ public class PostController : BaseController
 
 
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult<PostUpdateModel>> EditPost(Guid id, PostUpdateModel PostUpdateModel)
-    {
-        var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
-
-
-        var UpdatePost = await _sender.Send(UpdatePostCommand);
-
-        return Ok(UpdatePost);
-    }
 }
 
 
