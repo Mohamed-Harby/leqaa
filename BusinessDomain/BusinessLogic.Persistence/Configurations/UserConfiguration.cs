@@ -20,7 +20,7 @@ public class UserConfiguration : BaseConfiguration<User>
         builder
         .HasMany(u => u.Channels)
         .WithMany(c => c.Users)
-        
+
         .UsingEntity<UserChannel>();
 
 
@@ -39,7 +39,7 @@ public class UserConfiguration : BaseConfiguration<User>
             .WithMany()
             .HasForeignKey(ur => ur.UserId)
             .OnDelete(DeleteBehavior.Cascade)
-        ) ;
+        );
 
         builder
         .HasMany(u => u.Announcements)
@@ -53,13 +53,13 @@ public class UserConfiguration : BaseConfiguration<User>
         .HasMany(u => u.Followers)
         .WithMany(u => u.FollowedUsers).UsingEntity<UserUser>(
             join => join
-            .HasOne<User>()
+            .HasOne(uu => uu.Follower)
             .WithMany()
             .HasForeignKey(uu => uu.FollowerId)
             .OnDelete(DeleteBehavior.Cascade)
             ,
             join => join
-            .HasOne<User>()
+            .HasOne(uu => uu.Followed)
             .WithMany()
             .HasForeignKey(uu => uu.FollowedId)
             .OnDelete(DeleteBehavior.Cascade)
@@ -80,7 +80,9 @@ public class UserConfiguration : BaseConfiguration<User>
         builder.Property(p => p.Gender).IsRequired();
         builder.Property(p => p.UserName).IsRequired()
         .HasMaxLength(30);
-        // builder.Property(p => p.ProfileImage).IsRequired();
+        // other
+        builder.Ignore(u => u.IsFollowed);
+
 
 
     }

@@ -22,7 +22,7 @@ namespace BusinessLogic.Persistence.Migrations
                     Description = table.Column<string>(type: "varchar(4000)", maxLength: 4000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Logo = table.Column<byte[]>(type: "longblob", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(7234))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 997, DateTimeKind.Utc).AddTicks(6962))
                 },
                 constraints: table =>
                 {
@@ -43,7 +43,7 @@ namespace BusinessLogic.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     ProfilePicture = table.Column<byte[]>(type: "longblob", nullable: true),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 735, DateTimeKind.Utc).AddTicks(6856))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 27, 1, DateTimeKind.Utc).AddTicks(7099))
                 },
                 constraints: table =>
                 {
@@ -61,7 +61,7 @@ namespace BusinessLogic.Persistence.Migrations
                     Description = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     HubId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(4688))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 997, DateTimeKind.Utc).AddTicks(3710))
                 },
                 constraints: table =>
                 {
@@ -82,7 +82,7 @@ namespace BusinessLogic.Persistence.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Type = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(3630))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 999, DateTimeKind.Utc).AddTicks(3742))
                 },
                 constraints: table =>
                 {
@@ -107,7 +107,7 @@ namespace BusinessLogic.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Image = table.Column<byte[]>(type: "longblob", nullable: true),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(5554))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 999, DateTimeKind.Utc).AddTicks(5546))
                 },
                 constraints: table =>
                 {
@@ -128,8 +128,8 @@ namespace BusinessLogic.Persistence.Migrations
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     HubId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Role = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("5117c944-ee5e-4bcd-b141-92a3c50ebba8"), collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(4169))
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, defaultValue: new Guid("9c78089d-51e6-4679-89c5-3fb6aa14dfc0"), collation: "ascii_general_ci"),
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 21, 20, 27, 5, DateTimeKind.Local).AddTicks(7767))
                 },
                 constraints: table =>
                 {
@@ -155,10 +155,8 @@ namespace BusinessLogic.Persistence.Migrations
                 {
                     FollowerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     FollowedId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    FollowerId1 = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    FollowedId1 = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(8125))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 21, 20, 27, 6, DateTimeKind.Local).AddTicks(3313))
                 },
                 constraints: table =>
                 {
@@ -170,20 +168,8 @@ namespace BusinessLogic.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserUser_users_FollowedId1",
-                        column: x => x.FollowedId1,
-                        principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_UserUser_users_FollowerId",
                         column: x => x.FollowerId,
-                        principalTable: "users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserUser_users_FollowerId1",
-                        column: x => x.FollowerId1,
                         principalTable: "users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -204,7 +190,7 @@ namespace BusinessLogic.Persistence.Migrations
                     Image = table.Column<byte[]>(type: "longblob", nullable: true),
                     UserId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 731, DateTimeKind.Utc).AddTicks(3634))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 997, DateTimeKind.Utc).AddTicks(2288))
                 },
                 constraints: table =>
                 {
@@ -232,10 +218,10 @@ namespace BusinessLogic.Persistence.Migrations
                     NumberOfJoinedUsers = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    StartedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 733, DateTimeKind.Local).AddTicks(7749)),
+                    StartedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 21, 20, 26, 999, DateTimeKind.Local).AddTicks(7520)),
                     EndedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 18, 25, 47, 733, DateTimeKind.Utc).AddTicks(6408))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 19, 20, 26, 999, DateTimeKind.Utc).AddTicks(6397))
                 },
                 constraints: table =>
                 {
@@ -257,7 +243,7 @@ namespace BusinessLogic.Persistence.Migrations
                     ChannelId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Role = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 735, DateTimeKind.Local).AddTicks(6005))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 21, 20, 27, 1, DateTimeKind.Local).AddTicks(5195))
                 },
                 constraints: table =>
                 {
@@ -285,7 +271,7 @@ namespace BusinessLogic.Persistence.Migrations
                     RoomId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Role = table.Column<int>(type: "int", nullable: false),
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 2, 20, 25, 47, 740, DateTimeKind.Local).AddTicks(6032))
+                    CreationDate = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValue: new DateTime(2023, 3, 4, 21, 20, 27, 6, DateTimeKind.Local).AddTicks(305))
                 },
                 constraints: table =>
                 {
@@ -386,16 +372,6 @@ namespace BusinessLogic.Persistence.Migrations
                 name: "IX_UserUser_FollowedId",
                 table: "UserUser",
                 column: "FollowedId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserUser_FollowedId1",
-                table: "UserUser",
-                column: "FollowedId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserUser_FollowerId1",
-                table: "UserUser",
-                column: "FollowerId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -10,6 +10,7 @@ public record UserReadModel(
     string Name,
     string Email,
     string UserName,
+    bool IsFollowed,
     byte[]? ProfilePicture,
     List<PlanReadModel> Plans,
     List<HubReadModel> Hubs,

@@ -47,7 +47,7 @@ public class HubController : BaseController
     }
 
     [HttpGet]
-    [HasPermission(Permission.CanViewHubs)]
+    // [HasPermission(Permission.CanViewHubs)]
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
@@ -59,7 +59,7 @@ public class HubController : BaseController
 
 
     [HttpDelete("{id}")]
-    [HasPermission(Permission.CanDeleteHub)]
+    // [HasPermission(Permission.CanDeleteHub)]
     public async Task<IActionResult> DeleteHub(Guid id)
     {
 

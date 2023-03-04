@@ -34,6 +34,7 @@ public class User : BaseEntity
     public string Name { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string UserName { get; set; } = string.Empty;
+    public bool IsFollowed { get; set; }
     public Gender Gender { get; set; }
     public byte[]? ProfilePicture { get; set; }
     public virtual ICollection<Room>? Rooms { get; set; }
@@ -42,6 +43,6 @@ public class User : BaseEntity
     public virtual ICollection<Post> Posts { get; set; }
     public virtual ICollection<Announcement> Announcements { get; set; }
     public virtual ICollection<Plan.Plan> Plans { get; set; }
-    public virtual ICollection<User>? Followers { get; set; }
-    public virtual ICollection<User>? FollowedUsers { get; set; }
+    public virtual ICollection<User> Followers { get; set; }
+    public virtual ICollection<User> FollowedUsers { get; set; }
 }

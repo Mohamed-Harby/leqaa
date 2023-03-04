@@ -71,7 +71,7 @@ public class PostController : BaseController
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> EditPost(Guid id, PostUpdateModel PostUpdateModel)
+    public async Task<IActionResult> EditPost([FromQuery]Guid id, PostUpdateModel PostUpdateModel)
     {
         var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
 

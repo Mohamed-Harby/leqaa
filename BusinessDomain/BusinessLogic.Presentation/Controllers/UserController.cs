@@ -14,6 +14,10 @@ using Microsoft.AspNetCore.Identity;
 using System.Runtime.InteropServices;
 using BusinessLogic.Application.Queries.Users.ViewUserHubs;
 using BusinessLogic.Application.Queries.Users.ViewUserPosts;
+using BusinessLogic.Application.Commands.Users.FollowUser;
+using ErrorOr;
+using BusinessLogic.Application.Queries.Users.ViewRelatedUsers;
+using BusinessLogic.Application.Queries.Users.ViewUser;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -65,8 +69,7 @@ public class UserController : BaseController
     }
 
     [HttpGet]
-
-
+    [Authorize]
     public async Task<IActionResult> ViewUserChannels()
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -89,6 +92,7 @@ public class UserController : BaseController
 
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> ViewUserHubs()
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -110,13 +114,12 @@ public class UserController : BaseController
     }
 
     [HttpGet]
-
+    [Authorize]
     public async Task<IActionResult> ViewUserPosts()
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         if (string.IsNullOrEmpty(username))
-
         {
             return BadRequest(username);
         }
@@ -128,6 +131,45 @@ public class UserController : BaseController
              posts => Ok(posts),
              errors => Problem(errors)
          );
-
     }
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> FollowUser(FollowUserModel followUserModel)
+    {
+        var followerUsername = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var followUserCommand = new FollowUserCommand(
+            FollowedUser: followUserModel.FollowedUserName,
+            Follower: followerUsername);
+
+        ErrorOr<UserReadModel> result = await _sender.Send(followUserCommand);
+        return result.Match(
+            user => Ok(user),
+            errors => Problem(errors)
+        );
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ViewUsers(int pageNumber = 1, int pageSize = 20)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var viewRelatedUserQuery = new ViewRelatedUsersQuery(pageNumber, pageSize, username);
+        var result = await _sender.Send(viewRelatedUserQuery);
+        return result.Match(
+            users => Ok(users),
+            errors => Problem(errors)
+        );
+    }
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ViewUser([FromQuery] ViewUserQuery viewUserQuery)
+    {
+        var result = await _sender.Send(viewUserQuery);
+        return result.Match(
+            users => Ok(users),
+            errors => Problem(errors)
+        );
+    }
+
 }
