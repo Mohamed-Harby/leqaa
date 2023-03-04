@@ -43,17 +43,14 @@ public class ChannelController : BaseController
 
 
     [HttpGet]
-    // [HasPermission(Permission.CanViewChannels)]
+    [HasPermission(Permission.CanViewChannels)]
 
     public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
     {
         var query = new ViewChannelQuery(pageNumber, pageSize);
-        ErrorOr<List<ChannelReadModel>> result = await _sender.Send(query);
+        var hubs = await _sender.Send(query);
 
-        return result.Match(
-           channel => Ok(channel),
-           errors => Problem(errors)
-       );
+        return Ok(hubs);
     }
 
     [HttpDelete("{id}")]
@@ -62,26 +59,21 @@ public class ChannelController : BaseController
     public async Task<IActionResult> DeleteChannel(Guid id)
     {
 
-        var DeleteModel = new DeletePostCommand(id);
-       var result= await _sender.Send(DeleteModel);
+        var DeleteModel=new DeletePostCommand(id);
+        await _sender.Send(DeleteModel);
 
-        return result.Match(
-          DeleteModel => Ok(DeleteModel),
-          errors => Problem(errors)
-      );
+        return NoContent();
     }
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
+    public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
     {
         var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
+      
 
+        var UpdateChannel = await _sender.Send(UpdateChannelCommand);
 
-        var result = await _sender.Send(UpdateChannelCommand);
-        return result.Match(
-            channel => Ok(channel),
-            errors => Problem(errors)
-        );
+        return Ok(UpdateChannel);
     }
 }

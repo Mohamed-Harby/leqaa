@@ -2,9 +2,9 @@ using BusinessLogic.Application.Commands.Channels.UpdateChannel;
 using FluentValidation;
 
 namespace BusinessLogic.Application.Validations.ChannelValidations;
-public class UpdateChannelValidations : AbstractValidator<UpdateChannelCommand>
+public class UpdatePostValidations : AbstractValidator<UpdateChannelCommand>
 {
-    public UpdateChannelValidations()
+    public UpdatePostValidations()
     {
         RuleFor(h => h.Name)
        .NotEmpty()

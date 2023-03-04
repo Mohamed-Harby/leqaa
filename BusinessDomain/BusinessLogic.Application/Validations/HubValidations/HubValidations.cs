@@ -1,7 +1,7 @@
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using FluentValidation;
 
-namespace BusinessLogic.Application.Validations;
+namespace BusinessLogic.Application.Validations.HubValidations;
 public class HubValidator : AbstractValidator<DeployHubCommand>
 {
     public HubValidator()

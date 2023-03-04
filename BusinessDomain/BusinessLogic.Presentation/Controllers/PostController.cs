@@ -62,7 +62,7 @@ public class PostController : BaseController
        ErrorOr<List<PostReadModel>> results = await _sender.Send(query);
 
         return results.Match(
-          hub => Ok(hub),
+          ViewPosts => Ok(ViewPosts),
           errors => Problem(errors)
       );
     }
@@ -93,10 +93,7 @@ public class PostController : BaseController
        var result= await _sender.Send(DeleteModel);
 
 
-        return result.Match(
-          DeleteModel => Ok(DeleteModel),
-          errors => Problem(errors)
-      );
+        return Ok(result);
     }
 
 
