@@ -45,7 +45,7 @@ public class ChannelController : BaseController
     [HttpGet]
     [HasPermission(Permission.CanViewChannels)]
 
-    public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
+    public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, [FromQuery] int pageSize)
     {
         var query = new ViewChannelQuery(pageNumber, pageSize);
         var hubs = await _sender.Send(query);
@@ -53,10 +53,10 @@ public class ChannelController : BaseController
         return Ok(hubs);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("")]
     [HasPermission(Permission.CanDeleteChannel)]
 
-    public async Task<IActionResult> DeleteChannel(Guid id)
+    public async Task<IActionResult> DeleteChannel([FromQuery] Guid id)
     {
 
         var DeleteModel=new DeletePostCommand(id);
@@ -66,8 +66,8 @@ public class ChannelController : BaseController
     }
 
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
+    [HttpPut("")]
+    public async Task<ActionResult<ChannelWriteModel>> EditChannel([FromQuery] Guid id, ChannelWriteModel channelWriteModel)
     {
         var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
       

@@ -12,7 +12,7 @@ using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using Mapster;
-using MediatR;
+using MediatR; 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -58,9 +58,9 @@ public class HubController : BaseController
     }
 
 
-    [HttpDelete("{id}")]
+    [HttpDelete("")]
     [HasPermission(Permission.CanDeleteHub)]
-    public async Task<IActionResult> DeleteHub(Guid id)
+    public async Task<IActionResult> DeleteHub([FromQuery] Guid id)
     {
 
         var DeleteModel = new DeleteHubCommand(id);
@@ -71,8 +71,8 @@ public class HubController : BaseController
 
 
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> EditHub(Guid id, HubUpdateModel hubReadModel)
+    [HttpPut("")]
+    public async Task<IActionResult> EditHub([FromQuery] Guid id, HubUpdateModel hubReadModel)
     {
         var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
 
