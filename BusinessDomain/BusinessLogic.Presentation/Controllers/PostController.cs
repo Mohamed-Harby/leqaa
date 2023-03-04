@@ -14,6 +14,7 @@ using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -58,23 +59,29 @@ public class PostController : BaseController
     public async Task<IActionResult> ViewPosts([FromQuery] int pageNumber,int pageSize)
     {
         var query = new GetAllPostsQuery(pageNumber,pageSize);
-        var posts = await _sender.Send(query);
+       ErrorOr<List<PostReadModel>> results = await _sender.Send(query);
 
-        return Ok(posts);
+        return results.Match(
+          hub => Ok(hub),
+          errors => Problem(errors)
+      );
     }
 
 
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<PostUpdateModel>> EditPost(Guid id, PostUpdateModel PostUpdateModel)
+    public async Task<IActionResult> EditPost(Guid id, PostUpdateModel PostUpdateModel)
     {
         var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
 
 
-        var UpdatePost = await _sender.Send(UpdatePostCommand);
+        var results = await _sender.Send(UpdatePostCommand);
 
-        return Ok(UpdatePost);
+        return results.Match(
+          post => Ok(post),
+          errors => Problem(errors)
+      );
     }
 
     [HttpDelete("{id}")]
@@ -83,9 +90,13 @@ public class PostController : BaseController
     {
 
         var DeleteModel = new DeletePostCommand(id);
-        await _sender.Send(DeleteModel);
+       var result= await _sender.Send(DeleteModel);
 
-        return NoContent();
+
+        return result.Match(
+          DeleteModel => Ok(DeleteModel),
+          errors => Problem(errors)
+      );
     }
 
 

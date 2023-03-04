@@ -48,9 +48,12 @@ public class ChannelController : BaseController
     public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
     {
         var query = new ViewChannelQuery(pageNumber, pageSize);
-        var hubs = await _sender.Send(query);
+        ErrorOr<List<ChannelReadModel>> result = await _sender.Send(query);
 
-        return Ok(hubs);
+        return result.Match(
+           channel => Ok(channel),
+           errors => Problem(errors)
+       );
     }
 
     [HttpDelete("{id}")]
@@ -60,9 +63,12 @@ public class ChannelController : BaseController
     {
 
         var DeleteModel = new DeletePostCommand(id);
-        await _sender.Send(DeleteModel);
+       var result= await _sender.Send(DeleteModel);
 
-        return NoContent();
+        return result.Match(
+          DeleteModel => Ok(DeleteModel),
+          errors => Problem(errors)
+      );
     }
 
 
@@ -74,7 +80,7 @@ public class ChannelController : BaseController
 
         var result = await _sender.Send(UpdateChannelCommand);
         return result.Match(
-            channelWriteModel => Ok(channelWriteModel),
+            channel => Ok(channel),
             errors => Problem(errors)
         );
     }

@@ -13,6 +13,7 @@ using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using Mapster;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -38,7 +39,7 @@ public class HubController : BaseController
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         var deployHubCommand = new DeployHubCommand(hub.name, hub.description, hub.logo, username);
-        ErrorOr<HubReadModel> results = await _sender.Send(deployHubCommand);
+        ErrorOr<HubWriteModel> results = await _sender.Send(deployHubCommand);
         return results.Match(
             hub => Ok(hub),
             errors => Problem(errors)
@@ -71,14 +72,17 @@ public class HubController : BaseController
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<HubWriteModel>> EditHub(Guid id, HubUpdateModel hubReadModel)
+    public async Task<IActionResult> EditHub(Guid id, HubUpdateModel hubReadModel)
     { 
         var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
 
 
-        var UpdateHub = await _sender.Send(UpdateHubCommand);
+        ErrorOr< HubUpdateModel> results = await _sender.Send(UpdateHubCommand);
 
-        return Ok(UpdateHub);
+        return results.Match(
+             hub => Ok(hub),
+             errors => Problem(errors)
+         );
     }
 }
 

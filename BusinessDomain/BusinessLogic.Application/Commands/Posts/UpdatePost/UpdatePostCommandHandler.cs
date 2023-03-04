@@ -6,33 +6,48 @@ using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
+using FluentValidation;
 using Mapster;
 using MediatR;
 namespace BusinessLogic.Application.Commands.Posts.UpdatePost;
 
 public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<PostUpdateModel>>
 {
+    private readonly IValidator<UpdatePostCommand> _validator;
+
     private readonly IPostRepository _postRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
+
 
     public UpdatePostCommandHandler(
         IPostRepository postRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+              IValidator<UpdatePostCommand> validator)
+
     {
         _postRepository = postRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
+        _validator = validator;
+
     }
 
 
-        public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            var post = await _postRepository.GetByIdAsync(request.postId);
+
+        var result = await _validator.ValidateAsync(request);
+        if (!result.IsValid)
+        {
+            return result.Errors.ConvertAll(
+                validationFailure => Error.Validation(
+                    validationFailure.PropertyName,
+                    validationFailure.ErrorMessage)
+            );
+        }
+        var post = await _postRepository.GetByIdAsync(request.postId);
 
         if (request.Title != null)
         {

@@ -1,10 +1,12 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
+using BusinessLogic.Application.Commands.Channels.UpdateChannel;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
+using FluentValidation;
 using Mapster;
 using MediatR;
 
@@ -18,6 +20,7 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IValidator<DeletePostCommand> _validator;
 
 
     public DeletePostCommandHandler(
@@ -25,17 +28,29 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+       IValidator<DeletePostCommand> validator)
+
     {
         _channelRepository = channelRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
+        _validator = validator;
+
     }
 
     public async Task<ErrorOr<Unit>> Handle(DeletePostCommand request, CancellationToken cancellationToken)
     {
-       var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
+
+        var result = await _validator.ValidateAsync(request);
+        if (!result.IsValid)
+        {
+            return result.Errors.ConvertAll(
+                validationFailure => Error.Validation(
+                    validationFailure.PropertyName,
+                    validationFailure.ErrorMessage)
+            );
+        }
+        var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
         if (channel is null)
         {
             return DomainErrors.Channel.NotFound;
