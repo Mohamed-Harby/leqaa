@@ -44,7 +44,7 @@ public class CreateChannelCommandHandler : IHandler<CreateChannelCommand, ErrorO
                     validationFailures.ErrorMessage));
         }
 
-        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
+        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
         if (creatorUser is null)
         {
             return DomainErrors.User.NotFound;

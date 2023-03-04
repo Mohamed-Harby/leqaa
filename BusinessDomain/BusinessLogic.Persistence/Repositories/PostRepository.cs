@@ -32,8 +32,7 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
 
     public async Task<Post> GetPostAsync(Expression<Func<Post, bool>> predicate)
     {
-        var post = await db.Set<Post>().SingleOrDefaultAsync(predicate);
-
+        var post = await db.Set<Post>().FirstOrDefaultAsync(predicate);
         return post;
     }
 
@@ -41,7 +40,7 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
     {
         throw new NotImplementedException();
 
-        
+
     }
 
 

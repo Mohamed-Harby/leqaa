@@ -14,17 +14,15 @@ public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<HubUpdate
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
     public AddHubCommandHandler(
         IHubRepository HubRepository,
         IHubRepository hubRepository,
-        IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+        IUserRepository userRepository
+        )
     {
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<HubUpdateModel>> Handle(UpdateHubCommand request, CancellationToken cancellationToken)
@@ -33,15 +31,12 @@ public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<HubUpdate
 
         if (request.Name != null)
             hub.Name = request.Name;
-
-
         if (request.Description != null)
             hub.Description = request.Description;
-
         await _hubRepository.UpdateAsync(hub);
         if (await _hubRepository.SaveAsync(cancellationToken) == 0)
         {
-            return DomainErrors.Hub.NotFound;
+            return DomainErrors.Hub.InvalidHub;
         }
 
         return hub.Adapt<HubUpdateModel>();

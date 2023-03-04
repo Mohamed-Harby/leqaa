@@ -15,23 +15,21 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteM
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
     public AddPostCommandHandler(
         IPostRepository postRepository,
         IHubRepository hubRepository,
-        IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+        IUserRepository userRepository
+        )
     {
         _PostRepository = postRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<PostWriteModel>> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
-        User creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault()!;
+        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
 
         if (creatorUser is null)
         {
@@ -41,17 +39,11 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteM
         string username = request.Username;
         request = request with { Username = username };
         var post = request.Adapt<Post>();
-    
+
         creatorUser.Posts.Add(post);
-
-        post.User = creatorUser;
-
-
-
 
 
         var postmodel = post.Adapt<PostWriteModel>();
-        postmodel.Adapt<PostWriteModel>();
         if (await _PostRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.InvalidChannel;

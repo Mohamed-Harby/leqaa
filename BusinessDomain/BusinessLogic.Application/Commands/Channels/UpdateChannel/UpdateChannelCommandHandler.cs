@@ -4,6 +4,7 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
+using FluentValidation;
 using Mapster;
 using MediatR;
 
@@ -13,22 +14,32 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IValidator<UpdateChannelCommand> _validator;
 
     public UpdateChannelCommandHandler(
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
-        IUnitOfWork unitOfWork)
+        IValidator<UpdateChannelCommand> validator)
     {
         _channelRepository = channelRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _unitOfWork = unitOfWork;
+        _validator = validator;
     }
 
     public async Task<ErrorOr<ChannelWriteModel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
     {
+        var result = _validator.Validate(request);
+        if (!result.IsValid)
+        {
+            return result
+            .Errors
+            .ConvertAll(failure =>
+             Error.Failure(
+                 failure.PropertyName,
+                 failure.ErrorMessage));
+        }
         var channel = await _channelRepository.GetByIdAsync(request.Id);
 
         if (request.Name != null)
@@ -42,8 +53,6 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
         {
             return DomainErrors.Channel.InvalidChannel;
         }
-
         return channel.Adapt<ChannelWriteModel>();
-   
     }
 }

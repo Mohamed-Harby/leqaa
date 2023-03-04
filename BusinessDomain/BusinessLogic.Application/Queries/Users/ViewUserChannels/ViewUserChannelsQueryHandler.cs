@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
 {
-public class ViewUserChannelsQueryHandler : IHandler<ViewUserChannelsQuery, ErrorOr<List<ChannelReadModel>>>
+    public class ViewUserChannelsQueryHandler : IHandler<ViewUserChannelsQuery, ErrorOr<List<ChannelReadModel>>>
     {
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
@@ -40,23 +40,19 @@ public class ViewUserChannelsQueryHandler : IHandler<ViewUserChannelsQuery, Erro
         public async Task<ErrorOr<List<ChannelReadModel>>> Handle(ViewUserChannelsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _userRepository.GetUserAsync(u => u.UserName == request.userName, "Channels");
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Channels")).FirstOrDefault();
             if (user is null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-            var channels=user.Channels.ToList();
-
-            
-  
-       
-            if(channels.Count== 0)
+            var channels = user.Channels.ToList();
+            if (channels.Count == 0)
             {
                 return DomainErrors.Channel.NotFound;
             }
 
-         
+
 
             return channels
             .Adapt<List<ChannelReadModel>>();
@@ -68,5 +64,5 @@ public class ViewUserChannelsQueryHandler : IHandler<ViewUserChannelsQuery, Erro
 
 
     }
-    
+
 }

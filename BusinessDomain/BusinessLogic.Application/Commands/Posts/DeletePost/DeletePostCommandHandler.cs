@@ -15,26 +15,22 @@ namespace BusinessLogic.Application.Commands.Posts.DeletePost;
 public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit>>
 
 {
-    private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
-    private readonly IUserRepository _userRepository;
     private readonly IPostRepository _postRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
 
     public DeletePostCommandHandler(
         IPostRepository postRepository,
-        IHubRepository hubRepository,
-        IUnitOfWork unitOfWork)
+        IHubRepository hubRepository
+       )
     {
         _hubRepository = hubRepository;
-        _postRepository= postRepository;
-        _unitOfWork = unitOfWork;
+        _postRepository = postRepository;
     }
 
     public async Task<ErrorOr<Unit>> Handle(DeletePostCommand request, CancellationToken cancellationToken)
     {
-       var post = await _postRepository.GetByIdAsync(request.PostId);
+        var post = await _postRepository.GetByIdAsync(request.PostId);
         if (post is null)
         {
             return DomainErrors.Channel.NotFound;
@@ -42,15 +38,15 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
 
 
         _postRepository.Remove(post);
-       
+
 
         // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
-        if (await _unitOfWork.Save() == 0)
+        if (await _postRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
         return Unit.Value;
     }
 
-   
+
 }

@@ -43,7 +43,7 @@ public class ChannelController : BaseController
 
 
     [HttpGet]
-    [HasPermission(Permission.CanViewChannels)]
+    // [HasPermission(Permission.CanViewChannels)]
 
     public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
     {
@@ -59,7 +59,7 @@ public class ChannelController : BaseController
     public async Task<IActionResult> DeleteChannel(Guid id)
     {
 
-        var DeleteModel=new DeletePostCommand(id);
+        var DeleteModel = new DeletePostCommand(id);
         await _sender.Send(DeleteModel);
 
         return NoContent();
@@ -67,13 +67,15 @@ public class ChannelController : BaseController
 
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
+    public async Task<IActionResult> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
     {
         var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
-      
 
-        var UpdateChannel = await _sender.Send(UpdateChannelCommand);
 
-        return Ok(UpdateChannel);
+        var result = await _sender.Send(UpdateChannelCommand);
+        return result.Match(
+            channelWriteModel => Ok(channelWriteModel),
+            errors => Problem(errors)
+        );
     }
 }
