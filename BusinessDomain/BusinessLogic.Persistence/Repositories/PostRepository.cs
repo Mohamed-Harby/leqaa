@@ -33,7 +33,7 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
     public async Task<Post> GetPostAsync(Expression<Func<Post, bool>> predicate)
     {
         var post = await db.Set<Post>().FirstOrDefaultAsync(predicate);
-        return post;
+        return post ?? new Post();
     }
 
     public Task<Post> UpdatePostWithUser(Post Post, User user)

@@ -19,7 +19,6 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IValidator<DeletePostCommand> _validator;
 
 
@@ -58,15 +57,15 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
 
 
         _channelRepository.Remove(channel);
-       
+
 
         // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
-        if (await _unitOfWork.Save() == 0)
+        if (await _channelRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
         return Unit.Value;
     }
 
-   
+
 }

@@ -39,7 +39,7 @@ public class HubController : BaseController
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         var deployHubCommand = new DeployHubCommand(hub.name, hub.description, hub.logo, username);
-        ErrorOr<HubWriteModel> results = await _sender.Send(deployHubCommand);
+        ErrorOr<HubReadModel> results = await _sender.Send(deployHubCommand);
         return results.Match(
             hub => Ok(hub),
             errors => Problem(errors)
@@ -73,11 +73,11 @@ public class HubController : BaseController
 
     [HttpPut("{id}")]
     public async Task<IActionResult> EditHub(Guid id, HubUpdateModel hubReadModel)
-    { 
+    {
         var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
 
 
-        ErrorOr< HubUpdateModel> results = await _sender.Send(UpdateHubCommand);
+        ErrorOr<HubUpdateModel> results = await _sender.Send(UpdateHubCommand);
 
         return results.Match(
              hub => Ok(hub),

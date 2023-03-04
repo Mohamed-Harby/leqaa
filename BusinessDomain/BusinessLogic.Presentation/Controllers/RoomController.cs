@@ -31,9 +31,9 @@ public class RoomController : BaseController
     [Authorize]
     [HasPermission(Permission.CanJoinRoom)]
     [HttpGet]
-    public async Task<IActionResult> GetRoom(string roomId)
+    public Task<IActionResult> GetRoom(string roomId)
     {
-        return Ok("You can join this room");
+        return Task.FromResult<IActionResult>(Ok("You can join this room"));
     }
 
     [HttpGet]

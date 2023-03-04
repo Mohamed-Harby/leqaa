@@ -17,10 +17,6 @@ namespace CommonGenericClasses
     {
         protected readonly DbContext db;
         protected readonly DbSet<TEntity> table;
-
-
-        private static bool _isDisposed;
-
         public BaseRepo(DbContext db)
         {
             this.db = db;

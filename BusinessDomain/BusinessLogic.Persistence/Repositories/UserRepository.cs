@@ -77,7 +77,7 @@ public class UserRepository : BaseRepo<User>, IUserRepository
     }
 
 
-    public async Task<User> GetUserAsync(Expression<Func<User, bool>> predicate = null, string include = "")
+    public async Task<User> GetUserAsync(Expression<Func<User, bool>> predicate = null!, string include = "")
 
     {
         User user = (await table.Where(predicate).Include(include).FirstOrDefaultAsync())!;

@@ -11,7 +11,7 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.DeployHub;
-public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubWriteModel>>
+public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubReadModel>>
 {
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
@@ -32,7 +32,7 @@ public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubWri
         _userHubRepository = userHubRepository;
     }
 
-    public async Task<ErrorOr<HubWriteModel>> Handle(DeployHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<HubReadModel>> Handle(DeployHubCommand request, CancellationToken cancellationToken)
     {
         var result = await _validator.ValidateAsync(request);
         if (!result.IsValid)
@@ -70,6 +70,6 @@ public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubWri
             return DomainErrors.Hub.InvalidHub;
         }
 
-        return hub.Adapt<HubWriteModel>();
+        return hub.Adapt<HubReadModel>();
     }
 }
