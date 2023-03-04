@@ -4,11 +4,12 @@ using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Commands.Channels.UpdateChannel;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
-
+using BusinessLogic.Application.Queries.Channels.ViewChannel;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BusinessLogic.Presentation.Controllers;
@@ -43,23 +44,34 @@ public class ChannelController : BaseController
 
 
     [HttpGet]
-    [HasPermission(Permission.CanViewChannels)]
+    // [HasPermission(Permission.CanViewChannels)]
 
     public async Task<IActionResult> ViewChannels([FromQuery] int pageNumber, int pageSize)
     {
-        var query = new ViewChannelQuery(pageNumber, pageSize);
+        var query = new ViewChannelsQuery(pageNumber, pageSize);
         var hubs = await _sender.Send(query);
 
         return Ok(hubs);
     }
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ViewChannel([FromQuery] ViewChannelQuery viewChannelQuery)
+    {
+
+        var result = await _sender.Send(viewChannelQuery);
+        return result.Match(
+            channel => Ok(channel),
+            errors => Problem(errors)
+        );
+    }
 
     [HttpDelete("{id}")]
-    [HasPermission(Permission.CanDeleteChannel)]
+    // [HasPermission(Permission.CanDeleteChannel)]
 
     public async Task<IActionResult> DeleteChannel(Guid id)
     {
 
-        var DeleteModel=new DeletePostCommand(id);
+        var DeleteModel = new DeletePostCommand(id);
         await _sender.Send(DeleteModel);
 
         return NoContent();
@@ -70,7 +82,7 @@ public class ChannelController : BaseController
     public async Task<ActionResult<ChannelWriteModel>> EditChannel(Guid id, ChannelWriteModel channelWriteModel)
     {
         var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
-      
+
 
         var UpdateChannel = await _sender.Send(UpdateChannelCommand);
 

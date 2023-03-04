@@ -5,7 +5,7 @@ using BusinessLogic.Application.Queries.channels.ViewChannels;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Channels.VewChannels;
-public class GetAllChannelsQueryHandler : IHandler<ViewChannelQuery, List<ChannelReadModel>>
+public class GetAllChannelsQueryHandler : IHandler<ViewChannelsQuery, List<ChannelReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
 
@@ -14,7 +14,7 @@ public class GetAllChannelsQueryHandler : IHandler<ViewChannelQuery, List<Channe
         _channelRepository = channelRepository;
     }
 
-    public async Task<List<ChannelReadModel>> Handle(ViewChannelQuery request, CancellationToken cancellationToken)
+    public async Task<List<ChannelReadModel>> Handle(ViewChannelsQuery request, CancellationToken cancellationToken)
     {
 
 
