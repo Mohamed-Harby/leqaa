@@ -70,23 +70,22 @@ public class PostController : BaseController
 
 
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> EditPost([FromQuery]Guid id, PostUpdateModel PostUpdateModel)
+    [HttpPut("")]
+    public async Task<IActionResult> EditPost([FromQuery] Guid id, [FromBody] PostUpdateModel PostUpdateModel)
     {
         var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
-
 
         var results = await _sender.Send(UpdatePostCommand);
 
         return results.Match(
-          post => Ok(post),
-          errors => Problem(errors)
-      );
+            post => Ok(post),
+            errors => Problem(errors)
+        );
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("")]
     //[HasPermission(Permission.CanDeletePost)]
-    public async Task<IActionResult> RemovePost(Guid id)
+    public async Task<IActionResult> RemovePost([FromQuery] Guid id)
     {
 
         var DeleteModel = new DeletePostCommand(id);
