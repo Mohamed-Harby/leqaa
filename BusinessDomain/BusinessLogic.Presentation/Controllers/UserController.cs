@@ -98,7 +98,6 @@ public class UserController : BaseController
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         if (string.IsNullOrEmpty(username))
-
         {
             return BadRequest(username);
         }
