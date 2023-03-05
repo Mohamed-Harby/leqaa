@@ -23,7 +23,7 @@ public class ChannelController : BaseController
         _sender = sender;
     }
     [HttpPost]
-    [HasPermission(Permission.CanCreateChannel)]
+/*    [HasPermission(Permission.CanCreateChannel)]*/
     public async Task<IActionResult> CreateChannel(ChannelWriteModel channelWriteModel)
     {
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;

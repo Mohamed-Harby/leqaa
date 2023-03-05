@@ -39,18 +39,19 @@ public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<Lis
         public async Task<ErrorOr<List<HubReadModel>>> Handle(ViewUserHubsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _userRepository.GetUserAsync(u => u.UserName == request.userName, "Hubs");
+           
+
+
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Posts")).FirstOrDefault();
             if (user is null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-            var Hubs=user.Hubs.ToList();
+            var Hubs = user.Posts.ToList();
 
-            
-  
-       
-            if(Hubs.Count== 0)
+
+            if (Hubs.Count== 0)
             {
                 return DomainErrors.Hub.NotFound;
             }
