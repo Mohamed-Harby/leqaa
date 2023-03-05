@@ -9,6 +9,7 @@ public class Room : BaseEntity
     }
     public int NumberOfJoinedUsers { get; set; }
     public string? Description { get; set; }
+    public bool IsPrivate { get; set; }
     public DateTime StartedAt { get; set; }
     public DateTime EndedAt { get; set; }
     public Guid ChannelId { get; set; }

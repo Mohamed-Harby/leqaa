@@ -1,19 +1,14 @@
 using System.Security.Claims;
-using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Commands.Hubs.DeleteHub;
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Commands.Hubs.UpdateHub;
-using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
-using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
-using BusinessLogic.Domain;
+using BusinessLogic.Application.Queries.Hubs.ViewHub;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
-using Mapster;
-using MediatR; 
-using Microsoft.AspNetCore.Http;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -51,12 +46,20 @@ public class HubController : BaseController
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
-        var query = new GetAllPostsQuery(pageNumber, pageSize);
+        var query = new GetAllHubsQuery(pageNumber, pageSize);
         var hubs = await _sender.Send(query);
 
         return Ok(hubs);
     }
-
+    [HttpGet]
+    public async Task<IActionResult> ViewHub([FromQuery] ViewHubQuery viewHubQuery)
+    {
+        var result = await _sender.Send(viewHubQuery);
+        return result.Match(
+            hub => Ok(hub),
+            errors => Problem(errors)
+        );
+    }
 
     [HttpDelete("{id}")]
     // [HasPermission(Permission.CanDeleteHub)]
@@ -71,7 +74,7 @@ public class HubController : BaseController
 
 
 
-    [HttpPut("")]
+    [HttpPut]
     public async Task<IActionResult> EditHub([FromQuery] Guid id, HubUpdateModel hubReadModel)
     {
         var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);

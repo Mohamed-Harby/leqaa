@@ -18,6 +18,7 @@ public class Hub : BaseEntity
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public byte[]? Logo { get; set; }
+    public bool IsPrivate { get; set; }
     public virtual ICollection<User> Users { get; private set; }
     public virtual ICollection<Channel> Channels { get; private set; }
 
