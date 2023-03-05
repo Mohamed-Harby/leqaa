@@ -23,7 +23,7 @@ public class ChannelController : BaseController
         _sender = sender;
     }
     [HttpPost]
-/*    [HasPermission(Permission.CanCreateChannel)]*/
+    /*    [HasPermission(Permission.CanCreateChannel)]*/
     public async Task<IActionResult> CreateChannel(ChannelWriteModel channelWriteModel)
     {
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -65,7 +65,7 @@ public class ChannelController : BaseController
         );
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     // [HasPermission(Permission.CanDeleteChannel)]
 
     public async Task<IActionResult> DeleteChannel([FromQuery] Guid id)
