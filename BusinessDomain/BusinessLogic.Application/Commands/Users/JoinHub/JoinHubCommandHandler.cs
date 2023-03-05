@@ -33,7 +33,7 @@ public class JoinHubCommandHandler : IHandler<JoinHubCommand, ErrorOr<HubReadMod
         {
             return DomainErrors.Hub.NotFound;
         }
-        var userHub = await _userHubRepository.GetAsync(uh => uh.UserId == user.Id && uh.HubId == hub.Id);
+        var userHub = (await _userHubRepository.GetAsync(uh => uh.UserId == user.Id && uh.HubId == hub.Id)).FirstOrDefault();
         if (userHub is not null)
         {
             return DomainErrors.UserHub.AlreadyJoined;

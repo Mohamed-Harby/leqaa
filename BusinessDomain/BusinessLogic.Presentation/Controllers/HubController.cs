@@ -28,12 +28,12 @@ public class HubController : BaseController
     }
 
     [HttpPost]
-    [HasPermission(Permission.CanDeployHubs)]
+    // [HasPermission(Permission.CanDeployHubs)]
     public async Task<IActionResult> DeployHub(HubWriteModel hub)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var deployHubCommand = new DeployHubCommand(hub.name, hub.description, hub.logo, username);
+        var deployHubCommand = new DeployHubCommand(hub.Name, hub.Description, hub.IsPrivate, hub.Logo, username);
         ErrorOr<HubReadModel> results = await _sender.Send(deployHubCommand);
         return results.Match(
             hub => Ok(hub),

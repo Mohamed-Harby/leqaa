@@ -3,6 +3,7 @@ public enum Permission
 {
     CanJoinRoom,
     CanDeployHubs,
+    CanJoinHub,
     CanCreateChannel,
     CanDeleteChannel,
     CanDeletePost,
