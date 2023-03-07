@@ -46,10 +46,16 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
                 return DomainErrors.User.NotFound;
             }
 
-            var channels = user.Channels;
+            var channels = user.Channels.ToList();
+            if (channels.Count == 0)
+            {
+                return DomainErrors.Channel.NotFound;
+            }
+
+
 
             return channels
-        .Adapt<List<ChannelReadModel>>();
+            .Adapt<List<ChannelReadModel>>();
 
 
 

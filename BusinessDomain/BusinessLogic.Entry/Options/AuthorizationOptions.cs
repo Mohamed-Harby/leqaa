@@ -25,11 +25,5 @@ public class AuthorizationOptionsSetup : IConfigureOptions<AuthorizationOptions>
         {
             builder.AddRequirements(new CanJoinRoomRequirement(canJoinRoom));
         });
-
-        string canJoinHub = Permission.CanJoinHub.ToString();
-        options.AddPolicy(canJoinHub, builder =>
-        {
-            builder.AddRequirements(new CanJoinHubRequirement(canJoinHub));
-        });
     }
 }

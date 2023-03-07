@@ -18,9 +18,7 @@ using BusinessLogic.Application.Commands.Users.FollowUser;
 using ErrorOr;
 using BusinessLogic.Application.Queries.Users.ViewRelatedUsers;
 using BusinessLogic.Application.Queries.Users.ViewUser;
-using BusinessLogic.Application.Models.Hubs;
-using BusinessLogic.Application.Commands.Users.JoinHub;
-using BusinessLogic.Infrastructure.Authorization.Enums;
+using BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -101,6 +99,7 @@ public class UserController : BaseController
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         if (string.IsNullOrEmpty(username))
+
         {
             return BadRequest(username);
         }
@@ -167,25 +166,26 @@ public class UserController : BaseController
     [Authorize]
     public async Task<IActionResult> ViewUser([FromQuery] ViewUserQuery viewUserQuery)
     {
+
         var result = await _sender.Send(viewUserQuery);
         return result.Match(
             users => Ok(users),
             errors => Problem(errors)
         );
     }
-    [HttpPut]
-    [HasPermission(Permission.CanJoinHub)]
-    public async Task<IActionResult> JoinHub(JoinHubModel joinHubModel)
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetHubsWithoutUserHubs()
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
-
-        var joinHubCommand = new JoinHubCommand(username, joinHubModel.Id);
-        var result = await _sender.Send(joinHubCommand);
+        var model = new GetHubsWithoutUserHubsQuery(username);
+        var result = await _sender.Send(model);
         return result.Match(
-            hub => Ok(hub),
+            users => Ok(users),
             errors => Problem(errors)
         );
-
     }
 
 }

@@ -1,14 +1,21 @@
 using System.Security.Claims;
+using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Commands.Hubs.DeleteHub;
 using BusinessLogic.Application.Commands.Hubs.DeployHub;
 using BusinessLogic.Application.Commands.Hubs.UpdateHub;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
+using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
-using BusinessLogic.Application.Queries.Hubs.ViewHub;
+using BusinessLogic.Application.Queries.Hubs.viewHubChannels;
+using BusinessLogic.Application.Queries.Hubs.viewHubUsers;
+using BusinessLogic.Domain;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
-using MediatR;
+using Mapster;
+using MediatR; 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -28,12 +35,12 @@ public class HubController : BaseController
     }
 
     [HttpPost]
-    // [HasPermission(Permission.CanDeployHubs)]
+    [HasPermission(Permission.CanDeployHubs)]
     public async Task<IActionResult> DeployHub(HubWriteModel hub)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var deployHubCommand = new DeployHubCommand(hub.Name, hub.Description, hub.IsPrivate, hub.Logo, username);
+        var deployHubCommand = new DeployHubCommand(hub.name, hub.description, hub.logo, username);
         ErrorOr<HubReadModel> results = await _sender.Send(deployHubCommand);
         return results.Match(
             hub => Ok(hub),
@@ -46,20 +53,12 @@ public class HubController : BaseController
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
-        var query = new GetAllHubsQuery(pageNumber, pageSize);
+        var query = new GetAllPostsQuery(pageNumber, pageSize);
         var hubs = await _sender.Send(query);
 
         return Ok(hubs);
     }
-    [HttpGet]
-    public async Task<IActionResult> ViewHub([FromQuery] ViewHubQuery viewHubQuery)
-    {
-        var result = await _sender.Send(viewHubQuery);
-        return result.Match(
-            hub => Ok(hub),
-            errors => Problem(errors)
-        );
-    }
+
 
     [HttpDelete("{id}")]
     // [HasPermission(Permission.CanDeleteHub)]
@@ -74,7 +73,7 @@ public class HubController : BaseController
 
 
 
-    [HttpPut]
+    [HttpPut("")]
     public async Task<IActionResult> EditHub([FromQuery] Guid id, HubUpdateModel hubReadModel)
     {
         var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
@@ -86,6 +85,30 @@ public class HubController : BaseController
              hub => Ok(hub),
              errors => Problem(errors)
          );
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> ViewHubChannels(Guid hubid)
+    {
+        var channels = new ViewHubChannelsQuery(hubid);
+        var result= await _sender.Send(channels);
+        return result.Match(
+            channels => Ok(channels),
+            errors => Problem(errors)
+            );
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> ViewHubUsers(Guid hubid)
+    {
+        var users = new GetHubsWithoutUserHubsQuery(hubid);
+        var result = await _sender.Send(users);
+        return result.Match(
+            users => Ok(users), 
+            errors => Problem(errors)
+            );
     }
 }
 

@@ -12,7 +12,6 @@ public static class InfrastructureDependencyInjection
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
         services.AddSingleton<IFileManager, FileManager>();
-        services.AddScoped<IAuthorizationHandler, CanJoinHubAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanJoinRoomAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanDeployHubsAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanCreateChannelAuthorizationHandler>();

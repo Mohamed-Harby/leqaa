@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 {
-    public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<List<HubReadModel>>>
+public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<List<HubReadModel>>>
     {
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
@@ -39,21 +39,24 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
         public async Task<ErrorOr<List<HubReadModel>>> Handle(ViewUserHubsQuery request, CancellationToken cancellationToken)
         {
 
+           
 
 
-
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Hubs")).FirstOrDefault();
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Posts")).FirstOrDefault();
             if (user is null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-            var Hubs = user.Hubs.ToList();
+            var Hubs = user.Posts.ToList();
 
 
+            if (Hubs.Count== 0)
+            {
+                return DomainErrors.Hub.NotFound;
+            }
 
-
-
+         
 
             return Hubs
             .Adapt<List<HubReadModel>>();
@@ -65,5 +68,5 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 
 
     }
-
+    
 }
