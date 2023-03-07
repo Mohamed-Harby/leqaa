@@ -207,7 +207,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUserByUser( AddUserByUserCommand addUserByUserCommand)
+    public async Task<IActionResult> AddUserByUserToHub( AddUserByUserCommand addUserByUserCommand)
     {
 
         var result = await _sender.Send(addUserByUserCommand);
