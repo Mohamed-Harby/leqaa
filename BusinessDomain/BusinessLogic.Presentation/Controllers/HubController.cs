@@ -5,6 +5,8 @@ using BusinessLogic.Application.Commands.Hubs.UpdateHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Application.Queries.Hubs.ViewHub;
+using BusinessLogic.Application.Queries.Hubs.viewHubChannels;
+using BusinessLogic.Application.Queries.Hubs.viewHubUsers;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
@@ -87,7 +89,34 @@ public class HubController : BaseController
              errors => Problem(errors)
          );
     }
+
+
+
+
+    [HttpGet]
+    public async Task<IActionResult> ViewHubChannels(Guid hubid)
+    {
+        var channels = new ViewHubChannelsQuery(hubid);
+        var result = await _sender.Send(channels);
+        return result.Match(
+            channels => Ok(channels),
+            errors => Problem(errors)
+            );
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> ViewHubUsers(Guid hubid)
+    {
+        var users = new ViewHupUsersQuery(hubid);
+        var result = await _sender.Send(users);
+        return result.Match(
+            users => Ok(users),
+            errors => Problem(errors)
+            );
+    }
 }
+
 
 
 
