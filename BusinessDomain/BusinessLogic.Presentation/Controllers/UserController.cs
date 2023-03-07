@@ -22,6 +22,7 @@ using BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs;
 using BusinessLogic.Application.Commands.Users.JoinHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Infrastructure.Authorization.Enums;
+using BusinessLogic.Application.Commands.Users.AddUserByUser;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -204,5 +205,18 @@ public class UserController : BaseController
             errors => Problem(errors)
         );
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AddUserByUser( AddUserByUserCommand addUserByUserCommand)
+    {
+
+        var result = await _sender.Send(addUserByUserCommand);
+
+        return result.Match(
+            users => Ok(users),
+            errors => Problem(errors)
+        );
+    }
+
 
 }
