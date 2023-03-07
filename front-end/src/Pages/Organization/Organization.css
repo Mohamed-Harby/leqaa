@@ -3,12 +3,14 @@
   display: flex;
   background-color: #1b1b1b;
   color: #e2e0e3;
+  height: calc(100vh - 50px);
 }
 .organizationPage .organization-section {
   flex: 3;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  overflow-y: auto;
 }
 .organizationPage .organization-section .top .btns {
   width: 95%;

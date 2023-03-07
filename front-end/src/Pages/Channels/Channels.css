@@ -3,12 +3,14 @@
   display: flex;
   background-color: #1b1b1b;
   color: #e2e0e3;
+  height: calc(100vh - 50px);
 }
 .channelsPage .channel-section {
   flex: 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto;
 }
 .channelsPage .channel-section .top .btns {
   width: 95%;

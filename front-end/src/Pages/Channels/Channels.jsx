@@ -45,10 +45,7 @@ function Channels() {
 
   return (
     <div className="channelsPage">
-      <AdditionalSidebar
-        cards={size ? [...channels, responseCreatedChannel] : channels}
-        path={pathname}
-      />
+      <AdditionalSidebar cards={channels} path={pathname} />
       {Object.keys(responseGetChannel).length ? (
         <div className="channel-section">
           <div className="top">

@@ -35,7 +35,7 @@ function Organization() {
 
   useEffect(() => {
     dispatch(viewUserHubs(token));
-  }, []);
+  }, [responseCreatedHub]);
 
   useEffect(() => {
     console.log(responseHubs);
@@ -44,10 +44,7 @@ function Organization() {
 
   return (
     <div className="organizationPage">
-      <AdditionalSidebar
-        cards={size ? [...hubs, responseCreatedHub] : hubs}
-        path={pathname}
-      />
+      <AdditionalSidebar cards={hubs} path={pathname} />
       {Object.keys(responseGetHub).length ? (
         <div className="organization-section">
           <div className="top">

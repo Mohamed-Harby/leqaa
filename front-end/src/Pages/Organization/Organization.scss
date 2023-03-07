@@ -5,13 +5,14 @@
   display: flex;
   background-color: $firstColor;
   color: $fifthColor;
-
+  height: calc(100vh - 50px);
 
   .organization-section {
     flex: 3;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
+    overflow-y: auto;
     .top {
       .btns {
         width: 95%;

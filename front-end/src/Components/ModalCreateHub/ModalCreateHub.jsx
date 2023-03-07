@@ -10,6 +10,7 @@ import {
   getStatus,
 } from "../../redux/hubSlice";
 import { getCookies } from "../../Custom/useCookies";
+import { useNavigate } from "react-router-dom";
 
 function ModalCreateHub({ modalClose }) {
   const token = getCookies("token");
@@ -19,6 +20,7 @@ function ModalCreateHub({ modalClose }) {
   const [base64String, setBase64String] = useState()
   const dispatch = useDispatch();
   const response = useSelector(getResponseCreatedHub);
+  const navigate = useNavigate()
 
   function imageUploaded(x) {
     var file = x.target.files[0]
@@ -39,7 +41,7 @@ function ModalCreateHub({ modalClose }) {
     modalClose();
   };
   useEffect(() => {
-    console.log(response);
+    response && navigate('/hub')
   }, [response]);
   return (
     <div className="modalCreateHub">
