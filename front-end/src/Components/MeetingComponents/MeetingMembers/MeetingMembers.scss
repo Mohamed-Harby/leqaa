@@ -7,8 +7,8 @@
 
   position: relative;
   background-color: $secondColor;
-  height: 100%;
-
+  height: calc(100vh - 120px);
+  overflow-y: auto;
   
   
   

@@ -1,3 +1,25 @@
-.container{
+@use "../helper/style" as *;
+
+
+.layoutContainer{
     display: flex;
+}
+
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: $thirdColor;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $fifthColor;
+  border-radius: 5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $fourthColor;
 }

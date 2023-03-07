@@ -20,6 +20,8 @@
 }
 .modalCreateChannel form input:focus {
   outline: none;
+  border: 1px solid #e2e0e3;
+  background-color: #262427;
 }
 .modalCreateChannel form input::-moz-placeholder {
   color: #e2e0e3;

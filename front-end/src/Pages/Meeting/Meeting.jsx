@@ -70,7 +70,7 @@ function Meeting() {
         setUserDevices,
       }}
     >
-      <div className="callPage" ref={pageRef}>
+      <div className="meetingPage" ref={pageRef}>
         {toggleSettings ? <MeetingSettings /> : <MeetingContent />}
 
         <CallToolsBar />

@@ -17,7 +17,6 @@ function PeopleGrid(props) {
   
   useEffect(() => {
     let slicedArr = peopleArr.slice(0, 11);
-    slicedArr = slicedArr.filter(person => person.id !== activeIndex)
     setPeopleArrState(slicedArr);
   }, [activeIndex, setPeopleArrState]);
 
@@ -65,17 +64,19 @@ function PeopleComponent(props) {
   let arr = props.arr;
   return (
     <>
-      {arr.map((person, index) => {
-        return (
-          <MeetingPersonCard
-            img={person.img}
-            name={person.name}
-            key={person.id}
-            index={person.id}
-            activeIndex={props.activeIndex}
-            handleActive={props.handleActive}
-          />
-        );
+      {arr.map((person) => {
+        if(person.id !== props.activeIndex){
+          return (
+            <MeetingPersonCard
+              img={person.img}
+              name={person.name}
+              key={person.id}
+              index={person.id}
+              activeIndex={props.activeIndex}
+              handleActive={props.handleActive}
+            />
+          );
+        } 
       })}
     </>
   );

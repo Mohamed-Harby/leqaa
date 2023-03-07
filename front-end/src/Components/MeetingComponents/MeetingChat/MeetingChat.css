@@ -6,7 +6,8 @@
   align-items: center;
   position: relative;
   background-color: #262427;
-  height: 100%;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 .meetingChat .messages {
   width: 100%;

@@ -22,6 +22,8 @@
       border-radius: 3px;
       &:focus{
         outline: none;
+        border: 1px solid $fifthColor;
+        background-color: $secondColor;
       }
       &::placeholder{
         color: $fifthColor;

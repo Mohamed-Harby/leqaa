@@ -1,3 +1,21 @@
-.container {
+.layoutContainer {
   display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-track {
+  background: #656366;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e0e3;
+  border-radius: 5rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a379de;
 }/*# sourceMappingURL=Layout.css.map */

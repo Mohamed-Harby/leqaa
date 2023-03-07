@@ -7,6 +7,7 @@
 }
 .search .showAnimation,
 .search .hideAnimation {
+  height: 2rem;
   width: 70%;
   background: url(../../assets/search.png) no-repeat 99% center;
   background-size: 20px;

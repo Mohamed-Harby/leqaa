@@ -1,7 +1,7 @@
 @use "../../helper/style" as *;
 
 
-.callPage {
+.meetingPage {
   flex: 4;
 
   position: relative;
@@ -10,13 +10,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  height: auto;
 
-  
-
-
-
-  
-  
   
 
 }

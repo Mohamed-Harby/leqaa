@@ -6,9 +6,11 @@
   max-height: 2.5rem;
   display: flex;
   justify-content: center;
+
   
   .showAnimation,
   .hideAnimation {
+    height: 2rem;
     width: 70%;
     background: url(../../assets/search.png) no-repeat 99% center;
     background-size: 20px;

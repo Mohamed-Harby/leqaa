@@ -57,15 +57,39 @@ function ModalCreateHub({ modalClose }) {
           name="hub_desc"
           onChange={(e) => setHubDesc(e.target.value)}
         />
-          <div className="radioBox">
-            <input type="radio" name="choice" value={false} id="Public" onChange={(x) => {setPrivacy(x.target.value)}} />
+        <div className="radioBox">
+          <div>
+            <input
+              type="radio"
+              name="choice"
+              value={false}
+              id="Public"
+              onChange={(x) => {
+                setPrivacy(x.target.value);
+              }}
+            />
             <label for="Public">Public</label>
           </div>
           <div>
-            <input type="radio" name="choice" value={true} id="Private" onChange={(x) => {setPrivacy(x.target.value)}} />
+            <input
+              type="radio"
+              name="choice"
+              value={true}
+              id="Private"
+              onChange={(x) => {
+                setPrivacy(x.target.value);
+              }}
+            />
             <label for="Private">Private</label>
           </div>
-          <input type='file' onChange={imageUploaded} />
+        </div>
+        <div className="inputFile">
+          <label htmlFor="file-upload">
+            <div>Choose Hub Picture</div>
+            <div className="imgBtn">+</div>
+          </label>
+          <input id="file-upload" type="file" onChange={imageUploaded} />
+        </div>
         <button type="submit">Create Hub</button>
       </form>
     </div>

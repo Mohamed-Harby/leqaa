@@ -8,7 +8,7 @@
   flex: 3;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 0.3rem;
 }
 .organizationPage .organization-section .top .btns {
   width: 95%;

@@ -22,14 +22,16 @@ function Friends() {
 
   useEffect(() => {
     dispatch(viewUsers(token));
-  }, []);
+  }, [dispatch, token]);
 
   useEffect(() => {
     console.log(responseFriends);
     setFriends(responseFriends);
   }, [responseFriends]);
   return (
-    <div className="friends">
+    <div
+      className={friends.length === 1 ? "friends centerDiscover" : "friends"}
+    >
       {friends.map((item) => {
         if (item.isFollowed && auth.user.user.userName != item.userName) {
           return <Member card={item} />;

@@ -9,4 +9,6 @@
   gap: 1rem;
   padding: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  // height: calc(100vh - 120px);
+  // overflow-y: auto;
 }

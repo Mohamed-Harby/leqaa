@@ -16,10 +16,20 @@
       $fifthColor,
       16px
     );
-    align-self: flex-end;
+    // align-self: flex-end;
+    align-self: center;
     @media screen and (max-width: 480px) {
       width: 50px;
       font-size: 12px;
     }
+  }
+}
+
+.centerDiscover {
+  justify-content: center;
+  button {
+    padding: 1.2rem 2rem;
+    background-color: $fifthColor;
+    color: $firstColor;
   }
 }

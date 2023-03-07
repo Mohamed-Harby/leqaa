@@ -20,12 +20,52 @@
 }
 .modalCreateHub form input:focus {
   outline: none;
+  border: 1px solid #e2e0e3;
+  background-color: #262427;
 }
 .modalCreateHub form input::-moz-placeholder {
   color: #e2e0e3;
 }
 .modalCreateHub form input::placeholder {
   color: #e2e0e3;
+}
+.modalCreateHub form .inputFile {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #656366;
+  color: #e2e0e3;
+  border-radius: 3px;
+}
+.modalCreateHub form .inputFile label {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.modalCreateHub form .inputFile label .imgBtn {
+  padding: 0.3rem 1.7rem;
+  font-size: 1rem;
+  background-color: #262427;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+}
+.modalCreateHub form .inputFile input[type=file] {
+  position: absolute;
+  opacity: 0;
+}
+.modalCreateHub form .radioBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.modalCreateHub form .radioBox input[type=radio] {
+  margin-right: 0.6rem;
+}
+.modalCreateHub form .radioBox input[type=radio]:checked + label {
+  color: #a379de;
 }
 .modalCreateHub form button {
   background-color: #262427;
