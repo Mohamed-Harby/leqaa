@@ -1,58 +1,67 @@
 import React from "react";
 import Card from "../../Card/Card";
+import CardJoinMeeting from "../Cards/Meeting/CardJoinMeeting";
+import Post from "../Cards/Post/Post";
 import "./RecentActivities.css";
 
 function RecentActivities() {
   const arr = [
     {
-      meetingCreatedBy: "org1",
-      meetingName: "meeting1",
-      meetingCreatedTime: "10 minutes ago",
+      postTitle: "post1",
+      postTime: "1 Day ago",
+      postDescription:
+        "Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1",
     },
     {
-      meetingCreatedBy: "org2 scheduled",
-      meetingName: "meeting2",
-      meetingCreatedTime: "12 minutes ago",
+      meetingTitle: "meeting1",
+      meetingTime: "2 Day ago",
+      meetingDescription: "Description1",
     },
     {
-      postCreatedBy: "person1",
-      postCreatedTime: "30 minutes ago",
-      postDesc: "Desc1",
+      postTitle: "post2",
+      postTime: "3 Day ago",
+      postDescription: "Description2",
     },
     {
-      meetingCreatedBy: "org3",
-      meetingName: "meeting3",
-      meetingCreatedTime: "14 minutes ago",
+      meetingTitle: "meeting2",
+      meetingTime: "4 Day ago",
+      meetingDescription: "Description2",
     },
     {
-      meetingCreatedBy: "org4",
-      meetingName: "meeting4",
-      meetingCreatedTime: "16 minutes ago",
+      postTitle: "post3",
+      postTime: "5 Day ago",
+      postDescription: "Description3",
     },
     {
-      meetingCreatedBy: "org5",
-      meetingName: "meeting5",
-      meetingCreatedTime: "18 minutes ago",
+      meetingTitle: "meeting3",
+      meetingTime: "6 Day ago",
+      meetingDescription: "Description3",
     },
     {
-      postCreatedBy: "person2",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc2",
+      postTitle: "post4",
+      postTime: "7 Day ago",
+      postDescription: "Description4",
     },
     {
-      postCreatedBy: "person3",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc3",
+      meetingTitle: "meeting4",
+      meetingTime: "8 Day ago",
+      meetingDescription: "Description4",
     },
-    { memberName: "member1", memberBio: "bio1" },
-    { memberName: "member2", memberBio: "bio2" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc1" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc2" },
+    {
+      postTitle: "post5",
+      postTime: "9 Day ago",
+      postDescription: "Description5",
+    },
   ];
   return (
     <div className="recentactivities">
       {arr.map((item) => {
-        return <Card card={item} />;
+        const key = Object.keys(item);
+        if (key[0] == "postTitle") {
+          return <Post card={item} />;
+        } else {
+          return <CardJoinMeeting card={item} />;
+        }
       })}
     </div>
   );

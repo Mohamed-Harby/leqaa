@@ -14,7 +14,8 @@
   border-radius: 20px;
   z-index: 1000;
 }
-.dropdown-content-show a {
+.dropdown-content-show a,
+.dropdown-content-show button {
   color: #e2e0e3;
   padding: 10px;
   background-color: #656366;

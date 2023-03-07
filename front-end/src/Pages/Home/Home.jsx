@@ -24,18 +24,16 @@ function Home() {
   console.log(auth.user);
   const token = getCookies("token");
   console.log(token);
-  const width = useGetWidth()
-
+  const width = useGetWidth();
 
   useEffect(() => {
     if (width <= 768) {
-      setShow(2)
-      console.log('done');
-    }else{
-      setShow(3)
+      setShow(2);
+      console.log("done");
+    } else {
+      setShow(3);
     }
-  }, [width])
-
+  }, [width]);
 
   console.log(width);
 

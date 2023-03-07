@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "./Carousel.css";
 import Card from "../Card/Card";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import CardJoinMeetingCarousel from "../HomeComponents/Cards/CardJoinMeetingCarousel/CardJoinMeetingCarousel";
 
 const Carousel = (props) => {
   const { show } = props;
@@ -44,7 +45,7 @@ const Carousel = (props) => {
           style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}
         >
           {arr.map((item) => {
-            return <Card card={item} />;
+            return <CardJoinMeetingCarousel card={item} />;
           })}
         </div>
       </div>

@@ -1,0 +1,22 @@
+.cardChat {
+  border: 1px solid #e2e0e3;
+  border-radius: 10px;
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+  margin: 10px 0;
+  width: 90%;
+  cursor: pointer;
+}
+.cardChat .content {
+  display: flex;
+  flex-direction: column;
+  color: #e2e0e3;
+  font-size: 18px;
+}
+.cardChat .content div:nth-child(2) {
+  white-space: nowrap;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}/*# sourceMappingURL=Card.css.map */

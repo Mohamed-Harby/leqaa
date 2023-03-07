@@ -1,27 +1,23 @@
 import React, { useState } from "react";
-import Card from "../Card/Card";
+import CardSidebar from "../ChannelComponents/CardSidebar/CardSidebar";
+import Card from "../ChatComponents/Card/Card";
 import Searchbar from "../Searchbar/Searchbar";
 import "./AdditionalSidebar.css";
 
-function AdditionalSidebar({ cards }) {
-  const arr = [
-    { to: "person1", msg: "msggggggggggggggggggggggggg1" },
-    { to: "person2", msg: "msg2" },
-    { to: "person3", msg: "msg3" },
-    { to: "person4", msg: "msg4" },
-    { to: "person5", msg: "msg5" },
-    { to: "person6", msg: "msg6" },
-    // { channelName: "channel1", channelStatus: "Live Now" },
-    // { channelName: "channel2", channelStatus: "Live 3 days ago" },
-  ];
+function AdditionalSidebar({ cards, path }) {
   console.log(cards);
+  console.log(path);
 
   return (
     <div className="additional">
-      <Searchbar  />
+      <Searchbar />
       <div className="cards">
-        {arr?.map((item) => {
-          return <Card card={item} />;
+        {cards?.map((card) => {
+          if (path == "/chat") {
+            return <Card card={card} />;
+          } else {
+            return <CardSidebar card={card} />;
+          }
         })}
       </div>
     </div>

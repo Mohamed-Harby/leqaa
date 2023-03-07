@@ -5,7 +5,8 @@ import axios from "axios";
 const baseUrl = "http://localhost:5004/api/v1/Channel/";
 
 const initialState = {
-  response: {},
+  createChannel: {},
+  getChannel: {},
   status: "idle",
   error: "",
 };
@@ -14,17 +15,50 @@ export const createChannel = createAsyncThunk(
   "channel/createChannel",
   async (payload) => {
     const createChannelUrl = "CreateChannel";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${payload.token}`,
-    };
-    const data = {
-      name: payload.name,
-      description: payload.description,
-    };
     try {
-      const response = await axios.post(baseUrl + createChannelUrl, data, {
-        headers: headers,
+      const response = await axios.post(baseUrl + createChannelUrl, payload.data, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
+export const deleteChannel = createAsyncThunk(
+  "channel/deleteChannel",
+  async (payload) => {
+    console.log(payload);
+    const deleteChannelUrl = `DeleteChannel?id=${payload.id}`;
+    try {
+      const response = await axios.delete(baseUrl + deleteChannelUrl, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
+export const getChannel = createAsyncThunk(
+  "channel/getChannel",
+  async (payload) => {
+    const getChannelUrl = `ViewChannel?Id=${payload.id}`;
+    try {
+      const response = await axios.get(baseUrl + getChannelUrl, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
       });
       console.log(response.data);
       return response?.data;
@@ -46,9 +80,21 @@ const channelSlice = createSlice({
       })
       .addCase(createChannel.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.response = action.payload;
+        state.createChannel = action.payload;
       })
       .addCase(createChannel.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
+      .addCase(getChannel.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getChannel.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.getChannel = action.payload;
+      })
+      .addCase(getChannel.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
@@ -56,6 +102,7 @@ const channelSlice = createSlice({
 });
 
 export default channelSlice.reducer;
-export const getResponse = (state) => state.channel.response;
-export const getError = (state) => state.channel.error;
-export const getStatus = (state) => state.channel.status;
+export const getResponseCreatedChannel = (state) => state.channel.createChannel;
+export const getResponseGetChannel = (state) => state.channel.getChannel;
+export const getErrorChannel = (state) => state.channel.error;
+export const getStatusChannel = (state) => state.channel.status;

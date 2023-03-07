@@ -1,61 +1,69 @@
-import React from 'react'
+import React from "react";
 import "./Recommended.css";
-import Card from '../../Card/Card'
+import CardJoinMeeting from "../Cards/Meeting/CardJoinMeeting";
+import Post from "../Cards/Post/Post";
 
 function Recommended() {
-    const arr = [
-        {
-          meetingCreatedBy: "org1",
-          meetingName: "meeting1",
-          meetingCreatedTime: "10 minutes ago",
-        },
-        {
-          meetingCreatedBy: "org2 scheduled",
-          meetingName: "meeting2",
-          meetingCreatedTime: "12 minutes ago",
-        },
-        {
-          postCreatedBy: "person1",
-          postCreatedTime: "30 minutes ago",
-          postDesc: "Desc1",
-        },
-        {
-          meetingCreatedBy: "org3",
-          meetingName: "meeting3",
-          meetingCreatedTime: "14 minutes ago",
-        },
-        {
-          meetingCreatedBy: "org4",
-          meetingName: "meeting4",
-          meetingCreatedTime: "16 minutes ago",
-        },
-        {
-          meetingCreatedBy: "org5",
-          meetingName: "meeting5",
-          meetingCreatedTime: "18 minutes ago",
-        },
-        {
-          postCreatedBy: "person2",
-          postCreatedTime: "50 minutes ago",
-          postDesc: "Desc2",
-        },
-        {
-          postCreatedBy: "person3",
-          postCreatedTime: "50 minutes ago",
-          postDesc: "Desc3",
-        },
-        { memberName: "member1", memberBio: "bio1" },
-        { memberName: "member2", memberBio: "bio2" },
-        { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc1" },
-        { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc2" },
-      ];
-      return (
-        <div className="recommended">
-          {arr.map((item) => {
-            return <Card card={item} />;
-          })}
-        </div>
-      );
+  const arr = [
+    {
+      postTitle: "post1",
+      postTime: "1 Day ago",
+      postDescription:
+        "Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1",
+    },
+    {
+      meetingTitle: "meeting1",
+      meetingTime: "2 Day ago",
+      meetingDescription: "Description1",
+    },
+    {
+      postTitle: "post2",
+      postTime: "3 Day ago",
+      postDescription: "Description2",
+    },
+    {
+      meetingTitle: "meeting2",
+      meetingTime: "4 Day ago",
+      meetingDescription: "Description2",
+    },
+    {
+      postTitle: "post3",
+      postTime: "5 Day ago",
+      postDescription: "Description3",
+    },
+    {
+      meetingTitle: "meeting3",
+      meetingTime: "6 Day ago",
+      meetingDescription: "Description3",
+    },
+    {
+      postTitle: "post4",
+      postTime: "7 Day ago",
+      postDescription: "Description4",
+    },
+    {
+      meetingTitle: "meeting4",
+      meetingTime: "8 Day ago",
+      meetingDescription: "Description4",
+    },
+    {
+      postTitle: "post5",
+      postTime: "9 Day ago",
+      postDescription: "Description5",
+    },
+  ];
+  return (
+    <div className="recommended">
+      {arr.map((item) => {
+        const key = Object.keys(item);
+        if (key[0] == "postTitle") {
+          return <Post card={item} />;
+        } else {
+          return <CardJoinMeeting card={item} />;
+        }
+      })}
+    </div>
+  );
 }
 
-export default Recommended
+export default Recommended;

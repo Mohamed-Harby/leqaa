@@ -1,0 +1,33 @@
+.cardJoinMeeting {
+  color: #e2e0e3;
+  width: 95%;
+  border: 1px solid #e2e0e3;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px 0;
+}
+.cardJoinMeeting .body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.cardJoinMeeting .body button {
+  width: 100px;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #a379de;
+  color: #e2e0e3;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  align-self: flex-end;
+}
+@media screen and (max-width: 480px) {
+  .cardJoinMeeting .body button {
+    width: 50px;
+    font-size: 12px;
+  }
+}/*# sourceMappingURL=CardJoinMeeting.css.map */

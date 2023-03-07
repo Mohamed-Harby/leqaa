@@ -8,6 +8,7 @@
   flex: 3;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .channelsPage .channel-section .top .btns {
   width: 95%;

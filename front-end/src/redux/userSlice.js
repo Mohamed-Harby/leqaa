@@ -6,8 +6,11 @@ export const baseUrl = 'http://localhost:5004/api/v1/User/'
 
 
 const initialState = {
-    response: {},
     plan: {},
+    response: {},
+    userChannels: [],
+    userHubs: [],
+    friends: [],
     status: "idle",
     error: "",
 }
@@ -62,6 +65,70 @@ export const viewUserProfile = createAsyncThunk("user/viewuserprofile", async (p
     }
 })
 
+export const viewUserChannels = createAsyncThunk("user/viewuserchannels", async (payload) => {
+    const viewUserChannelsUrl = 'ViewUserChannels'
+    try {
+        const response = await axios.get(baseUrl + viewUserChannelsUrl, {
+            headers: {
+                Authorization: `Bearer ${payload}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const viewUserHubs = createAsyncThunk("user/viewuserhubs", async (payload) => {
+    const viewUserHubsUrl = 'ViewUserHubs'
+    try {
+        const response = await axios.get(baseUrl + viewUserHubsUrl, {
+            headers: {
+                Authorization: `Bearer ${payload}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const followUser = createAsyncThunk("user/followuser", async (payload) => {
+    const followUserUrl = 'FollowUser'
+    try {
+        const response = await axios.post(baseUrl + followUserUrl, payload.data,{
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const viewUsers = createAsyncThunk("user/viewusers", async (payload) => {
+    const viewUsersUrl = 'ViewUsers?pageNumber=1&pageSize=20'
+    try {
+        const response = await axios.get(baseUrl + viewUsersUrl, {
+            headers: {
+                Authorization: `Bearer ${payload}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
 
 const userSlice = createSlice({
     name: 'user',
@@ -104,12 +171,51 @@ const userSlice = createSlice({
                 state.status = "failed"
                 state.error = action.error.message
             })
+            //////////////////////////////////////////////////////
+            .addCase(viewUserChannels.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(viewUserChannels.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.userChannels = action.payload;
+            })
+            .addCase(viewUserChannels.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(viewUserHubs.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(viewUserHubs.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.userHubs = action.payload;
+            })
+            .addCase(viewUserHubs.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(viewUsers.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(viewUsers.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.friends = action.payload;
+            })
+            .addCase(viewUsers.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
     }
 })
 
 export default userSlice.reducer
 
 export const getResponse = (state) => state.user.response
+export const getResponseUserChannels = (state) => state.user.userChannels
+export const getResponseUserHubs = (state) => state.user.userHubs
+export const getResponseUserFriends = (state) => state.user.friends
 export const getPlan = (state) => state.user.plan
 export const getError = (state) => state.user.error
 export const getStatus = (state) => state.user.status

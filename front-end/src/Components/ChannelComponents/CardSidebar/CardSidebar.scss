@@ -1,0 +1,26 @@
+@use "../../../helper/style" as *;
+
+.cardSidebar {
+  border: 1px solid $fifthColor;
+  border-radius: 10px;
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+  margin: 10px 0;
+  width: 90%;
+  cursor: pointer;
+  .content {
+    display: flex;
+    flex-direction: column;
+    color: $fifthColor;
+    font-size: 18px;
+    div {
+      &:nth-child(2) {
+        white-space: nowrap;
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

@@ -3,65 +3,22 @@
 .chat {
   flex: 4;
   display: flex;
+  height: calc(100vh - 50px);
   .chat-section {
     flex: 3;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: $firstColor;
+    overflow-y: auto;
     @media screen and (max-width: 480px) {
       display: none;
     }
     .messages {
-      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      & > * {
-        max-width: 45%;
-        word-break: break-all;
-        padding: 1%;
-        border-radius: 10px;
-        margin: 10px 0px;
-      }
-      .sender {
-        align-self: flex-end;
-        background-color: $thirdColor;
-        position: relative;
-        right: 20px;
-        border-bottom-right-radius: 0;
-        &::after {
-          content: "";
-          position: absolute;
-          width: 0px;
-          height: 0px;
-          background-color: transparent;
-          right: -20px;
-          bottom: 0;
-          border-width: 10px;
-          border-style: solid;
-          border-color: transparent transparent transparent $fifthColor;
-        }
-      }
-      .receiver {
-        align-self: flex-start;
-        background-color: $secondColor;
-        position: relative;
-        left: 20px;
-        border-bottom-left-radius: 0;
-        &::after {
-          content: "";
-          position: absolute;
-          width: 0px;
-          height: 0px;
-          background-color: transparent;
-          left: -20px;
-          bottom: 0;
-          border-width: 10px;
-          border-style: solid;
-          border-color: transparent $fifthColor transparent transparent;
-        }
-      }
+
     }
   }
 }

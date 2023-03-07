@@ -62,11 +62,11 @@ console.log(user);
           Friends
         </button>
       </div>
-      <div className="cards">
+      <>
         {components == "Activities" && <Activities />}
         {components == "Channels" && <Channels />}
         {components == "Friends" && <Friends />}
-      </div>
+      </>
     </div>
   );
 }

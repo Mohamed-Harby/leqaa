@@ -14,52 +14,33 @@ import {
   getMsgs,
 } from "../../redux/chatSlice";
 import { setCookies } from "../../Custom/useCookies";
+import { useLocation } from "react-router-dom";
+import Msg from "../../Components/ChatComponents/Msg/Msg";
 
 function Chat() {
-  const allMsgs = useSelector(getAllChat);
-  const msgs = useSelector(getChat)
   const dispatch = useDispatch();
   const auth = useAuth();
+  const { pathname } = useLocation();
 
-  const uniqueArray = allMsgs
-    ?.slice(0)
-    .reverse()
-    .reduce((accumulator, current) => {
-      if (
-        !accumulator.find(
-          (item) => item.to === current.to || item.to === current.from
-        )
-      ) {
-        accumulator.push(current);
-      }
-      return accumulator;
-    }, []);
-
-
-  // useEffect(() => {
-  //   dispatch(getAllMsgs());
-  // }, []);
-
-  console.log(uniqueArray);
-  console.log(allMsgs);
+  const msgs = [
+    { from: "user1", to: 'Leqaa', msg: "msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1msg1" },
+    { from: "user2", to: 'Leqaa', msg: "msg2" },
+    { from: "user3", to: 'Leqaa', msg: "msg3" },
+    { from: "user4", to: 'Leqaa', msg: "msg4" },
+    { from: "user5", to: 'Leqaa', msg: "msg5" },
+    { from: "user6", to: 'Leqaa', msg: "msg6" },
+    { from: "user7", to: 'Leqaa', msg: "msg7" },
+    { to: "user7", from: 'Leqaa', msg: "msg7" },
+  ];
 
   return (
     <div className="chat">
-      <AdditionalSidebar cards={uniqueArray} />
+      <AdditionalSidebar cards={msgs} path={pathname} />
       <div className="chat-section">
         <Statusbar />
         <div className="messages">
           {msgs?.map((msg, index) => {
-            return (
-              <div
-                key={index}
-                className={
-                  msg.from == auth.user.user?.userName ? "sender" : "receiver"
-                }
-              >
-                {msg.msg}
-              </div>
-            );
+            return <Msg msg={msg} />;
           })}
         </div>
         <TypingBar />

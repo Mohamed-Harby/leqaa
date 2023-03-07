@@ -1,0 +1,58 @@
+@use "../../../helper/style" as *;
+
+.sender,
+.receiver {
+  width: 40%;
+  word-break: break-all;
+  margin: 10px 0px;
+  display: flex;
+  padding: 10px;
+  border-radius: 20px;
+  gap: 10px;
+  img{
+    align-self: flex-end;
+  }
+  div{
+    color: $fifthColor;
+  }
+}
+.sender {
+  align-self: flex-end;
+  background-color: $thirdColor;
+  position: relative;
+  right: 20px;
+  border-bottom-right-radius: 0;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    right: -20px;
+    bottom: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent $fourthColor;
+  }
+}
+
+.receiver {
+  background-color: $secondColor;
+  position: relative;
+  left: 20px;
+  border-bottom-left-radius: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    left: -20px;
+    bottom: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent $fourthColor transparent transparent;
+  }
+}

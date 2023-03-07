@@ -1,62 +1,44 @@
-import React from 'react'
-import Card from '../../Card/Card';
-import './Friends.css'
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../../Custom/useAuth";
+import { getCookies } from "../../../Custom/useCookies";
+import { getResponseUserFriends, viewUsers } from "../../../redux/userSlice";
+import Member from "../../ChannelComponents/Member/Member";
+import ModalDiscoverFriends from "../../ModalDiscoverFriends/ModalDiscoverFriends";
+import "./Friends.css";
 
 function Friends() {
-  const arr = [
-    {
-      meetingCreatedBy: "org1",
-      meetingName: "meeting1",
-      meetingCreatedTime: "10 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org2 scheduled",
-      meetingName: "meeting2",
-      meetingCreatedTime: "12 minutes ago",
-    },
-    {
-      postCreatedBy: "person1",
-      postCreatedTime: "30 minutes ago",
-      postDesc: "Desc1",
-    },
-    {
-      meetingCreatedBy: "org3",
-      meetingName: "meeting3",
-      meetingCreatedTime: "14 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org4",
-      meetingName: "meeting4",
-      meetingCreatedTime: "16 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org5",
-      meetingName: "meeting5",
-      meetingCreatedTime: "18 minutes ago",
-    },
-    {
-      postCreatedBy: "person2",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc2",
-    },
-    {
-      postCreatedBy: "person3",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc3",
-    },
-    { memberName: "member1", memberBio: "bio1" },
-    { memberName: "member2", memberBio: "bio2" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc1" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc2" },
-  ];
+  const dispatch = useDispatch();
+  const auth = useAuth();
+  const [friends, setFriends] = useState([]);
+  const responseFriends = useSelector(getResponseUserFriends);
+  const token = getCookies("token");
+  const [modalOpen, setModalOpen] = useState(false);
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  useEffect(() => {
+    dispatch(viewUsers(token));
+  }, []);
+
+  useEffect(() => {
+    console.log(responseFriends);
+    setFriends(responseFriends);
+  }, [responseFriends]);
   return (
     <div className="friends">
-      <h1>friends</h1>
-      {arr.map((item) => {
-        return <Card card={item} />;
+      {friends.map((item) => {
+        if (item.isFollowed && auth.user.user.userName != item.userName) {
+          return <Member card={item} />;
+        }
       })}
+      <button onClick={() => setModalOpen(true)}>Discover Friends</button>
+      {modalOpen && <ModalDiscoverFriends closeModal={closeModal} />}
     </div>
-  )
+  );
 }
 
-export default Friends
+export default Friends;

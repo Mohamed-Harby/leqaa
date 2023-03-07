@@ -1,24 +1,34 @@
 @use "../../helper/style" as *;
 
-.organizationPage{
+.organizationPage {
   flex: 4;
+  display: flex;
   background-color: $firstColor;
   color: $fifthColor;
-  display: flex;
-  flex-direction: column;
 
 
-  .top {
-    .btns {
-      width: 95%;
-      margin: 10px auto;
-      button {
-        @include Btn(150px, fit-content, 10px, 10px, $thirdColor, $fifthColor, 16px);
-        margin-right: 10px;
+  .organization-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .top {
+      .btns {
+        width: 95%;
+        margin: 10px auto;
+        button {
+          @include Btn(
+            150px,
+            fit-content,
+            10px,
+            10px,
+            $thirdColor,
+            $fifthColor,
+            16px
+          );
+          margin-right: 10px;
+        }
       }
     }
-
   }
-
-
 }

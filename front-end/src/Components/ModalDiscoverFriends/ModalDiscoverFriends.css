@@ -1,0 +1,32 @@
+.modalDiscoverFriends .modalCalling-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 100;
+  cursor: pointer;
+}
+.modalDiscoverFriends .modalCalling-content {
+  width: 50vw;
+  height: 50vh;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  padding: 2rem 3rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 0 10px 1px black;
+}
+.modalDiscoverFriends .modalCalling-content svg {
+  align-self: flex-end;
+  cursor: pointer;
+  color: #e2e0e3;
+  font-size: 20px;
+}/*# sourceMappingURL=ModalDiscoverFriends.css.map */

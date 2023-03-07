@@ -1,0 +1,36 @@
+@use "../../../../helper/style" as *;
+
+.cardJoinMeeting {
+    color: $fifthColor;
+    width: 95%;
+    border: 1px solid $fifthColor;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+  .header {
+  }
+  .body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    button {
+      @include Btn(
+        100px,
+        fit-content,
+        10px,
+        10px,
+        $fourthColor,
+        $fifthColor,
+        16px
+      );
+      align-self: flex-end;
+      @media screen and (max-width: 480px) {
+        width: 50px;
+        font-size: 12px;
+      }
+    }
+  }
+  .footer {
+  }
+}

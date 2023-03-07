@@ -15,19 +15,19 @@ import { useEffect } from "react";
 
 function Sidebar() {
   const id = null;
-  const [closeSidebar, setCloseSidebar] = useState(false)
-  const auth = useAuth()
-  const [user, setUser] = useState({}) 
-  const response = useSelector(getResponse)
-  const status = useSelector(getStatus)
+  const [closeSidebar, setCloseSidebar] = useState(false);
+  const auth = useAuth();
+  const [user, setUser] = useState({});
+  const response = useSelector(getResponse);
+  const status = useSelector(getStatus);
   const token = getCookies("token");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(viewUserProfile(token))
-  }, [])
+    dispatch(viewUserProfile(token));
+  }, []);
   useEffect(() => {
-    setUser(response)
-  }, [status])
+    setUser(response);
+  }, [status]);
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
@@ -50,15 +50,13 @@ function Sidebar() {
             <BsPeople />
             <span className={closeSidebar ? "hideText" : "text"}>Chat</span>
           </NavLink>
-          <NavLink to="/channels">
+          <NavLink to="/channel">
             <AiOutlineYoutube />
             <span className={closeSidebar ? "hideText" : "text"}>Channels</span>
           </NavLink>
-          <NavLink to="/organization">
+          <NavLink to="/hub">
             <VscOrganization />
-            <span className={closeSidebar ? "hideText" : "text"}>
-              Organization
-            </span>
+            <span className={closeSidebar ? "hideText" : "text"}>Hubs</span>
           </NavLink>
           <NavLink to="/meeting">
             <BsCameraVideo />
@@ -72,8 +70,17 @@ function Sidebar() {
             <span className={closeSidebar ? "hideText" : "text"}>Setting</span>
           </NavLink>
           <NavLink to={`/profile/${auth.user.user?.userName}`}>
-            <RadiusImg img={user?.profilePicture ? "data:image/png;base64," + user.profilePicture : null} size={40} />
-            <span className={closeSidebar ? "hideText" : "text"}>{auth.user.user?.userName}</span>
+            <RadiusImg
+              img={
+                user?.profilePicture
+                  ? "data:image/png;base64," + user.profilePicture
+                  : null
+              }
+              size={40}
+            />
+            <span className={closeSidebar ? "hideText" : "text"}>
+              {auth.user.user?.userName}
+            </span>
           </NavLink>
         </li>
       </ul>

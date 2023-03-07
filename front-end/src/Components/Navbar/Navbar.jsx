@@ -9,20 +9,20 @@ import "./Navbar.css";
 function Navbar() {
   const auth = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const modalClose = () => {
     setModalOpen(false);
   };
   const logOut = () => {
-    setCookies('token', '', 1)
-    navigate('/login')
-  }
+    setCookies("token", "", 1);
+    navigate("/login");
+  };
   return (
     <>
       <nav>
         <ul>
           <li>
-            <Link to={auth.user.user ? '/' : '/login'}>Leqaa</Link>
+            <Link to={auth.user.user ? "/" : "/login"}>Leqaa</Link>
           </li>
 
           <li>{auth.user.user && <Searchbar />}</li>
@@ -33,7 +33,7 @@ function Navbar() {
             )}
             {!auth.user.user && <Link to={`/login`}> Log In </Link>}
             {auth.user.user && (
-              <button onClick={() => logOut()} >Log out</button>
+              <button onClick={() => logOut()}>Log out</button>
             )}
           </li>
         </ul>

@@ -55,8 +55,9 @@ function Modal({ modalClose }) {
           </div>
         )}
 
-        {currentlyOpened === "create_channel" && <ModalCreateChannel />}
-        {currentlyOpened === "create_hub" && <ModalCreateHub />}
+        {currentlyOpened === "create_channel" && <ModalCreateChannel modalClose={modalClose} />}
+        {currentlyOpened === "create_hub" && <ModalCreateHub modalClose={modalClose} />}
+        
       </div>
     </div>
   );

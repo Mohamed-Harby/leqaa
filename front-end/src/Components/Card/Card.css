@@ -10,6 +10,7 @@
   color: white;
   border: 1px solid #656366;
   text-decoration: none;
+  cursor: pointer;
 }
 .card .content {
   margin-left: 10px;

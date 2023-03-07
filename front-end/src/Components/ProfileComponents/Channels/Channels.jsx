@@ -1,62 +1,36 @@
-import React from 'react'
-import Card from '../../Card/Card';
-import './Channels.css'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookies } from "../../../Custom/useCookies";
+import {
+  getResponseUserChannels,
+  viewUserChannels,
+} from "../../../redux/userSlice";
+import Card from "../../Card/Card";
+import ChannelCard from "../../HubComponents/ChannelCard/ChannelCard";
+import "./Channels.css";
 
 function Channels() {
-  const arr = [
-    {
-      meetingCreatedBy: "org1",
-      meetingName: "meeting1",
-      meetingCreatedTime: "10 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org2 scheduled",
-      meetingName: "meeting2",
-      meetingCreatedTime: "12 minutes ago",
-    },
-    {
-      postCreatedBy: "person1",
-      postCreatedTime: "30 minutes ago",
-      postDesc: "Desc1",
-    },
-    {
-      meetingCreatedBy: "org3",
-      meetingName: "meeting3",
-      meetingCreatedTime: "14 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org4",
-      meetingName: "meeting4",
-      meetingCreatedTime: "16 minutes ago",
-    },
-    {
-      meetingCreatedBy: "org5",
-      meetingName: "meeting5",
-      meetingCreatedTime: "18 minutes ago",
-    },
-    {
-      postCreatedBy: "person2",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc2",
-    },
-    {
-      postCreatedBy: "person3",
-      postCreatedTime: "50 minutes ago",
-      postDesc: "Desc3",
-    },
-    { memberName: "member1", memberBio: "bio1" },
-    { memberName: "member2", memberBio: "bio2" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc1" },
-    { announcementCreatedTime: "50 minutes ago", announcementDesc: "Desc2" },
-  ];
+  const dispatch = useDispatch();
+  const [channels, setChannels] = useState([]);
+  const responseChannels = useSelector(getResponseUserChannels);
+  const token = getCookies("token");
+  console.log(responseChannels);
+
+  useEffect(() => {
+    dispatch(viewUserChannels(token));
+  }, []);
+
+  useEffect(() => {
+    setChannels(responseChannels);
+  }, [responseChannels]);
+
   return (
-    <div className="channels">
-      <h1>channels</h1>
-      {arr.map((item) => {
-        return <Card card={item} />;
+    <div className="channelsGrid">
+      {channels.map((channel) => {
+        return <ChannelCard card={channel} />;
       })}
     </div>
-  )
+  );
 }
 
-export default Channels
+export default Channels;
