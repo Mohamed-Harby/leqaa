@@ -9,10 +9,11 @@ namespace BusinessLogic.Application.Queries.Users.ViewRelatedUsers;
 public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, ErrorOr<List<UserReadModel>>>
 {
     private readonly IUserRepository _userRepository;
-
-    public ViewRelatedUsersQueryHandler(IUserRepository userRepository)
+    private readonly IUserUserRepository _userUserRepository;
+    public ViewRelatedUsersQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository)
     {
         _userRepository = userRepository;
+        _userUserRepository = userUserRepository;
     }
 
     public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewRelatedUsersQuery request, CancellationToken cancellationToken)

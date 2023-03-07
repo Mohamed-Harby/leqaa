@@ -3,14 +3,6 @@
 version: '3.4'
 
 services:
-  frontend:
-    image: frontend-dev
-    build:
-      context: .
-      dockerfile: front-end/Dockerfile
-    ports:
-      - 3000:3000
-
   businessdomain:
     image: bussinesslogic-dev
     build:
@@ -28,7 +20,7 @@ services:
       test: ["CMD","curl","-f","http://businessdomaindb:3307"]
       timeout: 1s
       interval: 1s
-      retries: 10
+      retries: 20
 
   businessdomainunittests:
     image: unittests:v1.0
