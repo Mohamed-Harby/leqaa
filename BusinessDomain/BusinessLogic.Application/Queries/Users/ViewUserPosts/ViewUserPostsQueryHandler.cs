@@ -44,7 +44,6 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
             var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Posts")).FirstOrDefault();
             if (user is null)
             {
-                //user not found
                 return DomainErrors.User.NotFound;
             }
 

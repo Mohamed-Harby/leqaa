@@ -1,7 +1,8 @@
 namespace BusinessLogic.Application.Models.Hubs;
 public record HubWriteModel(
-    string name,
-    string description,
-    byte[]? logo
+    string Name,
+    string Description,
+    bool IsPrivate,
+    byte[]? Logo
 );
 
