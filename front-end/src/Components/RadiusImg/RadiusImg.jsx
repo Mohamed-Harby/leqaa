@@ -10,7 +10,7 @@ function RadiusImg(props) {
         style={{ width: props.size, height: props.size }}
         className="radiusImg"
         src={props.img || blankImg}
-        alt="user"
+        alt= {props.alt ||"user"}
       />
     </>
   );

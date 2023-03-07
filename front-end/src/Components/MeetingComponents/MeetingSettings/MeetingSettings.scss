@@ -1,1 +1,47 @@
 @use "../../../helper/style" as *;
+
+.MeetingSettingsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    label {
+      font-size: 1.1rem;
+    }
+
+    select {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border:none;
+      background-color: $thirdColor;
+      color: $fifthColor;
+      border-radius: 3px;
+      &:focus{
+        outline: none;
+      }
+      &::placeholder{
+        color: $fifthColor;
+      }
+    }
+
+    button {
+      background-color: $secondColor;
+      color: $fifthColor;
+      padding: 0.7rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 3px;
+      font-size: 1.1rem;
+    }
+
+  }
+
+}

@@ -61,7 +61,7 @@ function OpenCamera() {
         //   (device) => device.kind === "videoinput"
         // );
 
-        console.log(videoInputDevice)
+        // console.log(videoInputDevice)
         let constraints = {
           // audio: { deviceId: audioInputDevice.deviceId },
           video: { deviceId: videoInputDevice.deviceId },

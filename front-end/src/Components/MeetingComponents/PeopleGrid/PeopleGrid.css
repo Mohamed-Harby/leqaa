@@ -1,3 +1,7 @@
+.peopleGridFocus {
+  flex: 4;
+}
+
 .peopleGrid {
   display: grid;
   gap: 1rem;

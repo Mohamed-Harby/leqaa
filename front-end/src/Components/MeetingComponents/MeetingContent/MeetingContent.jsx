@@ -18,17 +18,21 @@ function MeetingContent() {
 
   return (
     <div className="content">
-      {!toggleShareScreen && !toggleOpenCamera && (
+      <PeopleGrid numberOfPeopleDisplayed={11} size={4} />
+      {/* {!toggleShareScreen && !toggleOpenCamera && (
         <PeopleGrid numberOfPeopleDisplayed={12} size={4} />
       )}
       {toggleShareScreen && <ShareScreen />}
       {toggleOpenCamera && <OpenCamera />}
       {toggleChat && <MeetingChat />}
       {toggleMembers && <MeetingMembers />}
-
+      
       {(toggleShareScreen || toggleOpenCamera) &&
         !toggleChat &&
-        !toggleMembers && <PeopleGrid numberOfPeopleDisplayed={4} size={1.5} />}
+      !toggleMembers && <PeopleGrid numberOfPeopleDisplayed={4} size={1.5} />} */}
+      
+      {toggleChat && <MeetingChat />}
+      {toggleMembers && <MeetingMembers />}
     </div>
   );
 }

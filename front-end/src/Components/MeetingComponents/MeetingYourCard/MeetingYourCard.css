@@ -1,0 +1,29 @@
+.meetingYourCard {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #262427;
+  color: #e2e0e3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.meetingYourCard .noVideo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background-color: #262427;
+  color: #e2e0e3;
+}
+.meetingYourCard .videoRunning {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.meetingYourCard .videoRunning video {
+  width: 100%;
+  height: 100%;
+}/*# sourceMappingURL=MeetingYourCard.css.map */

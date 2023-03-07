@@ -2,11 +2,10 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./MeetingSettings.css";
 import { MeetingContext } from "../MeetingUtilities/MeetingContext";
 
-
 const getAllDevices = async () => {
   try {
     let allDevicesArr = await navigator.mediaDevices.enumerateDevices();
-    let output = {}
+    let output = {};
     output.audioInputDevices = allDevicesArr.filter(
       (device) => device.kind === "audioinput"
     );
@@ -14,8 +13,7 @@ const getAllDevices = async () => {
       (device) => device.kind === "videoinput"
     );
 
-    return output
-
+    return output;
   } catch (err) {
     console.log(err);
   }
@@ -23,40 +21,68 @@ const getAllDevices = async () => {
 
 function MeetingSettings() {
   const { userDevices, setUserDevices } = useContext(MeetingContext);
-  const [audioInputDevices, setAudioInputDevices] = useState([])
-  const [videoInputDevices, setVideoInputDevices] = useState([])
+  const [audioInputDevices, setAudioInputDevices] = useState([]);
+  const [videoInputDevices, setVideoInputDevices] = useState([]);
+  const [selectedAudioInput, setSelectedAudioInput] = useState(null);
+  const [selectedVideoInput, setSelectedVideoInput] = useState(null);
 
   useEffect(() => {
-    getAllDevices().then(output => {
-      setAudioInputDevices(output.audioInputDevices)
-      setVideoInputDevices(output.videoInputDevices)
-    })
-  })  
-  
-  
-  
-  getAllDevices()
+    getAllDevices().then((output) => {
+      setAudioInputDevices(output.audioInputDevices);
+      setVideoInputDevices(output.videoInputDevices);
+    });
+  }, []);
 
-  const handleSubmit = () => {
-    console.log("hello world")
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUserDevices({
+      audioDeviceID: selectedAudioInput,
+      videoDeviceID: selectedVideoInput,
+    });
+    console.log(userDevices);
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="meetingSettings">
-      <label htmlFor="audio">Choose audio device:</label>
-      <select name="audio" id="audio">
-        {audioInputDevices.map((device) => {
-          return <option value={device.deviceId}>{device.label}</option>;
-        })}
-      </select>
-      <label htmlFor="video">Choose video device:</label>
-      <select name="video" id="video">
-        {videoInputDevices.map((device) => {
-          return <option value={device.deviceId}>{device.label}</option>;
-        })}
-      </select>
-      <button type="submit">Apply</button>{" "}
-    </form>
+    <div className="MeetingSettingsContainer">
+      <form onSubmit={handleSubmit}>
+        <h1>Meeting Settings</h1>
+        <label htmlFor="audio">Audio Device</label>
+        <select
+          name="audio"
+          id="audio"
+          onChange={(e) => {
+            setSelectedAudioInput(e.target.value);
+          }}
+        >
+          <option value="">Please choose a Mic</option>
+          {audioInputDevices.map((device, index) => {
+            return (
+              <option key={index} value={device.deviceId}>
+                {device.label}
+              </option>
+            );
+          })}
+        </select>
+        <label htmlFor="video">Video Device</label>
+        <select
+          name="video"
+          id="video"
+          onChange={(e) => {
+            setSelectedVideoInput(e.target.value);
+          }}
+        >
+          <option value="">Please choose a Camera</option>
+          {videoInputDevices.map((device, index) => {
+            return (
+              <option key={index} value={device.deviceId}>
+                {device.label}
+              </option>
+            );
+          })}
+        </select>
+        <button type="submit">Apply</button>
+      </form>
+    </div>
   );
 }
 
