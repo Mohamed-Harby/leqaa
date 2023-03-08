@@ -49,25 +49,31 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
             var hub = await _hubRepository.GetByIdAsync(request.hupId);
 
+            if(addedUser== null|| addingUser==null)
+            {
+                return DomainErrors.User.NotFound;
+            }
+
             var userHub = await _userHubRepository.GetAsync(uh => uh.UserId == addingUser.Id && uh.HubId == hub.Id);
             if (userHub == null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-            var existingUserHub = await _userHubRepository.GetAsync(uh => uh.UserId == addedUser.Id && uh.HubId == hub.Id);
-            if (existingUserHub != null)
-            {
-                return DomainErrors.Hub.AlreadyExest;
-            }
+
 
             var newUserHub = new UserHub
             {
                 UserId = addedUser.Id,
                 HubId = hub.Id
             };
-            _userHubRepository.AddAsync(newUserHub);
+
+
+            await _userHubRepository.AddAsync(newUserHub);
             await _userHubRepository.SaveAsync();
+            hub.AddUser(addedUser);
+            await _hubRepository.UpdateAsync(hub);
+            await _hubRepository.SaveAsync(cancellationToken);
 
             return addedUser.Adapt<UserReadModel>();
         }

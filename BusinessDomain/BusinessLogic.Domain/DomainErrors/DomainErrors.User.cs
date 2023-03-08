@@ -33,5 +33,9 @@ public static partial class DomainErrors
             "User.CannotCreateMoreChannels",
             "Can't create more channels, you can't create more than 37 channels");
 
+        public static Error UserDontHavePermession => Error.Failure(
+           "User.UserDontHavePermession",
+           "user don't have permission to take this action");
+
     }
 }
