@@ -18,5 +18,9 @@ public static partial class DomainErrors
             "User.InvalidFollowedUser",
             "Can't follow this user, please check the user you're trying to follow");
 
+        public static Error UserDontHavePermession => Error.Failure(
+           "User.UserDontHavePermession",
+           "user don't have permission to take this action");
+
     }
 }

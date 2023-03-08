@@ -19,8 +19,5 @@
     <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
     <ProjectReference Include="../BusinessLogic.Shared/BusinessLogic.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\Users\UpdateUserRole\" />
-  </ItemGroup>
 
 </Project>

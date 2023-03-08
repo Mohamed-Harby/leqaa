@@ -23,6 +23,8 @@ using BusinessLogic.Application.Commands.Users.JoinHub;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using BusinessLogic.Application.Commands.Users.AddUserByUser;
+using BusinessLogic.Application.Commands.Users.UpdateUserRole;
+using BusinessLogic.Domain.SharedEnums;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -211,6 +213,22 @@ public class UserController : BaseController
     {
 
         var result = await _sender.Send(addUserByUserCommand);
+
+        return result.Match(
+            users => Ok(users),
+            errors => Problem(errors)
+        );
+    }
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> UpdateUserRole(string UsertoUpdate, GroupRole newRole)
+    {
+        string usernameWhoUpdate = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var updateUserRoleCommand = new UpdateUserRoleCommand(usernameWhoUpdate, UsertoUpdate, newRole);
+
+        var result = await _sender.Send(updateUserRoleCommand);
 
         return result.Match(
             users => Ok(users),
