@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Users.ViewUserChannels;
 
-    public record ViewUserChannelsQuery(
+public record ViewUserChannelsQuery(
 
-     string userName
+ string UserName
 
-     ) : IQuery<ErrorOr<List<ChannelReadModel>>>;
+ ) : IUserNameInQuery<ErrorOr<List<ChannelReadModel>>>;

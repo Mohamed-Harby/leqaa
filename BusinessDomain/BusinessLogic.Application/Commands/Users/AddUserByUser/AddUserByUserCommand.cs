@@ -10,12 +10,11 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 {
-  
+
 
     public record AddUserByUserCommand(
-string addingUser,
-string addedUser,
-Guid? hupId,
-Guid?channelId
-) : ICommand<ErrorOr<UserReadModel>>;
+        string UserName,
+        string addedUser,
+        Guid? hupId,
+        Guid? channelId) : IUserNameInCommand<ErrorOr<UserReadModel>>;
 }

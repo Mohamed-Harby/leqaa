@@ -8,8 +8,8 @@ namespace BusinessLogic.Application.Models.Rooms
 {
     public record RoomReadModel(
     Guid Id,
-    string name,
-    string description
-
-);
+    string Name,
+    string Description,
+    DateTime CreationDate
+) : BaseReadModel(Id, CreationDate);
 }

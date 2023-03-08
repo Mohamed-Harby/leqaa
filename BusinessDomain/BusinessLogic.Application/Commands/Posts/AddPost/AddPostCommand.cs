@@ -10,6 +10,6 @@ namespace BusinessLogic.Application.Commands.Posts.AddaPost;
 public record AddPostCommand(
     string Title,
     byte[]? Image,
-   string Content,
-    string Username
-) : ICommand<ErrorOr<PostWriteModel>>;
+    string Content,
+    string UserName
+) : IUserNameInCommand<ErrorOr<PostWriteModel>>;

@@ -23,12 +23,8 @@ public class JoinHubCommandHandler : IHandler<JoinHubCommand, ErrorOr<HubReadMod
 
     public async Task<ErrorOr<HubReadModel>> Handle(JoinHubCommand request, CancellationToken cancellationToken)
     {
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         var hub = await _hubRepository.GetByIdAsync(request.HubId);
-        if (user is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
         if (hub is null)
         {
             return DomainErrors.Hub.NotFound;

@@ -45,7 +45,6 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
         _channelRepository.Remove(channel);
        
 
-        // await _channelRepository.DeleteChannelWithUser(channel, creatorUser);
         if (await _unitOfWork.Save() == 0)
         {
             return DomainErrors.Channel.InvalidChannel;

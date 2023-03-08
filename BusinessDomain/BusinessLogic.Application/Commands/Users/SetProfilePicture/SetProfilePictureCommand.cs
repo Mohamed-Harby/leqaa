@@ -5,5 +5,5 @@ using ErrorOr;
 namespace BusinessLogic.Application.Commands.Users.SetProfilePicture;
 public record SetProfilePictureCommand(
     byte[] ProfilePicture,
-    string Username
-) : ICommand<ErrorOr<UserReadModel>>;
+    string UserName
+) : IUserNameInCommand<ErrorOr<UserReadModel>>;

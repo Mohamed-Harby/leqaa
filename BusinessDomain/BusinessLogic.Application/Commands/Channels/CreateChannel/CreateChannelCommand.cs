@@ -9,5 +9,6 @@ public record CreateChannelCommand(
     string Name,
     string? Description,
     Guid? HubId,
-    string Username
-) : ICommand<ErrorOr<ChannelReadModel>>;
+    string UserName
+)
+: IUserNameInCommand<ErrorOr<ChannelReadModel>>;

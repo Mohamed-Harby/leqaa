@@ -12,8 +12,8 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs
 {
     public record GetHubsWithoutUserHubsQuery
-   (
-    string username
-
-       ) : IQuery<ErrorOr<List<HubReadModel>>>;
+    (
+        string UserName
+        
+    ) : IUserNameInQuery<ErrorOr<List<HubReadModel>>>;
 }

@@ -61,7 +61,7 @@ namespace CommonGenericClasses
             string[] includes = include.Split(',', StringSplitOptions.RemoveEmptyEntries);
             foreach (string property in includes)
             {
-                query = query.Include(property);
+                query = query.Include(property).AsSplitQuery();
             }
 
             return Task.FromResult(query);

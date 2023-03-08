@@ -8,4 +8,4 @@ namespace BusinessLogic.Application.Commands.Users.BuyPlan;
 public record BuyPlanCommand(
     string PlanType,
     string UserName
-) : ICommand<ErrorOr<PlanReadModel>>;
+) : IUserNameInCommand<ErrorOr<PlanReadModel>>;

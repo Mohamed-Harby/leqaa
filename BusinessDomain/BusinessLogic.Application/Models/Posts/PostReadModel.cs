@@ -11,7 +11,8 @@ namespace BusinessLogic.Application.Models.Posts
       string Title,
       byte[]? Image,
       string Content,
-      string Username
-);
+      string Username,
+      DateTime CreationDate
+) : BaseReadModel(Id, CreationDate);
 }
 

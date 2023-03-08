@@ -36,29 +36,11 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteM
 
     public async Task<ErrorOr<PostWriteModel>> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
+        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
 
-        var result = await _validator.ValidateAsync(request);
-        if (!result.IsValid)
-        {
-            return result.Errors.ConvertAll(
-                validationFailure => Error.Validation(
-                    validationFailure.PropertyName,
-                    validationFailure.ErrorMessage)
-            );
-        }
-        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
-
-        if (creatorUser is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
-
-        string username = request.Username;
-        request = request with { Username = username };
         var post = request.Adapt<Post>();
 
-        creatorUser.Posts.Add(post);
-
+        creatorUser!.Posts.Add(post);
 
         var postmodel = post.Adapt<PostWriteModel>();
         if (await _PostRepository.SaveAsync(cancellationToken) == 0)

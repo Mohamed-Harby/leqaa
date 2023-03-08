@@ -37,16 +37,6 @@ public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Post
 
     public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-
-        var result = await _validator.ValidateAsync(request);
-        if (!result.IsValid)
-        {
-            return result.Errors.ConvertAll(
-                validationFailure => Error.Validation(
-                    validationFailure.PropertyName,
-                    validationFailure.ErrorMessage)
-            );
-        }
         var post = await _postRepository.GetByIdAsync(request.postId);
 
         if (request.Title != null)

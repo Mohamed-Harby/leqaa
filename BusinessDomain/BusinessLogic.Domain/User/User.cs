@@ -37,7 +37,7 @@ public class User : BaseEntity
     public bool IsFollowed { get; set; }
     public Gender Gender { get; set; }
     public byte[]? ProfilePicture { get; set; }
-    public virtual ICollection<Room>? Rooms { get; set; }
+    public virtual ICollection<Room> Rooms { get; set; }
     public virtual ICollection<Channel> Channels { get; set; }
     public virtual ICollection<Hub> Hubs { get; set; }
     public virtual ICollection<Post> Posts { get; set; }

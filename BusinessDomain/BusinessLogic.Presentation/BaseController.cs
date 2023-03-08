@@ -6,7 +6,8 @@ namespace BusinessLogic.Presentation;
 [Route("[controller]/[action]")]
 public abstract class BaseController : ControllerBase
 {
-    [HttpGet]
+
+    [NonAction]
     public IActionResult Problem(List<Error> errors)
     {
         return BadRequest(errors);

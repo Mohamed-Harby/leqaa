@@ -12,6 +12,6 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Application.Queries.Users.ViewUserHubs;
 
 public record ViewUserHubsQuery(
-string userName
+string UserName
 
- ) : IQuery<ErrorOr<List<HubReadModel>>>;
+ ) : IUserNameInQuery<ErrorOr<List<HubReadModel>>>;

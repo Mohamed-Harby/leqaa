@@ -8,5 +8,5 @@ public record DeleteRoomCommand(
     string Name,
     string? Description,
     Guid RoomId,
-    string Username
-) : ICommand<ErrorOr<Room>>;
+    string UserName
+) : IUserNameInCommand<ErrorOr<Room>>;

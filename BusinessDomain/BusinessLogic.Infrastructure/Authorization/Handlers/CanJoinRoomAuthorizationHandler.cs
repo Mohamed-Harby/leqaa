@@ -28,11 +28,11 @@ public class CanJoinRoomAuthorizationHandler : AuthorizationHandler<CanJoinRoomR
         }
         var userPermittedRooms = user.Rooms;
         var requiredRoomIdToJoin = Guid.Parse(query["roomId"]);
-        if (user.Rooms!.Select(r => r.Id).Contains(requiredRoomIdToJoin))
+        if (!user.Rooms.Select(r => r.Id).Contains(requiredRoomIdToJoin))
         {
-            context.Succeed(requirement);
+            context.Fail(new AuthorizationFailureReason(this, "You are not authorized to join this room ask the room owner for permission"));
             return;
         }
-        context.Fail(new AuthorizationFailureReason(this, "You are not authorized to join this room ask the room owner for permission"));
+        context.Succeed(requirement);
     }
 }

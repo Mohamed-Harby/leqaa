@@ -22,11 +22,7 @@ public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, Erro
         .Take(request.PageSize)
         .Skip((request.PageNumber - 1) * request.PageSize).ToList();
 
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "FollowedUsers")).FirstOrDefault();
-        if (user is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "FollowedUsers")).FirstOrDefault()!;
         for (int i = 0; i < users.Count; i++)
         {
             if (user.FollowedUsers.Contains(users[i]))

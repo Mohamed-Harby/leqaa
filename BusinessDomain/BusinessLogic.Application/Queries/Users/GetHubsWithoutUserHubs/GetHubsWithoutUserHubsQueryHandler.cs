@@ -41,7 +41,7 @@ namespace BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs
             List<Hub> Hubs = new();
 
 
-            User? user = (await _userRepository.GetAsync(c => c.UserName == request.username)).FirstOrDefault();
+            User? user = (await _userRepository.GetAsync(c => c.UserName == request.UserName)).FirstOrDefault()!;
 
             var UserHubsNotContainUser = (await _userHubRepository.GetAsync(u => u.UserId != user.Id)).ToList();
 

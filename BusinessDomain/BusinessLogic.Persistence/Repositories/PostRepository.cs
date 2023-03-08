@@ -19,7 +19,7 @@ public class PostRepository : BaseRepo<Post>, IPostRepository
 
     public async Task<Post> AddPostWithUser(Post post, User user)
     {
-        post.AddUser(user);
+        post.SetUser(user);
         await db.Set<Post>().AddAsync(post);
         return post;
     }

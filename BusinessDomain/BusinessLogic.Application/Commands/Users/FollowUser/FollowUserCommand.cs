@@ -5,5 +5,5 @@ using ErrorOr;
 namespace BusinessLogic.Application.Commands.Users.FollowUser;
 public record FollowUserCommand(
     string FollowedUser,
-    string Follower
-) : ICommand<ErrorOr<UserReadModel>>;
+    string UserName
+) : IUserNameInCommand<ErrorOr<UserReadModel>>;

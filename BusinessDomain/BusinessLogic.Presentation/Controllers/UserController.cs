@@ -145,7 +145,7 @@ public class UserController : BaseController
 
         var followUserCommand = new FollowUserCommand(
             FollowedUser: followUserModel.FollowedUserName,
-            Follower: followerUsername);
+            UserName: followerUsername);
 
         ErrorOr<UserReadModel> result = await _sender.Send(followUserCommand);
         return result.Match(
@@ -207,7 +207,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUserByUser( AddUserByUserCommand addUserByUserCommand)
+    public async Task<IActionResult> AddUserByUser(AddUserByUserCommand addUserByUserCommand)
     {
 
         var result = await _sender.Send(addUserByUserCommand);

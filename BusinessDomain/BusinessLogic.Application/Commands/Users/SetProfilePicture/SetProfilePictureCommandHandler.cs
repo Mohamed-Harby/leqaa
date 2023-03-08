@@ -17,16 +17,12 @@ public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand
 
     public async Task<ErrorOr<UserReadModel>> Handle(SetProfilePictureCommand request, CancellationToken cancellationToken)
     {
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.Username)).FirstOrDefault();
-        if (user is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         user.ProfilePicture = request.ProfilePicture;
         await _userRepository.UpdateAsync(user);
         if (await _userRepository.SaveAsync(cancellationToken) == 0)
         {
-            return Error.Failure("User.Failure", "Failed to save changes, please check the picture format");
+            return Error.Failure("User.Failure", "Failed to save changes, please check the image format");
         }
         return user.Adapt<UserReadModel>();
 

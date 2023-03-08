@@ -41,23 +41,8 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
         public async Task<ErrorOr<List<PostReadModel>>> Handle(ViewUserPostsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Posts")).FirstOrDefault();
-            if (user is null)
-            {
-                return DomainErrors.User.NotFound;
-            }
-
-            var posts = user.Posts.ToList();
-
-
-
-
-            if (posts.Count == 0)
-            {
-                return DomainErrors.Post.NotFound;
-            }
-
-
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Posts")).FirstOrDefault()!;
+            var posts = user.Posts;
 
             return posts
             .Adapt<List<PostReadModel>>();

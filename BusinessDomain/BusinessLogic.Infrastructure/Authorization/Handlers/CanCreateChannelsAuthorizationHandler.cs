@@ -7,21 +7,22 @@ using BusinessLogic.Domain.Plan;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Infrastructure.NetworkCalls;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
 public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCreateChannelsRequirement>
 {
     private readonly IUserRepository _userRepository;
     private readonly IPlanRepository _planRepository;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly HttpHelper _httpHelper;
     public CanCreateChannelAuthorizationHandler(
         IUserRepository userRepository,
         IPlanRepository planRepository,
-        IHttpContextAccessor httpContextAccessor)
+        HttpHelper httpHelper)
     {
         _userRepository = userRepository;
         _planRepository = planRepository;
-        _httpContextAccessor = httpContextAccessor;
+        _httpHelper = httpHelper;
     }
 
     protected async override Task HandleRequirementAsync(AuthorizationHandlerContext context, CanCreateChannelsRequirement requirement)
@@ -30,10 +31,11 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
         if (userNameClaim is null)
         {
             context.Fail(new AuthorizationFailureReason(this, "Not authorized"));
+            await _httpHelper.WriteBody(DomainErrors.User.NotLogined, StatusCodes.Status401Unauthorized);
             return;
         }
-        _httpContextAccessor.HttpContext.Request.EnableBuffering();
-        var requestBody = new StreamReader(_httpContextAccessor.HttpContext.Request.Body);
+        _httpHelper.Request.EnableBuffering();
+        var requestBody = new StreamReader(_httpHelper.Request.Body);
         var channelWriteModelSerialized = (await requestBody.ReadToEndAsync());
         var channelWriteModel = JsonConvert.DeserializeObject<ChannelWriteModel>(channelWriteModelSerialized)!;
 
@@ -45,6 +47,7 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
         if (user is null)
         {
             context.Fail(new AuthorizationFailureReason(this, DomainErrors.User.NotFound.Description));
+            await _httpHelper.WriteBody(DomainErrors.User.NotFound, StatusCodes.Status404NotFound);
             return;
         }
         var plans = user.Plans;
@@ -55,14 +58,16 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
             context.Fail(new AuthorizationFailureReason(
                this,
                "You are not authorized to create channels in this hub, not authorized"));
+            await _httpHelper.WriteBody(DomainErrors.User.NotFounderNorAdmin, StatusCodes.Status403Forbidden);
             return;
         }
-        _httpContextAccessor.HttpContext.Request.Body.Position = 0;
+        _httpHelper.Request.Body.Position = 0;
         if (channels.Count >= 37)
         {
             context.Fail(new AuthorizationFailureReason(
                 this,
                 "Can't create more than 37 channels"));
+            await _httpHelper.WriteBody(DomainErrors.User.CannotCreateMoreChannels, StatusCodes.Status403Forbidden);
             return;
         }
         if (!plans.Select(p => p.Type).Contains(PlanType.Premium))
@@ -70,6 +75,7 @@ public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCrea
             context.Fail(new AuthorizationFailureReason(
                 this,
                 "You are not authorized to Create channels, consider upgrading your plan"));
+            await _httpHelper.WriteBody(DomainErrors.User.InSufficentPlan, StatusCodes.Status403Forbidden);
             return;
         }
         context.Succeed(requirement);

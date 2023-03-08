@@ -43,9 +43,9 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
         public async Task<ErrorOr<UserReadModel>> Handle(AddUserByUserCommand request, CancellationToken cancellationToken)
         {
-           User addingUser =(await _userRepository.GetAsync(u=>u.UserName==request.addingUser)).FirstOrDefault() ;
+            User addingUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
 
-          User addedUser = (await _userRepository.GetAsync(u => u.UserName == request.addedUser)).FirstOrDefault();
+            User addedUser = (await _userRepository.GetAsync(u => u.UserName == request.addedUser)).FirstOrDefault()!;
 
             var hub = await _hubRepository.GetByIdAsync(request.hupId);
 

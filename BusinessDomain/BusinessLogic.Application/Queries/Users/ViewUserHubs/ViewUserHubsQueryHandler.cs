@@ -38,29 +38,10 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
         }
         public async Task<ErrorOr<List<HubReadModel>>> Handle(ViewUserHubsQuery request, CancellationToken cancellationToken)
         {
-
-
-
-
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Hubs")).FirstOrDefault();
-            if (user is null)
-            {
-                return DomainErrors.User.NotFound;
-            }
-
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs")).FirstOrDefault()!;
             var Hubs = user.Hubs.ToList();
-
-
-
-
-
-
             return Hubs
             .Adapt<List<HubReadModel>>();
-
-
-
-
         }
 
 

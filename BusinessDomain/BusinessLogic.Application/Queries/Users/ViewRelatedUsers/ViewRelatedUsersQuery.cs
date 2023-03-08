@@ -7,4 +7,4 @@ public record ViewRelatedUsersQuery(
     int PageNumber,
     int PageSize,
     string UserName
-) : IQuery<ErrorOr<List<UserReadModel>>>;
+) : IUserNameInQuery<ErrorOr<List<UserReadModel>>>;

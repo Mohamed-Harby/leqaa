@@ -22,8 +22,6 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserChannelRepository _userChannelRepository;
-        private readonly IValidator<CreateChannelCommand> _validator;
-
         public ViewUserChannelsQueryHandler(
             IChannelRepository channelRepository,
             IHubRepository hubRepository,
@@ -35,16 +33,11 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
             _hubRepository = hubRepository;
             _userRepository = userRepository;
             _userChannelRepository = userChannelRepository;
-            _validator = validator;
         }
         public async Task<ErrorOr<List<ChannelReadModel>>> Handle(ViewUserChannelsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName, null!, "Channels")).FirstOrDefault();
-            if (user is null)
-            {
-                return DomainErrors.User.NotFound;
-            }
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Channels")).FirstOrDefault()!;
 
             var channels = user.Channels;
 

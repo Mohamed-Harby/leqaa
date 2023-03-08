@@ -6,11 +6,11 @@ using Mapster;
 
 namespace BusinessLogic.Application.Queries.Rooms.ViewRooms;
 
-public class ViewRoomQueryHandler : IHandler<ViewRoomsQuery, List<RoomReadModel>>
+public class ViewRoomsQueryHandler : IHandler<ViewRoomsQuery, List<RoomReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
 
-    public ViewRoomQueryHandler(IChannelRepository channelRepository)
+    public ViewRoomsQueryHandler(IChannelRepository channelRepository)
     {
         _channelRepository = channelRepository;
     }

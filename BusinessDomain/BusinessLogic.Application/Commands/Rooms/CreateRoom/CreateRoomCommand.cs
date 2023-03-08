@@ -3,9 +3,9 @@ using BusinessLogic.Domain;
 using ErrorOr;
 
 namespace BusinessLogic.Application.Commands.Rooms.AddRoom;
-public record AddRoomCommand(
+public record CreateRoomCommand(
     string Name,
     string Description,
     byte[]? Logo,
-    string Username
- ) : ICommand<ErrorOr<Room>>;
+    string UserName
+ ) : IUserNameInCommand<ErrorOr<Room>>;

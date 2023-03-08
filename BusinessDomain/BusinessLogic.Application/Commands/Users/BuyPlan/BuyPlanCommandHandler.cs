@@ -21,11 +21,8 @@ public class BuyPlanCommandHandler : IHandler<BuyPlanCommand, ErrorOr<PlanReadMo
 
     public async Task<ErrorOr<PlanReadModel>> Handle(BuyPlanCommand request, CancellationToken cancellationToken)
     {
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
-        if (user is null)
-        {
-            return DomainErrors.User.NotFound;
-        }
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
+
         PlanType planType = PlanType.Free;
         if (!Enum.TryParse<PlanType>(
             value: request.PlanType,

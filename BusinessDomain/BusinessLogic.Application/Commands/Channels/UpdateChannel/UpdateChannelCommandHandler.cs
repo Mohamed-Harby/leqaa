@@ -30,16 +30,6 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
 
     public async Task<ErrorOr<ChannelWriteModel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
     {
-        var result = _validator.Validate(request);
-        if (!result.IsValid)
-        {
-            return result
-            .Errors
-            .ConvertAll(failure =>
-             Error.Failure(
-                 failure.PropertyName,
-                 failure.ErrorMessage));
-        }
         var channel = await _channelRepository.GetByIdAsync(request.Id);
 
         if (request.Name != null)
