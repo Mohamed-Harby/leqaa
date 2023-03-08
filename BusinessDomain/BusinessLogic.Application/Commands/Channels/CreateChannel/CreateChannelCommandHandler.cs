@@ -1,5 +1,6 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
+using BusinessLogic.Application.Extensions;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
@@ -10,10 +11,6 @@ using FluentValidation;
 using Mapster;
 
 
-//show me the best practices to refactor that code 
-
-
-
 namespace BusinessLogic.Application.Commands.Channels.AddChannel;
 public class CreateChannelCommandHandler : IHandler<CreateChannelCommand, ErrorOr<ChannelReadModel>>
 {
@@ -21,26 +18,23 @@ public class CreateChannelCommandHandler : IHandler<CreateChannelCommand, ErrorO
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IValidator<CreateChannelCommand> _validator;
 
     public CreateChannelCommandHandler(
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
         IUserChannelRepository userChannelRepository,
-        IValidator<CreateChannelCommand> validator,
         IUnitOfWork unitOfWork)
     {
         _channelRepository = channelRepository;
         _hubRepository = hubRepository;
         _userRepository = userRepository;
-        _validator = validator;
         _unitOfWork = unitOfWork;
     }
 
     public async Task<ErrorOr<ChannelReadModel>> Handle(CreateChannelCommand request, CancellationToken cancellationToken)
     {
-        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
+        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         Guid hubId = request.HubId ?? Constants.DefaultId;
 
         request = request with { HubId = hubId };
@@ -52,7 +46,7 @@ public class CreateChannelCommandHandler : IHandler<CreateChannelCommand, ErrorO
         }
         var channel = request.Adapt<Channel>();
 
-        await _unitOfWork.CreateChannelAsync(channel, creatorUser!);
+        await _unitOfWork.CreateChannelAsync(channel, creatorUser);
 
         if (await _userRepository.SaveAsync(cancellationToken) == 0)
         {

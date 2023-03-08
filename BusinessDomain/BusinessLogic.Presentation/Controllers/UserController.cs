@@ -25,6 +25,8 @@ using BusinessLogic.Infrastructure.Authorization.Enums;
 using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Commands.Users.UpdateUserRole;
 using BusinessLogic.Domain.SharedEnums;
+using BusinessLogic.Application.Models;
+using BusinessLogic.Domain;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -209,11 +211,10 @@ public class UserController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUserByUserToHub( AddUserByUserCommand addUserByUserCommand)
+    public async Task<IActionResult> AddUserByUserToHub(AddUserByUserCommand addUserByUserCommand)
     {
 
         var result = await _sender.Send(addUserByUserCommand);
-
         return result.Match(
             users => Ok(users),
             errors => Problem(errors)

@@ -15,7 +15,6 @@ public class CheckUserBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest
     {
         _userRepository = userRepository;
     }
-
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();

@@ -36,14 +36,13 @@ public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Post
 
 
     public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
-        {
+    {
         var post = await _postRepository.GetByIdAsync(request.postId);
 
         if (request.Title != null)
         {
             post.Title = request.Title;
         }
-
         if (request.Image != null)
         {
             post.Image = request.Image;
@@ -52,17 +51,17 @@ public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Post
         {
             post.Content = request.Content;
         }
-            await _postRepository.UpdateAsync(post);
-            if (await _postRepository.SaveAsync(cancellationToken) == 0)
-            {
-                return DomainErrors.Channel.InvalidChannel;
-            }
-
-            return post.Adapt<PostUpdateModel>();
-
+        await _postRepository.UpdateAsync(post);
+        if (await _postRepository.SaveAsync(cancellationToken) == 0)
+        {
+            return DomainErrors.Channel.InvalidChannel;
         }
 
-
+        return post.Adapt<PostUpdateModel>();
 
     }
+
+
+
+}
 

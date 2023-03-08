@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ErrorOr;
+﻿using ErrorOr;
 namespace BusinessLogic.Domain.DomainSucceeded.User
 {
 
@@ -14,7 +9,6 @@ namespace BusinessLogic.Domain.DomainSucceeded.User
         public static class User
         {
             public static Error RoleAdded => Error.NotFound("User.roleAdded", "Role added successfully");
-
         }
 
     }
