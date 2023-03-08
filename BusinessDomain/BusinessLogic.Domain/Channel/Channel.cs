@@ -26,6 +26,7 @@ public class Channel : BaseEntity
     public string? Description { get; set; }
     public Guid HubId { get; set; }
     public bool IsPrivate { get; set; }
+    public byte[]? Image { get; set; }
     public Hub Hub { get; set; } = null!;
 
     public virtual ICollection<Announcement>? Announcements { get; private set; }

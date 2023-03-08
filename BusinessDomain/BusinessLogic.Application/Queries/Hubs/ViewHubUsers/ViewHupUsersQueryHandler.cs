@@ -40,7 +40,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
         {
 
             List<User> users = new();
-            var hubs = (await _hubRepository.GetAsync(c => c.Id == request.hubid, null, "Users")).FirstOrDefault();
+            var hubs = (await _hubRepository.GetAsync(c => c.Id == request.hubid, null, "Users")).FirstOrDefault()!;
 
 
             /*   foreach(var userHub in userHubs)

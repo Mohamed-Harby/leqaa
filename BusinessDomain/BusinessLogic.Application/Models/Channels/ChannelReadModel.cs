@@ -2,9 +2,8 @@
 namespace BusinessLogic.Application.Models.Channels;
 public record ChannelReadModel(
     Guid Id,
-    string HubId,
-    string Name,
+    string ChannelName,
     bool IsPrivate,
-    string Description,
-    byte[]? Logo,
+    string ChannelDescription,
+    byte[]? ChannelImage,
     DateTime CreationDate) : BaseReadModel(Id, CreationDate);

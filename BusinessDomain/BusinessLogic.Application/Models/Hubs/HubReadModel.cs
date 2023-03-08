@@ -1,9 +1,9 @@
 namespace BusinessLogic.Application.Models.Hubs;
 public record HubReadModel(
     Guid Id,
-    string Name,
-    string Description,
+    string HubName,
+    string HubDescription,
     bool IsPrivate,
-    byte[]? Logo,
+    byte[]? HubLogo,
     DateTime CreationDate
 ) : BaseReadModel(Id, CreationDate);
