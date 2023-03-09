@@ -3,7 +3,7 @@ using BusinessLogic.Domain;
 using CommonGenericClasses;
 
 namespace BusinessLogic.Persistence.Repositories;
-public class UserChannelRepository : BaseRepo<UserChannel>, IUserChannelRepository
+public class UserChannelRepository : BaseRepo<UserHubAnnouncement>, IUserChannelRepository
 {
     public UserChannelRepository(ApplicationDbContext db) : base(db)
     {

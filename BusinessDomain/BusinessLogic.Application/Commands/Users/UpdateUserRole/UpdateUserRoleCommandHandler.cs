@@ -38,14 +38,16 @@ namespace BusinessLogic.Application.Commands.Users.UpdateUserRole
         public async Task<ErrorOr<Unit>> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
         {
 
-            User? currentUser = (await _userRepository.GetAsync(u => u.UserName == request.userNameAdding)).FirstOrDefault();
-            UserHub userHup = (await _userHubRepository.GetAsync(u => u.UserId == currentUser.Id)).FirstOrDefault();
+            User? currentUser = (await _userRepository.GetAsync(u => u.UserName == request.userNameAdding)).FirstOrDefault()!;
+
+            
+            UserHub userHup = (await _userHubRepository.GetAsync(u => u.UserId == currentUser.Id)).FirstOrDefault()!;
             if (userHup.Role != GroupRole.Admin && userHup.Role != GroupRole.Founder)
             {
                 return DomainErrors.User.UserDontHavePermession;
             }
 
-            User? userToUpdateRole = (await _userRepository.GetAsync(u => u.UserName == request.userNameToUpdate)).FirstOrDefault();
+            User? userToUpdateRole = (await _userRepository.GetAsync(u => u.UserName == request.userNameToUpdate)).FirstOrDefault()!;
 
             UserHub? userToUpdate = (await _userHubRepository.GetAsync(u => u.UserId == userToUpdateRole.Id)).FirstOrDefault();
 

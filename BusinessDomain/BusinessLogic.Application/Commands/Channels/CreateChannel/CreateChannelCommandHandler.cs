@@ -12,14 +12,14 @@ using Mapster;
 
 
 namespace BusinessLogic.Application.Commands.Channels.AddChannel;
-public class CreateChannelCommandHandler : IHandler<CreateChannelCommand, ErrorOr<ChannelReadModel>>
+public class DeployHubAnnoucementCommandHandler : IHandler<CreateChannelCommand, ErrorOr<ChannelReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateChannelCommandHandler(
+    public DeployHubAnnoucementCommandHandler(
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
