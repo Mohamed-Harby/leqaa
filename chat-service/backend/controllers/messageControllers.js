@@ -2,6 +2,10 @@ const asyncHandler = require("express-async-handler");
 const Message = require("../models/messageModel");
 const User = require("../models/userModel");
 const Chat = require("../models/chatModel");
+const { v4: uuidv4 } = require('uuid');
+var uuid = require("node-uuid");
+
+const mongoose = require("mongoose");
 
 //@description     Get all Messages
 //@route           GET /api/Message/:chatId
@@ -30,6 +34,7 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 
   var newMessage = {
+    _id: uuid.v1(),
     sender: req.user._id,
     content: content,
     chat: chatId,

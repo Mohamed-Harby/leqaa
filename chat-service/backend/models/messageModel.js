@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+var uuid = require("node-uuid");
 
 const messageSchema = mongoose.Schema(
   {
-    sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    sender: { type: String, default: uuid.v1, ref: "User" },
     content: { type: String, trim: true },
-    chat: { type: mongoose.Schema.Types.ObjectId, ref: "Chat" },
-    readBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    chat: { type: String, default: uuid.v1, ref: "Chat" },
+    readBy: [{ type: String, default: uuid.v1, ref: "User" }],
   },
   { timestamps: true }
 );

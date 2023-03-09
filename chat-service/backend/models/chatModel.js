@@ -1,15 +1,17 @@
 const mongoose = require("mongoose");
+const { v1: uuidv4 } = require("uuid");
+var uuid = require("node-uuid");
 
 const chatModel = mongoose.Schema(
   {
     chatName: { type: String, trim: true },
     isGroupChat: { type: Boolean, default: false },
-    users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    users: [{ type: String, default: uuid.v1, ref: "User" }],
     latestMessage: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "Message",
     },
-    groupAdmin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    groupAdmin: { type: String, default: uuid.v1, ref: "User" },
   },
   { timestamps: true }
 );
