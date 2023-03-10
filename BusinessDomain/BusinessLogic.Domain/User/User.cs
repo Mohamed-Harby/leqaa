@@ -11,7 +11,10 @@ public class User : BaseEntity
         Hubs = new HashSet<Hub>();
         Channels = new HashSet<Channel>();
         Posts = new HashSet<Post>();
-        Announcements = new HashSet<Announcement>();
+        HubAnnouncements = new HashSet<HubAnnouncement>();
+        ChannelAnnouncement = new HashSet<ChannelAnnouncement>();
+        
+
         Plans = new List<Plan.Plan>();
     }
     public User(string name, string email, string username, Gender gender)
@@ -22,7 +25,11 @@ public class User : BaseEntity
         Hubs = new HashSet<Hub>();
         Channels = new HashSet<Channel>();
         Posts = new HashSet<Post>();
-        Announcements = new HashSet<Announcement>();
+        HubAnnouncements = new HashSet<HubAnnouncement>();
+        ChannelAnnouncement = new HashSet<ChannelAnnouncement>();
+
+        /* UserChannelAnnoucement = new HashSet<UserChannelAnnoucement>();*/
+
         Plans = new List<Plan.Plan>();
 
         Name = name;
@@ -41,7 +48,9 @@ public class User : BaseEntity
     public virtual ICollection<Channel> Channels { get; set; }
     public virtual ICollection<Hub> Hubs { get; set; }
     public virtual ICollection<Post> Posts { get; set; }
-    public virtual ICollection<Announcement> Announcements { get; set; }
+    public virtual ICollection<HubAnnouncement> HubAnnouncements { get; set; }
+    public virtual ICollection<ChannelAnnouncement> ChannelAnnouncement { get; set; }
+
     public virtual ICollection<Plan.Plan> Plans { get; set; }
     public virtual ICollection<User> Followers { get; set; }
     public virtual ICollection<User> FollowedUsers { get; set; }

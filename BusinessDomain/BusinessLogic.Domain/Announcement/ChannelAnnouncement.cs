@@ -1,9 +1,22 @@
 namespace BusinessLogic.Domain;
-public class Announcement : BaseEntity
+public class ChannelAnnouncement : BaseEntity
 {
-    public string RoleName { get; set; } = string.Empty;
+
+    public ChannelAnnouncement()
+    {
+
+
+    }
+    public ChannelAnnouncement(string title, string content, byte[]? image)
+    {
+
+        Title = title;
+        Content = content;
+        Image = image;
+
+    }
     public string Title { get; set; } = string.Empty;
-    public string? content { get; set; }
+    public string? Content { get; set; }
     public byte[]? Image { get; set; }
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;

@@ -40,6 +40,38 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         return Task.FromResult(hubToBeCreated);
     }
 
+    public Task<HubAnnouncement> CreateHubAnnoucementAsync(HubAnnouncement hubToBeCreated, User creator)
+    {
+        var userHub = new UserHubAnnouncement
+        {
+            User = creator,
+            HubAnnouncement = hubToBeCreated,
+
+        };
+
+        creator.HubAnnouncements.Add(hubToBeCreated);
+
+        _context.Set<UserHubAnnouncement>().Update(userHub);
+
+        return Task.FromResult(hubToBeCreated);
+    }
+
+    public Task<ChannelAnnouncement> CreateChannelAnnoucementAsync(ChannelAnnouncement hubToBeCreated, User creator)
+    {
+        var userHub = new UserChannelAnnoucement
+        {
+            User = creator,
+           ChannelAnnouncement= hubToBeCreated
+
+        };
+
+        creator.ChannelAnnouncement.Add(hubToBeCreated);
+
+        _context.Set<UserChannelAnnoucement>().Update(userHub);
+
+        return Task.FromResult(hubToBeCreated);
+    }
+
     public Task<Channel> CreateChannelAsync(Channel channelToBeCreated, User creator)
     {
         var userChannel = new UserChannel
@@ -65,4 +97,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         _context.Set<UserRoom>().Update(userRoom);
         return Task.FromResult(roomToBeCreated);
     }
+
+
 }

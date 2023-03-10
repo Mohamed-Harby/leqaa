@@ -7,7 +7,7 @@ public class Channel : BaseEntity
     {
         Rooms = new HashSet<Room>();
         Users = new HashSet<User>();
-        Announcements = new HashSet<Announcement>();
+        Announcements = new HashSet<ChannelAnnouncement>();
 
     }
 
@@ -18,7 +18,7 @@ public class Channel : BaseEntity
         HubId = hubId;
         Rooms = new HashSet<Room>();
         Users = new HashSet<User>();
-        Announcements = new HashSet<Announcement>();
+        Announcements = new HashSet<ChannelAnnouncement>();
 
 
     }
@@ -29,7 +29,7 @@ public class Channel : BaseEntity
     public byte[]? Image { get; set; }
     public Hub Hub { get; set; } = null!;
 
-    public virtual ICollection<Announcement>? Announcements { get; private set; }
+    public virtual ICollection<ChannelAnnouncement>? Announcements { get; private set; }
     public virtual ICollection<Room>? Rooms { get; private set; }
     public virtual ICollection<User> Users { get; private set; }
     public void AddUser(User user)

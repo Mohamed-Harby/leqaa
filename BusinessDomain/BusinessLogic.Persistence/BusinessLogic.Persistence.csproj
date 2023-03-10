@@ -12,6 +12,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Graph" Version="4.53.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
   </ItemGroup>
@@ -19,7 +23,7 @@
     <ProjectReference Include="../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
     <ProjectReference Include="../Src/CommonGenericClasses/Common.csproj" />
     <ProjectReference Include="../BusinessLogic.Application/BusinessLogic.Application.csproj" />
-    <ProjectReference Include="../BusinessLogic.Shared/BusinessLogic.Shared.csproj"/>
+    <ProjectReference Include="../BusinessLogic.Shared/BusinessLogic.Shared.csproj" />
   </ItemGroup>
 
 </Project>
