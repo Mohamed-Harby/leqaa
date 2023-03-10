@@ -1,4 +1,4 @@
-using BusinessLogic.Domain;
+/*using BusinessLogic.Domain;
 using CommonGenericClasses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -22,4 +22,4 @@ public class AnnouncementConfiguration : BaseConfiguration<ChannelAnnouncement>
 
     }
 
-}
+}*/

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Application.Models.Annoucements.HubAnnoucements
+namespace BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements
 {
-    public record HubAnnoucementWriteModel(
+    public record ChannelAnnoucementWriteModel(
     string Title,
      string? Content,
 
       byte[]? Image,
 
-      Guid HubId
+      Guid ChannelId
 
         );
 }

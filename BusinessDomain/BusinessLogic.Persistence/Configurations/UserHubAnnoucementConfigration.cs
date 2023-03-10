@@ -9,7 +9,7 @@ public class UserHubAnnoucementConfigration : BaseConfiguration<UserHubAnnouncem
     public override void Configure(EntityTypeBuilder<UserHubAnnouncement> builder)
     {
 
-        builder.HasKey(uh => new { uh.UserId, uh.HubHubAnnouncementId });
+        builder.HasKey(uh => new { uh.UserId, uh.HubAnnouncementId });
         builder.Property(uh => uh.Id).HasDefaultValue(Guid.NewGuid());
         builder.Property(h => h.CreationDate).HasDefaultValue(DateTime.Now);
     }

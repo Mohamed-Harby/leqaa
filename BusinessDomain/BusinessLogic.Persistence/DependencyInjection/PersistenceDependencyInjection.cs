@@ -21,7 +21,7 @@ public static class PersistenceDependencyInjection
         services.AddScoped<IHubRepository, HubRepository>();
         services.AddScoped<IChannelRepository, ChannelRepository>();
         services.AddScoped<IRoomRepository, RoomRepository>();
-        services.AddScoped<IPostAnnouncementRepository, PostAnnouncementRepository>();
+
         services.AddScoped<IHubAnnouncementRepository, HubAnnouncementRepository>();
         services.AddScoped<IChannelAnnouncementRepository, ChannelAnnouncementRepository>();
         services.AddScoped<IPostRepository, PostRepository>();

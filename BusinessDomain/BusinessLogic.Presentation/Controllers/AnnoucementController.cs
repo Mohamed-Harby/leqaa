@@ -1,5 +1,7 @@
-﻿using BusinessLogic.Application.Commands.Annoucements.HubAnnoucements;
+﻿using BusinessLogic.Application.Commands.Annoucements.ChannnelAnnoucement.AddChannelAnnoucement;
+using BusinessLogic.Application.Commands.Annoucements.HubAnnoucements;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
+using BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements;
 using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
 using BusinessLogic.Application.Models.Channels;
 using ErrorOr;
@@ -15,10 +17,10 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-public class HubAnnoucementController : BaseController
+public class AnnoucementController : BaseController
 {
     private readonly ISender _sender;
-    public HubAnnoucementController(ISender sender)
+    public AnnoucementController(ISender sender)
     {
         _sender = sender;
     }
@@ -31,7 +33,31 @@ public class HubAnnoucementController : BaseController
             hupAnnouncementWriewModel.Title,
             hupAnnouncementWriewModel.Content,
             hupAnnouncementWriewModel.Image,
-             hupAnnouncementWriewModel.HupId,
+             hupAnnouncementWriewModel.HubId,
+            username
+             );
+
+        var results = await _sender.Send(addHubAnnoucementCommand);
+        return results.Match(
+          channel => Ok(channel),
+          errors => Problem(errors)
+      );
+    }
+
+
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> DeployChannelAnnoucement(ChannelAnnoucementWriteModel channelAnnouncementWriewModel)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var addHubAnnoucementCommand = new DeployChannelAnnoucementCommand(
+            channelAnnouncementWriewModel.Title,
+            channelAnnouncementWriewModel.Content,
+            channelAnnouncementWriewModel.Image,
+             channelAnnouncementWriewModel.ChannelId,
             username
              );
 
@@ -45,4 +71,7 @@ public class HubAnnoucementController : BaseController
 
 
     }
+  
+
+
 }

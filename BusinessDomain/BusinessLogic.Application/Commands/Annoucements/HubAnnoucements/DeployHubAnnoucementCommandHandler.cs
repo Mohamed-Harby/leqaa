@@ -37,9 +37,13 @@ public class DeployHubAnnoucementCommandHandler : IHandler<DeployHubAnnoucementC
     public async Task<ErrorOr<HubAnnoucementReadModel>> Handle(DeployHubAnnoucementCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Hub? hub= (await _hubRepository.GetAsync(u => u.Id == request.HupId)).FirstOrDefault()!;
+        Hub? hub= (await _hubRepository.GetAsync(u => u.Id == request.HubId)).FirstOrDefault()!;
 
+        request = request with { HubId = request.HubId };
         var hupAnnoucements =request.Adapt<HubAnnouncement>()!;
+        hupAnnoucements.User=creatorUser;
+        hupAnnoucements.Hub=hub;
+
    
 
         await _unitOfWork.CreateHubAnnoucementAsync(hupAnnoucements, creatorUser!);

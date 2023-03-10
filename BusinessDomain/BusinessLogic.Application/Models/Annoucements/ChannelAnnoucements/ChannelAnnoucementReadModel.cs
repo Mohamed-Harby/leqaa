@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Application.Models.Annoucements.HubAnnoucements
+namespace BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements
 {
-    public record HubAnnoucementReadModel(
+    public record ChannelAnnoucementReadModel(
        
     string Title,
      string? Content,
 
       byte[]? Image,
        string UserName,
-          Guid HubId,
+          Guid ChannelId,
          Guid Id,
 
       DateTime CreationDate

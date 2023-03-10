@@ -10,6 +10,8 @@ namespace BusinessLogic.Application.Interfaces
         Task<Room> CreateRoomAsync(Room roomToBeCreated, User creator);
         Task<HubAnnouncement> CreateHubAnnoucementAsync(HubAnnouncement hubToBeCreated, User creator);
 
+        Task<ChannelAnnouncement> CreateChannelAnnoucementAsync(ChannelAnnouncement hubToBeCreated, User creator);
+
         Task<int> Save();
     }
 }

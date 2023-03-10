@@ -17,7 +17,7 @@ namespace BusinessLogic.Application.Commands.Annoucements.HubAnnoucements
      string? Content,
        byte[]? Image,
  
-      Guid HupId,
+      Guid HubId,
           string UserName
        ) : ICommand<ErrorOr<HubAnnoucementReadModel>>;
 }

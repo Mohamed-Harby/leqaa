@@ -9,11 +9,11 @@ namespace BusinessLogic.Domain
 {
     public class UserChannelAnnoucement : BaseEntity
     {
+        
         public Guid UserId { get; set; }
-        public Guid ChannelId { get; set; }
+        public Guid ChannelAnnouncementId { get; set; }
         public User User { get; set; } = null!;
-        public Channel channel { get; set; } = null!;
-        public GroupRole Role { get; set; } = GroupRole.Member;
+        public ChannelAnnouncement ChannelAnnouncement { get; set; } = null!;
 
     }
 }

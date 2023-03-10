@@ -42,17 +42,22 @@ public class UserConfiguration : BaseConfiguration<User>
         );
 
         builder
-        .HasMany(u => u.HubAnnouncement)
-        .WithOne(a => a.User)
-        .HasForeignKey(a => a.UserAnnounceId)
-        .OnDelete(DeleteBehavior.Cascade);
-
-   /*             builder
-        .HasMany(u => u.UserChannelAnnoucement)
+        .HasMany(u => u.HubAnnouncements)
         .WithOne(a => a.User)
         .HasForeignKey(a => a.UserId)
         .OnDelete(DeleteBehavior.Cascade);
-*/
+        builder
+      .HasMany(u => u.Posts)
+      .WithOne(p => p.User)
+      .HasForeignKey(p => p.UserId)
+      .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+.HasMany(u => u.ChannelAnnouncement)
+.WithOne(a => a.User)
+.HasForeignKey(a => a.UserId)
+.OnDelete(DeleteBehavior.Cascade);
+
         builder
         .HasMany(u => u.Followers)
         .WithMany(u => u.FollowedUsers).UsingEntity<UserUser>(
