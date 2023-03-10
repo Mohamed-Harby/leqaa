@@ -25,7 +25,7 @@ public class HubAnnouncement : BaseEntity
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
     public Guid HubId { get; set; }
-    public Hub Hub { get; set; }
+    public Hub Hub { get; set; } = null!;
 
 
 

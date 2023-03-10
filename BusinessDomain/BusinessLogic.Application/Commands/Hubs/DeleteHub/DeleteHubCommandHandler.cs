@@ -34,10 +34,10 @@ public class DeleteHubCommandHandler : IHandler<DeleteHubCommand, ErrorOr<Unit>>
         {
             return DomainErrors.Hub.NotFound;
         }
-      
+
         _hubRepository.Remove(hub);
 
-        if (await _unitOfWork.Save() == 0)
+        if (await _unitOfWork.SaveAsync() == 0)
         {
             return DomainErrors.Hub.InvalidHub;
         }

@@ -9,6 +9,6 @@ public class UserRoomConfiguration : BaseConfiguration<UserRoom>
     public override void Configure(EntityTypeBuilder<UserRoom> builder)
     {
         builder.HasKey(ur => new { ur.UserId, ur.RoomId });
-        builder.Property(ur => ur.CreationDate).HasDefaultValue(DateTime.Now);
+        builder.Property(ur => ur.CreationDate).HasDefaultValue(DateTime.UtcNow);
     }
 }

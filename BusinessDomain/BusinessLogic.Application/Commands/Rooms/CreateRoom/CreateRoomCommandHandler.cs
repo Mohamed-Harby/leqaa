@@ -44,7 +44,7 @@ public class CreateRoomCommandHandler : IHandler<CreateRoomCommand, ErrorOr<Room
         var creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
 
         await _unitOfWork.CreateRoomAsync(Room, creatorUser!);
-        if (await _unitOfWork.Save() == 0)
+        if (await _unitOfWork.SaveAsync() == 0)
         {
             //return DomainErrors.Room.InvalidRoom;
         }
