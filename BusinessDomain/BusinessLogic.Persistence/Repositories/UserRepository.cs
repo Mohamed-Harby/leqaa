@@ -8,7 +8,7 @@ namespace BusinessLogic.Persistence.Repositories;
 public class UserRepository : BaseRepo<User>, IUserRepository
 {
     private readonly ApplicationDbContext _context;
-   
+
     public UserRepository(ApplicationDbContext context) : base(context)
     {
 
@@ -40,32 +40,11 @@ public class UserRepository : BaseRepo<User>, IUserRepository
         return user;
     }
 
-    public Task<User?> GetUserWithPlansWithChannelsWithHubsAsync(string username)
-    {
-        var userTask = (
-             table
-            .Where(u => u.UserName == username)
-            .AsNoTracking()
-            .Include(u => u.Plans)
-            .Include(u => u.Channels)
-            .Include(u => u.Hubs)
-            .AsSplitQuery()
-            .FirstOrDefaultAsync());
-        return userTask;
-    }
+
 
     public async Task<User?> GetUserWithPlansWithHubsAsync(string username)
     {
         var user = await GetAsync(u => u.UserName == username, null!, "Plans,Hubs");
-        // User? user = (
-        //      table
-        //     .Where(u => u.UserName == username)
-        //     .AsNoTracking()
-        //     .Include(u => u.Plans)
-        //     .Include(u => u.Hubs)
-        //     .AsSplitQuery()
-        //     .AsParallel()
-        //     .FirstOrDefault());
         return await user.FirstOrDefaultAsync();
     }
 
@@ -75,13 +54,21 @@ public class UserRepository : BaseRepo<User>, IUserRepository
         return user;
 
     }
-
-
     public async Task<User> GetUserAsync(Expression<Func<User, bool>> predicate = null!, string include = "")
 
     {
         User user = (await table.Where(predicate).Include(include).FirstOrDefaultAsync())!;
         return user;
 
+    }
+
+    public async Task<User?> GetUserWithChannelsIncludingAnnouncements(string username)
+    {
+        User user = (await table
+        .Where(u => u.UserName == username)
+        .Include(u => u.Channels)
+        .ThenInclude(c => c.ChannelAnnouncements.OrderByDescending(a => a.CreationDate))
+        .FirstOrDefaultAsync())!;
+        return user;
     }
 }

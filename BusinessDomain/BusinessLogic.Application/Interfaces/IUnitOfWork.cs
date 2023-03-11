@@ -12,6 +12,8 @@ namespace BusinessLogic.Application.Interfaces
 
         Task<ChannelAnnouncement> CreateChannelAnnoucementAsync(ChannelAnnouncement hubToBeCreated, User creator);
         Task<List<BaseEntity>> GetRecentActivitiesAsync(int pageNumber, int pageSize);
+        Task<List<BaseEntity>> GetUserRecentActivitiesAsync(string userName, int pageNumber, int pageSize);
+
 
         Task<int> SaveAsync(CancellationToken cancellationToken = default);
     }

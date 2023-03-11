@@ -53,7 +53,7 @@ public class UserConfiguration : BaseConfiguration<User>
       .OnDelete(DeleteBehavior.Cascade);
 
         builder
-.HasMany(u => u.ChannelAnnouncement)
+.HasMany(u => u.ChannelAnnouncements)
 .WithOne(a => a.User)
 .HasForeignKey(a => a.UserId)
 .OnDelete(DeleteBehavior.Cascade);

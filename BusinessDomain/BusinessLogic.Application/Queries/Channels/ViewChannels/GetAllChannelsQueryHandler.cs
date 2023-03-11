@@ -16,14 +16,11 @@ public class GetAllChannelsQueryHandler : IHandler<ViewChannelsQuery, List<Chann
 
     public async Task<List<ChannelReadModel>> Handle(ViewChannelsQuery request, CancellationToken cancellationToken)
     {
-
-
-
         var skip = (request.PageNumber - 1) * request.PageSize;
-        return (await _channelRepository.GetAllAsync())
+        return (await _channelRepository.GetAsync(null!, null!, "ChannelAnnouncements"))
             .Skip(skip)
             .Take(request.PageSize)
-             .ToList()
+            .ToList()
             .Adapt<List<ChannelReadModel>>();
 
 

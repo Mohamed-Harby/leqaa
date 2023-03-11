@@ -7,11 +7,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Application.Queries.Users.ViewUserProfile;
 using BusinessLogic.Application.Models.Users;
-using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Application.Queries.Users.ViewUserChannels;
-using Microsoft.AspNetCore.Identity;
-using System.Runtime.InteropServices;
 using BusinessLogic.Application.Queries.Users.ViewUserHubs;
 using BusinessLogic.Application.Queries.Users.ViewUserPosts;
 using BusinessLogic.Application.Commands.Users.FollowUser;
@@ -25,8 +22,7 @@ using BusinessLogic.Infrastructure.Authorization.Enums;
 using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Commands.Users.UpdateUserRole;
 using BusinessLogic.Domain.SharedEnums;
-using BusinessLogic.Application.Models;
-using BusinessLogic.Domain;
+using BusinessLogic.Application.Queries.Users.ViewRecentActivities;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -211,6 +207,7 @@ public class UserController : BaseController
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> AddUserByUserToHub(AddUserByUserCommand addUserByUserCommand)
     {
 
@@ -224,6 +221,7 @@ public class UserController : BaseController
 
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> UpdateUserRole(string UsertoUpdate, GroupRole newRole)
     {
         string usernameWhoUpdate = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -236,6 +234,16 @@ public class UserController : BaseController
             errors => Problem(errors)
         );
     }
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ViewRecentActivities(int pageNumber = 1, int pageSize = 20)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var viewRecentActivitiesQuery = new ViewUserRecentActivitiesQuery(pageNumber, pageSize, username);
 
+        var result = await _sender.Send(viewRecentActivitiesQuery);
+
+        return Ok(result);
+    }
 
 }

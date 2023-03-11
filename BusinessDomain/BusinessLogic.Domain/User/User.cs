@@ -12,7 +12,7 @@ public class User : BaseEntity
         Channels = new HashSet<Channel>();
         Posts = new HashSet<Post>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
-        ChannelAnnouncement = new HashSet<ChannelAnnouncement>();
+        ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
         PinnedChannels = new HashSet<PinnedChannel>();
 
 
@@ -28,7 +28,7 @@ public class User : BaseEntity
         Channels = new HashSet<Channel>();
         Posts = new HashSet<Post>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
-        ChannelAnnouncement = new HashSet<ChannelAnnouncement>();
+        ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
         PinnedChannels = new HashSet<PinnedChannel>();
 
 
@@ -53,7 +53,7 @@ public class User : BaseEntity
     public virtual ICollection<Hub> Hubs { get; set; }
     public virtual ICollection<Post> Posts { get; set; }
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; set; }
-    public virtual ICollection<ChannelAnnouncement> ChannelAnnouncement { get; set; }
+    public virtual ICollection<ChannelAnnouncement> ChannelAnnouncements { get; set; }
 
     public virtual ICollection<Plan.Plan> Plans { get; set; }
     public virtual ICollection<User> Followers { get; set; }

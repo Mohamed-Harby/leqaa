@@ -17,15 +17,15 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
         .WithMany(u => u.Channels)
         .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany(r => r.Announcements)
+        builder.HasMany(r => r.ChannelAnnouncements)
             .WithOne(a => a.Channel)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(t=>t.Name).IsRequired()
+        builder.Property(t => t.Name).IsRequired()
         .HasMaxLength(30);
 
-        builder.Property(t=>t.Description).HasMaxLength(200);
-        
+        builder.Property(t => t.Description).HasMaxLength(200);
+
 
 
 

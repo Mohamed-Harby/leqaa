@@ -4,15 +4,18 @@ using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BusinessLogic.Persistence.UnitsOfWork;
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
     private ApplicationDbContext _context;
-    public UnitOfWork(ApplicationDbContext context)
+    private readonly IUserRepository _userRepository;
+    public UnitOfWork(ApplicationDbContext context, IUserRepository userRepository)
 
     {
         _context = context;
+        _userRepository = userRepository;
     }
     public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
     {
@@ -66,7 +69,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
         };
 
-        creator.ChannelAnnouncement.Add(hubToBeCreated);
+        creator.ChannelAnnouncements.Add(hubToBeCreated);
 
         _context.Set<UserChannelAnnoucement>().Update(userHub);
 
@@ -104,27 +107,50 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         var hubs = await _context.Set<Hub>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .AsNoTracking()
             .ToListAsync();
         var channels = await _context.Set<Channel>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .AsNoTracking()
             .ToListAsync();
         var hubAnnouncements = await _context.Set<HubAnnouncement>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize / 2)
+            .AsNoTracking()
             .ToListAsync();
         var channelAnnouncements = await _context.Set<ChannelAnnouncement>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize / 2)
+            .AsNoTracking()
             .ToListAsync();
         //todo find a method to optimize the performance
         var recentActivities = new List<BaseEntity>();
         recentActivities.AddRange(hubs);
         recentActivities.AddRange(channels);
-        recentActivities.AddRange((hubAnnouncements).OrderBy(ha => ha.CreationDate));
-        recentActivities.AddRange((channelAnnouncements).OrderBy(ca => ca.CreationDate));
+        recentActivities.AddRange((hubAnnouncements).OrderByDescending(ha => ha.CreationDate));
+        recentActivities.AddRange((channelAnnouncements).OrderByDescending(ca => ca.CreationDate));
         return recentActivities;
     }
 
+    public async Task<List<BaseEntity>> GetUserRecentActivitiesAsync(string userName, int pageNumber, int pageSize)
+    {
+        var user = (await _userRepository.GetAsync(
+            u => u.UserName == userName,
+            null!,
+            "Hubs,Posts,Channels,HubAnnouncements,ChannelAnnouncements"))
+                    .FirstOrDefault()!;
 
+        var result = new List<BaseEntity>();
+
+        result.AddRange(user.Hubs);
+        result.AddRange(user.Posts);
+        result.AddRange(user.Channels);
+        result.AddRange(user.HubAnnouncements);
+        result.AddRange(user.ChannelAnnouncements);
+        result = result.OrderByDescending(r => r.CreationDate).ToList();
+        return result;
+
+
+    }
 }

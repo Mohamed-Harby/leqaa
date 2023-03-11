@@ -37,9 +37,9 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
         public async Task<ErrorOr<List<ChannelReadModel>>> Handle(ViewUserChannelsQuery request, CancellationToken cancellationToken)
         {
 
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Channels")).FirstOrDefault()!;
+            var user = await _userRepository.GetUserWithChannelsIncludingAnnouncements(request.UserName);
 
-            var channels = user.Channels;
+            var channels = user!.Channels;
 
             return channels
         .Adapt<List<ChannelReadModel>>();

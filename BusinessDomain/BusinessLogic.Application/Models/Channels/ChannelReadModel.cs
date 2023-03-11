@@ -1,4 +1,7 @@
 ﻿
+using BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements;
+using BusinessLogic.Domain;
+
 namespace BusinessLogic.Application.Models.Channels;
 public record ChannelReadModel(
     Guid Id,
@@ -6,4 +9,5 @@ public record ChannelReadModel(
     bool IsPrivate,
     string ChannelDescription,
     byte[]? ChannelImage,
+    HashSet<ChannelAnnouncementReadModel> ChannelAnnouncements,
     DateTime CreationDate) : BaseReadModel(Id, CreationDate);
