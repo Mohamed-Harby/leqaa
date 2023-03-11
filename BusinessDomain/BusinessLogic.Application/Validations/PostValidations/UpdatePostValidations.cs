@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Application.Commands.Posts.UpdatePost;
+﻿using BusinessLogic.Application.Models.Posts;
+using BusinessLogic.Application.Commands.Posts.UpdatePost;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

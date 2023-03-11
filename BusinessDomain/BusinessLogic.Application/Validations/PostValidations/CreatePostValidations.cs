@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Application.Commands.Channels.CreateChannel;
+
 using BusinessLogic.Application.Commands.Posts.AddaPost;
 using FluentValidation;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Validations.PostValidations
 {
-  public class CreatePostValidations : AbstractValidator<AddPostCommand>
+    public class CreatePostValidations : AbstractValidator<AddPostCommand>
     {
 
         public CreatePostValidations() {
