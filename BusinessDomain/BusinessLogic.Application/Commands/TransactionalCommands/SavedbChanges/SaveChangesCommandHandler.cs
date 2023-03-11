@@ -17,7 +17,7 @@ public class SaveChangesCommandHandler : IHandler<SaveChangesCommand, ErrorOr<in
     {
         try
         {
-            return await _unitOfWork.Save();
+            return await _unitOfWork.SaveAsync();
         }
         catch
         {

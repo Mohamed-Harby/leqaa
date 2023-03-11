@@ -2,6 +2,7 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Persistence.Repositories;
+using BusinessLogic.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Persistence.UnitsOfWork;
@@ -13,7 +14,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     {
         _context = context;
     }
-    public async Task<int> Save()
+    public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
     {
         //returns how many rows were affected
         return await _context.SaveChangesAsync();
@@ -61,7 +62,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         var userHub = new UserChannelAnnoucement
         {
             User = creator,
-           ChannelAnnouncement= hubToBeCreated
+            ChannelAnnouncement = hubToBeCreated
 
         };
 
@@ -96,6 +97,33 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         creator.Rooms.Add(roomToBeCreated);
         _context.Set<UserRoom>().Update(userRoom);
         return Task.FromResult(roomToBeCreated);
+    }
+
+    public async Task<List<BaseEntity>> GetRecentActivitiesAsync(int pageNumber, int pageSize)
+    {
+        var hubs = await _context.Set<Hub>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        var channels = await _context.Set<Channel>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        var hubAnnouncements = await _context.Set<HubAnnouncement>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize / 2)
+            .ToListAsync();
+        var channelAnnouncements = await _context.Set<ChannelAnnouncement>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize / 2)
+            .ToListAsync();
+
+        var recentActivities = new List<BaseEntity>();
+        recentActivities.AddRange(hubs);
+        recentActivities.AddRange(channels);
+        recentActivities.AddRange(hubAnnouncements.OrderBy(ha => ha.CreationDate));
+        recentActivities.AddRange(channelAnnouncements.OrderBy(ca => ca.CreationDate));
+        return recentActivities;
     }
 
 

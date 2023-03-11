@@ -35,7 +35,7 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
 
     public async Task<ErrorOr<Unit>> Handle(DeletePostCommand request, CancellationToken cancellationToken)
     {
-       var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
+        var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
         if (channel is null)
         {
             return DomainErrors.Channel.NotFound;
@@ -43,14 +43,14 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
 
 
         _channelRepository.Remove(channel);
-       
 
-        if (await _unitOfWork.Save() == 0)
+
+        if (await _unitOfWork.SaveAsync() == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
         return Unit.Value;
     }
 
-   
+
 }

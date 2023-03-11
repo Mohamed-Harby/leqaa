@@ -11,6 +11,6 @@ public class UserChannelAnnoucementConfiguration : BaseConfiguration<UserChannel
 
         builder.HasKey(uh => new { uh.UserId, uh.ChannelAnnouncementId });
         builder.Property(uh => uh.Id).HasDefaultValue(Guid.NewGuid());
-        builder.Property(h => h.CreationDate).HasDefaultValue(DateTime.Now);
+        builder.Property(h => h.CreationDate).HasDefaultValue(DateTime.UtcNow);
     }
 }

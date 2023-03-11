@@ -10,6 +10,6 @@ public class UserUserConfiguration : BaseConfiguration<UserUser>
     {
         // base.Configure(builder);
         builder.HasKey(uu => new { uu.FollowerId, uu.FollowedId });
-        builder.Property(uu => uu.CreationDate).HasDefaultValue(DateTime.Now);
+        builder.Property(uu => uu.CreationDate).HasDefaultValue(DateTime.UtcNow);
     }
 }
