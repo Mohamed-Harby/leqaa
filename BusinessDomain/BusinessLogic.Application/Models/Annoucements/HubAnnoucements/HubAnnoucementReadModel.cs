@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Models.Annoucements.HubAnnoucements
 {
-    public record HubAnnoucementReadModel(
-       
-    string Title,
-     string? Content,
-
-      byte[]? Image,
-       string UserName,
-          Guid HubId,
-         Guid Id,
-
-      DateTime CreationDate
-
-        ) : BaseReadModel(Id, CreationDate);
+    public record HubAnnouncementReadModel(
+        string Title,
+        string? Content,
+        byte[]? Image,
+        string UserName,
+        Guid HubId,
+        Guid Id,
+        DateTime CreationDate) : BaseReadModel(Id, CreationDate);
 }

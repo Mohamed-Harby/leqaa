@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Commands.Annoucements.HubAnnoucements
 {
-   public record DeployHubAnnoucementCommand(
+    public record DeployHubAnnoucementCommand(
 
 
-         string Title,
-     string? Content,
-       byte[]? Image,
- 
-      Guid HubId,
-          string UserName
-       ) : ICommand<ErrorOr<HubAnnoucementReadModel>>;
+          string Title,
+      string? Content,
+        byte[]? Image,
+
+       Guid HubId,
+           string UserName
+        ) : ICommand<ErrorOr<HubAnnouncementReadModel>>;
 }

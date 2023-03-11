@@ -5,7 +5,7 @@ using BusinessLogic.Domain;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.MultiQueries.ViewRecentActivities;
-public class ViewRecentActivitiesQueryHandler : IHandler<ViewRecentActivitiesQuery, List<BaseEntity>>
+public class ViewRecentActivitiesQueryHandler : IHandler<ViewRecentActivitiesQuery, List<BaseReadModel>>
 {
     private readonly IUnitOfWork _unitOfWork;
 
@@ -14,9 +14,9 @@ public class ViewRecentActivitiesQueryHandler : IHandler<ViewRecentActivitiesQue
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<List<BaseEntity>> Handle(ViewRecentActivitiesQuery request, CancellationToken cancellationToken)
+    public async Task<List<BaseReadModel>> Handle(ViewRecentActivitiesQuery request, CancellationToken cancellationToken)
     {
         var recentActivities = await _unitOfWork.GetRecentActivitiesAsync(request.PageNumber, request.PageSize);
-        return recentActivities;//.Adapt<List<BaseReadModel>>();//todo : find a method to map the return objects and to optimize the performance
+        return recentActivities.Adapt<List<BaseReadModel>>();
     }
 }

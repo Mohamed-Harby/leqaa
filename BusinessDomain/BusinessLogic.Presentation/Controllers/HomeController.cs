@@ -16,7 +16,7 @@ public class HomeController : BaseController
     [HttpGet]
     public async Task<IActionResult> ViewRecentActivities([FromQuery] ViewRecentActivitiesQuery viewRecentActivitiesQuery)
     {
-        return Ok(await _sender.Send(viewRecentActivitiesQuery));//! check why this only returns BaseEntity properties 
-                                                                 //! and loses the properties of it's children 
+        var result = await _sender.Send(viewRecentActivitiesQuery);
+        return Ok(result);
     }
 }

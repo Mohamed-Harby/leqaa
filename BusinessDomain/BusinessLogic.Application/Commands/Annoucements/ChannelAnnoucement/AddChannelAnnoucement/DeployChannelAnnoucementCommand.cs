@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Application.Commands.Annoucements.ChannnelAnnoucement.AddChannelAnnoucement;
 
 
-   public record DeployChannelAnnoucementCommand(
+public record DeployChannelAnnoucementCommand(
 
 
-         string Title,
-     string? Content,
-       byte[]? Image,
- 
-      Guid ChannelId,
-          string UserName
-       ) : ICommand<ErrorOr<ChannelAnnoucementReadModel>>;
+      string Title,
+  string? Content,
+    byte[]? Image,
+
+   Guid ChannelId,
+       string UserName
+    ) : ICommand<ErrorOr<ChannelAnnouncementReadModel>>;
 

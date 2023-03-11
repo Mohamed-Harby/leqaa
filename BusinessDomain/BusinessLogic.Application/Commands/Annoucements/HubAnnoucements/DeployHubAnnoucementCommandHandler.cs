@@ -15,16 +15,16 @@ using Mapster;
 
 
 namespace BusinessLogic.Application.Commands.Annoucements.HubAnnoucements;
-public class DeployHubAnnoucementCommandHandler : IHandler<DeployHubAnnoucementCommand, ErrorOr<HubAnnoucementReadModel>>
+public class DeployHubAnnoucementCommandHandler : IHandler<DeployHubAnnoucementCommand, ErrorOr<HubAnnouncementReadModel>>
 {
-  
+
     private readonly IUnitOfWork _unitOfWork;
     private readonly IHubAnnouncementRepository _hubAnnouncementRepository;
     private readonly IUserRepository _userRepository;
     private readonly IHubRepository _hubRepository;
 
     public DeployHubAnnoucementCommandHandler(
-   
+
         IUnitOfWork unitOfWork, IHubAnnouncementRepository hubAnnouncementRepository, IUserRepository userRepository, IHubRepository hubRepository)
     {
 
@@ -34,24 +34,24 @@ public class DeployHubAnnoucementCommandHandler : IHandler<DeployHubAnnoucementC
         _hubRepository = hubRepository;
     }
 
-    public async Task<ErrorOr<HubAnnoucementReadModel>> Handle(DeployHubAnnoucementCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<HubAnnouncementReadModel>> Handle(DeployHubAnnoucementCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Hub? hub= (await _hubRepository.GetAsync(u => u.Id == request.HubId)).FirstOrDefault()!;
+        Hub? hub = (await _hubRepository.GetAsync(u => u.Id == request.HubId)).FirstOrDefault()!;
 
         request = request with { HubId = request.HubId };
-        var hupAnnoucements =request.Adapt<HubAnnouncement>()!;
-        hupAnnoucements.User=creatorUser;
-        hupAnnoucements.Hub=hub;
+        var hupAnnoucements = request.Adapt<HubAnnouncement>()!;
+        hupAnnoucements.User = creatorUser;
+        hupAnnoucements.Hub = hub;
 
-   
+
 
         await _unitOfWork.CreateHubAnnoucementAsync(hupAnnoucements, creatorUser!);
         await _hubAnnouncementRepository.SaveAsync();
-     
- 
-        return hupAnnoucements.Adapt<HubAnnoucementReadModel>();
 
-        
+
+        return hupAnnoucements.Adapt<HubAnnouncementReadModel>();
+
+
     }
 }

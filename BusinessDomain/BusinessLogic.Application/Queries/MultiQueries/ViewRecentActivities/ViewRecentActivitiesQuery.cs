@@ -5,4 +5,4 @@ using BusinessLogic.Domain;
 namespace BusinessLogic.Application.Queries.MultiQueries.ViewRecentActivities;
 public record ViewRecentActivitiesQuery(
     int PageNumber,
-    int PageSize) : IQuery<List<BaseEntity>>;
+    int PageSize) : IQuery<List<BaseReadModel>>;

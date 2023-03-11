@@ -14,6 +14,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMQ.Client;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using BusinessLogic.Entry.JsonConfigurations;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +28,8 @@ builder.Host.ConfigureLogging((ctx, lc) =>
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddApplicationPart(typeof(HubController).Assembly)
+builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+.AddApplicationPart(typeof(HubController).Assembly)
 .AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -59,6 +64,7 @@ builder.Services.Configure<RabbitMQConnection>(
     );
 
 builder.Services.AddCorsConfiguration();
+#pragma warning disable
 builder.Services.AddAuthorization();
 
 try

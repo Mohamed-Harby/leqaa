@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements
 {
-    public record ChannelAnnoucementReadModel(
-       
-    string Title,
-     string? Content,
-
-      byte[]? Image,
-       string UserName,
-          Guid ChannelId,
-         Guid Id,
-
-      DateTime CreationDate
-
-        ) : BaseReadModel(Id, CreationDate);
+    public record ChannelAnnouncementReadModel(
+        string Title,
+        string? Content,
+        byte[]? Image,
+        string UserName,
+        Guid ChannelId,
+        Guid Id,
+        DateTime CreationDate) : BaseReadModel(Id, CreationDate);
 }

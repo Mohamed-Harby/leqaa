@@ -117,12 +117,12 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize / 2)
             .ToListAsync();
-
+        //todo find a method to optimize the performance
         var recentActivities = new List<BaseEntity>();
         recentActivities.AddRange(hubs);
         recentActivities.AddRange(channels);
-        recentActivities.AddRange(hubAnnouncements.OrderBy(ha => ha.CreationDate));
-        recentActivities.AddRange(channelAnnouncements.OrderBy(ca => ca.CreationDate));
+        recentActivities.AddRange((hubAnnouncements).OrderBy(ha => ha.CreationDate));
+        recentActivities.AddRange((channelAnnouncements).OrderBy(ca => ca.CreationDate));
         return recentActivities;
     }
 
