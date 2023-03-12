@@ -64,7 +64,6 @@ builder.Services.Configure<RabbitMQConnection>(
     );
 
 builder.Services.AddCorsConfiguration();
-#pragma warning disable
 builder.Services.AddAuthorization();
 
 try

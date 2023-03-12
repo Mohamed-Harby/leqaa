@@ -235,15 +235,17 @@ public class UserController : BaseController
         );
     }
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     public async Task<IActionResult> ViewRecentActivities(int pageNumber = 1, int pageSize = 20)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         var viewRecentActivitiesQuery = new ViewUserRecentActivitiesQuery(pageNumber, pageSize, username);
 
         var result = await _sender.Send(viewRecentActivitiesQuery);
-
-        return Ok(result);
+        return result.Match(
+            user => Ok(user),
+            errors => Problem(errors)
+        );
     }
 
 }
