@@ -9,7 +9,7 @@ public static partial class DomainErrors
         public static Error NotFound => Error.NotFound("Hub.NotFound", "Hub not found, create hub");
         public static Error CannotJoinHub => Error.Failure("Hub.CannotJoin", "Can't join hub, please check your input");
 
-        public static Error AlreadyExest => Error.Failure("Hub.AlreadyExest", "user aleaready exists");
+        public static Error AlreadyExest => Error.Failure("Hub.AlreadyExest", "hub aleaready exists");
 
 
     }

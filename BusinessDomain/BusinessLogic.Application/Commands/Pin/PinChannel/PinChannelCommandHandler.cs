@@ -47,7 +47,21 @@ public class PinChannelCommandHandler : IHandler<PinChannelCommand, ErrorOr<Chan
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         Channel? channel= await _channelRepository.GetByIdAsync(request.ChannelId);
 
-        
+
+        var PinningUser = await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedChannels")!;
+        User? getuser = PinningUser.FirstOrDefault()!;
+        var PinnedChannels = getuser.PinnedChannels;
+
+        foreach (var PinnedChannel in PinnedChannels)
+        {
+            if (PinnedChannel.Id == request.ChannelId)
+            {
+                return DomainErrors.Channel.AlreadyExest;
+            }
+
+        }
+
+           
         creatorUser.PinnedChannels.Add(channel);
         await _unitOfWork.PinChannelAsync(channel, creatorUser);
         if (await _unitOfWork.SaveAsync() == 0)

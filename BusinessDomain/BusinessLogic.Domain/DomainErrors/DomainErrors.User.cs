@@ -37,5 +37,9 @@ public static partial class DomainErrors
            "User.UserDontHavePermession",
            "user don't have permission to take this action");
 
+        public static Error AllreadyExists => Error.Failure(
+        "User.AllreadyExists",
+        "user already exists");
+
     }
 }

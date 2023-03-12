@@ -43,17 +43,36 @@ public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostReadMo
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         Post?post = await _PostRepository.GetByIdAsync(request.PostId);
-        creatorUser.PinnedPosts.Add(post);  
-       await _unitOfWork.PinPostAsync(post, creatorUser);
 
-        if (await _unitOfWork.SaveAsync() == 0)
+        var PinningUser = await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedPosts")!;
+        User? getuser = PinningUser.FirstOrDefault()!;
+        var PinnedPosts = getuser.PinnedPosts;
+
+        foreach (var PinnedPost in PinnedPosts)
         {
+            if (PinnedPost.Id == request.PostId)
+            {
+                return DomainErrors.Post.AllreadyExistsToPin;
+            }
 
-
-            return DomainErrors.Post.InvalidPost;
         }
-        return post.Adapt<PostReadModel>();
+
+
+        creatorUser.PinnedPosts.Add(post);
+            await _unitOfWork.PinPostAsync(post, creatorUser);
+
+            if (await _unitOfWork.SaveAsync() == 0)
+            {
+
+
+                return DomainErrors.Post.InvalidPost;
+            }
+            return post.Adapt<PostReadModel>();
+
+
+        }
+
+     
     }
 
 
-}

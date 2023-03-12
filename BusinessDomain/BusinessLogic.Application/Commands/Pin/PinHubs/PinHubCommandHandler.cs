@@ -44,6 +44,18 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         Hub? hub = await _hubRepository.GetByIdAsync(request.HubId);
 
+        var PinningUser = await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedHubs")!;
+        User? getuser= PinningUser.FirstOrDefault()!;
+        var PinnedHubs = getuser.PinnedHubs;
+
+        foreach(var userHup in PinnedHubs)
+        {
+            if(userHup.Id==request.HubId)
+            {
+                return DomainErrors.Hub.AlreadyExest;
+            }
+
+        }
         creatorUser.PinnedHubs.Add(hub);
 
         await _unitOfWork.PinHubAsync(hub, creatorUser);
@@ -52,10 +64,6 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
         return DomainErrors.Hub.InvalidHub;
 
         }
-
-
-
-
 
         return hub.Adapt<HubReadModel>();
 
