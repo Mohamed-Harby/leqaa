@@ -11,6 +11,7 @@ const initialState = {
     userChannels: [],
     userHubs: [],
     friends: [],
+    user: {},
     status: "idle",
     error: "",
 }
@@ -129,6 +130,22 @@ export const viewUsers = createAsyncThunk("user/viewusers", async (payload) => {
     }
 })
 
+export const viewUser = createAsyncThunk("user/viewuser", async (payload) => {
+    const viewUserUrl = `ViewUser?UserName=${payload.data}`
+    try {
+        const response = await axios.get(baseUrl + viewUserUrl, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
 
 const userSlice = createSlice({
     name: 'user',
@@ -207,6 +224,18 @@ const userSlice = createSlice({
                 state.status = "failed"
                 state.error = action.error.message
             })
+            //////////////////////////////////////////////////////
+            .addCase(viewUser.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(viewUser.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.user = action.payload;
+            })
+            .addCase(viewUser.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
     }
 })
 
@@ -216,6 +245,7 @@ export const getResponse = (state) => state.user.response
 export const getResponseUserChannels = (state) => state.user.userChannels
 export const getResponseUserHubs = (state) => state.user.userHubs
 export const getResponseUserFriends = (state) => state.user.friends
+export const getResponseUser = (state) => state.user.user
 export const getPlan = (state) => state.user.plan
 export const getError = (state) => state.user.error
 export const getStatus = (state) => state.user.status

@@ -10,6 +10,8 @@ import ModalDiscoverFriends from "../../ModalDiscoverFriends/ModalDiscoverFriend
 import "./Friends.css";
 
 function Friends() {
+  const [render, setRender] = useState(false);
+
   const dispatch = useDispatch();
   const auth = useAuth();
   const [friends, setFriends] = useState([]);

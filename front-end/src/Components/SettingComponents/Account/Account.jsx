@@ -19,6 +19,7 @@ const Account = () => {
   const status = useSelector(getStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
+  const [selectPlan, setSelectPlan] = useState('')
   useEffect(() => {
     dispatch(viewUserProfile(token));
   }, []);
@@ -32,13 +33,14 @@ const Account = () => {
     reset,
   } = useForm();
   const onSubmitHandler = (data) => {
+    setSelectPlan(data.planType)
     data.planType &&
       dispatch(buyPlan({ data: { planType: data.planType }, token: token }));
   };
   console.log(response);
-  useEffect(() => {
-    plan.type && window.location.reload();
-  }, [plan]);
+  // useEffect(() => {
+  //   plan.type && window.location.reload();
+  // }, [plan]);
   return (
     <div className="plans">
       <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -47,7 +49,7 @@ const Account = () => {
           <label htmlFor="planType">Plan Type</label>
           <select id="planType" {...register("planType")} name="planType">
             <option value="">Select Plan Type</option>
-            <option value="premium">Premium</option>
+            <option value="Premium">Premium</option>
           </select>
         </div>
         {user[0]?.description}
@@ -56,7 +58,10 @@ const Account = () => {
         </div>
       </form>
       <div>
-        <h3>You Are {user.plans?.length ? user.plans[0].type : "Free"} Plan</h3>
+        <h3>
+          You Are{" "}
+          <span>{user.plans?.length ? user.plans[0].type : selectPlan.length ? selectPlan : "Free"}</span> Plan
+        </h3>
       </div>
     </div>
   );

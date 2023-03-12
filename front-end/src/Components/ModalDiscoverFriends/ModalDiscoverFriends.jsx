@@ -9,6 +9,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import Member from "../ChannelComponents/Member/Member";
 
 const ModalDiscoverFriends = ({ closeModal }) => {
+  const [render, setRender] = useState(false);
   const auth = useAuth();
   const dispatch = useDispatch();
   const [friends, setFriends] = useState([]);
@@ -18,7 +19,7 @@ const ModalDiscoverFriends = ({ closeModal }) => {
 
   useEffect(() => {
     dispatch(viewUsers(token));
-  }, []);
+  }, [render]);
 
   useEffect(() => {
     setFriends(responseFriends);
