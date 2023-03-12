@@ -1,5 +1,6 @@
-﻿using BusinessLogic.Application.Commands.Pin.PinHubs;
-using BusinessLogic.Application.Models.Pinned.PinHubs;
+﻿using BusinessLogic.Application.Commands.Pin.PinChannels;
+using BusinessLogic.Application.Commands.Pin.PinHubs;
+using BusinessLogic.Application.Commands.Pin.PinPosts;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,13 +36,13 @@ public class PinnedController : BaseController
 
 
     [HttpPost]
-    public async Task<IActionResult> PinHub(PinHubWriteModel PinHubWriteModel)
-    {
+    public async Task<IActionResult> PinHub( Guid HubId)
+    { 
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
         var PinHubCommand = new PinHubCommand(
           username,
-             PinHubWriteModel.HubId
+          HubId
 
              );
 
@@ -55,6 +56,40 @@ public class PinnedController : BaseController
 
 
 
+    [HttpPost]
+    public async Task<IActionResult> PinPost(Guid PostID)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var PinHubCommand = new PinPostCommand(
+          username,
+          PostID
+
+             );
+
+        var results = await _sender.Send(PinHubCommand);
+        return results.Match(
+          channel => Ok(channel),
+          errors => Problem(errors)
+      );
+    }
+    [HttpPost]
+    public async Task<IActionResult> PinChannel(Guid channelId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var PinChannelCommand = new PinChannelCommand(
+          username,
+          channelId
+
+             );
+
+        var results = await _sender.Send(PinChannelCommand);
+        return results.Match(
+          channel => Ok(channel),
+          errors => Problem(errors)
+      );
+    }
 
 
 

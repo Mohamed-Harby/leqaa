@@ -76,6 +76,90 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         return Task.FromResult(hubToBeCreated);
     }
 
+
+
+
+
+
+
+
+
+
+
+    public Task<Hub> PinHubAsync(Hub hub,User User)
+    {
+        var userPinndHub = new UserPinnedHub
+        {
+            UserPinned = User,
+            PinnedHub = hub
+        };
+        User.PinnedHubs.Add(hub);
+          _context.Set<UserPinnedHub>().Update(userPinndHub);
+
+        return Task.FromResult(hub);
+
+    }
+
+
+
+    public Task<Channel> PinChannelAsync(Channel channel, User creator)
+    {
+        var userPinndChannel=new UserPinnedChannel
+        { UserPinned=creator,
+        PinnedChannel= channel
+
+        };
+
+        creator.PinnedChannels.Add(channel);
+
+        _context.Set<UserPinnedChannel>().Update(userPinndChannel);
+
+        return Task.FromResult(channel);
+    }
+    public Task<Post>PinPostAsync(Post post, User creator)
+    { 
+        var userPinnedPost = new UserPinnedPost
+        {
+         UserPinned=creator,
+         PinnedPost= post
+        };
+
+        creator.PinnedPosts.Add(post);
+
+        _context.Set<UserPinnedPost>().Update(userPinnedPost);
+
+        return Task.FromResult(post);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Task<Channel> CreateChannelAsync(Channel channelToBeCreated, User creator)
     {
         var userChannel = new UserChannel

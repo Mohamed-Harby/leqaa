@@ -1,5 +1,6 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Commands.Channels.UpdateChannel;
+using BusinessLogic.Application.Commands.Pin.PinPosts;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
@@ -13,16 +14,15 @@ using MediatR;
 using System.Runtime.CompilerServices;
 
 namespace BusinessLogic.Application.Commands.Pin.PinHubs;
-public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel>>
+public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostReadModel>>
 {
-
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
     private readonly IChannelRepository _channelRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
 
-    public PinHubCommandHandler(
+    public PinPostCommandHandler(
         IPostRepository postRepository,
         IHubRepository hubRepository,
         IChannelRepository channelRepository,
@@ -39,27 +39,20 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
 
 
     }
-    public async Task<ErrorOr<HubReadModel>> Handle(PinHubCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostReadModel>> Handle(PinPostCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Hub? hub = await _hubRepository.GetByIdAsync(request.HubId);
+        Post?post = await _PostRepository.GetByIdAsync(request.PostId);
+        creatorUser.PinnedPosts.Add(post);  
+       await _unitOfWork.PinPostAsync(post, creatorUser);
 
-        creatorUser.PinnedHubs.Add(hub);
-
-        await _unitOfWork.PinHubAsync(hub, creatorUser);
         if (await _unitOfWork.SaveAsync() == 0)
         {
-        return DomainErrors.Hub.InvalidHub;
 
+
+            return DomainErrors.Post.InvalidPost;
         }
-
-
-
-
-
-        return hub.Adapt<HubReadModel>();
-
-
+        return post.Adapt<PostReadModel>();
     }
 
 

@@ -13,8 +13,9 @@ public class User : BaseEntity
         Posts = new HashSet<Post>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
         ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
-        PinnedChannels = new HashSet<PinnedChannel>();
-
+        PinnedChannels = new HashSet<Channel>();
+        PinnedPosts = new HashSet<Post>();
+        PinnedHubs = new HashSet<Hub>();
 
 
         Plans = new List<Plan.Plan>();
@@ -29,7 +30,10 @@ public class User : BaseEntity
         Posts = new HashSet<Post>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
         ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
-        PinnedChannels = new HashSet<PinnedChannel>();
+        PinnedChannels=new HashSet<Channel>();
+        PinnedPosts=new HashSet<Post>();
+        PinnedHubs=new HashSet<Hub>();
+
 
 
         /* UserChannelAnnoucement = new HashSet<UserChannelAnnoucement>();*/
@@ -55,9 +59,12 @@ public class User : BaseEntity
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; set; }
     public virtual ICollection<ChannelAnnouncement> ChannelAnnouncements { get; set; }
 
+    public virtual ICollection<Channel> PinnedChannels { get; set; }
+    public virtual ICollection<Post> PinnedPosts { get; set; }
+    public virtual ICollection<Hub> PinnedHubs { get; set; }
     public virtual ICollection<Plan.Plan> Plans { get; set; }
     public virtual ICollection<User> Followers { get; set; }
     public virtual ICollection<User> FollowedUsers { get; set; }
-    public virtual ICollection<PinnedChannel> PinnedChannels { get; set; }
+
 
 }

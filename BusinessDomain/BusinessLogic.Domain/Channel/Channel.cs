@@ -8,7 +8,8 @@ public class Channel : BaseEntity
         Rooms = new HashSet<Room>();
         Users = new HashSet<User>();
         ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
-        PinnedChannels = new HashSet<PinnedChannel>();
+        ChannelPinningUsers = new HashSet<User>();
+
 
 
     }
@@ -21,10 +22,10 @@ public class Channel : BaseEntity
         Rooms = new HashSet<Room>();
         Users = new HashSet<User>();
         ChannelAnnouncements = new HashSet<ChannelAnnouncement>();
-        PinnedChannels = new HashSet<PinnedChannel>();
+        ChannelPinningUsers = new HashSet<User>();
 
 
-    }
+}
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public Guid HubId { get; set; }
@@ -36,7 +37,7 @@ public class Channel : BaseEntity
     public virtual ICollection<Room> Rooms { get; private set; }
     public virtual ICollection<User> Users { get; private set; }
 
-    public ICollection<PinnedChannel> PinnedChannels { get; set; }
+    public ICollection<User> ChannelPinningUsers { get; set; }
 
     public void AddUser(User user)
     {

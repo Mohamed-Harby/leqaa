@@ -6,10 +6,10 @@ using ErrorOr;
 using MediatR;
 using System.Reflection.Metadata;
 
-namespace BusinessLogic.Application.Commands.Pin.PinHubs;
+namespace BusinessLogic.Application.Commands.Pin.PinPosts;
 
-public record PinHubCommand(
+public record PinPostCommand(
    string UserName,
 
-   Guid HubId
-) : ICommand<ErrorOr<HubReadModel>>;
+   Guid PostId
+) : ICommand<ErrorOr<PostReadModel>>;

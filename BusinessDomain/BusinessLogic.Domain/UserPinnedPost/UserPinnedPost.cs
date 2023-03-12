@@ -6,21 +6,16 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Domain
 {
-
-    public class PinnedPost : BaseEntity
+    public class UserPinnedPost: BaseEntity
     {
+        public Guid UserPinnedId { get; set; }
+        public Guid PinnedPostId { get; set; }
 
-        public Guid UserPinnedChannelId { get; set; } = Guid.Empty;
         public User UserPinned { get; set; } = null!;
 
-        public virtual ICollection<Post> Posts { get; private set; }
-
-
-
-
-
-
+        public Post PinnedPost { get; set; } = null!;
 
 
     }
 }
+

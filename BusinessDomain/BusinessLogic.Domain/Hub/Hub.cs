@@ -6,6 +6,8 @@ public class Hub : BaseEntity
         Users = new HashSet<User>();
         Channels = new HashSet<Channel>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
+        HubPinningUsers = new HashSet<User>();
+
     }
     public Hub(string name, string logo = null!, string description = "")
     {
@@ -15,6 +17,7 @@ public class Hub : BaseEntity
         Users = new HashSet<User>();
         Channels = new HashSet<Channel>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
+        HubPinningUsers = new HashSet<User>();
     }
 
     public string Name { get; set; } = string.Empty;
@@ -24,7 +27,7 @@ public class Hub : BaseEntity
     public virtual ICollection<User> Users { get; private set; }
     public virtual ICollection<Channel> Channels { get; private set; }
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; private set; }
-
+    public ICollection<User> HubPinningUsers { get; set; }
 
     public void AddUser(User user)
     {

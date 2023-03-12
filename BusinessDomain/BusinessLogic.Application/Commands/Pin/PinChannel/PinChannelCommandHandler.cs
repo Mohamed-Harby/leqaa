@@ -1,5 +1,6 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Commands.Channels.UpdateChannel;
+using BusinessLogic.Application.Commands.Pin.PinChannels;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
@@ -12,9 +13,10 @@ using Mapster;
 using MediatR;
 using System.Runtime.CompilerServices;
 
-namespace BusinessLogic.Application.Commands.Pin.PinHubs;
-public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel>>
+namespace BusinessLogic.Application.Commands.Pin.PinChannel;
+public class PinChannelCommandHandler : IHandler<PinChannelCommand, ErrorOr<ChannelReadModel>>
 {
+  
 
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
@@ -22,7 +24,7 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserRepository _userRepository;
 
-    public PinHubCommandHandler(
+    public PinChannelCommandHandler(
         IPostRepository postRepository,
         IHubRepository hubRepository,
         IChannelRepository channelRepository,
@@ -36,29 +38,24 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
         _channelRepository = channelRepository;
         _unitOfWork = unitOfWork;
         _userRepository = userRepository;
-
+ 
 
     }
-    public async Task<ErrorOr<HubReadModel>> Handle(PinHubCommand request, CancellationToken cancellationToken)
+
+    public async Task<ErrorOr<ChannelReadModel>> Handle(PinChannelCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Hub? hub = await _hubRepository.GetByIdAsync(request.HubId);
+        Channel? channel= await _channelRepository.GetByIdAsync(request.ChannelId);
 
-        creatorUser.PinnedHubs.Add(hub);
-
-        await _unitOfWork.PinHubAsync(hub, creatorUser);
+        
+        creatorUser.PinnedChannels.Add(channel);
+        await _unitOfWork.PinChannelAsync(channel, creatorUser);
         if (await _unitOfWork.SaveAsync() == 0)
         {
-        return DomainErrors.Hub.InvalidHub;
-
+            return DomainErrors.Channel.InvalidChannel;
         }
 
-
-
-
-
-        return hub.Adapt<HubReadModel>();
-
+        return channel.Adapt<ChannelReadModel>();
 
     }
 

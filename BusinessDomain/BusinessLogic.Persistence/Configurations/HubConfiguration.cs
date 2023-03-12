@@ -33,6 +33,25 @@ public class HubConfiguration : BaseConfiguration<Hub>
         );
 
 
+        builder
+     .HasMany(h => h.HubPinningUsers)
+     .WithMany(u => u.PinnedHubs)
+     .UsingEntity<UserPinnedHub>(
+         join => join
+         .HasOne(uh => uh.UserPinned)
+         .WithMany()
+         .HasForeignKey(uh => uh.UserPinnedid)
+              .OnDelete(DeleteBehavior.Cascade),
+
+         join => join
+         .HasOne(uh => uh.PinnedHub)
+         .WithMany()
+         .HasForeignKey(uh => uh.PinnedHubId)
+              .OnDelete(DeleteBehavior.Cascade)
+     );
+
+
+
         builder.Property(t => t.Name).IsRequired()
         .HasMaxLength(100);
         builder.Property(t => t.Description).HasMaxLength(4000);

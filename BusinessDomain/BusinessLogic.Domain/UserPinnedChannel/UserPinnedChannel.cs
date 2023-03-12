@@ -8,12 +8,12 @@ namespace BusinessLogic.Domain
 {
     public class UserPinnedChannel : BaseEntity
     {
-        public Guid UserId { get; set; }
+        public Guid UserPinnedId { get; set; }
         public Guid PinnedChannelId { get; set; }
 
-        public User User { get; set; } = null!;
+        public User UserPinned { get; set; } = null!;
 
-        public PinnedChannel PinnedChannel { get; set; } = null!;
+        public Channel PinnedChannel { get; set; } = null!;
 
 
     }

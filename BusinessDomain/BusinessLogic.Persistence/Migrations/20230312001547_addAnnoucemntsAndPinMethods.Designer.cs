@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessLogic.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230308201935_AddedImageToChannel")]
-    partial class AddedImageToChannel
+    [Migration("20230312001547_addAnnoucemntsAndPinMethods")]
+    partial class addAnnoucemntsAndPinMethods
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,49 +20,6 @@ namespace BusinessLogic.Persistence.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("BusinessLogic.Domain.Announcement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("ChannelId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 344, DateTimeKind.Utc).AddTicks(7847));
-
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("longblob");
-
-                    b.Property<string>("RoleName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("content")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChannelId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("announcements", (string)null);
-                });
 
             modelBuilder.Entity("BusinessLogic.Domain.Channel", b =>
                 {
@@ -73,7 +30,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 344, DateTimeKind.Utc).AddTicks(8812));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 259, DateTimeKind.Utc).AddTicks(3748));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
@@ -111,6 +68,42 @@ namespace BusinessLogic.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BusinessLogic.Domain.ChannelAnnouncement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ChannelId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 259, DateTimeKind.Utc).AddTicks(2578));
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChannelId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("channelAnnouncements", (string)null);
+                });
+
             modelBuilder.Entity("BusinessLogic.Domain.Hub", b =>
                 {
                     b.Property<Guid>("Id")
@@ -120,7 +113,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 345, DateTimeKind.Utc).AddTicks(2787));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 262, DateTimeKind.Utc).AddTicks(5887));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4000)
@@ -153,6 +146,40 @@ namespace BusinessLogic.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("BusinessLogic.Domain.HubAnnouncement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("HubId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("longblob");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HubId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("HubAnnouncement");
+                });
+
             modelBuilder.Entity("BusinessLogic.Domain.Plan.Plan", b =>
                 {
                     b.Property<Guid>("Id")
@@ -162,7 +189,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 347, DateTimeKind.Utc).AddTicks(8182));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 268, DateTimeKind.Utc).AddTicks(7624));
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -191,7 +218,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 348, DateTimeKind.Utc).AddTicks(291));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 268, DateTimeKind.Utc).AddTicks(9827));
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("longblob");
@@ -223,7 +250,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 348, DateTimeKind.Utc).AddTicks(1235));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 272, DateTimeKind.Utc).AddTicks(4593));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -242,7 +269,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("StartedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 22, 19, 35, 348, DateTimeKind.Local).AddTicks(2690));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 272, DateTimeKind.Utc).AddTicks(5828));
 
                     b.HasKey("Id");
 
@@ -273,7 +300,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 20, 19, 35, 350, DateTimeKind.Utc).AddTicks(3087));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 276, DateTimeKind.Utc).AddTicks(346));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -328,7 +355,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 22, 19, 35, 350, DateTimeKind.Local).AddTicks(1943));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 275, DateTimeKind.Utc).AddTicks(9489));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -343,6 +370,31 @@ namespace BusinessLogic.Persistence.Migrations
                     b.ToTable("UserChannel");
                 });
 
+            modelBuilder.Entity("BusinessLogic.Domain.UserChannelAnnoucement", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ChannelAnnouncementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 274, DateTimeKind.Utc).AddTicks(3096));
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasDefaultValue(new Guid("56480b08-e9ba-4ca6-b81f-d85522027530"));
+
+                    b.HasKey("UserId", "ChannelAnnouncementId");
+
+                    b.HasIndex("ChannelAnnouncementId");
+
+                    b.ToTable("UserChannelAnnoucement");
+                });
+
             modelBuilder.Entity("BusinessLogic.Domain.UserHub", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -354,12 +406,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 22, 19, 35, 354, DateTimeKind.Local).AddTicks(1548));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 283, DateTimeKind.Utc).AddTicks(9685));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("ecd1d3e4-79ed-4170-a4f5-d2b3d068a49e"));
+                        .HasDefaultValue(new Guid("bb760b43-5383-4977-b3ac-ff1575b18311"));
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -369,6 +421,106 @@ namespace BusinessLogic.Persistence.Migrations
                     b.HasIndex("HubId");
 
                     b.ToTable("UserHub");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserHubAnnouncement", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("HubAnnouncementId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 283, DateTimeKind.Utc).AddTicks(7272));
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasDefaultValue(new Guid("f298d8ad-ffc3-4ce6-b4fa-8ae8c13511af"));
+
+                    b.HasKey("UserId", "HubAnnouncementId");
+
+                    b.HasIndex("HubAnnouncementId");
+
+                    b.ToTable("UserHubAnnouncement");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedChannel", b =>
+                {
+                    b.Property<Guid>("UserPinnedId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PinnedChannelId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 2, 15, 47, 284, DateTimeKind.Local).AddTicks(2236));
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasDefaultValue(new Guid("1eb47a45-8c96-46d8-adde-50f11be926d2"));
+
+                    b.HasKey("UserPinnedId", "PinnedChannelId");
+
+                    b.HasIndex("PinnedChannelId");
+
+                    b.ToTable("UserPinnedChannel");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedHub", b =>
+                {
+                    b.Property<Guid>("UserPinnedid")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PinnedHubId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 2, 15, 47, 284, DateTimeKind.Local).AddTicks(4793));
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasDefaultValue(new Guid("4d5e6f3d-ce9e-4f3d-a5d1-ce9fad2ec653"));
+
+                    b.HasKey("UserPinnedid", "PinnedHubId");
+
+                    b.HasIndex("PinnedHubId");
+
+                    b.ToTable("UserPinnedHub");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedPost", b =>
+                {
+                    b.Property<Guid>("UserPinnedId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("PinnedPostId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 2, 15, 47, 284, DateTimeKind.Local).AddTicks(7248));
+
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
+                        .HasDefaultValue(new Guid("93ac999f-5335-42b5-92c1-7c22cd43a5d2"));
+
+                    b.HasKey("UserPinnedId", "PinnedPostId");
+
+                    b.HasIndex("PinnedPostId");
+
+                    b.ToTable("UserPinnedPost");
                 });
 
             modelBuilder.Entity("BusinessLogic.Domain.UserRoom", b =>
@@ -382,7 +534,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 22, 19, 35, 354, DateTimeKind.Local).AddTicks(3431));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 284, DateTimeKind.Utc).AddTicks(9076));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -408,7 +560,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 3, 8, 22, 19, 35, 354, DateTimeKind.Local).AddTicks(5411));
+                        .HasDefaultValue(new DateTime(2023, 3, 12, 0, 15, 47, 285, DateTimeKind.Utc).AddTicks(1149));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -420,25 +572,6 @@ namespace BusinessLogic.Persistence.Migrations
                     b.ToTable("UserUser");
                 });
 
-            modelBuilder.Entity("BusinessLogic.Domain.Announcement", b =>
-                {
-                    b.HasOne("BusinessLogic.Domain.Channel", "Channel")
-                        .WithMany("Announcements")
-                        .HasForeignKey("ChannelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BusinessLogic.Domain.User", "User")
-                        .WithMany("Announcements")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Channel");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BusinessLogic.Domain.Channel", b =>
                 {
                     b.HasOne("BusinessLogic.Domain.Hub", "Hub")
@@ -448,6 +581,44 @@ namespace BusinessLogic.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Hub");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.ChannelAnnouncement", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.Channel", "Channel")
+                        .WithMany("ChannelAnnouncements")
+                        .HasForeignKey("ChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "User")
+                        .WithMany("ChannelAnnouncements")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Channel");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.HubAnnouncement", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.Hub", "Hub")
+                        .WithMany("HubAnnouncements")
+                        .HasForeignKey("HubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "User")
+                        .WithMany("HubAnnouncements")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hub");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BusinessLogic.Domain.Plan.Plan", b =>
@@ -502,6 +673,25 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BusinessLogic.Domain.UserChannelAnnoucement", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.ChannelAnnouncement", "ChannelAnnouncement")
+                        .WithMany()
+                        .HasForeignKey("ChannelAnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChannelAnnouncement");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BusinessLogic.Domain.UserHub", b =>
                 {
                     b.HasOne("BusinessLogic.Domain.Hub", "Hub")
@@ -519,6 +709,82 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Navigation("Hub");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserHubAnnouncement", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.HubAnnouncement", "HubAnnouncement")
+                        .WithMany()
+                        .HasForeignKey("HubAnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HubAnnouncement");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedChannel", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.Channel", "PinnedChannel")
+                        .WithMany()
+                        .HasForeignKey("PinnedChannelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "UserPinned")
+                        .WithMany()
+                        .HasForeignKey("UserPinnedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PinnedChannel");
+
+                    b.Navigation("UserPinned");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedHub", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.Hub", "PinnedHub")
+                        .WithMany()
+                        .HasForeignKey("PinnedHubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "UserPinned")
+                        .WithMany()
+                        .HasForeignKey("UserPinnedid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PinnedHub");
+
+                    b.Navigation("UserPinned");
+                });
+
+            modelBuilder.Entity("BusinessLogic.Domain.UserPinnedPost", b =>
+                {
+                    b.HasOne("BusinessLogic.Domain.Post", "PinnedPost")
+                        .WithMany()
+                        .HasForeignKey("PinnedPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessLogic.Domain.User", "UserPinned")
+                        .WithMany()
+                        .HasForeignKey("UserPinnedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PinnedPost");
+
+                    b.Navigation("UserPinned");
                 });
 
             modelBuilder.Entity("BusinessLogic.Domain.UserRoom", b =>
@@ -561,7 +827,7 @@ namespace BusinessLogic.Persistence.Migrations
 
             modelBuilder.Entity("BusinessLogic.Domain.Channel", b =>
                 {
-                    b.Navigation("Announcements");
+                    b.Navigation("ChannelAnnouncements");
 
                     b.Navigation("Rooms");
                 });
@@ -569,11 +835,15 @@ namespace BusinessLogic.Persistence.Migrations
             modelBuilder.Entity("BusinessLogic.Domain.Hub", b =>
                 {
                     b.Navigation("Channels");
+
+                    b.Navigation("HubAnnouncements");
                 });
 
             modelBuilder.Entity("BusinessLogic.Domain.User", b =>
                 {
-                    b.Navigation("Announcements");
+                    b.Navigation("ChannelAnnouncements");
+
+                    b.Navigation("HubAnnouncements");
 
                     b.Navigation("Plans");
 
