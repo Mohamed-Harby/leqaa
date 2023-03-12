@@ -17,7 +17,7 @@ public class ViewUserQueryHandler : IHandler<ViewUserQuery, ErrorOr<UserReadMode
 
     public async Task<ErrorOr<UserReadModel>> Handle(ViewUserQuery request, CancellationToken cancellationToken)
     {
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Users,Plans,Hubs,Channels")).FirstOrDefault()!;
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Plans,Hubs,Channels,HubAnnouncements,ChannelAnnouncements")).FirstOrDefault()!;
         return user.Adapt<UserReadModel>();
     }
 }

@@ -58,7 +58,6 @@ public class User : BaseEntity
     public virtual ICollection<Post> Posts { get; set; }
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; set; }
     public virtual ICollection<ChannelAnnouncement> ChannelAnnouncements { get; set; }
-
     public virtual ICollection<Channel> PinnedChannels { get; set; }
     public virtual ICollection<Post> PinnedPosts { get; set; }
     public virtual ICollection<Hub> PinnedHubs { get; set; }
