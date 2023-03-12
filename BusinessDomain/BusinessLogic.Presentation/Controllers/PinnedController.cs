@@ -22,19 +22,6 @@ public class PinnedController : BaseController
         _sender = sender;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     [HttpPost]
     public async Task<IActionResult> PinHub( Guid HubId)
     { 
@@ -52,10 +39,7 @@ public class PinnedController : BaseController
           errors => Problem(errors)
       );
     }
-
-
-
-
+    
     [HttpPost]
     public async Task<IActionResult> PinPost(Guid PostID)
     {

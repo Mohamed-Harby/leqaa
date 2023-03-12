@@ -23,7 +23,7 @@ public class DeployHubAnnoucementCommandHandler : IHandler<CreateChannelCommand,
         IChannelRepository channelRepository,
         IHubRepository hubRepository,
         IUserRepository userRepository,
-        IUserChannelRepository userChannelRepository,
+        IUserHubRepository userChannelRepository,
         IUnitOfWork unitOfWork)
     {
         _channelRepository = channelRepository;

@@ -1,4 +1,4 @@
-using BusinessLogic.Application.Queries.MultiQueries.ViewRecentActivities;
+using BusinessLogic.Application.Queries.Home.ViewRecentActivities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

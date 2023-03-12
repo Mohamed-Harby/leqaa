@@ -64,6 +64,4 @@ public class User : BaseEntity
     public virtual ICollection<Plan.Plan> Plans { get; set; }
     public virtual ICollection<User> Followers { get; set; }
     public virtual ICollection<User> FollowedUsers { get; set; }
-
-
 }

@@ -40,7 +40,7 @@ namespace BusinessLogic.Application.Commands.Users.UpdateUserRole
 
             User? currentUser = (await _userRepository.GetAsync(u => u.UserName == request.userNameAdding)).FirstOrDefault()!;
 
-            
+
             UserHub userHup = (await _userHubRepository.GetAsync(u => u.UserId == currentUser.Id)).FirstOrDefault()!;
             if (userHup.Role != GroupRole.Admin && userHup.Role != GroupRole.Founder)
             {
@@ -51,20 +51,20 @@ namespace BusinessLogic.Application.Commands.Users.UpdateUserRole
 
             UserHub? userToUpdate = (await _userHubRepository.GetAsync(u => u.UserId == userToUpdateRole.Id)).FirstOrDefault();
 
-          
-         
+
+
             if (userToUpdate == null)
             {
                 return DomainErrors.User.NotFound;
             }
 
-    
+
             userToUpdate.Role = request.NewRole;
             var result = await _userHubRepository.UpdateAsync(userToUpdate);
 
-            if(await _userHubRepository.SaveAsync() == 0)
+            if (await _userHubRepository.SaveAsync() == 0)
             {
-                return DomainErrors.UserHub.CouldNotProceed; 
+                return DomainErrors.UserHub.CouldNotProceed;
 
             }
             return DomainSucceded.User.RoleAdded;

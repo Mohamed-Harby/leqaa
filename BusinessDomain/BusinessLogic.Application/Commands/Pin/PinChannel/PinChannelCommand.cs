@@ -13,4 +13,4 @@ public record PinChannelCommand(
    string UserName,
 
    Guid ChannelId
-) : ICommand<ErrorOr<ChannelReadModel>>;
+) : IUserNameInCommand<ErrorOr<ChannelReadModel>>;

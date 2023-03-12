@@ -22,22 +22,22 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
             .OnDelete(DeleteBehavior.Cascade);
 
 
-             builder
-        .HasMany(h => h.ChannelPinningUsers)
-        .WithMany(u => u.PinnedChannels)
-        .UsingEntity<UserPinnedChannel>(
-            join => join
-            .HasOne(uh => uh.UserPinned)
-            .WithMany()
-            .HasForeignKey(uh => uh.UserPinnedId)
-                 .OnDelete(DeleteBehavior.Cascade),
+        builder
+   .HasMany(h => h.PinningUsers)
+   .WithMany(u => u.PinnedChannels)
+   .UsingEntity<UserPinnedChannel>(
+       join => join
+       .HasOne(uh => uh.UserPinned)
+       .WithMany()
+       .HasForeignKey(uh => uh.UserPinnedId)
+            .OnDelete(DeleteBehavior.Cascade),
 
-            join => join
-            .HasOne(uh => uh.PinnedChannel)
-            .WithMany()
-            .HasForeignKey(uh => uh.PinnedChannelId)
-                 .OnDelete(DeleteBehavior.Cascade)
-        );
+       join => join
+       .HasOne(uh => uh.PinnedChannel)
+       .WithMany()
+       .HasForeignKey(uh => uh.PinnedChannelId)
+            .OnDelete(DeleteBehavior.Cascade)
+   );
 
 
         builder.Property(t => t.Name).IsRequired()

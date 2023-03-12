@@ -4,7 +4,7 @@ using BusinessLogic.Application.Models;
 using BusinessLogic.Domain;
 using Mapster;
 
-namespace BusinessLogic.Application.Queries.MultiQueries.ViewRecentActivities;
+namespace BusinessLogic.Application.Queries.Home.ViewRecentActivities;
 public class ViewRecentActivitiesQueryHandler : IHandler<ViewRecentActivitiesQuery, List<BaseReadModel>>
 {
     private readonly IUnitOfWork _unitOfWork;

@@ -10,6 +10,5 @@ namespace BusinessLogic.Application.Commands.Pin.PinPosts;
 
 public record PinPostCommand(
    string UserName,
-
    Guid PostId
-) : ICommand<ErrorOr<PostReadModel>>;
+) : IUserNameInCommand<ErrorOr<PostReadModel>>;

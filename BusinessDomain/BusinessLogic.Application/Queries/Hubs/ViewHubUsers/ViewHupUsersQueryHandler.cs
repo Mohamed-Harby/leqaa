@@ -49,7 +49,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
                    User user= await _userRepository.GetByIdAsync(userId);
                    users.Add(user);
                }*/
-            return hubs.Users.Adapt<List<UserReadModel>>();
+            return hubs.JoinedUsers.Adapt<List<UserReadModel>>();
 
 
 

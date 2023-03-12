@@ -2,9 +2,11 @@ using System.Security.Claims;
 using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Commands.Channels.DeleteChannel;
 using BusinessLogic.Application.Commands.Channels.UpdateChannel;
+using BusinessLogic.Application.Models;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Channels.ViewChannel;
+using BusinessLogic.Application.Queries.Channels.ViewRecentActivities;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
@@ -78,7 +80,7 @@ public class ChannelController : BaseController
     }
 
 
-    [HttpPut("")]
+    [HttpPut]
     public async Task<ActionResult<ChannelWriteModel>> EditChannel([FromQuery] Guid id, ChannelWriteModel channelWriteModel)
     {
         var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
@@ -87,5 +89,12 @@ public class ChannelController : BaseController
         var UpdateChannel = await _sender.Send(UpdateChannelCommand);
 
         return Ok(UpdateChannel);
+    }
+    [HttpGet]
+    public async Task<IActionResult> ViewRecentActivities(
+        [FromQuery] ViewChannelRecentActivitiesQuery viewChannelRecentActivitiesQuery)
+    {
+        var result = await _sender.Send(viewChannelRecentActivitiesQuery);
+        return Ok(result);
     }
 }

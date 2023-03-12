@@ -1,7 +1,6 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Users;
-using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
 using Mapster;
 
@@ -17,7 +16,7 @@ public class ViewUserQueryHandler : IHandler<ViewUserQuery, ErrorOr<UserReadMode
 
     public async Task<ErrorOr<UserReadModel>> Handle(ViewUserQuery request, CancellationToken cancellationToken)
     {
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Plans,Hubs,Channels,HubAnnouncements,ChannelAnnouncements")).FirstOrDefault()!;
+        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Plans,Posts,Hubs,Channels,HubAnnouncements,ChannelAnnouncements")).FirstOrDefault()!;
         return user.Adapt<UserReadModel>();
     }
 }

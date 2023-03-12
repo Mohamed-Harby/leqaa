@@ -1,6 +1,7 @@
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
 using CommonGenericClasses;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Persistence.Repositories;
 
@@ -14,11 +15,20 @@ public class ChannelRepository : BaseRepo<Channel>, IChannelRepository
 
         _context = context;
     }
-    public async Task<Channel> AddChannelWithUser(Channel channel, User user)
+    public async Task<List<BaseEntity>> GetRecentActivitiesAsync(Guid id, int pageNumber, int pageSize)
     {
-        channel.AddUser(user);
-        await db.Set<Channel>().AddAsync(channel);
-        return channel;
+        var channel = (await _context.Set<Channel>()
+                                    .Where(c => c.Id == id)
+                                    .Include(c => c.JoinedUsers)
+                                    .Include(c => c.ChannelAnnouncements)
+                                    .FirstOrDefaultAsync())!;
+        var recentActivities = new List<BaseEntity>();
+        recentActivities.AddRange(channel.JoinedUsers);
+        recentActivities.AddRange(channel.ChannelAnnouncements);
+        recentActivities = recentActivities.OrderByDescending(b => b.CreationDate).ToList();
+        return recentActivities;
+
+
     }
 
     public Task<Channel> DeleteChannelWithUser(Channel channel, User user)
@@ -33,5 +43,5 @@ public class ChannelRepository : BaseRepo<Channel>, IChannelRepository
         throw new NotImplementedException();
     }
 
-    
+
 }

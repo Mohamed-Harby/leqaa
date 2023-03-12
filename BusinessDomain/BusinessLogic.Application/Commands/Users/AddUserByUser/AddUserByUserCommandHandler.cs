@@ -21,7 +21,7 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
     public class AddUserByUserCommandHandler : IHandler<AddUserByUserCommand, ErrorOr<UserReadModel>>
     {
 
-        private readonly IUserChannelRepository _userChannelRepository;
+        private readonly IUserHubRepository _userChannelRepository;
         private readonly IUserHubRepository _userHubRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IChannelRepository _channelRepository;
@@ -29,7 +29,7 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
         public AddUserByUserCommandHandler(IPlanRepository planRepository,
             IUserRepository userRepository,
-            IUserChannelRepository userChannelRepository,
+            IUserHubRepository userChannelRepository,
             IUserHubRepository userHubRepository,
             IHubRepository hubRepository,
             IChannelRepository channelRepository)
@@ -49,7 +49,7 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
             var hub = await _hubRepository.GetByIdAsync(request.hupId);
 
-            if(addedUser== null|| addingUser==null)
+            if (addedUser == null || addingUser == null)
             {
                 return DomainErrors.User.NotFound;
             }

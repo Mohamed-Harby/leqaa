@@ -86,7 +86,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 
 
-    public Task<Hub> PinHubAsync(Hub hub,User User)
+    public Task<Hub> PinHubAsync(Hub hub, User User)
     {
         var userPinndHub = new UserPinnedHub
         {
@@ -94,7 +94,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
             PinnedHub = hub
         };
         User.PinnedHubs.Add(hub);
-          _context.Set<UserPinnedHub>().Update(userPinndHub);
+        _context.Set<UserPinnedHub>().Update(userPinndHub);
 
         return Task.FromResult(hub);
 
@@ -104,9 +104,10 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     public Task<Channel> PinChannelAsync(Channel channel, User creator)
     {
-        var userPinndChannel=new UserPinnedChannel
-        { UserPinned=creator,
-        PinnedChannel= channel
+        var userPinndChannel = new UserPinnedChannel
+        {
+            UserPinned = creator,
+            PinnedChannel = channel
 
         };
 
@@ -116,12 +117,12 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
         return Task.FromResult(channel);
     }
-    public Task<Post>PinPostAsync(Post post, User creator)
-    { 
+    public Task<Post> PinPostAsync(Post post, User creator)
+    {
         var userPinnedPost = new UserPinnedPost
         {
-         UserPinned=creator,
-         PinnedPost= post
+            UserPinned = creator,
+            PinnedPost = post
         };
 
         creator.PinnedPosts.Add(post);
@@ -214,6 +215,11 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         recentActivities.AddRange(channels);
         recentActivities.AddRange((hubAnnouncements).OrderByDescending(ha => ha.CreationDate));
         recentActivities.AddRange((channelAnnouncements).OrderByDescending(ca => ca.CreationDate));
+        
+        recentActivities = recentActivities
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToList();
         return recentActivities;
     }
 
@@ -232,7 +238,10 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         result.AddRange(user.Channels);
         result.AddRange(user.HubAnnouncements);
         result.AddRange(user.ChannelAnnouncements);
-        result = result.OrderByDescending(r => r.CreationDate).ToList();
+        result = result.OrderByDescending(r => r.CreationDate)
+        .Skip((pageNumber - 1) * pageSize)
+        .Take(pageSize)
+        .ToList();
         return result;
 
 

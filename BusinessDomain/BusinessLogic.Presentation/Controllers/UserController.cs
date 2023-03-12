@@ -23,6 +23,12 @@ using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Commands.Users.UpdateUserRole;
 using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Application.Queries.Users.ViewRecentActivities;
+using BusinessLogic.Application.Commands.Pin.PinChannels;
+using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Commands.Users.JoinChannel;
+using BusinessLogic.Application.Commands.Pin.PinHubs;
+using BusinessLogic.Application.Models.Posts;
+using BusinessLogic.Application.Commands.Pin.PinPosts;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -218,8 +224,6 @@ public class UserController : BaseController
         );
     }
 
-
-
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> UpdateUserRole(string UsertoUpdate, GroupRole newRole)
@@ -235,7 +239,7 @@ public class UserController : BaseController
         );
     }
     [HttpGet]
-    // [Authorize]
+    [Authorize]
     public async Task<IActionResult> ViewRecentActivities(int pageNumber = 1, int pageSize = 20)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -247,5 +251,50 @@ public class UserController : BaseController
             errors => Problem(errors)
         );
     }
-
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> JoinChannel(JoinChannelModel joinChannelModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var joinChannelCommand = new JoinChannelCommand(username, joinChannelModel.Id);
+        var result = await _sender.Send(joinChannelCommand);
+        return result.Match(
+            channel => Ok(channel),
+            errors => Problem(errors)
+        );
+    }
+    
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> PinChannel(PinChannelModel pinChannelModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var pinChannelCommand = new PinChannelCommand(username, pinChannelModel.Id);
+        var result = await _sender.Send(pinChannelCommand);
+        return result.Match(
+            channel => Ok(channel),
+            errors => Problem(errors));
+    }
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> PinHub(PinHubModel pinHubModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var pinHubCommand = new PinHubCommand(username, pinHubModel.Id);
+        var result = await _sender.Send(pinHubCommand);
+        return result.Match(
+            hub => Ok(hub),
+            errors => Problem(errors));
+    }
+    [HttpPost]
+    [Authorize]
+    public async Task<IActionResult> PinPost(PinPostModel pinPostModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var pinPostCommand = new PinPostCommand(username, pinPostModel.Id);
+        var result = await _sender.Send(pinPostCommand);
+        return result.Match(
+            post => Ok(post),
+            errors => Problem(errors));
+    }
 }
