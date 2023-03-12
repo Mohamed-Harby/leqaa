@@ -1,14 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
-const mongoose = require("mongoose");
-// const { ObjectId } = require("mongodb");
 
-const { v4: uuidv4 } = require("uuid");
 var uuid = require("node-uuid");
-
-// let id = mongoose.Types.ObjectId("4edd40c86762e0fb12000003");
-
 
 //@description     Create or fetch One to One Chat
 //@route           POST /api/chat/

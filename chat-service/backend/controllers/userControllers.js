@@ -97,10 +97,8 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const generateToken = require("../config/generateToken");
-const { v4: uuidv4 } = require("uuid");
 var uuid = require("node-uuid");
 
-const mongoose = require("mongoose");
 
 //@description     Get or Search all users
 //@route           GET /api/user?search=
