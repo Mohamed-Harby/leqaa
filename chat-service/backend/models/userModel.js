@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 var uuid = require("node-uuid");
 
+const crypto = require("node:crypto");
+
+
 const userSchema = mongoose.Schema(
   {
     _id: { type: String, default: uuid.v1 },
@@ -32,9 +35,17 @@ userSchema.pre("save", async function (next) {
     next();
   }
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+  // const salt = await bcrypt.genSalt(10);
+  // this.password = await bcrypt.hash(this.password, salt);
+
+
+
+  this.password = crypto
+    .createHmac("sha256", process.env.JWT_SECRET)
+    .update(this.password)
+    .digest("hex");
 });
+
 
 const User = mongoose.model("User", userSchema);
 
