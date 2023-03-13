@@ -19,7 +19,7 @@ public class UserConfiguration : BaseConfiguration<User>
 
         builder
         .HasMany(u => u.Channels)
-        .WithMany(c => c.Users)
+        .WithMany(c => c.JoinedUsers)
 
         .UsingEntity<UserChannel>();
 

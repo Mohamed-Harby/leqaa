@@ -58,7 +58,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             }
             if (userChannel.Role == GroupRole.Founder)
             {
-                var newFounder = channel.Users.FirstOrDefault(u => u.Id != user.Id);
+                var newFounder = channel.JoinedUsers.FirstOrDefault(u => u.Id != user.Id);
                 if (newFounder is null)
                 {
 
@@ -66,7 +66,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
                 }
 
             }
-            channel.Users.Remove(user);
+            channel.JoinedUsers.Remove(user);
             if (await _hubRepository.SaveAsync(cancellationToken) == 0)
             {
                 return DomainErrors.Channel.InvalidChannel;       

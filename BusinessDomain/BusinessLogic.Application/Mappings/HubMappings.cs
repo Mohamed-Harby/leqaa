@@ -1,4 +1,5 @@
 using BusinessLogic.Application.Models.Hubs;
+using BusinessLogic.Application.Models.RecentActivities;
 using BusinessLogic.Domain;
 using Mapster;
 
@@ -7,7 +8,7 @@ public class HubMappings : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Hub, HubReadModel>()
+        config.NewConfig<Hub, HubRecentReadModel>()
         .Map(dest => dest.HubName, src => src.Name)
         .Map(dest => dest.Id, src => src.Id)
         .Map(dest => dest.HubDescription, src => src.Description)

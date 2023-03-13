@@ -31,7 +31,7 @@ public static class PersistenceDependencyInjection
         services.AddScoped<IUserChannelRepository, UserChannelRepository>();
         services.AddScoped<IUserUserRepository, UserUserRepository>();
 
-       
+
         services.AddScoped<IUserPinnedChannelRepository, UserPinnedChannelRepository>();
         services.AddScoped<IUserPinnedHubRepository, UserPinnedHubRepository>();
         services.AddScoped<IUserPinnedPostRepository, UserPinnedPostRepository>();

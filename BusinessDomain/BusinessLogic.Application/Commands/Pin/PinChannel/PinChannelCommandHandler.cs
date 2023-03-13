@@ -56,12 +56,11 @@ public class PinChannelCommandHandler : IHandler<PinChannelCommand, ErrorOr<Chan
         {
             if (PinnedChannel.Id == request.ChannelId)
             {
-                return DomainErrors.Channel.AlreadyExest;
+                return DomainErrors.Channel.AlreadyPinned;
             }
 
         }
-
-           
+        
         creatorUser.PinnedChannels.Add(channel);
         await _unitOfWork.PinChannelAsync(channel, creatorUser);
         if (await _unitOfWork.SaveAsync() == 0)

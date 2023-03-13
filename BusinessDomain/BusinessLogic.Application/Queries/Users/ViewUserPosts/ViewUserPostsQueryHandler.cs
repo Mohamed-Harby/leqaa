@@ -25,13 +25,13 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IUserChannelRepository _userChannelRepository;
+        private readonly IUserHubRepository _userChannelRepository;
 
         public ViewUserPostsQueryHandler(
             IChannelRepository channelRepository,
             IHubRepository hubRepository,
             IUserRepository userRepository,
-            IUserChannelRepository userChannelRepository)
+            IUserHubRepository userChannelRepository)
         {
             _channelRepository = channelRepository;
             _hubRepository = hubRepository;

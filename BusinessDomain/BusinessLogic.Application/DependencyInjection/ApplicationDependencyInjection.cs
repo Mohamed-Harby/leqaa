@@ -15,7 +15,7 @@ public static class ApplicationDependencyInjection
         services.AddValidatorsFromAssembly(typeof(DeployHubCommandValidations).Assembly, includeInternalTypes: true);
         services.AddMediatR(typeof(DeployHubCommand));
         services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CheckUserBehavior<,>));
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CheckUserBehaviour<,>));
 
         var mappingConfig = TypeAdapterConfig.GlobalSettings;
         mappingConfig.Scan(typeof(ApplicationDependencyInjection).Assembly);

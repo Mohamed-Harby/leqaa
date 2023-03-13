@@ -10,6 +10,5 @@ namespace BusinessLogic.Application.Commands.Pin.PinHubs;
 
 public record PinHubCommand(
    string UserName,
-
    Guid HubId
-) : ICommand<ErrorOr<HubReadModel>>;
+) : IUserNameInCommand<ErrorOr<HubReadModel>>;

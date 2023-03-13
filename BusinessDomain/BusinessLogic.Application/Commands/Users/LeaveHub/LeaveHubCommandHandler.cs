@@ -50,7 +50,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveHub
             }
             if (userHub.Role == GroupRole.Founder)
             {
-                var newFounder = hub.Users.FirstOrDefault(u => u.Id != user.Id);
+                var newFounder = hub.JoinedUsers.FirstOrDefault(u => u.Id != user.Id);
                 if (newFounder is null)
                 {
 
@@ -58,7 +58,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveHub
                 }
 
             }
-            hub.Users.Remove(user);
+            hub.JoinedUsers.Remove(user);
             if (await _hubRepository.SaveAsync(cancellationToken) == 0)
             {
                 return DomainErrors.Hub.CannotLeaveHub;

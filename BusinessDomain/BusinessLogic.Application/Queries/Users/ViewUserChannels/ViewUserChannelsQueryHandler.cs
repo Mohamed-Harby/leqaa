@@ -21,12 +21,12 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserChannels
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IUserChannelRepository _userChannelRepository;
+        private readonly IUserHubRepository _userChannelRepository;
         public ViewUserChannelsQueryHandler(
             IChannelRepository channelRepository,
             IHubRepository hubRepository,
             IUserRepository userRepository,
-            IUserChannelRepository userChannelRepository,
+            IUserHubRepository userChannelRepository,
             IValidator<CreateChannelCommand> validator)
         {
             _channelRepository = channelRepository;

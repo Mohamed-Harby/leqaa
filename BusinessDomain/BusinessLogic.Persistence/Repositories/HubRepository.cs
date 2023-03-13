@@ -10,20 +10,4 @@ public class HubRepository : BaseRepo<Hub>, IHubRepository
     {
         _context = context;
     }
-    public async Task<Hub> AddHubWithUserAsync(Hub hub, User user)
-    {
-        hub.AddUser(user);
-        await table.AddAsync(hub);
-        return hub;
-    }
-
-    public Task<Hub> DeleteHubWithUserAsync(Hub hub, User user)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<Hub> UpdateHubWithUserAsync(Hub hub, User user)
-    {
-        throw new NotImplementedException();
-    }
 }

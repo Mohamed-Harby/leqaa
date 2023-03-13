@@ -3,35 +3,35 @@ public class Hub : BaseEntity
 {
     public Hub()
     {
-        Users = new HashSet<User>();
+        JoinedUsers = new HashSet<User>();
         Channels = new HashSet<Channel>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
-        HubPinningUsers = new HashSet<User>();
+        PinningUsers = new HashSet<User>();
 
     }
-    public Hub(string name, string logo = null!, string description = "")
+    public Hub(string name, byte[] logo = null!, string description = "")
     {
         Name = name;
         Description = description;
-        Logo = logo is null ? null! : Convert.FromBase64String(logo);
-        Users = new HashSet<User>();
+        Logo = logo;
+        JoinedUsers = new HashSet<User>();
         Channels = new HashSet<Channel>();
         HubAnnouncements = new HashSet<HubAnnouncement>();
-        HubPinningUsers = new HashSet<User>();
+        PinningUsers = new HashSet<User>();
     }
 
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public byte[]? Logo { get; set; }
     public bool IsPrivate { get; set; }
-    public virtual ICollection<User> Users { get; private set; }
+    public virtual ICollection<User> JoinedUsers { get; private set; }
     public virtual ICollection<Channel> Channels { get; private set; }
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; private set; }
-    public ICollection<User> HubPinningUsers { get; set; }
+    public ICollection<User> PinningUsers { get; set; }
 
     public void AddUser(User user)
     {
-        Users.Add(user);
+        JoinedUsers.Add(user);
     }
     public void AddChannel(Channel channel)
     {

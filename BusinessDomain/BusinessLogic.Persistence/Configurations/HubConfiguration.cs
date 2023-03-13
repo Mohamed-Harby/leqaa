@@ -18,7 +18,7 @@ public class HubConfiguration : BaseConfiguration<Hub>
         .OnDelete(DeleteBehavior.Cascade);
 
         builder
-        .HasMany(h => h.Users)
+        .HasMany(h => h.JoinedUsers)
         .WithMany(u => u.Hubs)
         .UsingEntity<UserHub>(
             join => join
@@ -34,7 +34,7 @@ public class HubConfiguration : BaseConfiguration<Hub>
 
 
         builder
-     .HasMany(h => h.HubPinningUsers)
+     .HasMany(h => h.PinningUsers)
      .WithMany(u => u.PinnedHubs)
      .UsingEntity<UserPinnedHub>(
          join => join

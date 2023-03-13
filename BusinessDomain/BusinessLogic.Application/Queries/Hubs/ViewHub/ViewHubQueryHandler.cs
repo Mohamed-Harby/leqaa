@@ -17,7 +17,7 @@ public class ViewHubQueryHandler : IHandler<ViewHubQuery, ErrorOr<HubReadModel>>
 
     public async Task<ErrorOr<HubReadModel>> Handle(ViewHubQuery request, CancellationToken cancellationToken)
     {
-        var hub = await _hubRepository.GetByIdAsync(request.Id);
+        var hub = await _hubRepository.GetAsync(h => h.Id == request.Id, null!, "HubAnnouncements,JoinedUsers");
         if (hub is null)
         {
             return DomainErrors.Hub.NotFound;

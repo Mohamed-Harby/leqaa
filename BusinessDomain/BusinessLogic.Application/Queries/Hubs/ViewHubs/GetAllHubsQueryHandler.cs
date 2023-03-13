@@ -18,19 +18,12 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
 
     public async Task<List<HubReadModel>> Handle(GetAllHubsQuery request, CancellationToken cancellationToken)
     {
-
-
-
-
-
         var skip = (request.PageNumber - 1) * request.PageSize;
         return (await _hubRepository.GetAllAsync())
             .Skip(skip)
             .Take(request.PageSize)
              .ToList()
               .Adapt<List<HubReadModel>>();
-
-
     }
 
 
