@@ -9,6 +9,8 @@ public static partial class DomainErrors
         public static Error InvalidChannel => Error.Failure("Channel.InvalidChannel", "Invalid Channel, couldn't complete your request");
 
         public static Error AlreadyExest => Error.Failure("Channel.AlreadyExest", "Channel aleaready exists");
+        public static Error CannotLeaveChannel => Error.Failure("Channel.CannotLeaveHub", "cant't leave Channel because there are no other users");
+
 
     }
 
@@ -25,6 +27,6 @@ public static partial class DomainErrors
         public static Error InvalidPost => Error.Failure(".InvalidPost", "Invalid Post, couldn't complete your request");
   
         public static Error NotFound => Error.NotFound("post.NotFound", "post not found, create post");
-        public static Error AllreadyExistsToPin => Error.NotFound("post.AllreadyExistsToPin", "posts all ready Pinned");
+        public static Error AllreadyExistsToPin => Error.NotFound("post.AllreadyExistsToPin", "post allready Pinned");
     }
 }

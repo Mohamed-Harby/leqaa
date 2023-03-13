@@ -11,6 +11,8 @@ public static partial class DomainErrors
 
         public static Error AlreadyExest => Error.Failure("Hub.AlreadyExest", "hub aleaready exists");
 
+        public static Error CannotLeaveHub => Error.Failure("Hub.CannotLeaveHub", "cant't leave hub because there are no other users");
+
 
     }
 }

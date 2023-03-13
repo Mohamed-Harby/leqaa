@@ -81,7 +81,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 
 
-
+    
 
 
 
@@ -109,7 +109,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         PinnedChannel= channel
 
         };
-
         creator.PinnedChannels.Add(channel);
 
         _context.Set<UserPinnedChannel>().Update(userPinndChannel);
