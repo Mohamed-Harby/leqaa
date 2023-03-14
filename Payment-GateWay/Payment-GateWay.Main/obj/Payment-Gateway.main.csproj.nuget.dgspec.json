@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {}
+    "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {
+    "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
+        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
         "projectName": "Payment-Gateway.main",
-        "projectPath": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
+        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
         "packagesPath": "C:\\Users\\Mo Dawoud\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\Payment-Gateway.main\\obj\\",
+        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mo Dawoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\shared.csproj": {
-                "projectPath": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\shared.csproj"
+              "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
+                "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj"
               }
             }
           }
@@ -48,14 +48,6 @@
               "target": "Package",
               "version": "[6.0.14, )"
             },
-            "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[6.0.14, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.14, )"
-            },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -66,6 +58,10 @@
               "target": "Package",
               "version": "[1.17.0, )"
             },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[6.0.2, )"
+            },
             "Stripe.net": {
               "target": "Package",
               "version": "[41.8.0, )"
@@ -73,6 +69,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.27.0, )"
             }
           },
           "imports": [
@@ -98,14 +98,14 @@
         }
       }
     },
-    "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\shared.csproj": {
+    "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\shared.csproj",
+        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
         "projectName": "shared",
-        "projectPath": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\shared.csproj",
+        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
         "packagesPath": "C:\\Users\\Mo Dawoud\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mo Dawoud\\source\\repos\\Payment-GateWay\\shared\\obj\\",
+        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\Payment\\leqaa\\Payment-GateWay\\shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mo Dawoud\\AppData\\Roaming\\NuGet\\NuGet.Config",

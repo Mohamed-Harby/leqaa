@@ -10,17 +10,20 @@ using Shared.Models.Services;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace Payment_Gateway.main.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-/*[ApiExplorerSettings(IgnoreApi = true)]*/
+
 public class CheckoutController : ControllerBase
 {
     private readonly IConfiguration _configuration;
 
-    private readonly static string s_wasmClientURL = "https://localhost:7132";
+    private readonly static string s_wasmClientURL = "http://localhost:3000/";
 
     public CheckoutController(IConfiguration configuration)
     {
@@ -30,29 +33,29 @@ public class CheckoutController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CheckoutPlan([FromBody] UserPlan product, [FromServices] IServiceProvider sp)
     {
-        /*var referer = Request.Headers.Referer;
-        s_wasmClientURL = referer[0];
 
-        // Build the URL to which the customer will be redirected after paying.
-        var server = sp.GetRequiredService<IServer>();
-
-        var serverAddressesFeature = server.Features.Get<IServerAddressesFeature>();
-
-        string? thisApiUrl = null;
-
-        if (serverAddressesFeature is not null)
-        {
-            thisApiUrl = "http://localhost:5196";
-            Console.WriteLine(thisApiUrl);
-        }*/
         string? thisApiUrl = null;
         thisApiUrl = "http://localhost:5196";
         if (thisApiUrl is not null)
         {
+            switch (product.PlanType.ToLower())
+            {
+                case "premium":
+                    product.Price = 5000;
+                    break;
+                case "platinum":
+                    product.Price = 8000;
+                    break;
+                default:
+                    return BadRequest("Invalid plan type.");
+            }
+            string? user = GetUserNameFromToken(product.User);
+            product.User = user;
             StripeSettings stripeSettings = await CheckOut(product, thisApiUrl);
             var pubKey = _configuration["Stripe:PubKey"];
 
             stripeSettings.PubKey = pubKey;
+            stripeSettings.userName= user;
 
             return Ok(stripeSettings);
         }
@@ -62,6 +65,7 @@ public class CheckoutController : ControllerBase
         }
     }
 
+
     [NonAction]
     public async Task<StripeSettings> CheckOut(UserPlan product, string thisApiUrl)
     {
@@ -69,7 +73,7 @@ public class CheckoutController : ControllerBase
         var options = new SessionCreateOptions
         {
           
-            SuccessUrl = $"{s_wasmClientURL}/checkout/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
+            SuccessUrl = $"{s_wasmClientURL}/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
             CancelUrl = s_wasmClientURL + "/failed",  
             PaymentMethodTypes = new List<string> 
             {
@@ -86,6 +90,7 @@ public class CheckoutController : ControllerBase
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = product.PlanType,
+                            Description="for"+product.User,
                      
                         },
                     },
@@ -108,44 +113,17 @@ public class CheckoutController : ControllerBase
 
 
 
-
-
-
-
-
-/*
     [NonAction]
-    public void SendOrderConfirmationEmail(string toEmailAddress, UserPlan order)
+
+    private string GetUserNameFromToken(string token)
     {
-        MailMessage mail = new MailMessage();
-        MailMessage.From.Add(new MailboxAddress("leqaa.technical", Smtp.Email));
-        mail.To.Add(new MailAddress(toEmailAddress));
-        mail.Subject = "Order Confirmation";
-        mail.Body = "Dear <br><br>Your order has been confirmed.<br><br>Order details:<br><br>" ;
-        mail.IsBodyHtml = true;
+        JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
-        SmtpClient client = new SmtpClient("smtp.example.com", 587);
-        client.UseDefaultCredentials = false;
-        client.Credentials = new NetworkCredential("username", "password");
+        JwtSecurityToken jwtToken = handler.ReadJwtToken(token);
 
-        client.Send(mail);
-    }*/
-
-   /* public string GetOrderDetails(Order order)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.Append("<table>");
-        sb.Append("<tr><td>Product Name</td><td>Price</td><td>Quantity</td><td>Total</td></tr>");
-        foreach (var item in order.Items)
-        {
-            sb.Append("<tr><td>" + item.ProductName + "</td><td>" + item.Price + "</td><td>" + item.Quantity + "</td><td>" + (item.Price * item.Quantity) + "</td></tr>");
-        }
-        sb.Append("<tr><td colspan='3'>Total</td><td>" + order.TotalAmount + "</td></tr>");
-        sb.Append("</table>");
-        return sb.ToString();
-    }*/
-
-
+        string userName = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+        return userName;
+    }
 
 
 

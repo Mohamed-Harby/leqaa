@@ -25,10 +25,14 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+/*builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlite("DataSource=:memory:"));*/
 builder.Services.AddDbContext<ApplicationDbContext>(Options =>
 {
-    Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    var con =builder.Configuration.GetConnectionString("DefaultConnection");
+
+
+    Options.UseMySql(con, ServerVersion.AutoDetect(con));
 });
 
 var app = builder.Build();

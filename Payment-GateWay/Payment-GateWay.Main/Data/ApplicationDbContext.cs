@@ -26,7 +26,7 @@ namespace Payment_GateWay.Main.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            const int amountOfProductsToSeed = 20;
+            const int amountOfProductsToSeed = 1;
 
             var productsToSeed = new UserPlan[amountOfProductsToSeed];
 
@@ -35,15 +35,20 @@ namespace Payment_GateWay.Main.Data
                 productsToSeed[i - 1] = new UserPlan
                 {
                     Id = i*5,
+                    User="palnUserName",
                     PlanType = "Premium",
-                    Price = 1000 * i,
+                    Price= i*5,
+                  
                 };
             }
 
             modelBuilder.Entity<UserPlan>().HasData(productsToSeed);
         }
 
-       
-
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext dbContext)
+        {
+            dbContext.Database.OpenConnection();
+            dbContext.Database.EnsureCreated();
+        }
     }
 }
