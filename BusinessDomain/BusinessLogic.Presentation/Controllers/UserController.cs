@@ -23,12 +23,18 @@ using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Commands.Users.UpdateUserRole;
 using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Application.Queries.Users.ViewRecentActivities;
+
+using BusinessLogic.Application.Commands.Users.LeaveHub;
+using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Commands.Users.LeaveChannel;
+
 using BusinessLogic.Application.Commands.Pin.PinChannels;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
+
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -198,6 +204,37 @@ public class UserController : BaseController
         );
 
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> LeaveHub(LeaveHubModel leaveHubModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var LeaveHubCommand = new LeaveHubCommand(username, leaveHubModel.Id);
+        var result = await _sender.Send(LeaveHubCommand);
+        return result.Match(
+            hub => Ok(hub),
+            errors => Problem(errors)
+        );
+
+    }
+
+
+
+    [HttpDelete]
+    public async Task<IActionResult> LeavChannel(LeaveChannelModel LeaveChannelModel)
+    {
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var LeaveChannelCommand = new LeaveChannelCommand(username, LeaveChannelModel.Id);
+        var result = await _sender.Send(LeaveChannelCommand);
+        return result.Match(
+            channel=> Ok(channel),
+            errors => Problem(errors)
+        );
+
+    }
+
 
 
     [HttpGet]
