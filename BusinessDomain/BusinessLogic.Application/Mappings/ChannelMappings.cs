@@ -13,6 +13,17 @@ public class ChannelMappings : IRegister
         .Map(dest => dest.Id, src => src.Id)
         .Map(dest => dest.ChannelDescription, src => src.Description)
         .Map(dest => dest.CreationDate, src => src.CreationDate)
-        .Map(dest => dest.ChannelImage, src => src.Image).MapToConstructor(true);
+        .Map(dest => dest.ChannelImage, src => src.Image)
+        .MapToConstructor(true);
+
+        config.NewConfig<Channel, ChannelReadModel>()
+        .Map(dest => dest.Name, src => src.Name)
+        .Map(dest => dest.Id, src => src.Id)
+        .Map(dest => dest.Description, src => src.Description)
+        .Map(dest => dest.CreationDate, src => src.CreationDate)
+        .Map(dest => dest.Image, src => src.Image)
+        .Map(dest => dest.JoinedUsers, src => src.JoinedUsers)
+        .Map(dest => dest.ChannelAnnouncements, src => src.ChannelAnnouncements)
+        .MapToConstructor(true);
     }
 }

@@ -56,7 +56,7 @@ public class ChannelController : BaseController
         return Ok(hubs);
     }
     [HttpGet]
-    [Authorize]
+    // [Authorize]
     public async Task<IActionResult> ViewChannel([FromQuery] ViewChannelQuery viewChannelQuery)
     {
 

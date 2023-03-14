@@ -6,4 +6,4 @@ namespace BusinessLogic.Application.Commands.Users.SetProfilePicture;
 public record SetProfilePictureCommand(
     byte[] ProfilePicture,
     string UserName
-) : IUserNameInCommand<ErrorOr<UserReadModel>>;
+) : IUserNameInCommand<ErrorOr<UserRecentReadModel>>;

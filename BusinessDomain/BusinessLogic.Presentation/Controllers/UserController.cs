@@ -263,7 +263,7 @@ public class UserController : BaseController
             errors => Problem(errors)
         );
     }
-    
+
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> PinChannel(PinChannelModel pinChannelModel)

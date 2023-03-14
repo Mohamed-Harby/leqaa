@@ -6,7 +6,7 @@ using ErrorOr;
 using Mapster;
 
 namespace BusinessLogic.Application.Commands.Users.SetProfilePicture;
-public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand, ErrorOr<UserReadModel>>
+public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand, ErrorOr<UserRecentReadModel>>
 {
     private readonly IUserRepository _userRepository;
 
@@ -15,7 +15,7 @@ public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand
         _userRepository = userRepository;
     }
 
-    public async Task<ErrorOr<UserReadModel>> Handle(SetProfilePictureCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UserRecentReadModel>> Handle(SetProfilePictureCommand request, CancellationToken cancellationToken)
     {
         var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         user.ProfilePicture = request.ProfilePicture;
@@ -24,7 +24,7 @@ public class SetProfilePictureCommandHandler : IHandler<SetProfilePictureCommand
         {
             return Error.Failure("User.Failure", "Failed to save changes, please check the image format");
         }
-        return user.Adapt<UserReadModel>();
+        return user.Adapt<UserRecentReadModel>();
 
     }
 }

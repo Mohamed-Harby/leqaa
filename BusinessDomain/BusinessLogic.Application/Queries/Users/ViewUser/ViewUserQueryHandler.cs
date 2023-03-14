@@ -5,7 +5,7 @@ using ErrorOr;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Users.ViewUser;
-public class ViewUserQueryHandler : IHandler<ViewUserQuery, ErrorOr<UserReadModel>>
+public class ViewUserQueryHandler : IHandler<ViewUserQuery, ErrorOr<UserRecentReadModel>>
 {
     private readonly IUserRepository _userRepository;
 
@@ -14,9 +14,9 @@ public class ViewUserQueryHandler : IHandler<ViewUserQuery, ErrorOr<UserReadMode
         _userRepository = userRepository;
     }
 
-    public async Task<ErrorOr<UserReadModel>> Handle(ViewUserQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<UserRecentReadModel>> Handle(ViewUserQuery request, CancellationToken cancellationToken)
     {
         var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Plans,Posts,Hubs,Channels,HubAnnouncements,ChannelAnnouncements")).FirstOrDefault()!;
-        return user.Adapt<UserReadModel>();
+        return user.Adapt<UserRecentReadModel>();
     }
 }
