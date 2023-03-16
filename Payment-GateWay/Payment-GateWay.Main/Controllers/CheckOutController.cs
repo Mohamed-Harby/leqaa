@@ -38,6 +38,11 @@ public class CheckoutController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> CheckoutPlan([FromBody] UserPlan product, [FromServices] IServiceProvider sp)
     {
+        if (product.User=="" ||product.User=="string")
+        {
+            string error = "not valid token";
+            return BadRequest(error);
+        }
 
         string? thisApiUrl = null;
         thisApiUrl = "http://localhost:5196";
@@ -68,9 +73,12 @@ public class CheckoutController : ControllerBase
             {
              await   _userPlanRepository.AddAsync(product);
               await  _userPlanRepository.SaveAsync();
+
+
             }
 
             return Ok(stripeSettings);
+
         }
         else
         {
@@ -135,6 +143,11 @@ public class CheckoutController : ControllerBase
         JwtSecurityToken jwtToken = handler.ReadJwtToken(token);
 
         string? userName = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        if (userName==null)
+        {
+            return "invalid token,please try again";
+        }
         return userName;
     }
 
@@ -143,6 +156,10 @@ public class CheckoutController : ControllerBase
     public async Task<string> GetPlanType(string token)
     {
         string? userName = GetUserNameFromToken(token!);
+        if (userName==null)
+        {
+            return "not valid token";
+        }
         var userPlan = await _userPlanRepository.GetAsync(userName);
         return userPlan;
 
