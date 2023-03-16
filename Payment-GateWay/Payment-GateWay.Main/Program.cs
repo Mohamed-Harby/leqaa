@@ -3,6 +3,8 @@ using Payment_GateWay.Main.Data;
 using Stripe;
 using System.Configuration;
 using System;
+using Payment_Gateway.main.Data.Repository;
+using shared.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
-
+builder.Services.AddScoped<IUserPlanRepository, UserPlanRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

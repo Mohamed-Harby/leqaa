@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Mvc;
-
 using Stripe.Checkout;
 using Stripe;
 using Shared.Models;
@@ -13,6 +11,9 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using Payment_GateWay.Main.Data;
+using Payment_Gateway.main.Data.Repository;
 
 namespace Payment_Gateway.main.Controllers;
 
@@ -22,12 +23,16 @@ namespace Payment_Gateway.main.Controllers;
 public class CheckoutController : ControllerBase
 {
     private readonly IConfiguration _configuration;
+    private readonly IUserPlanRepository _userPlanRepository;
+
 
     private readonly static string s_wasmClientURL = "http://localhost:3000/";
 
-    public CheckoutController(IConfiguration configuration)
+    public CheckoutController(IConfiguration configuration, IUserPlanRepository userPlanRepository)
     {
         _configuration = configuration;
+        _userPlanRepository = userPlanRepository;
+
     }
 
     [HttpPost]
@@ -49,13 +54,21 @@ public class CheckoutController : ControllerBase
                 default:
                     return BadRequest("Invalid plan type.");
             }
-            string? user = GetUserNameFromToken(product.User);
+            string? user = GetUserNameFromToken(product.User!);
             product.User = user;
             StripeSettings stripeSettings = await CheckOut(product, thisApiUrl);
             var pubKey = _configuration["Stripe:PubKey"];
 
             stripeSettings.PubKey = pubKey;
-            stripeSettings.userName= user;
+            stripeSettings.userName = user;
+
+
+            //here you save in data base
+            if (user != null)
+            {
+             await   _userPlanRepository.AddAsync(product);
+              await  _userPlanRepository.SaveAsync();
+            }
 
             return Ok(stripeSettings);
         }
@@ -69,13 +82,13 @@ public class CheckoutController : ControllerBase
     [NonAction]
     public async Task<StripeSettings> CheckOut(UserPlan product, string thisApiUrl)
     {
-      
+
         var options = new SessionCreateOptions
         {
-          
+
             SuccessUrl = $"{s_wasmClientURL}/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
-            CancelUrl = s_wasmClientURL + "/failed",  
-            PaymentMethodTypes = new List<string> 
+            CancelUrl = s_wasmClientURL + "/failed",
+            PaymentMethodTypes = new List<string>
             {
                 "card"
             },
@@ -85,24 +98,24 @@ public class CheckoutController : ControllerBase
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = product.Price, 
+                        UnitAmount = product.Price*100,
                         Currency = "USD",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = product.PlanType,
-                            Description="for"+product.User,
-                     
+                            Description="User Name"+product.User,
+
                         },
                     },
                     Quantity = 1,
                 },
             },
-            Mode = "payment" 
+            Mode = "payment"
         };
 
         var service = new SessionService();
         var session = await service.CreateAsync(options);
-       var f=new StripeSettings();
+        var f = new StripeSettings();
         f.SessionId = session.Id;
         f.Secret = session.Url;
         return f;
@@ -121,15 +134,19 @@ public class CheckoutController : ControllerBase
 
         JwtSecurityToken jwtToken = handler.ReadJwtToken(token);
 
-        string userName = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+        string? userName = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         return userName;
     }
 
 
+    [HttpGet("GetPlanType")]
+    public async Task<string> GetPlanType(string token)
+    {
+        string? userName = GetUserNameFromToken(token!);
+        var userPlan = await _userPlanRepository.GetAsync(userName);
+        return userPlan;
 
-
-
-
+    }
 
 
 

@@ -22,3 +22,15 @@ C:\Users\Mo Dawoud\Desktop\Payment\leqaa\Payment-GateWay\shared\obj\Debug\net6.0
 C:\Users\Mo Dawoud\Desktop\Payment\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\refint\shared.dll
 C:\Users\Mo Dawoud\Desktop\Payment\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.pdb
 C:\Users\Mo Dawoud\Desktop\Payment\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\ref\shared.dll
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\bin\Debug\net6.0\shared.deps.json
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\bin\Debug\net6.0\shared.dll
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\bin\Debug\net6.0\shared.pdb
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.csproj.AssemblyReference.cache
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.AssemblyInfoInputs.cache
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.AssemblyInfo.cs
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.csproj.CoreCompileInputs.cache
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.dll
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\refint\shared.dll
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\shared.pdb
+C:\Users\Mo Dawoud\Desktop\pay\leqaa\Payment-GateWay\shared\obj\Debug\net6.0\ref\shared.dll
