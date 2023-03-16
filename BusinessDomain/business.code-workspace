@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "BusinessLogic.Application"
+		},
+		{
+			"path": "BusinessLogic.Domain"
+		},
+		{
+			"path": "BusinessLogic.Entry"
+		},
+		{
+			"path": "BusinessLogic.Infrastructure"
+		},
+		{
+			"path": "BusinessLogic.Persistence"
+		},
+		{
+			"path": "BusinessLogic.Presentation"
+		},
+		{
+			"path": "BusinessLogic.Shared"
+		},
+		{
+			"path": "BusinessLogic.Tests"
+		},
+		{
+			"path": "Src"
+		}
+	],
+	"settings": {}
+}

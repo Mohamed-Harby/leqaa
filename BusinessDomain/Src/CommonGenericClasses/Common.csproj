@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>CommonGenericClasses</PackageId>
+    <version>8.0.0</version>
+    <License>MS-PL</License>
+    <Authors>Muhammad Badea</Authors>
+    <Description>
+    Base generic implementation using repository and unit of work design pattern to crud operations in .NET Standard 2.1
+    And .NET 6.0
+    </Description>
+    <PackageTags>Generic;Repository;UnitOfWork;Crud;Base;Implementation;Design;Pattern;NetStandard2.1;Net6.0</PackageTags>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../BusinessLogic.Domain/BusinessLogic.Domain.csproj" />
+    <ProjectReference Include="../../BusinessLogic.Application/BusinessLogic.Application.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,56 @@
+@model Authentication.Application.Models.Results
+<style>
+  body {
+        display: flex;
+        align-items: center;
+    margin: 0;
+    padding: 0;
+        background-color: #444;
+  }
+
+  .container {
+     display: flex;
+    align-items: center;
+    
+    width: 80%;
+    margin: 0 auto;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center; /* Center align container */
+  }
+
+   .containe:hover {
+        background-color:#800288;
+
+    }
+
+  h1 {
+    color: #800080;
+    margin-top: 0;
+    display:flex;
+    align-items:center;
+
+  }
+
+  p {
+    color: #444;
+  }
+
+
+
+
+  </style>
+<div class="container">
+    @if (Model.IsSuccess)
+    {
+        <h1 class="hover"style="color:#800080;">Your email is confirmed. You can now access your account.</h1>
+      
+    }
+    else
+    {
+        <h1 class ="hover" style="color:#800080;">Your email is not confirmed. Please check your inbox and follow the instructions to confirm your email.</h1>
+        
+    }
+</div>
