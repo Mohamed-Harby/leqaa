@@ -114,7 +114,7 @@ services:
     restart: always
 
   paymentgatewaydb:
-    image: mysql/mysql-server:latest
+    image: mysql/mysql-server:8.0
     environment:
       - MYSQL_ROOT_PASSWORD=2510203121
       - MYSQL_DATABASE=payment
