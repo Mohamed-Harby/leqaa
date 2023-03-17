@@ -69,6 +69,7 @@ services:
       - ./BusinessDomain:/src/BusinessDomain
     depends_on:
       - businessdomaindb
+      - rabbitmq
     healthcheck:
       test: ["CMD","curl","-f","http://businessdomaindb:3307",";", "curl","-f","http://rabbitmq:5672"]
       timeout: 1s
@@ -97,7 +98,7 @@ services:
       dockerfile: Payment-GateWay/Payment-GateWay.Main/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=server=paymentgatewaydb;Port=3309;database=payment;Uid=root;pwd=1216;
+      - ConnectionStrings__DefaultConnection=server=paymentgatewaydb;Port=3309;database=payment;Uid=root;pwd=2510203121;
     ports:
       - 5006:5006
       - 5007:5007
@@ -110,19 +111,20 @@ services:
       - paymentgatewaydb
     volumes:
       - ./Payment-GateWay:/src/Payment-GateWay
+    restart: always
 
   paymentgatewaydb:
-    image: mysql/mysql-server:latest
+    image: mysql/mysql-server:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD=1216
+      - MYSQL_ROOT_PASSWORD=2510203121
       - MYSQL_DATABASE=payment
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=1216
+      - MYSQL_PASSWORD=2510203121
       - MYSQL_TCP_PORT=3309
     ports:
       - 3309:3309
     volumes:
-      - paymentgatewaydbvolume:/var/lib/mysql
+      - paymentgatewaydbvolume:/var/lib/mysql3
     restart: always
 
   

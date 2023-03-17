@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://0.0.0.0:5006;http://0.0.0.0:5007"
+      "applicationUrl": "https://0.0.0.0:5007;http://0.0.0.0:5006"
     },
     "IIS Express": {
       "commandName": "IISExpress",
