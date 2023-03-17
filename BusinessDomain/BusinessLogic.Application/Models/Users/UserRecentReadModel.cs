@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Plans;
+using BusinessLogic.Application.Models.Posts;
 
 namespace BusinessLogic.Application.Models.Users;
 
@@ -14,6 +15,7 @@ public record UserRecentReadModel(
     List<PlanReadModel> Plans,
     List<HubReadModel> Hubs,
     List<ChannelReadModel> Channels,
+    List<PostReadModel> Posts,
     DateTime CreationDate
     ) : BaseReadModel(Id, CreationDate);
 
