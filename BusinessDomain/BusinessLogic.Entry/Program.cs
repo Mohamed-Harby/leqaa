@@ -81,9 +81,6 @@ using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.Creat
     var context = serviceScope?.ServiceProvider.GetRequiredService<ApplicationDbContext>()!;
 
     context.Database.Migrate();
-    System.IO.File.WriteAllText("dgml" + ".dgml",
-        context.AsDgml(),
-        System.Text.Encoding.UTF8);
 
 }
 // Configure the HTTP request pipeline.
