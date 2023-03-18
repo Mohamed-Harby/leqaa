@@ -16,6 +16,8 @@ public record UserRecentReadModel(
     List<HubReadModel> Hubs,
     List<ChannelReadModel> Channels,
     List<PostReadModel> Posts,
+    List<UserReadModel> Followers,
+    List<UserReadModel> FollowedUsers,
     DateTime CreationDate
     ) : BaseReadModel(Id, CreationDate);
 
