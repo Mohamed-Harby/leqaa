@@ -1,0 +1,11 @@
+# installed dependencies
+node_modules/
+
+# environment variables
+.env
+.env.development
+.env.production
+
+# package managers lock files
+*.yarn.lock
+package-lock.json
