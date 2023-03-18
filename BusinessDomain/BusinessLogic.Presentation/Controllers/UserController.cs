@@ -29,7 +29,6 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.LeaveChannel;
 
 using BusinessLogic.Application.Commands.Pin.PinChannels;
-using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
