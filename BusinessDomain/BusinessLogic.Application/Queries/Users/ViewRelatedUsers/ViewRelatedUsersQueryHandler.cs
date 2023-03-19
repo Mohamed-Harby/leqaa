@@ -6,7 +6,7 @@ using ErrorOr;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Users.ViewRelatedUsers;
-public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, ErrorOr<List<UserReadModel>>>
+public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, ErrorOr<List<UserRecentReadModel>>>
 {
     private readonly IUserRepository _userRepository;
     private readonly IUserUserRepository _userUserRepository;
@@ -16,7 +16,7 @@ public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, Erro
         _userUserRepository = userUserRepository;
     }
 
-    public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewRelatedUsersQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewRelatedUsersQuery request, CancellationToken cancellationToken)
     {
         var users = (await _userRepository.GetAllAsync())
         .Take(request.PageSize)
@@ -30,6 +30,6 @@ public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, Erro
                 users[i].IsFollowed = true;
             }
         }
-        return users.Adapt<List<UserReadModel>>();
+        return users.Adapt<List<UserRecentReadModel>>();
     }
 }

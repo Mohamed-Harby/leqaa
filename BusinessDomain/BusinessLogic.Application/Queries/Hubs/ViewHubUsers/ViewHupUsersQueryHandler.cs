@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 {
-    public class ViewHupUsersQueryHandler : IHandler<ViewHupUsersQuery, ErrorOr<List<UserReadModel>>>
+    public class ViewHupUsersQueryHandler : IHandler<ViewHupUsersQuery, ErrorOr<List<UserRecentReadModel>>>
     {
         private readonly IHubRepository _hubRepository;
 
@@ -36,7 +36,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 
 
 
-        public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewHupUsersQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewHupUsersQuery request, CancellationToken cancellationToken)
         {
 
             List<User> users = new();
@@ -49,7 +49,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
                    User user= await _userRepository.GetByIdAsync(userId);
                    users.Add(user);
                }*/
-            return hubs.JoinedUsers.Adapt<List<UserReadModel>>();
+            return hubs.JoinedUsers.Adapt<List<UserRecentReadModel>>();
 
 
 

@@ -5,4 +5,4 @@ using ErrorOr;
 namespace BusinessLogic.Application.Queries.Users.ViewUserProfile;
 public record ViewUserProfileQuery(
     string UserName
-) : IUserNameInQuery<ErrorOr<UserReadModel>>;
+) : IUserNameInQuery<ErrorOr<UserRecentReadModel>>;

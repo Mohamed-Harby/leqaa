@@ -29,7 +29,10 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.LeaveChannel;
 
 using BusinessLogic.Application.Commands.Pin.PinChannels;
+<<<<<<< HEAD
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedHubs;
+=======
+>>>>>>> dc0f2fce22d2571b7accdf0ed5f72416cafd753f
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
@@ -301,7 +304,7 @@ public class UserController : BaseController
             errors => Problem(errors)
         );
     }
-    
+
     [HttpPost]
     [Authorize]
     public async Task<IActionResult> PinChannel(PinChannelModel pinChannelModel)

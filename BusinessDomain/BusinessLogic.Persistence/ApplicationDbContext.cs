@@ -27,6 +27,7 @@ public class ApplicationDbContext : DbContext
                             ServerVersion.AutoDetect(connectionString))
                             .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
         }
+        
         base.OnConfiguring(optionsBuilder);
     }
     protected async override void OnModelCreating(ModelBuilder modelBuilder)
@@ -34,5 +35,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         await modelBuilder.SeedDataAsync();
         base.OnModelCreating(modelBuilder);
+        
     }
 }

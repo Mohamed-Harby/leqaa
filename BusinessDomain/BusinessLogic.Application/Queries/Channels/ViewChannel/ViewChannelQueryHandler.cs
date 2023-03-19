@@ -16,7 +16,7 @@ public class ViewChannelqueryHandler : IHandler<ViewChannelQuery, ErrorOr<Channe
 
     public async Task<ErrorOr<ChannelReadModel>> Handle(ViewChannelQuery request, CancellationToken cancellationToken)
     {
-        var channel = await _channelRepository.GetAsync(c => c.Id == request.Id, null!, "ChannelAnnouncements,JoinedUsers");
+        var channel = (await _channelRepository.GetAsync(c => c.Id == request.Id, null!, "ChannelAnnouncements,JoinedUsers")).FirstOrDefault();
         if (channel is null)
         {
             return DomainErrors.Channel.NotFound;

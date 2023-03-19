@@ -14,5 +14,5 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
    (
         Guid hubid
 
-       ) : IQuery<ErrorOr<List<UserReadModel>>>;
+       ) : IQuery<ErrorOr<List<UserRecentReadModel>>>;
 }
