@@ -33,6 +33,7 @@ public class ChannelController : BaseController
         var addChannelCommand = new CreateChannelCommand(
             channelWriteModel.Name,
             channelWriteModel.Description,
+            channelWriteModel.Image,
             channelWriteModel.HubId,
             username);
 

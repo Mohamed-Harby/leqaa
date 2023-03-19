@@ -44,7 +44,7 @@ public class HubController : BaseController
     }
 
     [HttpGet]
-    [HasPermission(Permission.CanViewHubs)]
+    // [HasPermission(Permission.CanViewHubs)]
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
@@ -108,7 +108,7 @@ public class HubController : BaseController
     [HttpGet]
     public async Task<IActionResult> ViewHubUsers(Guid hubid)
     {
-        var users = new ViewHupUsersQuery(hubid);
+        var users = new ViewHubUsersQuery(hubid);
         var result = await _sender.Send(users);
         return result.Match(
             users => Ok(users),

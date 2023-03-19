@@ -4,6 +4,7 @@ using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
+using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Domain;
 using Mapster;
 
@@ -17,6 +18,7 @@ public class BaseEntityMapping : IRegister
         .Include<Channel, ChannelReadModel>()
         .Include<ChannelAnnouncement, ChannelAnnouncementReadModel>()
         .Include<HubAnnouncement, HubAnnouncementReadModel>()
-        .Include<Post, PostReadModel>();
+        .Include<Post, PostReadModel>()
+        .Include<User, UserReadModel>();
     }
 }

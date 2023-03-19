@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 {
-    public record ViewHupUsersQuery
+    public record ViewHubUsersQuery
    (
         Guid hubid
 
