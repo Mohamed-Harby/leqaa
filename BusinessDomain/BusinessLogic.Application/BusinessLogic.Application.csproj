@@ -21,8 +21,8 @@
     <ProjectReference Include="../BusinessLogic.Shared/BusinessLogic.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\Pin\DeletePin\DeletePinnedChannel\" />
     <Folder Include="Commands\Pin\DeletePin\DeletePinnedHub\" />
+    <Folder Include="Commands\Pin\DeletePin\DeletePinnedPost\" />
   </ItemGroup>
 
 </Project>

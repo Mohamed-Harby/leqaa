@@ -53,11 +53,11 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel
             {
                 return DomainErrors.Channel.NotFound;
             }
-            var userChannel = (await _userPinnedChannelRepository.GetAsync(uh => uh.UserPinnedId== user.Id && uh.PinnedChannelId == channel.Id
+            var userPinnedChannel = (await _userPinnedChannelRepository.GetAsync(uh => uh.UserPinnedId== user.Id && uh.PinnedChannelId == channel.Id
             )).FirstOrDefault()!;
-            if (userChannel is null)
+            if (userPinnedChannel is null)
             {
-                return DomainErrors.UserHub.NotJoined;
+                return DomainErrors.UserChannel.NotJoined;
             }
            
             channel.PinningUsers.Remove(user);
@@ -65,7 +65,7 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel
             {
                 return DomainErrors.Channel.InvalidChannel;
             }
-            return DomainSucceded.User.HubLeft;
+            return DomainSucceded.User.ChannelUnPinned;
         }
     }
 }

@@ -54,7 +54,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             )).FirstOrDefault()!;
             if (userChannel is null)
             {
-                return DomainErrors.UserHub.NotJoined;
+                return DomainErrors.UserChannel.NotJoined;
             }
             if (userChannel.Role == GroupRole.Founder)
             {
