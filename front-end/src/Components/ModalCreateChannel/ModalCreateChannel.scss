@@ -1,6 +1,6 @@
 @use "../../helper/style" as *;
 
-.modalCreateChannel{
+.modalCreateChannel {
   color: $fifthColor;
   margin-top: -1rem;
 
@@ -16,17 +16,66 @@
     input {
       font-size: 1rem;
       padding: 0.5rem 1rem;
-      border:none;
+      border: none;
       background-color: $thirdColor;
       color: $fifthColor;
       border-radius: 3px;
-      &:focus{
+      &:focus {
         outline: none;
         border: 1px solid $fifthColor;
         background-color: $secondColor;
       }
-      &::placeholder{
+      &::placeholder {
         color: $fifthColor;
+      }
+    }
+
+    select {
+      background-color: $secondColor;
+      color: $fifthColor;
+      border: none;
+      border-bottom: 1px solid $thirdColor;
+      height: 100%;
+      width: 75%;
+      margin-left: 15px;
+      border-radius: 15px;
+      padding: 8px;
+      &::placeholder {
+        color: #dcdcdc;
+        opacity: 1;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .inputFile {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: $thirdColor;
+      color: $fifthColor;
+      border-radius: 3px;
+
+      label {
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+
+        .imgBtn {
+          padding: 0.3rem 1.7rem;
+          font-size: 1rem;
+          background-color: $secondColor;
+          cursor: pointer;
+          border: none;
+          border-radius: 3px;
+        }
+      }
+
+      input[type="file"] {
+        position: absolute;
+        opacity: 0;
       }
     }
 
@@ -38,9 +87,5 @@
       border: none;
       border-radius: 3px;
     }
-
-
-
   }
-
 }

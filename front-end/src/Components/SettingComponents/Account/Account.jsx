@@ -7,21 +7,25 @@ import {
   getPlan,
   getResponse,
   getStatus,
+  viewUser,
   viewUserProfile,
 } from "../../../redux/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getCookies } from "../../../Custom/useCookies";
+import { useAuth } from "../../../Custom/useAuth";
 
 const Account = () => {
+  const auth = useAuth();
   const [user, setUser] = useState({});
   const response = useSelector(getResponse);
   const plan = useSelector(getPlan);
   const status = useSelector(getStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
-  const [selectPlan, setSelectPlan] = useState('')
+  const [selectPlan, setSelectPlan] = useState("");
+  console.log(auth.user.user);
   useEffect(() => {
-    dispatch(viewUserProfile(token));
+    dispatch(viewUser({ token: token, username: auth.user.user.userName }));
   }, []);
   useEffect(() => {
     setUser(response);
@@ -33,14 +37,15 @@ const Account = () => {
     reset,
   } = useForm();
   const onSubmitHandler = (data) => {
-    setSelectPlan(data.planType)
-    data.planType &&
-      dispatch(buyPlan({ data: { planType: data.planType }, token: token }));
+    if (user.plans[0].type == "Premium") {
+      alert("You Are Already Have Premium Plan");
+    } else {
+      setSelectPlan(data.planType);
+      data.planType &&
+        dispatch(buyPlan({ data: { planType: data.planType }, token: token }));
+    }
   };
   console.log(response);
-  // useEffect(() => {
-  //   plan.type && window.location.reload();
-  // }, [plan]);
   return (
     <div className="plans">
       <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -60,7 +65,14 @@ const Account = () => {
       <div>
         <h3>
           You Are{" "}
-          <span>{user.plans?.length ? user.plans[0].type : selectPlan.length ? selectPlan : "Free"}</span> Plan
+          <span>
+            {user.plans?.length
+              ? user.plans[0].type
+              : selectPlan.length
+              ? selectPlan
+              : "Free"}
+          </span>{" "}
+          Plan
         </h3>
       </div>
     </div>

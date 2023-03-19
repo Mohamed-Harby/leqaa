@@ -12,6 +12,7 @@ const initialState = {
     userHubs: [],
     friends: [],
     user: {},
+    HubsWithoutUserHubs: [],
     status: "idle",
     error: "",
 }
@@ -101,7 +102,7 @@ export const viewUserHubs = createAsyncThunk("user/viewuserhubs", async (payload
 export const followUser = createAsyncThunk("user/followuser", async (payload) => {
     const followUserUrl = 'FollowUser'
     try {
-        const response = await axios.post(baseUrl + followUserUrl, payload.data,{
+        const response = await axios.post(baseUrl + followUserUrl, payload.data, {
             headers: {
                 Authorization: `Bearer ${payload.token}`
             }
@@ -131,9 +132,123 @@ export const viewUsers = createAsyncThunk("user/viewusers", async (payload) => {
 })
 
 export const viewUser = createAsyncThunk("user/viewuser", async (payload) => {
-    const viewUserUrl = `ViewUser?UserName=${payload.data}`
+    const viewUserUrl = `ViewUser?UserName=${payload.username}`
     try {
         const response = await axios.get(baseUrl + viewUserUrl, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const joinHub = createAsyncThunk("user/joinhub", async (payload) => {
+    const joinHubUrl = `JoinHub`
+    try {
+        const response = await axios.put(baseUrl + joinHubUrl, payload.data, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const leaveHub = createAsyncThunk("user/leavehub", async (payload) => {
+    console.log(payload);
+    const leaveHubUrl = `LeaveHub`
+    try {
+        const response = await axios.delete(baseUrl + leaveHubUrl, payload.data, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const leaveChannel = createAsyncThunk("user/leavechannel", async (payload) => {
+    const leaveChannelUrl = `LeavChannel`
+    try {
+        const response = await axios.delete(baseUrl + leaveChannelUrl, payload.data, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const getHubsWithoutUserHubs = createAsyncThunk("user/gethubswithoutuserhubs", async (payload) => {
+    console.log(payload);
+    const getHubsWithoutUserHubsUrl = `GetHubsWithoutUserHubs`
+    try {
+        const response = await axios.get(baseUrl + getHubsWithoutUserHubsUrl, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const joinChannel = createAsyncThunk("user/joinChannel", async (payload) => {
+    const joinChannelUrl = `JoinChannel`
+    try {
+        const response = await axios.post(baseUrl + joinChannelUrl, payload.data, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const pinChannel = createAsyncThunk("user/pinchannel", async (payload) => {
+    const pinChannelUrl = `PinChannel`
+    try {
+        const response = await axios.post(baseUrl + pinChannelUrl, payload.data, {
+            headers: {
+                Authorization: `Bearer ${payload.token}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error.response.data);
+        return error.response.data
+    }
+})
+
+export const pinHub = createAsyncThunk("user/pinhub", async (payload) => {
+    const pinHubUrl = `PinHub`
+    try {
+        const response = await axios.post(baseUrl + pinHubUrl, payload.data, {
             headers: {
                 Authorization: `Bearer ${payload.token}`
             }
@@ -236,6 +351,84 @@ const userSlice = createSlice({
                 state.status = "failed"
                 state.error = action.error.message
             })
+            //////////////////////////////////////////////////////
+            .addCase(joinHub.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(joinHub.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(joinHub.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(leaveHub.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(leaveHub.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(leaveHub.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(leaveChannel.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(leaveChannel.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(leaveChannel.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(getHubsWithoutUserHubs.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(getHubsWithoutUserHubs.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.HubsWithoutUserHubs = action.payload;
+            })
+            .addCase(getHubsWithoutUserHubs.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(joinChannel.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(joinChannel.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(joinChannel.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(pinChannel.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(pinChannel.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(pinChannel.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
+            //////////////////////////////////////////////////////
+            .addCase(pinHub.pending, (state, action) => {
+                state.status = "loading"
+            })
+            .addCase(pinHub.fulfilled, (state, action) => {
+                state.status = "succeeded"
+            })
+            .addCase(pinHub.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.error.message
+            })
     }
 })
 
@@ -246,6 +439,7 @@ export const getResponseUserChannels = (state) => state.user.userChannels
 export const getResponseUserHubs = (state) => state.user.userHubs
 export const getResponseUserFriends = (state) => state.user.friends
 export const getResponseUser = (state) => state.user.user
+export const getResponseHubsWithoutUserHubs = (state) => state.user.HubsWithoutUserHubs
 export const getPlan = (state) => state.user.plan
 export const getError = (state) => state.user.error
 export const getStatus = (state) => state.user.status

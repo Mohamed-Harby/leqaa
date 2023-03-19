@@ -9,20 +9,9 @@ import Card from "../../Card/Card";
 import ChannelCard from "../../HubComponents/ChannelCard/ChannelCard";
 import "./Channels.css";
 
-function Channels() {
+function Channels({ channels }) {
   const dispatch = useDispatch();
-  const [channels, setChannels] = useState([]);
-  const responseChannels = useSelector(getResponseUserChannels);
   const token = getCookies("token");
-  console.log(responseChannels);
-
-  useEffect(() => {
-    dispatch(viewUserChannels(token));
-  }, []);
-
-  useEffect(() => {
-    setChannels(responseChannels);
-  }, [responseChannels]);
 
   return (
     <div className="channelsGrid">

@@ -11,12 +11,13 @@ import profilePicture from "../../assets/badea.jpg";
 import ModalCalling from "../ModalCalling/ModalCalling";
 import ModalVideoCalling from "../ModalVideoCalling/ModalVideoCalling";
 import { useAuth } from "../../Custom/useAuth";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { deleteChannel } from "../../redux/channelSlice";
 import { getCookies } from "../../Custom/useCookies";
 import { deleteHub } from "../../redux/hubSlice";
+import { leaveChannel, leaveHub } from "../../redux/userSlice";
 
 function Statusbar({ data }) {
   console.log(data);
@@ -30,10 +31,11 @@ function Statusbar({ data }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const path = ["/hub", "/channel"];
+  const {id} = useParams()
 
   useEffect(() => {
     console.log(data);
-    if (pathname == "/chat") {
+    if (pathname.split("/")[1] == "chat") {
       setLinks([
         {
           name: "View Profile",
@@ -42,14 +44,13 @@ function Statusbar({ data }) {
         { name: "Pin Chat", to: "Link2" },
         { name: "Clear Chat", to: "Link3" },
       ]);
-    } else if (pathname == "/hub") {
+    } else if (pathname.split("/")[1] == "hub") {
       setLinks([
         {
           element: "btn",
-          name: "Delete Hub",
+          name: "Leave Hub",
           function: () => {
-            dispatch(deleteHub({ token: token, id: data.id }));
-            window.location.reload(false);
+            dispatch(leaveHub({ token: token, data: { id: id } }));
           },
         },
         { element: "link", name: "Pin Chat", to: "Link2" },
@@ -59,10 +60,9 @@ function Statusbar({ data }) {
       setLinks([
         {
           element: "btn",
-          name: "Delete Channel",
+          name: "Leave Channel",
           function: () => {
-            dispatch(deleteChannel({ token: token, id: data.id }));
-            window.location.reload(false);
+            dispatch(leaveChannel({ token: token, data: { id: id } }));
           },
         },
         { element: "btn", name: "Pin Chat", to: "Link2" },

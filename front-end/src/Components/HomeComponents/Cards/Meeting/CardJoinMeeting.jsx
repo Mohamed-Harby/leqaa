@@ -8,7 +8,7 @@ const CardJoinMeeting = ({ card }) => {
       <div className="body">
         <div>{card.meetingDescription}</div>
         <button>
-          {card.meetingDescription.includes("scheduled") ? "notify me" : "join"}
+          {card.meetingDescription?.includes("scheduled") ? "notify me" : "join"}
         </button>
       </div>
       <div className="footer">{card.meetingTime}</div>

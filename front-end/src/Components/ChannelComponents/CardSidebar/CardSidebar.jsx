@@ -1,21 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCookies } from "../../../Custom/useCookies";
 import { getChannel } from "../../../redux/channelSlice";
 import { getHub } from "../../../redux/hubSlice";
 import RadiusImg from "../../RadiusImg/RadiusImg";
 import "./CardSidebar.css";
 
-const CardSidebar = ({ card }) => {
+const CardSidebar = ({ card, setMembersList }) => {
   const token = getCookies("token");
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const handleClick = () => {
-    console.log(pathname);
-    pathname == "/channel" &&
+    console.log(card);
+    console.log(pathname.split("/")[1]);
+    console.log(token);
+    setMembersList(card.joinedUsers);
+    if (pathname.split("/")[1] == "channel") {
       dispatch(getChannel({ id: card.id, token: token }));
-    pathname == "/hub" && dispatch(getHub({ id: card.id, token: token }));
+      navigate(`/channel/${card.id}`);
+    }
+    if (pathname.split("/")[1] == "hub") {
+      dispatch(getHub({ id: card.id, token: token }));
+      navigate(`/hub/${card.id}`);
+    }
+    
   };
   return (
     <div className="cardSidebar" onClick={() => handleClick()}>

@@ -16,7 +16,8 @@ function Profile() {
   const{username} = useParams()
   const activities = useRef(null);
   const channels = useRef(null);
-  const friends = useRef(null);
+  const followers = useRef(null);
+  const followedUsers = useRef(null);
   const [components, setComponents] = useState("Activities");
   const auth = useAuth();
   const [user, setUser] = useState({}) 
@@ -26,17 +27,14 @@ function Profile() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(viewUser({token: token, data: username}))
-    // setUser(response)
+    dispatch(viewUser({token: token, username: username}))
   }, [])
 
   useEffect(() => {
     setUser(response)
-  }, [status])
+  }, [response])
 
-
-
-console.log(user);
+  console.log(user);
 
   return (
     <div className="profile">
@@ -57,17 +55,25 @@ console.log(user);
           Channels
         </button>
         <button
-          onClick={() => setComponents(friends.current.value)}
-          value="Friends"
-          ref={friends}
+          onClick={() => setComponents(followers.current.value)}
+          value="Followers"
+          ref={followers}
         >
-          Friends
+          Followers
+        </button>
+        <button
+          onClick={() => setComponents(followedUsers.current.value)}
+          value="FollowedUsers"
+          ref={followedUsers}
+        >
+          FollowedUsers
         </button>
       </div>
       <>
         {components == "Activities" && <Activities />}
-        {components == "Channels" && <Channels />}
-        {components == "Friends" && <Friends />}
+        {components == "Channels" && <Channels channels={user.channels} />}
+        {components == "Followers" && <Friends friends={user.followers} />}
+        {components == "FollowedUsers" && <Friends friends={user.followedUsers} />}
       </>
     </div>
   );

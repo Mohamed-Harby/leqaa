@@ -7,9 +7,9 @@ import "./RecentActivities.css";
 function RecentActivities() {
   const arr = [
     {
-      postTitle: "post1",
+      title: "post1",
       postTime: "1 Day ago",
-      postDescription:
+      content:
         "Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1Description1",
     },
     {
@@ -18,9 +18,9 @@ function RecentActivities() {
       meetingDescription: "Description1",
     },
     {
-      postTitle: "post2",
+      title: "post2",
       postTime: "3 Day ago",
-      postDescription: "Description2",
+      content: "Description2",
     },
     {
       meetingTitle: "meeting2",
@@ -28,9 +28,9 @@ function RecentActivities() {
       meetingDescription: "Description2",
     },
     {
-      postTitle: "post3",
+      title: "post3",
       postTime: "5 Day ago",
-      postDescription: "Description3",
+      content: "Description3",
     },
     {
       meetingTitle: "meeting3",
@@ -38,9 +38,9 @@ function RecentActivities() {
       meetingDescription: "Description3",
     },
     {
-      postTitle: "post4",
+      title: "post4",
       postTime: "7 Day ago",
-      postDescription: "Description4",
+      content: "Description4",
     },
     {
       meetingTitle: "meeting4",
@@ -48,19 +48,19 @@ function RecentActivities() {
       meetingDescription: "Description4",
     },
     {
-      postTitle: "post5",
+      title: "post5",
       postTime: "9 Day ago",
-      postDescription: "Description5",
+      content: "Description5",
     },
   ];
   return (
     <div className="recentactivities">
-      {arr.map((item) => {
+      {arr.map((item, index) => {
         const key = Object.keys(item);
-        if (key[0] == "postTitle") {
-          return <Post card={item} />;
+        if (key[0] == "title") {
+          return <Post key={index} card={item} />;
         } else {
-          return <CardJoinMeeting card={item} />;
+          return <CardJoinMeeting key={index} card={item} />;
         }
       })}
     </div>

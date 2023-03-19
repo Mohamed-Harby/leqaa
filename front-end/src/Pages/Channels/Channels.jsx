@@ -3,7 +3,7 @@ import "./Channels.css";
 import AdditionalSidebar from "../../Components/AdditionalSidebar/AdditionalSidebar";
 import Statusbar from "../../Components/Statusbar/Statusbar";
 import TypingBar from "../../Components/TypingBar/TypingBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -13,6 +13,7 @@ import {
 } from "../../redux/userSlice";
 import { getCookies } from "../../Custom/useCookies";
 import {
+  getChannel,
   getResponseChannel,
   getResponseCreatedChannel,
   getResponseGetChannel,
@@ -27,6 +28,7 @@ function Channels() {
   const [components, setComponents] = useState("Recent");
   const { pathname } = useLocation();
   const [channels, setChannels] = useState([]);
+  const [membersList, setMembersList] = useState([]);
   const responseChannels = useSelector(getResponseUserChannels);
   const responseGetChannel = useSelector(getResponseGetChannel);
   const responseCreatedChannel = useSelector(getResponseCreatedChannel);
@@ -34,19 +36,33 @@ function Channels() {
   const token = getCookies("token");
   const dispatch = useDispatch();
   var size = Object.keys(responseCreatedChannel).length;
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(viewUserChannels(token));
+    id && dispatch(getChannel({token: token, id: id}))
   }, []);
 
   useEffect(() => {
-    setChannels(responseChannels);
-  }, [responseChannels]);
+    setChannels(responseChannels);    
+    // responseCreatedChannel && channels.push(responseCreatedChannel)
+  }, [responseChannels, responseCreatedChannel]);
+
+  // useEffect(() => {
+  //   channels.push(responseCreatedChannel)
+  //   console.log(responseCreatedChannel);
+  // }, [responseCreatedChannel]);
+
+  console.log(responseCreatedChannel);
 
   return (
     <div className="channelsPage">
-      <AdditionalSidebar cards={channels} path={pathname} />
-      {Object.keys(responseGetChannel).length ? (
+      <AdditionalSidebar
+        setMembersList={setMembersList}
+        cards={channels}
+        path={pathname}
+      />
+      {id ? (
         <div className="channel-section">
           <div className="top">
             <Statusbar data={responseGetChannel} />
@@ -67,10 +83,10 @@ function Channels() {
               </button>
             </div>
           </div>
-          <div>
-            {components === "Recent" && <Recent />}
-            {components === "Members" && <Members />}
-          </div>
+          <>
+            {components === "Recent" && <Recent id={id} />}
+            {components === "Members" && <Members members={membersList} />}
+          </>
           {components === "Recent" && <TypingBar />}
         </div>
       ) : (

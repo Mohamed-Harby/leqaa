@@ -52,7 +52,7 @@ function Login() {
   };
 
   useEffect(() => {
-    console.log(auth.user.isSuccess);
+    console.log(auth.user);
     auth.user.isSuccess && navigate("/");
   }, [auth.user]);
 

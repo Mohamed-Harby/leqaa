@@ -44,8 +44,8 @@ const Carousel = (props) => {
           className={`item show-${show}`}
           style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}
         >
-          {arr.map((item) => {
-            return <CardJoinMeetingCarousel card={item} />;
+          {arr.map((item, index) => {
+            return <CardJoinMeetingCarousel key={index} card={item} />;
           })}
         </div>
       </div>

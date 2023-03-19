@@ -8,7 +8,7 @@ import Settings from "../Pages/Settings/Settings";
 import Meeting from "../Pages/Meeting/Meeting";
 import Channels from "../Pages/Channels/Channels";
 import Organization from "../Pages/Organization/Organization";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD, HUB } from "./Paths";
+import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD, HUB, CHANNEL, HUBs, HUBS } from "./Paths";
 import { useAuth } from "../Custom/useAuth";
 import { useEffect } from "react";
 import { baseUrl, getStatus, getUser } from "../redux/authSlice";
@@ -78,6 +78,14 @@ export const RouterConfig = createBrowserRouter([
       {
         path: CHANNELS,
         element: <Channels />,
+      },
+      {
+        path: CHANNEL,
+        element: <Channels />,
+      },
+      {
+        path: HUBS,
+        element: <Organization />,
       },
       {
         path: HUB,

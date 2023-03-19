@@ -7,6 +7,7 @@ const baseUrl = "http://localhost:5004/api/v1/Channel/";
 const initialState = {
   createChannel: {},
   getChannel: {},
+  recentActivitiesChannels:[],
   status: "idle",
   error: "",
 };
@@ -14,6 +15,7 @@ const initialState = {
 export const createChannel = createAsyncThunk(
   "channel/createChannel",
   async (payload) => {
+    console.log(payload);
     const createChannelUrl = "CreateChannel";
     try {
       const response = await axios.post(baseUrl + createChannelUrl, payload.data, {
@@ -69,6 +71,26 @@ export const getChannel = createAsyncThunk(
   }
 );
 
+export const viewRecentActivities = createAsyncThunk(
+  "channel/viewrecentactivities",
+  async (payload) => {
+    console.log(payload);
+    const viewRecentActivitiesUrl = `ViewRecentActivities?Id=${payload.id}`;
+    try {
+      const response = await axios.get(baseUrl + viewRecentActivitiesUrl, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
 const channelSlice = createSlice({
   name: "channel",
   initialState,
@@ -97,6 +119,18 @@ const channelSlice = createSlice({
       .addCase(getChannel.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
+      .addCase(viewRecentActivities.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(viewRecentActivities.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.recentActivitiesChannels = action.payload;
+      })
+      .addCase(viewRecentActivities.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
@@ -104,5 +138,6 @@ const channelSlice = createSlice({
 export default channelSlice.reducer;
 export const getResponseCreatedChannel = (state) => state.channel.createChannel;
 export const getResponseGetChannel = (state) => state.channel.getChannel;
+export const getResponseViewRecentActivitiesChannel = (state) => state.channel.recentActivitiesChannels;
 export const getErrorChannel = (state) => state.channel.error;
 export const getStatusChannel = (state) => state.channel.status;

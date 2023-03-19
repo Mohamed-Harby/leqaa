@@ -9,12 +9,14 @@ import Member from "../../ChannelComponents/Member/Member";
 import ModalDiscoverFriends from "../../ModalDiscoverFriends/ModalDiscoverFriends";
 import "./Friends.css";
 
-function Friends() {
+function Friends({ friends }) {
   const [render, setRender] = useState(false);
+
+  console.log(friends.length);
 
   const dispatch = useDispatch();
   const auth = useAuth();
-  const [friends, setFriends] = useState([]);
+  // const [friends, setFriends] = useState([]);
   const responseFriends = useSelector(getResponseUserFriends);
   const token = getCookies("token");
   const [modalOpen, setModalOpen] = useState(false);
@@ -22,20 +24,20 @@ function Friends() {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    dispatch(viewUsers(token));
-  }, [dispatch, token]);
+  // useEffect(() => {
+  //   dispatch(viewUsers(token));
+  // }, [dispatch, token]);
 
-  useEffect(() => {
-    console.log(responseFriends);
-    setFriends(responseFriends);
-  }, [responseFriends]);
+  // useEffect(() => {
+  //   console.log(responseFriends);
+  //   setFriends(responseFriends);
+  // }, [responseFriends]);
   return (
     <div
-      className={friends.length === 1 ? "friends centerDiscover" : "friends"}
+      className={friends.length === 0 ? "friends centerDiscover" : "friends"}
     >
       {friends.map((item) => {
-        if (item.isFollowed && auth.user.user.userName != item.userName) {
+        if (auth.user.user.userName != item.userName) {
           return <Member card={item} />;
         }
       })}

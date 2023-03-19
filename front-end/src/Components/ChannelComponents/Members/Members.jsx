@@ -2,7 +2,8 @@ import React from "react";
 import Member from "../Member/Member";
 import "./Members.css";
 
-const Members = () => {
+const Members = ({members}) => {
+  console.log(members);
   const arr = [
     { nameMember: "member1", descriptionMember: "description1" },
     { nameMember: "member2", descriptionMember: "description1" },
@@ -13,7 +14,7 @@ const Members = () => {
   ];
   return (
     <div className="members">
-      {arr.map((item) => {
+      {members.map((item) => {
         return <Member card={item} />;
       })}
     </div>

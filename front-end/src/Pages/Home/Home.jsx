@@ -12,6 +12,7 @@ import Card from "../../Components/Card/Card";
 import { useAuth } from "../../Custom/useAuth";
 import { getCookies } from "../../Custom/useCookies";
 import { getWindowSize, useGetWidth } from "../../Custom/useDimension";
+import { getUser } from "../../redux/authSlice";
 // import CallToolsBar from '../../Components/CallToolsBar/CallToolsBar'
 // import TypingBar from '../../Components/TypingBar/TypingBar';
 
@@ -36,6 +37,9 @@ function Home() {
   }, [width]);
 
   console.log(width);
+  useEffect(() => {
+    console.log("third");
+  }, []);
 
   return (
     <div className="home">

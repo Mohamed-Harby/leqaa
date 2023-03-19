@@ -14,8 +14,8 @@ import {
 } from "../../redux/userSlice";
 import { getCookies } from "../../Custom/useCookies";
 import AdditionalSidebar from "../../Components/AdditionalSidebar/AdditionalSidebar";
-import { getResponseCreatedHub, getResponseGetHub } from "../../redux/hubSlice";
-import { useLocation } from "react-router-dom";
+import { getHub, getResponseCreatedHub, getResponseGetHub } from "../../redux/hubSlice";
+import { useLocation, useParams } from "react-router-dom";
 import Members from "../../Components/HubComponents/Members/Members";
 
 function Organization() {
@@ -24,6 +24,7 @@ function Organization() {
   const members = useRef(null);
   const [components, setComponents] = useState("Channels");
   const { pathname } = useLocation();
+  const [membersList, setMembersList] = useState([]);
   const [hubs, setHubs] = useState([]);
   const responseHubs = useSelector(getResponseUserHubs);
   const responseGetHub = useSelector(getResponseGetHub);
@@ -32,20 +33,26 @@ function Organization() {
   const token = getCookies("token");
   const dispatch = useDispatch();
   var size = Object.keys(responseCreatedHub).length;
+  const { id } = useParams();
+
 
   useEffect(() => {
     dispatch(viewUserHubs(token));
-  }, [responseCreatedHub]);
+    id && dispatch(getHub({token: token, id: id}))
+  }, []);
 
   useEffect(() => {
     console.log(responseHubs);
     setHubs(responseHubs);
   }, [responseHubs]);
 
+console.log(responseGetHub);
+  
+
   return (
     <div className="organizationPage">
-      <AdditionalSidebar cards={hubs} path={pathname} />
-      {Object.keys(responseGetHub).length ? (
+      <AdditionalSidebar setMembersList={setMembersList} cards={hubs} path={pathname} />
+      {id ? (
         <div className="organization-section">
           <div className="top">
             <Statusbar data={responseGetHub} />
@@ -74,9 +81,9 @@ function Organization() {
             </div>
           </div>
           <div>
-            {components === "Channels" && <ChannelsGrid />}
+            {components === "Channels" && <ChannelsGrid id={id}  />}
             {components === "Announcements" && <Announcements />}
-            {components === "Members" && <Members />}
+            {components === "Members" && <Members id={id} />}
           </div>
         </div>
       ) : (
