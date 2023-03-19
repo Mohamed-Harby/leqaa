@@ -29,12 +29,13 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.LeaveChannel;
 
 using BusinessLogic.Application.Commands.Pin.PinChannels;
-using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedHubs;
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
-
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -333,5 +334,42 @@ public class UserController : BaseController
         return result.Match(
             post => Ok(post),
             errors => Problem(errors));
+    }
+
+
+    //pin work
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedHubs()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedHubsCommand(username);
+     var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               hubs => Ok(hubs),
+               errors => Problem(errors));
+    }
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedChannels()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedChannelsCommand(username);
+        var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               channels => Ok(channels),
+               errors => Problem(errors));
+    }
+
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedPosts()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedPostsCommand(username);
+        var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               posts => Ok(posts),
+               errors => Problem(errors));
     }
 }
