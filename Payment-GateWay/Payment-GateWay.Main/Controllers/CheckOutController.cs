@@ -121,7 +121,7 @@ public class CheckoutController : ControllerBase
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = product.PlanType,
-                            Description="User Name"+product.User,
+                            Description="User Name :"+product.User,
 
                         },
                     },
@@ -175,6 +175,18 @@ public class CheckoutController : ControllerBase
 
     }
 
+    [HttpGet("BackToFree")]
+    public async Task<string> BackToFree(string token)
+    {
+        string? userName = GetUserNameFromToken(token!);
+        if (userName == null)
+        {
+            return "not valid token";
+        }
+        var userNewPlanType= await _userPlanRepository.BackToFree(userName);
+        await _userPlanRepository.SaveAsync();
+        return userNewPlanType;
 
+    }
 
 }

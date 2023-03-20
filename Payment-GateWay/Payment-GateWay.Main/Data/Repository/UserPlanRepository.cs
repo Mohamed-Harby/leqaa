@@ -68,5 +68,24 @@ namespace shared.Repository
             return founded.ToString();
    
         }
+
+        public async Task<string> BackToFree(string userName)
+        {
+
+            if (userName == null)
+            {
+                return "not valid user name";
+            }
+            UserPlan user = (await table.Where(u => u.User == userName).FirstOrDefaultAsync())!;
+            if (user == null)
+            {
+                return "user does not exists";
+            }
+            if (user.PlanType.ToLower() == "premium")
+            {
+                user.PlanType = "free";
+            }
+            return $"user plan type now is {user.PlanType} if you want to back to premium just buy it again";
+        }
     }
 }
