@@ -67,14 +67,22 @@ public class CheckoutController : ControllerBase
             stripeSettings.PubKey = pubKey;
             stripeSettings.userName = user;
 
+            if (await _userPlanRepository.GetAsync(user) != null)
+            {
 
+                return BadRequest("user already exists");
+            }
             //here you save in data base
             if (user != null)
             {
-             await   _userPlanRepository.AddAsync(product);
-              await  _userPlanRepository.SaveAsync();
 
+                    
+                
 
+                    await _userPlanRepository.AddAsync(product);
+                    await _userPlanRepository.SaveAsync();
+
+                
             }
 
             return Ok(stripeSettings);
@@ -94,7 +102,7 @@ public class CheckoutController : ControllerBase
         var options = new SessionCreateOptions
         {
 
-            SuccessUrl = $"{s_wasmClientURL}/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
+            SuccessUrl = $"{s_wasmClientURL}success?sessionId=" + "{CHECKOUT_SESSION_ID}",
             CancelUrl = s_wasmClientURL + "/failed",
             PaymentMethodTypes = new List<string>
             {

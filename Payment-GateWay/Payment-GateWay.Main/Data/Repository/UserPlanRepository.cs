@@ -35,6 +35,10 @@ namespace shared.Repository
                 return "not valid user name";
             }
             UserPlan user = (await table.Where(u => u.User == username).FirstOrDefaultAsync())!;
+            if(user == null)
+            {
+                return "user does not exists";
+            }
             var PlanType = user.PlanType;
             return PlanType;
         }
