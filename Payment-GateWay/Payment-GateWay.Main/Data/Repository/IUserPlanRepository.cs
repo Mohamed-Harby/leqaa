@@ -10,6 +10,7 @@ namespace Payment_Gateway.main.Data.Repository
 
         public Task<string> GetAsync(string username);
         public Task<UserPlan> AddAsync(UserPlan entity);
+        public Task<string> Find(string username);
         Task SaveAsync();
     }
 

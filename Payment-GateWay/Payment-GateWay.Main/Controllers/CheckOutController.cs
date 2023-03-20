@@ -63,24 +63,26 @@ public class CheckoutController : ControllerBase
             product.User = user;
             StripeSettings stripeSettings = await CheckOut(product, thisApiUrl);
             var pubKey = _configuration["Stripe:PubKey"];
-
+       
             stripeSettings.PubKey = pubKey;
             stripeSettings.userName = user;
 
-            if (await _userPlanRepository.GetAsync(user) != null)
-            {
+            
+            
 
-                return BadRequest("user already exists");
-            }
+        
             //here you save in data base
             if (user != null)
             {
 
-                    
-                
-
+                string found = await _userPlanRepository.Find(user);
+                if (found == "True")
+                {
                     await _userPlanRepository.AddAsync(product);
                     await _userPlanRepository.SaveAsync();
+                }
+                 return Ok("user was added before");
+              
 
                 
             }

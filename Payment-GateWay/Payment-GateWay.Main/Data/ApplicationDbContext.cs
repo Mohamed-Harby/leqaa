@@ -26,7 +26,7 @@ namespace Payment_GateWay.Main.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            const int amountOfProductsToSeed = 1;
+            const int amountOfProductsToSeed = 2;
 
             var productsToSeed = new UserPlan[amountOfProductsToSeed];
 

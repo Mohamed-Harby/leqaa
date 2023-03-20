@@ -56,6 +56,17 @@ namespace shared.Repository
             return entity;
         }
 
-      
+        public virtual async Task<string> Find(string username)
+        {
+            bool founded = false;
+         var found=  await table.Where(table=> table.User == username).FirstOrDefaultAsync();
+            if (found != null)
+            {
+                return "user already exists";
+            }
+            founded= true;
+            return founded.ToString();
+   
+        }
     }
 }
