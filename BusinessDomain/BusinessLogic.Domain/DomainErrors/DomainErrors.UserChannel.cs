@@ -11,4 +11,15 @@ public static partial class DomainErrors
 
         
     }
+
+    
+
+    public static partial class UserPost
+    {
+        public static Error AlreadyJoinedpost => Error.Conflict("User.JoinedPosts", "You have already joined this posts");
+        public static Error NotJoined => Error.Conflict("User.NotJoined", "You did not join to this posts");
+
+
+
+    }
 }

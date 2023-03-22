@@ -38,6 +38,9 @@ using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedPost;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -372,6 +375,43 @@ public class UserController : BaseController
         var results = await _sender.Send(ViewPinnedHubsCommand);
         return results.Match(
                posts => Ok(posts),
+               errors => Problem(errors));
+    }
+
+
+
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedChannels([FromQuery] Guid ChannelId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedChannel = new DeletePinnedChannelCommand(username, ChannelId);
+        var results = await _sender.Send(DeleteUserPinnedChannel);
+        return results.Match(
+               delete => Ok(delete),
+               errors => Problem(errors));
+    }
+
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedHub([FromQuery] Guid HubId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedHub = new DeletePinnedHubCommand(username, HubId);
+        var results = await _sender.Send(DeleteUserPinnedHub);
+        return results.Match(
+               delete => Ok(delete),
+               errors => Problem(errors));
+    }
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedPost([FromQuery] Guid PostId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedpost = new DeletePinnedPostCommand(username, PostId);
+        var results = await _sender.Send(DeleteUserPinnedpost);
+        return results.Match(
+               delete => Ok(delete),
                errors => Problem(errors));
     }
 }
