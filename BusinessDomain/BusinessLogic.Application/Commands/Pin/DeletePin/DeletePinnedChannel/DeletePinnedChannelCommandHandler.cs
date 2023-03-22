@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel
 {
-    public class DeletePinnedChannelCommandHandler : IHandler<LeaveChannelCommand, ErrorOr<ChannelReadModel>>
+    public class DeletePinnedChannelCommandHandler : IHandler<DeletePinnedChannelCommand, ErrorOr<ChannelReadModel>>
     {
 
         private readonly IUserPinnedChannelRepository _userPinnedChannelRepository;
@@ -44,9 +44,9 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ErrorOr<ChannelReadModel>> Handle(LeaveChannelCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<ChannelReadModel>> Handle(DeletePinnedChannelCommand request, CancellationToken cancellationToken)
         {
-            var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
+            var user = (await _userRepository.GetAsync(u => u.UserName == request.userName)).FirstOrDefault()!;
             var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
 
             if (channel is null)

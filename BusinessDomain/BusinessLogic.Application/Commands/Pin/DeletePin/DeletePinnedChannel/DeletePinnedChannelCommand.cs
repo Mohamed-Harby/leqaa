@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel
 {
-  public record DeletePinnedChannel(
+  public record DeletePinnedChannelCommand(
       string userName,
       Guid ChannelId
 
