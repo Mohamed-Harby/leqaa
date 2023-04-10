@@ -41,6 +41,11 @@ using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
 using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel;
 using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub;
 using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedPost;
+using BusinessLogic.Application.Queries.Users.GetFollowedUsersCount;
+using BusinessLogic.Application.Queries.Users.GetFollowerUsersCount;
+using BusinessLogic.Application.Queries.Users.ViewFollowers;
+using Microsoft.AspNetCore.Http;
+using BusinessLogic.Application.Queries.Users.ViewFollowed;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -414,4 +419,53 @@ public class UserController : BaseController
                delete => Ok(delete),
                errors => Problem(errors));
     }
+
+
+    //Get Followed users
+    [HttpGet]
+    public async Task<IActionResult> GetFollowedUsersCount([FromQuery] Guid UserId)
+    {
+        var GetFollowedUsersCountQuery = new GetFollowedUsersCountQuery(UserId);
+        var results = await _sender.Send(GetFollowedUsersCountQuery);
+        return results.Match(
+               results => Ok(results),
+               errors => Problem(errors));
+
+    }
+    //Get Followers
+    [HttpGet]
+    public async Task<IActionResult> GetFollowerUsersCount([FromQuery] Guid UserId)
+    {
+        var GetFollowerUsersCountQuery = new GetFollowerUsersCountQuery(UserId);
+        var results = await _sender.Send(GetFollowerUsersCountQuery);
+        return results.Match(
+               results => Ok(results),
+               errors => Problem(errors));
+
+    }
+
+    //view followers
+    [HttpGet]
+    public async Task<IActionResult> ViewFollowers([FromQuery] Guid UserId)
+    {
+        var ViewFollowersQuery = new ViewFollowersQuery(UserId);
+        var result=await _sender.Send(ViewFollowersQuery);
+        return result.Match(
+             results => Ok(results),
+             errors => Problem(errors));
+
+    }
+
+    //view followers
+    [HttpGet]
+    public async Task<IActionResult> ViewFollowed([FromQuery] Guid UserId)
+    {
+        var ViewFollowedQuery = new ViewFollowedQuery(UserId);
+        var result = await _sender.Send(ViewFollowedQuery);
+        return result.Match(
+             results => Ok(results),
+             errors => Problem(errors));
+
+    }
+
 }
