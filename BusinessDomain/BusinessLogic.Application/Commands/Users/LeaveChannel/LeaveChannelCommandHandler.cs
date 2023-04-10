@@ -71,7 +71,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             {
                 return DomainErrors.Channel.InvalidChannel;       
                     }
-            return DomainSucceded.User.HubLeft;
+            return DomainSucceded.User.ChannelLeft;
         }
     }
 }

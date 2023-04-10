@@ -217,11 +217,11 @@ public class UserController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> LeaveHub(LeaveHubModel leaveHubModel)
+    public async Task<IActionResult> LeaveHub([FromQuery] Guid hubID)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var LeaveHubCommand = new LeaveHubCommand(username, leaveHubModel.Id);
+        var LeaveHubCommand = new LeaveHubCommand(username, hubID);
         var result = await _sender.Send(LeaveHubCommand);
         return result.Match(
             hub => Ok(hub),
@@ -233,11 +233,11 @@ public class UserController : BaseController
 
 
     [HttpDelete]
-    public async Task<IActionResult> LeavChannel(LeaveChannelModel LeaveChannelModel)
+    public async Task<IActionResult> LeavChannel([FromQuery] Guid ChannelID)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var LeaveChannelCommand = new LeaveChannelCommand(username, LeaveChannelModel.Id);
+        var LeaveChannelCommand = new LeaveChannelCommand(username, ChannelID);
         var result = await _sender.Send(LeaveChannelCommand);
         return result.Match(
             channel=> Ok(channel),
