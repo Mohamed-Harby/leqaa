@@ -9,7 +9,7 @@ using Mapster;
 using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.UpdateChannel;
-public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorOr<ChannelWriteModel>>
+public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorOr<ChannelReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
     private readonly IHubRepository _hubRepository;
@@ -28,9 +28,9 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
         _validator = validator;
     }
 
-    public async Task<ErrorOr<ChannelWriteModel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<ChannelReadModel>> Handle(UpdateChannelCommand request, CancellationToken cancellationToken)
     {
-        var channel = await _channelRepository.GetByIdAsync(request.Id);
+        var channel = await _channelRepository.GetByIdAsync(request.ChannelId);
 
         if (request.Name != null)
             channel.Name = request.Name;
@@ -43,6 +43,6 @@ public class UpdateChannelCommandHandler : IHandler<UpdateChannelCommand, ErrorO
         {
             return DomainErrors.Channel.InvalidChannel;
         }
-        return channel.Adapt<ChannelWriteModel>();
+        return channel.Adapt<ChannelReadModel>();
     }
 }

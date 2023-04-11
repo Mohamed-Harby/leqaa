@@ -82,14 +82,17 @@ public class ChannelController : BaseController
 
 
     [HttpPut]
-    public async Task<ActionResult<ChannelWriteModel>> EditChannel([FromQuery] Guid id, ChannelWriteModel channelWriteModel)
+    public async Task<IActionResult> EditChannel(UpdateChannelCommand channelWriteModel)
     {
-        var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
+        var UpdateChannelCommand = new UpdateChannelCommand(channelWriteModel.ChannelId, channelWriteModel.Name, channelWriteModel.Description);
 
 
-        var UpdateChannel = await _sender.Send(UpdateChannelCommand);
+        var result = await _sender.Send(UpdateChannelCommand);
 
-        return Ok(UpdateChannel);
+        return result.Match(
+             channel => Ok(channel),
+             errors => Problem(errors)
+         );
     }
     [HttpGet]
     public async Task<IActionResult> ViewRecentActivities(
