@@ -14,6 +14,9 @@ namespace BusinessLogic.Domain.DomainSucceeded.User
 
             public static Error ChannelLeft => Error.NotFound("User.ChannelLeft", "Channel left ");
 
+            public static Error ChannelUnPinned=> Error.NotFound("User.ChannelUnPinned", "Channel un pinned ");
+            public static Error HubUnPinned => Error.NotFound("User.HubUnPinned", "hub un pinned ");
+
 
         }
 

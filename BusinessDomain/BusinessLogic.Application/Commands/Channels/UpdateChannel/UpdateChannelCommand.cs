@@ -6,8 +6,8 @@ using MediatR;
 
 namespace BusinessLogic.Application.Commands.Channels.UpdateChannel;
 public record UpdateChannelCommand(
-       Guid Id,
+       Guid ChannelId,
     string Name,
     string? Description
  
-) : ICommand<ErrorOr<ChannelWriteModel>>;
+) : ICommand<ErrorOr<ChannelReadModel>>;

@@ -29,11 +29,23 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.LeaveChannel;
 
 using BusinessLogic.Application.Commands.Pin.PinChannels;
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedHubs;
+
+
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
-
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub;
+using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedPost;
+using BusinessLogic.Application.Queries.Users.GetFollowedUsersCount;
+using BusinessLogic.Application.Queries.Users.GetFollowerUsersCount;
+using BusinessLogic.Application.Queries.Users.ViewFollowers;
+using Microsoft.AspNetCore.Http;
+using BusinessLogic.Application.Queries.Users.ViewFollowed;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -205,11 +217,11 @@ public class UserController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> LeaveHub(LeaveHubModel leaveHubModel)
+    public async Task<IActionResult> LeaveHub([FromQuery] Guid hubID)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var LeaveHubCommand = new LeaveHubCommand(username, leaveHubModel.Id);
+        var LeaveHubCommand = new LeaveHubCommand(username, hubID);
         var result = await _sender.Send(LeaveHubCommand);
         return result.Match(
             hub => Ok(hub),
@@ -221,11 +233,11 @@ public class UserController : BaseController
 
 
     [HttpDelete]
-    public async Task<IActionResult> LeavChannel(LeaveChannelModel LeaveChannelModel)
+    public async Task<IActionResult> LeavChannel([FromQuery] Guid ChannelID)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
 
-        var LeaveChannelCommand = new LeaveChannelCommand(username, LeaveChannelModel.Id);
+        var LeaveChannelCommand = new LeaveChannelCommand(username, ChannelID);
         var result = await _sender.Send(LeaveChannelCommand);
         return result.Match(
             channel=> Ok(channel),
@@ -333,4 +345,127 @@ public class UserController : BaseController
             post => Ok(post),
             errors => Problem(errors));
     }
+
+
+    //pin work
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedHubs()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedHubsCommand(username);
+     var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               hubs => Ok(hubs),
+               errors => Problem(errors));
+    }
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedChannels()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedChannelsCommand(username);
+        var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               channels => Ok(channels),
+               errors => Problem(errors));
+    }
+
+    [HttpGet]
+
+    public async Task<IActionResult> ViewUserPinnedPosts()
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var ViewPinnedHubsCommand = new ViewPinnedPostsCommand(username);
+        var results = await _sender.Send(ViewPinnedHubsCommand);
+        return results.Match(
+               posts => Ok(posts),
+               errors => Problem(errors));
+    }
+
+
+
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedChannels([FromQuery] Guid ChannelId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedChannel = new DeletePinnedChannelCommand(username, ChannelId);
+        var results = await _sender.Send(DeleteUserPinnedChannel);
+        return results.Match(
+               delete => Ok(delete),
+               errors => Problem(errors));
+    }
+
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedHub([FromQuery] Guid HubId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedHub = new DeletePinnedHubCommand(username, HubId);
+        var results = await _sender.Send(DeleteUserPinnedHub);
+        return results.Match(
+               delete => Ok(delete),
+               errors => Problem(errors));
+    }
+    [HttpDelete]
+
+    public async Task<IActionResult> DeleteUserPinnedPost([FromQuery] Guid PostId)
+    {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var DeleteUserPinnedpost = new DeletePinnedPostCommand(username, PostId);
+        var results = await _sender.Send(DeleteUserPinnedpost);
+        return results.Match(
+               delete => Ok(delete),
+               errors => Problem(errors));
+    }
+
+
+    //Get Followed users
+    [HttpGet]
+    public async Task<IActionResult> GetFollowedUsersCount([FromQuery] Guid UserId)
+    {
+        var GetFollowedUsersCountQuery = new GetFollowedUsersCountQuery(UserId);
+        var results = await _sender.Send(GetFollowedUsersCountQuery);
+        return results.Match(
+               results => Ok(results),
+               errors => Problem(errors));
+
+    }
+    //Get Followers
+    [HttpGet]
+    public async Task<IActionResult> GetFollowerUsersCount([FromQuery] Guid UserId)
+    {
+        var GetFollowerUsersCountQuery = new GetFollowerUsersCountQuery(UserId);
+        var results = await _sender.Send(GetFollowerUsersCountQuery);
+        return results.Match(
+               results => Ok(results),
+               errors => Problem(errors));
+
+    }
+
+    //view followers
+    [HttpGet]
+    public async Task<IActionResult> ViewFollowers([FromQuery] Guid UserId)
+    {
+        var ViewFollowersQuery = new ViewFollowersQuery(UserId);
+        var result=await _sender.Send(ViewFollowersQuery);
+        return result.Match(
+             results => Ok(results),
+             errors => Problem(errors));
+
+    }
+
+    //view followers
+    [HttpGet]
+    public async Task<IActionResult> ViewFollowed([FromQuery] Guid UserId)
+    {
+        var ViewFollowedQuery = new ViewFollowedQuery(UserId);
+        var result = await _sender.Send(ViewFollowedQuery);
+        return result.Match(
+             results => Ok(results),
+             errors => Problem(errors));
+
+    }
+
 }

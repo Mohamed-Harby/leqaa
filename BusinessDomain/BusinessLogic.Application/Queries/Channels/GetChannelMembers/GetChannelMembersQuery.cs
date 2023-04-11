@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.Application.CommandInterfaces;
-using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Users;
 using ErrorOr;
 using System;
@@ -8,11 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
+namespace BusinessLogic.Application.Queries.Channels.GetChannelMembers
 {
-    public record ViewHubUsersQuery
-   (
-        Guid hubid
-
-       ) : IQuery<ErrorOr<List<UserRecentReadModel>>>;
+    public record GetChannelMembersQuery(
+        Guid ChannelId
+        ):IQuery<ErrorOr<List<UserReadModel>>>;
 }

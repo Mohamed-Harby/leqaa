@@ -8,7 +8,6 @@ namespace BusinessLogic.Application.Commands.Channels.CreateChannel;
 public record CreateChannelCommand(
     string Name,
     string? Description,
-    byte[]? Image,
     Guid? HubId,
     string UserName
 )

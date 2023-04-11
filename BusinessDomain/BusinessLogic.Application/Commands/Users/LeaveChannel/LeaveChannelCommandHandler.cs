@@ -54,7 +54,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             )).FirstOrDefault()!;
             if (userChannel is null)
             {
-                return DomainErrors.UserHub.NotJoined;
+                return DomainErrors.UserChannel.NotJoined;
             }
             if (userChannel.Role == GroupRole.Founder)
             {
@@ -71,7 +71,7 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             {
                 return DomainErrors.Channel.InvalidChannel;       
                     }
-            return DomainSucceded.User.HubLeft;
+            return DomainSucceded.User.ChannelLeft;
         }
     }
 }

@@ -44,7 +44,7 @@ public class HubController : BaseController
     }
 
     [HttpGet]
-    // [HasPermission(Permission.CanViewHubs)]
+    [HasPermission(Permission.CanViewHubs)]
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
@@ -77,9 +77,9 @@ public class HubController : BaseController
 
 
     [HttpPut]
-    public async Task<IActionResult> EditHub([FromQuery] Guid id, HubUpdateModel hubReadModel)
+    public async Task<IActionResult> EditHub( HubUpdateModel HubUpdateModel)
     {
-        var UpdateHubCommand = new UpdateHubCommand(id, hubReadModel.name, hubReadModel.description);
+        var UpdateHubCommand = new UpdateHubCommand(HubUpdateModel.hubid, HubUpdateModel.name, HubUpdateModel.description);
 
 
         ErrorOr<HubUpdateModel> results = await _sender.Send(UpdateHubCommand);
@@ -108,7 +108,7 @@ public class HubController : BaseController
     [HttpGet]
     public async Task<IActionResult> ViewHubUsers(Guid hubid)
     {
-        var users = new ViewHubUsersQuery(hubid);
+        var users = new ViewHupUsersQuery(hubid);
         var result = await _sender.Send(users);
         return result.Match(
             users => Ok(users),
