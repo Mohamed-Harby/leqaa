@@ -1,7 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
@@ -15,8 +14,6 @@
             "args": [],
             "cwd": "${workspaceFolder}/BusinessDomain/BusinessLogic.Entry",
             "stopAtEntry": false,
-            "justMyCode": true,
-
             // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
             "serverReadyAction": {
                 "action": "openExternally",
@@ -32,8 +29,7 @@
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "attach",
-            "justMyCode": false
+            "request": "attach"
         }
     ]
 }

@@ -35,8 +35,7 @@
                 "--project",
                 "${workspaceFolder}/BusinessDomain/BusinessLogic.Entry/BusinessLogic.Entry.csproj"
             ],
-            "problemMatcher": "$msCompile",
-            
+            "problemMatcher": "$msCompile"
         }
     ]
 }
