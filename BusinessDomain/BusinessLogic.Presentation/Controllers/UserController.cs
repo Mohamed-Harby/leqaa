@@ -46,6 +46,8 @@ using BusinessLogic.Application.Queries.Users.GetFollowerUsersCount;
 using BusinessLogic.Application.Queries.Users.ViewFollowers;
 using Microsoft.AspNetCore.Http;
 using BusinessLogic.Application.Queries.Users.ViewFollowed;
+using BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser;
+using BusinessLogic.Application.Queries.Users.GetChannelUserNotIn;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -466,6 +468,37 @@ public class UserController : BaseController
              results => Ok(results),
              errors => Problem(errors));
 
+    }
+    [HttpPost]
+    public async Task<IActionResult> AddUsersByUser([FromBody] AddMultibleUsersByUserCommand request)
+    {
+        var command = new AddMultibleUsersByUserCommand
+        (
+           request.UserName,
+            request.AddedUserNames,
+             request.HubId
+        );
+
+        var result = await _sender.Send(command);
+
+        return result.Match(
+            addedUsers => Ok(addedUsers),
+            errors => Problem(errors)
+        );
+    }
+    [HttpGet("available")]
+    public async Task<IActionResult> GetAvailableChannels()
+    {
+
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+
+        var query = new GetChannelUserNotInQuery(username);
+        var result = await _sender.Send(query);
+
+        return result.Match(
+           addedUsers => Ok(addedUsers),
+           errors => Problem(errors)
+       );
     }
 
 }

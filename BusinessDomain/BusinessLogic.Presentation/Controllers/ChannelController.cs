@@ -7,12 +7,15 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Channels.ViewChannel;
 using BusinessLogic.Application.Queries.Channels.ViewRecentActivities;
+using BusinessLogic.Application.Queries.Channels.GetChannelMembers;
+
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Application.Models.Users;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -99,5 +102,17 @@ public class ChannelController : BaseController
     {
         var result = await _sender.Send(viewChannelRecentActivitiesQuery);
         return Ok(result);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetChannelMembers([FromQuery] Guid ChannelId)
+    {
+        var GetChannelMembersQuery = new GetChannelMembersQuery(ChannelId);
+     var result=await _sender.Send(GetChannelMembersQuery);
+        return result.Match(
+             channel => Ok(channel),
+             errors => Problem(errors)
+         );
     }
 }

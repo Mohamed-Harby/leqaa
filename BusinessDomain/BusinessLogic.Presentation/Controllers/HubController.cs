@@ -44,7 +44,7 @@ public class HubController : BaseController
     }
 
     [HttpGet]
-    [HasPermission(Permission.CanViewHubs)]
+   /* [HasPermission(Permission.CanViewHubs)]*/
 
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {

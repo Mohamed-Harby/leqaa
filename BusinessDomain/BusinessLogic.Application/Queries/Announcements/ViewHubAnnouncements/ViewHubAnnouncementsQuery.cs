@@ -1,8 +1,10 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
+using ErrorOr;
 
-namespace BusinessLogic.Application.Queries.Announcements;
+namespace BusinessLogic.Application.Queries.Announcements.ViewHubAnnouncements;
 public record ViewHubAnnouncementsQuery(
     int PageNumber,
-    int PageSize
-):IQuery<List<HubAnnouncementReadModel>>;
+    int PageSize,
+    Guid HubId
+) : IQuery<ErrorOr<List<HubAnnouncementReadModel>>>;
