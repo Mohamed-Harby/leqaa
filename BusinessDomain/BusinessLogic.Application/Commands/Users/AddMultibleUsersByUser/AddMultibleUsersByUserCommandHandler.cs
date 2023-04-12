@@ -43,7 +43,7 @@ namespace BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser
                 return DomainErrors.User.NotFound;
             }
 
-            var userHub = await _userHubRepository.GetAsync(uh => uh.UserId == addingUser.Id && uh.HubId == hub.Id);
+            UserHub userHub = (await _userHubRepository.GetAsync(uh => uh.UserId == addingUser.Id && uh.HubId == hub.Id, null, "")).FirstOrDefault()!;
             if (userHub == null)
             {
                 return DomainErrors.User.NotFound;
