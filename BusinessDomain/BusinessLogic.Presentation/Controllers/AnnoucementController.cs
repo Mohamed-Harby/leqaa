@@ -4,6 +4,8 @@ using BusinessLogic.Application.Commands.Channels.CreateChannel;
 using BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements;
 using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Application.Queries.Announcements.ViewChannelAnnoucement;
+using BusinessLogic.Application.Queries.Announcements.ViewHubAnnouncements;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -71,7 +73,36 @@ public class AnnoucementController : BaseController
 
 
     }
-  
 
+    [HttpGet]
+    public async Task<IActionResult> GetHubAnnoucements( [FromQuery] ViewHubAnnouncementsQuery ViewHubAnnouncementsQuery)
+    {
+        var viewHubAnnouncementsQuery = new ViewHubAnnouncementsQuery(
+            ViewHubAnnouncementsQuery.PageNumber,
+            ViewHubAnnouncementsQuery.PageSize,
+            ViewHubAnnouncementsQuery.HubId);
 
+     var results = await _sender.Send(viewHubAnnouncementsQuery);
+        return results.Match(
+          channel => Ok(channel),
+          errors => Problem(errors)
+      );
+
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetChannelAnnoucements([FromQuery] ViewChannelAnnouncementsQuery ViewChannelAnnouncementsQuery)
+    {
+        var viewChannelAnnouncementsQuery = new ViewChannelAnnouncementsQuery(
+            ViewChannelAnnouncementsQuery.PageNumber,
+            ViewChannelAnnouncementsQuery.PageSize,
+            ViewChannelAnnouncementsQuery.ChannelId);
+
+        var results = await _sender.Send(viewChannelAnnouncementsQuery);
+        return results.Match(
+          channel => Ok(channel),
+          errors => Problem(errors)
+      );
+
+    }
 }
