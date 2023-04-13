@@ -18,18 +18,18 @@ public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, Erro
 
     public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewRelatedUsersQuery request, CancellationToken cancellationToken)
     {
-        var users = (await _userRepository.GetAllAsync())
-        .Take(request.PageSize)
+        var users = await _userRepository.GetAllAsync();
+        users.Take(request.PageSize)
         .Skip((request.PageNumber - 1) * request.PageSize).ToList();
 
-        var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "FollowedUsers")).FirstOrDefault()!;
-        for (int i = 0; i < users.Count; i++)
+       /* var user = await _userRepository.GetAllAsync();*/
+      /*  for (int i = 0; i < users.Count; i++)
         {
             if (user.FollowedUsers.Contains(users[i]))
             {
                 users[i].IsFollowed = true;
             }
-        }
+        }*/
         return users.Adapt<List<UserRecentReadModel>>();
     }
 }

@@ -8,7 +8,16 @@ public class ChannelAnnouncementConfiguration : BaseConfiguration<ChannelAnnounc
 {
     public override void Configure(EntityTypeBuilder<ChannelAnnouncement> builder)
     {
-        base.Configure(builder);
+
+
+
         builder.ToTable("channelAnnouncements");
+
+        base.Configure(builder);
+
+        builder
+        .HasOne(r => r.Channel)
+        .WithMany(u => u.ChannelAnnouncements)
+        .OnDelete(DeleteBehavior.Cascade);
     }
 }
