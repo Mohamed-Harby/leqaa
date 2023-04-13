@@ -39,16 +39,13 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
         public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewHupUsersQuery request, CancellationToken cancellationToken)
         {
 
-            List<User> users = new();
-            var hubs = (await _hubRepository.GetAsync(c => c.Id == request.hubid, null, "Users")).FirstOrDefault()!;
 
-
-            /*   foreach(var userHub in userHubs)
-               {
-                   var userId = userHub.UserId;
-                   User user= await _userRepository.GetByIdAsync(userId);
-                   users.Add(user);
-               }*/
+            var hubs = (await _hubRepository.GetAsync(c => c.Id == request.hubid, null, "JoinedUsers"))
+                .FirstOrDefault()!;
+            
+   
+            
+         
             return hubs.JoinedUsers.Adapt<List<UserRecentReadModel>>();
 
 
