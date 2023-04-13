@@ -23,15 +23,11 @@ using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Commands.Users.UpdateUserRole;
 using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Application.Queries.Users.ViewRecentActivities;
-
 using BusinessLogic.Application.Commands.Users.LeaveHub;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Commands.Users.LeaveChannel;
-
 using BusinessLogic.Application.Commands.Pin.PinChannels;
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedHubs;
-
-
 using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
@@ -44,7 +40,6 @@ using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedPost;
 using BusinessLogic.Application.Queries.Users.GetFollowedUsersCount;
 using BusinessLogic.Application.Queries.Users.GetFollowerUsersCount;
 using BusinessLogic.Application.Queries.Users.ViewFollowers;
-using Microsoft.AspNetCore.Http;
 using BusinessLogic.Application.Queries.Users.ViewFollowed;
 using BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser;
 using BusinessLogic.Application.Queries.Users.GetChannelUserNotIn;
@@ -242,7 +237,7 @@ public class UserController : BaseController
         var LeaveChannelCommand = new LeaveChannelCommand(username, ChannelID);
         var result = await _sender.Send(LeaveChannelCommand);
         return result.Match(
-            channel=> Ok(channel),
+            channel => Ok(channel),
             errors => Problem(errors)
         );
 
@@ -356,7 +351,7 @@ public class UserController : BaseController
     {
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         var ViewPinnedHubsCommand = new ViewPinnedHubsCommand(username);
-     var results = await _sender.Send(ViewPinnedHubsCommand);
+        var results = await _sender.Send(ViewPinnedHubsCommand);
         return results.Match(
                hubs => Ok(hubs),
                errors => Problem(errors));
@@ -451,7 +446,7 @@ public class UserController : BaseController
     public async Task<IActionResult> ViewFollowers([FromQuery] Guid UserId)
     {
         var ViewFollowersQuery = new ViewFollowersQuery(UserId);
-        var result=await _sender.Send(ViewFollowersQuery);
+        var result = await _sender.Send(ViewFollowersQuery);
         return result.Match(
              results => Ok(results),
              errors => Problem(errors));

@@ -62,6 +62,6 @@ public class User : BaseEntity
     public virtual ICollection<Post> PinnedPosts { get; set; }
     public virtual ICollection<Hub> PinnedHubs { get; set; }
     public virtual ICollection<Plan.Plan> Plans { get; set; }
-    public virtual ICollection<User> Followers { get; set; }
-    public virtual ICollection<User> FollowedUsers { get; set; }
+    public virtual ICollection<User> Followers { get; set; }//people who follow this user
+    public virtual ICollection<User> FollowedUsers { get; set; }//people who this user follows
 }

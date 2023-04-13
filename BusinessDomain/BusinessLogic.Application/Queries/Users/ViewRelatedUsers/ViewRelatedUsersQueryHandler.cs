@@ -22,14 +22,20 @@ public class ViewRelatedUsersQueryHandler : IHandler<ViewRelatedUsersQuery, Erro
         users.Take(request.PageSize)
         .Skip((request.PageNumber - 1) * request.PageSize).ToList();
 
-       /* var user = await _userRepository.GetAllAsync();*/
-      /*  for (int i = 0; i < users.Count; i++)
+        var followedUsers = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "FollowedUsers"))
+        .FirstOrDefault()!
+        .FollowedUsers;
+        users = users.Select(x => new Domain.User
         {
-            if (user.FollowedUsers.Contains(users[i]))
-            {
-                users[i].IsFollowed = true;
-            }
-        }*/
+            Id = x.Id,
+            UserName = x.UserName,
+            Email = x.Email,
+            ProfilePicture = x.ProfilePicture,
+            Gender = x.Gender,
+            Name = x.Name,
+            IsFollowed = followedUsers.Contains(x),
+        });
+
         return users.Adapt<List<UserRecentReadModel>>();
     }
 }

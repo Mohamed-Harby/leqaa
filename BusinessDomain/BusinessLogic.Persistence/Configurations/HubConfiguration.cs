@@ -31,7 +31,9 @@ public class HubConfiguration : BaseConfiguration<Hub>
             .WithMany()
             .HasForeignKey(uh => uh.HubId)
         );
-
+        builder
+        .Ignore(h => h.IsJoined)
+        .Ignore(h => h.IsPinned);
 
         builder
      .HasMany(h => h.PinningUsers)

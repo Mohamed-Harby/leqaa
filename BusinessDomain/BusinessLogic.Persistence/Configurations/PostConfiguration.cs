@@ -14,27 +14,27 @@ public class PostConfiguration : BaseConfiguration<Post>
 
 
         builder
-   .HasMany(h => h.PostPinningUsers)
-   .WithMany(u => u.PinnedPosts)
-   .UsingEntity<UserPinnedPost>(
-       join => join
-       .HasOne(uh => uh.UserPinned)
-       .WithMany()
-       .HasForeignKey(uh => uh.UserPinnedId)
-            .OnDelete(DeleteBehavior.Cascade),
+        .HasMany(h => h.PostPinningUsers)
+        .WithMany(u => u.PinnedPosts)
+        .UsingEntity<UserPinnedPost>(
+            join => join
+                .HasOne(uh => uh.UserPinned)
+                .WithMany()
+                .HasForeignKey(uh => uh.UserPinnedId)
+                .OnDelete(DeleteBehavior.Cascade),
 
-       join => join
-       .HasOne(uh => uh.PinnedPost)
-       .WithMany()
-       .HasForeignKey(uh => uh.PinnedPostId)
-            .OnDelete(DeleteBehavior.Cascade)
+            join => join
+                .HasOne(uh => uh.PinnedPost)
+                .WithMany()
+                .HasForeignKey(uh => uh.PinnedPostId)
+                .OnDelete(DeleteBehavior.Cascade)
    );
 
+        builder.Ignore(p => p.IsPinned);
 
-
-        builder.Property(t=>t.Title).IsRequired()
+        builder.Property(t => t.Title).IsRequired()
         .HasMaxLength(30);
-        builder.Property(t=>t.Content).IsRequired()
+        builder.Property(t => t.Content).IsRequired()
         .HasMaxLength(1000);
 
 
