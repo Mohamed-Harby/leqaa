@@ -10,14 +10,15 @@ services:
     environment:
       - ConnectionStrings__Default=server=authenticationdb;Port=3308;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
       - Uri=http://localhost:5002
+      - RabbitMQ__Host=rabbitmq
     ports:
       - 5002:5002
       - 5003:5003
     depends_on:
       - authenticationdb
       - rabbitmq
-    # volumes:
-      # - ./Authentication:/src/Authentication
+    volumes:
+      - ./Authentication:/src/Authentication
     healthcheck:
       test: ["CMD","curl","-f","http://authenticationdb:3308"]
       timeout: 1s

@@ -1,3 +1,4 @@
+using System.Text;
 using Authentication.Application.DependencyInjection;
 using Authentication.Domain.Entities.ApplicationRole;
 using Authentication.Domain.Entities.ApplicationUser;
@@ -35,11 +36,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 {
     options.TokenValidationParameters = new()
     {
-        ValidIssuer = jwt.Issuer,
         ValidAudience = jwt.Audience,
-        ValidateIssuer = true,
         ValidateAudience = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Base64UrlEncoder.DecodeBytes(jwt.Key)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
         ValidateIssuerSigningKey = true,
     };
 });

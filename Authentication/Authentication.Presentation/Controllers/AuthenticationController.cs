@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Authentication.Presentation.Controllers;
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-[Authorize(AuthenticationSchemes = "Bearer")]
+// [Authorize(AuthenticationSchemes = "Bearer")]
 public class AuthenticationController : Controller
 {
     private readonly ISender _sender;
