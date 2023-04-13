@@ -81,7 +81,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
 
 
-
+    
 
 
 
@@ -196,13 +196,11 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         var channels = await _context.Set<Channel>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
-            .OrderByDescending(ha => ha.CreationDate)
             .AsNoTracking()
             .ToListAsync();
         var hubAnnouncements = await _context.Set<HubAnnouncement>()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize / 2)
-            .OrderByDescending(ha => ha.CreationDate)
             .AsNoTracking()
             .ToListAsync();
         var channelAnnouncements = await _context.Set<ChannelAnnouncement>()
@@ -216,7 +214,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         recentActivities.AddRange(channels);
         recentActivities.AddRange((hubAnnouncements).OrderByDescending(ha => ha.CreationDate));
         recentActivities.AddRange((channelAnnouncements).OrderByDescending(ca => ca.CreationDate));
-
+        
         recentActivities = recentActivities
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)

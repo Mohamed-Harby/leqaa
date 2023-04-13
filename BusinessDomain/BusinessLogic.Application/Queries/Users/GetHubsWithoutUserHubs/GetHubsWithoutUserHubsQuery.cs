@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs;
-
-public record GetHubsWithoutUserHubsQuery
-(
-    string UserName
-
-) : IUserNameInQuery<ErrorOr<List<HubReadModel>>>;
+namespace BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs
+{
+    public record GetHubsWithoutUserHubsQuery
+    (
+        string UserName
+        
+    ) : IUserNameInQuery<ErrorOr<List<HubReadModel>>>;
+}
