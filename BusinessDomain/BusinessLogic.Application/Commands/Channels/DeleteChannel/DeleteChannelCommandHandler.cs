@@ -7,6 +7,8 @@ using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
 using Mapster;
 using MediatR;
+using BusinessLogic.Domain.DomainSucceeded.User;
+
 
 namespace BusinessLogic.Application.Commands.Channels.DeleteChannel;
 
@@ -42,14 +44,14 @@ public class DeletePostCommandHandler : IHandler<DeletePostCommand, ErrorOr<Unit
         }
 
 
-        _channelRepository.Remove(channel);
+      _channelRepository.Remove(channel);
 
 
         if (await _unitOfWork.SaveAsync() == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
-        return Unit.Value;
+        return DomainSucceded.User.ChannelDeleted;
     }
 
 

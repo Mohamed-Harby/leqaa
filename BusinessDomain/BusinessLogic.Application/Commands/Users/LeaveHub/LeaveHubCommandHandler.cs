@@ -19,12 +19,13 @@ using BusinessLogic.Domain.DomainSucceeded.User;
 namespace BusinessLogic.Application.Commands.Users.LeaveHub
 {
 
-    public class LeaveChannelCommandHandler : IHandler<LeaveHubCommand, ErrorOr<HubReadModel>>
+    public class LeaveHubCommandHandler : IHandler<LeaveHubCommand, ErrorOr<HubReadModel>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserHubRepository _userHubRepository;
-        public LeaveChannelCommandHandler(
+
+        public LeaveHubCommandHandler(
             IUserRepository userRepository,
             IHubRepository hubRepository,
             IUserHubRepository userHubRepository)
@@ -53,10 +54,14 @@ namespace BusinessLogic.Application.Commands.Users.LeaveHub
                 var newFounder = hub.JoinedUsers.FirstOrDefault(u => u.Id != user.Id);
                 if (newFounder is null)
                 {
-
-                    return DomainErrors.Hub.CannotLeaveHub;
+                    // Delete the Hub if the leaving user is the last user in the Hub
+                   _hubRepository.Remove(hub);
+                    if (await _hubRepository.SaveAsync(cancellationToken) == 0)
+                    {
+                        return DomainErrors.Hub.CannotLeaveHub;
+                    }
+                    return DomainSucceded.User.HubLeftAndDeleted;
                 }
-
             }
             hub.JoinedUsers.Remove(user);
             if (await _hubRepository.SaveAsync(cancellationToken) == 0)
