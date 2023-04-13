@@ -5,7 +5,7 @@ import ModalDiscoverHubs from "../ModalDiscoverHubs/ModalDiscoverHubs";
 import Searchbar from "../Searchbar/Searchbar";
 import "./AdditionalSidebar.css";
 
-function AdditionalSidebar({ cards, path, setMembersList }) {
+function AdditionalSidebar({ cards, path, setMembersList, setComponents }) {
   console.log(cards);
   console.log(path);
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,7 +27,7 @@ function AdditionalSidebar({ cards, path, setMembersList }) {
               return <Card card={card} />;
             } else {
               return (
-                <CardSidebar setMembersList={setMembersList} card={card} />
+                <CardSidebar setComponents={setComponents} setMembersList={setMembersList} card={card} />
               );
             }
           })}

@@ -13,6 +13,8 @@ import { useAuth } from "../../Custom/useAuth";
 import { getCookies } from "../../Custom/useCookies";
 import { getWindowSize, useGetWidth } from "../../Custom/useDimension";
 import { getUser } from "../../redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getResponseRecentActivities, viewRecentActivities, viewRecentActivitiesHome } from "../../redux/homeSlice";
 // import CallToolsBar from '../../Components/CallToolsBar/CallToolsBar'
 // import TypingBar from '../../Components/TypingBar/TypingBar';
 
@@ -26,6 +28,8 @@ function Home() {
   const token = getCookies("token");
   console.log(token);
   const width = useGetWidth();
+  const dispatch = useDispatch()
+  const recentactivities = useSelector(getResponseRecentActivities)
 
   useEffect(() => {
     if (width <= 768) {
@@ -38,8 +42,9 @@ function Home() {
 
   console.log(width);
   useEffect(() => {
-    console.log("third");
+    dispatch(viewRecentActivitiesHome({token: token}))
   }, []);
+
 
   return (
     <div className="home">

@@ -1,0 +1,15 @@
+@use "../../../helper/style" as *;
+
+.settingChannel {
+  label {
+    cursor: pointer;
+    span {
+      svg {
+        font-size: 25px;
+      }
+    }
+    input {
+      display: none;
+    }
+  }
+}

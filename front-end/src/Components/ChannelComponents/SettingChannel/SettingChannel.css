@@ -1,0 +1,9 @@
+.settingChannel label {
+  cursor: pointer;
+}
+.settingChannel label span svg {
+  font-size: 25px;
+}
+.settingChannel label input {
+  display: none;
+}/*# sourceMappingURL=SettingChannel.css.map */

@@ -7,7 +7,7 @@ import { getHub } from "../../../redux/hubSlice";
 import RadiusImg from "../../RadiusImg/RadiusImg";
 import "./CardSidebar.css";
 
-const CardSidebar = ({ card, setMembersList }) => {
+const CardSidebar = ({ card, setMembersList, setComponents }) => {
   const token = getCookies("token");
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -18,10 +18,12 @@ const CardSidebar = ({ card, setMembersList }) => {
     console.log(token);
     setMembersList(card.joinedUsers);
     if (pathname.split("/")[1] == "channel") {
+      setComponents("Recent")
       dispatch(getChannel({ id: card.id, token: token }));
       navigate(`/channel/${card.id}`);
     }
     if (pathname.split("/")[1] == "hub") {
+      setComponents("Channels")
       dispatch(getHub({ id: card.id, token: token }));
       navigate(`/hub/${card.id}`);
     }

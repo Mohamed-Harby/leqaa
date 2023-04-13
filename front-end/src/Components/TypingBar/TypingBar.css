@@ -30,6 +30,15 @@
   color: #656366;
   padding: 1rem;
 }
+.typingBar label {
+  cursor: pointer;
+}
+.typingBar label span svg {
+  font-size: 25px;
+}
+.typingBar label input {
+  display: none;
+}
 .typingBar button {
   background-color: #1b1b1b;
   color: #e2e0e3;
@@ -37,4 +46,5 @@
   font-size: 2rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }/*# sourceMappingURL=TypingBar.css.map */

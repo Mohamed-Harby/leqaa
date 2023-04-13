@@ -14,14 +14,23 @@ import {
 } from "../../redux/userSlice";
 import { getCookies } from "../../Custom/useCookies";
 import AdditionalSidebar from "../../Components/AdditionalSidebar/AdditionalSidebar";
-import { getHub, getResponseCreatedHub, getResponseGetHub } from "../../redux/hubSlice";
+import {
+  getHub,
+  getResponseCreatedHub,
+  getResponseEditedHub,
+  getResponseGetDeleteHubStatus,
+  getResponseGetHub,
+} from "../../redux/hubSlice";
 import { useLocation, useParams } from "react-router-dom";
 import Members from "../../Components/HubComponents/Members/Members";
+import TypingBar from "../../Components/TypingBar/TypingBar";
+import SettingChannel from "../../Components/ChannelComponents/SettingChannel/SettingChannel";
 
 function Organization() {
   const channels = useRef(null);
   const recent = useRef(null);
   const members = useRef(null);
+  const setting = useRef(null);
   const [components, setComponents] = useState("Channels");
   const { pathname } = useLocation();
   const [membersList, setMembersList] = useState([]);
@@ -29,33 +38,45 @@ function Organization() {
   const responseHubs = useSelector(getResponseUserHubs);
   const responseGetHub = useSelector(getResponseGetHub);
   const responseCreatedHub = useSelector(getResponseCreatedHub);
+  const responseEditedHub = useSelector(getResponseEditedHub);
+  const responseDeletedHub = useSelector(getResponseGetDeleteHubStatus);
   const status = useSelector(getStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
   var size = Object.keys(responseCreatedHub).length;
   const { id } = useParams();
 
-
   useEffect(() => {
     dispatch(viewUserHubs(token));
-    id && dispatch(getHub({token: token, id: id}))
-  }, []);
+    dispatch(getHub({ token: token, id: id }));
+    console.log(responseDeletedHub);
+  }, [responseCreatedHub, responseDeletedHub]);
 
   useEffect(() => {
     console.log(responseHubs);
     setHubs(responseHubs);
   }, [responseHubs]);
 
-console.log(responseGetHub);
-  
+  console.log(responseGetHub);
 
   return (
     <div className="organizationPage">
-      <AdditionalSidebar setMembersList={setMembersList} cards={hubs} path={pathname} />
+      <AdditionalSidebar
+        setComponents={setComponents}
+        setMembersList={setMembersList}
+        cards={hubs}
+        path={pathname}
+      />
       {id ? (
         <div className="organization-section">
           <div className="top">
-            <Statusbar data={responseGetHub} />
+            <Statusbar
+              data={
+                Object.keys(responseEditedHub).length
+                  ? responseEditedHub
+                  : responseGetHub
+              }
+            />
             <div className="btns">
               <button
                 onClick={() => setComponents(channels.current.value)}
@@ -78,13 +99,22 @@ console.log(responseGetHub);
               >
                 Members
               </button>
+              <button
+                onClick={() => setComponents(setting.current.value)}
+                value="Setting"
+                ref={setting}
+              >
+                Setting
+              </button>
             </div>
           </div>
           <div>
-            {components === "Channels" && <ChannelsGrid id={id}  />}
+            {components === "Channels" && <ChannelsGrid id={id} />}
             {components === "Announcements" && <Announcements />}
             {components === "Members" && <Members id={id} />}
+            {components === "Setting" && <SettingChannel />}
           </div>
+          {components === "Announcements" && <TypingBar />}
         </div>
       ) : (
         <div

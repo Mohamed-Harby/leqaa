@@ -1,6 +1,6 @@
 @use "../../helper/style" as *;
 
-.typingBar{
+.typingBar {
   background-color: $firstColor;
   display: flex;
   align-items: center;
@@ -12,7 +12,6 @@
   position: sticky;
   bottom: 0;
   z-index: 1000;
-  
 
   input {
     flex: 1;
@@ -24,39 +23,35 @@
     font-size: 1.1rem;
     box-shadow: 0px 0px 5px 1px black;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
 
-    &::placeholder{
+    &::placeholder {
       color: $thirdColor;
       padding: 1rem;
     }
   }
 
-  button{
+  label {
+    cursor: pointer;
+    span {
+      svg {
+        font-size: 25px;
+      }
+    }
+    input {
+      display: none;
+    }
+  }
+
+  button {
     background-color: $firstColor;
     color: $fifthColor;
     border: none;
     font-size: 2rem;
     display: flex;
     align-items: center;
-
+    cursor: pointer;
   }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -16,23 +16,28 @@ import {
   getChannel,
   getResponseChannel,
   getResponseCreatedChannel,
+  getResponseEditedChannel,
   getResponseGetChannel,
+  getResponseGetDeleteChannelStatus,
 } from "../../redux/channelSlice";
 import Recent from "../../Components/ChannelComponents/Recent/Recent";
 import Member from "../../Components/ChannelComponents/Member/Member";
 import Members from "../../Components/ChannelComponents/Members/Members";
+import SettingChannel from "../../Components/ChannelComponents/SettingChannel/SettingChannel";
 
 function Channels() {
   const recent = useRef(null);
   const members = useRef(null);
+  const setting = useRef(null);
   const [components, setComponents] = useState("Recent");
   const { pathname } = useLocation();
   const [channels, setChannels] = useState([]);
   const [membersList, setMembersList] = useState([]);
-  const responseChannels = useSelector(getResponseUserChannels);
+  const responseGetChannels = useSelector(getResponseUserChannels);
   const responseGetChannel = useSelector(getResponseGetChannel);
   const responseCreatedChannel = useSelector(getResponseCreatedChannel);
-  const status = useSelector(getStatus);
+  const responseEditedChannel = useSelector(getResponseEditedChannel);
+  const responseDeletedChannel = useSelector(getResponseGetDeleteChannelStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
   var size = Object.keys(responseCreatedChannel).length;
@@ -40,24 +45,18 @@ function Channels() {
 
   useEffect(() => {
     dispatch(viewUserChannels(token));
-    id && dispatch(getChannel({token: token, id: id}))
-  }, []);
+    dispatch(getChannel({ token: token, id: id }));
+  }, [responseCreatedChannel, responseDeletedChannel]);
 
   useEffect(() => {
-    setChannels(responseChannels);    
-    // responseCreatedChannel && channels.push(responseCreatedChannel)
-  }, [responseChannels, responseCreatedChannel]);
+    setChannels(responseGetChannels);
+  }, [responseGetChannels]);
 
-  // useEffect(() => {
-  //   channels.push(responseCreatedChannel)
-  //   console.log(responseCreatedChannel);
-  // }, [responseCreatedChannel]);
-
-  console.log(responseCreatedChannel);
 
   return (
     <div className="channelsPage">
       <AdditionalSidebar
+        setComponents={setComponents}
         setMembersList={setMembersList}
         cards={channels}
         path={pathname}
@@ -65,7 +64,7 @@ function Channels() {
       {id ? (
         <div className="channel-section">
           <div className="top">
-            <Statusbar data={responseGetChannel} />
+            <Statusbar data={Object.keys(responseEditedChannel).length ? responseEditedChannel : responseGetChannel} />
             <div className="btns">
               <button
                 onClick={() => setComponents(recent.current.value)}
@@ -81,11 +80,19 @@ function Channels() {
               >
                 Members
               </button>
+              <button
+                onClick={() => setComponents(setting.current.value)}
+                value="Setting"
+                ref={setting}
+              >
+                Setting
+              </button>
             </div>
           </div>
           <>
             {components === "Recent" && <Recent id={id} />}
             {components === "Members" && <Members members={membersList} />}
+            {components === "Setting" && <SettingChannel />}
           </>
           {components === "Recent" && <TypingBar />}
         </div>

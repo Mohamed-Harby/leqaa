@@ -4,8 +4,8 @@ import "./Announcement.css";
 export const Announcement = ({ card }) => {
   return (
     <div className="announcement">
-      <p>{card.announcementDescription}</p>
-      <p>{card.announcementTime}</p>
+      <p>{card.content}</p>
+      <p>{card.creationDate}</p>
     </div>
   );
 };

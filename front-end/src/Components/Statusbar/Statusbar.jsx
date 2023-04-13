@@ -13,11 +13,16 @@ import ModalVideoCalling from "../ModalVideoCalling/ModalVideoCalling";
 import { useAuth } from "../../Custom/useAuth";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { deleteChannel } from "../../redux/channelSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteChannel, getResponseEditedChannel } from "../../redux/channelSlice";
 import { getCookies } from "../../Custom/useCookies";
 import { deleteHub } from "../../redux/hubSlice";
-import { leaveChannel, leaveHub } from "../../redux/userSlice";
+import {
+  leaveChannel,
+  leaveHub,
+  pinChannel,
+  pinHub,
+} from "../../redux/userSlice";
 
 function Statusbar({ data }) {
   console.log(data);
@@ -31,7 +36,8 @@ function Statusbar({ data }) {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const path = ["/hub", "/channel"];
-  const {id} = useParams()
+  const { id } = useParams();
+  const editChannel = useSelector(getResponseEditedChannel)
 
   useEffect(() => {
     console.log(data);
@@ -50,10 +56,16 @@ function Statusbar({ data }) {
           element: "btn",
           name: "Leave Hub",
           function: () => {
-            dispatch(leaveHub({ token: token, data: { id: id } }));
+            dispatch(leaveHub({ token: token, id: id }));
           },
         },
-        { element: "link", name: "Pin Chat", to: "Link2" },
+        {
+          element: "btn",
+          name: "Pin Hub",
+          function: () => {
+            dispatch(pinHub({ token: token, data: { id: id } }));
+          },
+        },
         { element: "link", name: "Clear Chat", to: "Link3" },
       ]);
     } else {
@@ -62,10 +74,16 @@ function Statusbar({ data }) {
           element: "btn",
           name: "Leave Channel",
           function: () => {
-            dispatch(leaveChannel({ token: token, data: { id: id } }));
+            dispatch(leaveChannel({ token: token, id: id }));
           },
         },
-        { element: "btn", name: "Pin Chat", to: "Link2" },
+        {
+          element: "btn",
+          name: "Pin Channel",
+          function: () => {
+            dispatch(pinChannel({ token: token, data: { id: id } }));
+          },
+        },
         { element: "btn", name: "Clear Chat", to: "Link3" },
       ]);
     }

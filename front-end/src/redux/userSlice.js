@@ -165,14 +165,14 @@ export const joinHub = createAsyncThunk("user/joinhub", async (payload) => {
 
 export const leaveHub = createAsyncThunk("user/leavehub", async (payload) => {
     console.log(payload);
-    const leaveHubUrl = `LeaveHub`
+    const leaveHubUrl = `LeaveHub?hubID=${payload.id}`
     try {
-        const response = await axios.delete(baseUrl + leaveHubUrl, payload.data, {
+        const response = await axios.delete(baseUrl + leaveHubUrl, {
             headers: {
                 Authorization: `Bearer ${payload.token}`
             }
         })
-        console.log(response.data)
+        console.log(response)
         return response?.data
     } catch (error) {
         console.log(error.response.data);
@@ -181,14 +181,14 @@ export const leaveHub = createAsyncThunk("user/leavehub", async (payload) => {
 })
 
 export const leaveChannel = createAsyncThunk("user/leavechannel", async (payload) => {
-    const leaveChannelUrl = `LeavChannel`
+    const leaveChannelUrl = `LeavChannel?ChannelID=${payload.id}`
     try {
-        const response = await axios.delete(baseUrl + leaveChannelUrl, payload.data, {
+        const response = await axios.delete(baseUrl + leaveChannelUrl, {
             headers: {
                 Authorization: `Bearer ${payload.token}`
             }
         })
-        console.log(response.data)
+        console.log(response)
         return response?.data
     } catch (error) {
         console.log(error.response.data);

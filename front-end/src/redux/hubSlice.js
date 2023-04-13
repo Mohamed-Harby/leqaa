@@ -6,7 +6,9 @@ const baseUrl = "http://localhost:5004/api/v1/Hub/";
 
 const initialState = {
   createHub: {},
+  editedHub: {},
   getHub: {},
+  deleteHubStatus: null,
   HubChannels: [],
   HubUsers: [],
   status: "idle",
@@ -30,6 +32,26 @@ export const deployHub = createAsyncThunk("hub/deployHub", async (payload) => {
   }
 });
 
+export const editHub = createAsyncThunk(
+  "channel/editHub",
+  async (payload) => {
+    console.log(payload);
+    const editHubUrl = `EditHub?id=${payload.id}`;
+    try {
+      const response = await axios.put(baseUrl + editHubUrl, payload.data, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
 export const deleteHub = createAsyncThunk(
   "hub/deleteHub",
   async (payload) => {
@@ -41,8 +63,8 @@ export const deleteHub = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`
         },
       });
-      console.log(response.data);
-      return response?.data;
+      console.log(response.status);
+      return response?.status;
     } catch (error) {
       console.log(error.response.data);
       return error.response.data;
@@ -125,6 +147,18 @@ const hubSlice = createSlice({
         state.error = action.error.message;
       })
       // /////////////////////////////////////////////////////////
+      .addCase(editHub.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(editHub.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.editedHub = action.payload;
+      })
+      .addCase(editHub.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
       .addCase(getHub.pending, (state, action) => {
         state.status = "loading";
       })
@@ -133,6 +167,18 @@ const hubSlice = createSlice({
         state.getHub = action.payload;
       })
       .addCase(getHub.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
+      .addCase(deleteHub.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(deleteHub.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.deleteHubStatus = action.payload;
+      })
+      .addCase(deleteHub.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -165,6 +211,8 @@ const hubSlice = createSlice({
 
 export default hubSlice.reducer;
 export const getResponseCreatedHub = (state) => state.hub.createHub;
+export const getResponseEditedHub = (state) => state.hub.editedHub;
+export const getResponseGetDeleteHubStatus = (state) => state.hub.deleteHubStatus;
 export const getResponseGetHub = (state) => state.hub.getHub;
 export const getResponseGetHubChannels = (state) => state.hub.HubChannels;
 export const getResponseGetHubUsers = (state) => state.hub.HubUsers;

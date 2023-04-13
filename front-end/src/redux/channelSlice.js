@@ -5,9 +5,13 @@ import axios from "axios";
 const baseUrl = "http://localhost:5004/api/v1/Channel/";
 
 const initialState = {
-  createChannel: {},
+  createdChannel: {},
+  editedChannel: {},
   getChannel: {},
-  recentActivitiesChannels:[],
+  deleteChannelStatus: null,
+  recentActivitiesChannels: [],
+  channelAnnoucement: {},
+  channelMembers: [],
   status: "idle",
   error: "",
 };
@@ -32,6 +36,26 @@ export const createChannel = createAsyncThunk(
   }
 );
 
+export const editChannel = createAsyncThunk(
+  "channel/editChannel",
+  async (payload) => {
+    console.log(payload);
+    const editChannelUrl = `EditChannel`;
+    try {
+      const response = await axios.put(baseUrl + editChannelUrl, payload.data, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
 export const deleteChannel = createAsyncThunk(
   "channel/deleteChannel",
   async (payload) => {
@@ -43,8 +67,8 @@ export const deleteChannel = createAsyncThunk(
           Authorization: `Bearer ${payload.token}`
         },
       });
-      console.log(response.data);
-      return response?.data;
+      console.log(response.status);
+      return response?.status;
     } catch (error) {
       console.log(error.response.data);
       return error.response.data;
@@ -91,6 +115,27 @@ export const viewRecentActivities = createAsyncThunk(
   }
 );
 
+export const getChannelMembers = createAsyncThunk(
+  "channel/getChannelMembers",
+  async (payload) => {
+    console.log(payload);
+    const getChannelMembers = `GetChannelMembers?ChannelId=${payload.id}`;
+    try {
+      const response = await axios.get(baseUrl + getChannelMembers, {
+        headers: {
+          Authorization: `Bearer ${payload.token}`
+        },
+      });
+      console.log(response.data);
+      return response?.data;
+    } catch (error) {
+      console.log(error.response.data);
+      return error.response.data;
+    }
+  }
+);
+
+
 const channelSlice = createSlice({
   name: "channel",
   initialState,
@@ -102,9 +147,21 @@ const channelSlice = createSlice({
       })
       .addCase(createChannel.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.createChannel = action.payload;
+        state.createdChannel = action.payload;
       })
       .addCase(createChannel.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
+      .addCase(editChannel.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(editChannel.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.editedChannel = action.payload;
+      })
+      .addCase(editChannel.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
@@ -121,6 +178,18 @@ const channelSlice = createSlice({
         state.error = action.error.message;
       })
       // /////////////////////////////////////////////////////////
+      .addCase(deleteChannel.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(deleteChannel.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.deleteChannelStatus = action.payload;
+      })
+      .addCase(deleteChannel.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      // /////////////////////////////////////////////////////////
       .addCase(viewRecentActivities.pending, (state, action) => {
         state.status = "loading";
       })
@@ -131,13 +200,28 @@ const channelSlice = createSlice({
       .addCase(viewRecentActivities.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      });
+      })
+      // /////////////////////////////////////////////////////////
+      .addCase(getChannelMembers.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(getChannelMembers.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.channelMembers = action.payload;
+      })
+      .addCase(getChannelMembers.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
   },
 });
 
 export default channelSlice.reducer;
-export const getResponseCreatedChannel = (state) => state.channel.createChannel;
+export const getResponseCreatedChannel = (state) => state.channel.createdChannel;
+export const getResponseEditedChannel = (state) => state.channel.editedChannel;
 export const getResponseGetChannel = (state) => state.channel.getChannel;
+export const getResponseGetDeleteChannelStatus = (state) => state.channel.deleteChannelStatus;
 export const getResponseViewRecentActivitiesChannel = (state) => state.channel.recentActivitiesChannels;
+export const getResponseChannelMembers = (state) => state.channel.channelMembers;
 export const getErrorChannel = (state) => state.channel.error;
 export const getStatusChannel = (state) => state.channel.status;
