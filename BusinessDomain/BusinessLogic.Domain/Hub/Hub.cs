@@ -24,6 +24,8 @@ public class Hub : BaseEntity
     public string? Description { get; set; }
     public byte[]? Logo { get; set; }
     public bool IsPrivate { get; set; }
+    public bool IsJoined { get; set; }
+    public bool IsPinned { get; set; }
     public virtual ICollection<User> JoinedUsers { get; private set; }
     public virtual ICollection<Channel> Channels { get; private set; }
     public virtual ICollection<HubAnnouncement> HubAnnouncements { get; private set; }

@@ -7,12 +7,15 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Channels.ViewChannel;
 using BusinessLogic.Application.Queries.Channels.ViewRecentActivities;
+using BusinessLogic.Application.Queries.Channels.GetChannelMembers;
+
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BusinessLogic.Application.Models.Users;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -82,14 +85,17 @@ public class ChannelController : BaseController
 
 
     [HttpPut]
-    public async Task<ActionResult<ChannelWriteModel>> EditChannel([FromQuery] Guid id, ChannelWriteModel channelWriteModel)
+    public async Task<IActionResult> EditChannel(UpdateChannelCommand channelWriteModel)
     {
-        var UpdateChannelCommand = new UpdateChannelCommand(id, channelWriteModel.Name, channelWriteModel.Description);
+        var UpdateChannelCommand = new UpdateChannelCommand(channelWriteModel.ChannelId, channelWriteModel.Name, channelWriteModel.Description);
 
 
-        var UpdateChannel = await _sender.Send(UpdateChannelCommand);
+        var result = await _sender.Send(UpdateChannelCommand);
 
-        return Ok(UpdateChannel);
+        return result.Match(
+             channel => Ok(channel),
+             errors => Problem(errors)
+         );
     }
     [HttpGet]
     public async Task<IActionResult> ViewRecentActivities(
@@ -97,5 +103,17 @@ public class ChannelController : BaseController
     {
         var result = await _sender.Send(viewChannelRecentActivitiesQuery);
         return Ok(result);
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> GetChannelMembers([FromQuery] Guid ChannelId)
+    {
+        var GetChannelMembersQuery = new GetChannelMembersQuery(ChannelId);
+     var result=await _sender.Send(GetChannelMembersQuery);
+        return result.Match(
+             channel => Ok(channel),
+             errors => Problem(errors)
+         );
     }
 }

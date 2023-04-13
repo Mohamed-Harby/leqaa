@@ -30,13 +30,13 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             IUserRepository userRepository,
             IHubRepository hubRepository,
             IUserChannelRepository userChannelRepository,
-            
+
             IChannelRepository channelRepository)
         {
             _userRepository = userRepository;
             _hubRepository = hubRepository;
             _userChannelRepository = userChannelRepository;
-    
+
             _channelRepository = channelRepository;
 
         }
@@ -50,28 +50,25 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             {
                 return DomainErrors.Channel.NotFound;
             }
-            var userChannel= (await _userChannelRepository.GetAsync(uh => uh.UserId == user.Id && uh.ChannelId==channel.Id
+            var userChannel = (await _userChannelRepository.GetAsync(uh => uh.UserId == user.Id && uh.ChannelId == channel.Id
             )).FirstOrDefault()!;
             if (userChannel is null)
             {
-                return DomainErrors.UserHub.NotJoined;
+                return DomainErrors.UserChannel.NotJoined;
             }
-            if (userChannel.Role == GroupRole.Founder)
-            {
-                var newFounder = channel.JoinedUsers.FirstOrDefault(u => u.Id != user.Id);
-                if (newFounder is null)
-                {
-
-                    return DomainErrors.Channel.CannotLeaveChannel;
-                }
-
-            }
+     
             channel.JoinedUsers.Remove(user);
-            if (await _hubRepository.SaveAsync(cancellationToken) == 0)
-            {
-                return DomainErrors.Channel.InvalidChannel;       
-                    }
-            return DomainSucceded.User.HubLeft;
+
+
+            if ((await _userChannelRepository.GetAsync(uc => uc.ChannelId == channel.Id, null, "")) 
+                .Count()==1) {
+                _channelRepository.Remove(channel);
+                await _channelRepository.SaveAsync(cancellationToken);
+                return DomainSucceded.User.channelLeftAndDeleted;
+
+            }
+            await _channelRepository.SaveAsync(cancellationToken);
+            return DomainSucceded.User.ChannelLeft;
         }
     }
 }

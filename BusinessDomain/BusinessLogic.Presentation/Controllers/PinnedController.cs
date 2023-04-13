@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Application.Commands.Pin.PinChannels;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
+using BusinessLogic.Application.Models.Hubs;
 using ErrorOr;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -76,5 +77,5 @@ public class PinnedController : BaseController
     }
 
 
-
+  
 }

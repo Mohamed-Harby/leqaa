@@ -25,6 +25,8 @@ public class Channel : BaseEntity
     public string? Description { get; set; }
     public Guid HubId { get; set; }
     public bool IsPrivate { get; set; }
+    public bool IsJoined { get; set; }
+    public bool IsPinned { get; set; }
     public byte[]? Image { get; set; }
     public Hub Hub { get; set; } = null!;
 

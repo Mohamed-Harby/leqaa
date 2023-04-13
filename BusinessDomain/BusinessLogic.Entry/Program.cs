@@ -17,7 +17,7 @@ using RabbitMQ.Client;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using BusinessLogic.Entry.JsonConfigurations;
-
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,9 +53,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidAudience = jwt.Audience,
         ValidateIssuer = true,
         ValidateAudience = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Base64UrlEncoder.DecodeBytes(jwt.Key)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Key)),
         ValidateIssuerSigningKey = true,
     };
+    System.Console.WriteLine(jwt.Audience);
 });
 
 builder.Services.AddHttpContextAccessor();

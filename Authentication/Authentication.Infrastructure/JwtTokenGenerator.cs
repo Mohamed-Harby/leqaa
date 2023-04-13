@@ -20,11 +20,12 @@ public class JwtTokenGenerator : ITokenGenerator
         Claim[] claims = new Claim[]{
             new (ClaimTypes.NameIdentifier,user.UserName),
             new (ClaimTypes.Email,user.Email),
+            new (ClaimTypes.PrimarySid,user.Id)
         };
 
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
-                Base64UrlEncoder.DecodeBytes(jwt.Key)
+                Encoding.UTF8.GetBytes(jwt.Key)
             ),
             SecurityAlgorithms.HmacSha256);
 

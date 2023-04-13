@@ -21,7 +21,10 @@ public class ChannelConfiguration : BaseConfiguration<Channel>
             .WithOne(a => a.Channel)
             .OnDelete(DeleteBehavior.Cascade);
 
-
+        builder
+        .Ignore(c => c.IsJoined)
+        .Ignore(c => c.IsPinned);
+        
         builder
    .HasMany(h => h.PinningUsers)
    .WithMany(u => u.PinnedChannels)
