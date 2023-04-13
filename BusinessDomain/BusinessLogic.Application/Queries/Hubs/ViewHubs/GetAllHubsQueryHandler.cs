@@ -3,10 +3,11 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
+using ErrorOr;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
-public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadModel>>
+public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, ErrorOr<List<HubReadModel>>>
 {
     private readonly IHubRepository _hubRepository;
 
@@ -16,15 +17,15 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, List<HubReadMode
         _hubRepository = hubRepository;
     }
 
-    public async Task<List<HubReadModel>> Handle(GetAllHubsQuery request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<HubReadModel>>> Handle (GetAllHubsQuery request, CancellationToken cancellationToken)
     {
 
         var hubs = await _hubRepository.GetAllAsync();
 
   
-        return hubs
-           .Skip((request.PageNumber - 1) * request.PageSize)
-            .Take(request.PageSize)
+        return hubs.Take(request.PageSize)
+        .Skip((request.PageNumber - 1) * request.PageSize).ToList()
+
             .Adapt<List<HubReadModel>>();
     }
 

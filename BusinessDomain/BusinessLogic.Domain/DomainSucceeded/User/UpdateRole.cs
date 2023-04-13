@@ -20,6 +20,7 @@ namespace BusinessLogic.Domain.DomainSucceeded.User
             
 
             public static Error HubLeftAndDeleted => Error.NotFound("User.HubLeftAndDeleted", "Hub Left And Deleted ");
+            public static Error channelLeftAndDeleted => Error.NotFound("User.channelLeftAndDeleted", "channel Left And Deleted ");
 
         }
 

@@ -49,9 +49,12 @@ public class HubController : BaseController
     public async Task<IActionResult> ViewHubs([FromQuery] int pageNumber, int pageSize)
     {
         var query = new GetAllHubsQuery(pageNumber, pageSize);
-        var hubs = await _sender.Send(query);
+        var result = await _sender.Send(query);
 
-        return Ok(hubs);
+        return result.Match(
+             hub => Ok(hub),
+             errors => Problem(errors)
+         );
     }
     [HttpGet]
     public async Task<IActionResult> ViewHub([FromQuery] ViewHubQuery viewHubQuery)
