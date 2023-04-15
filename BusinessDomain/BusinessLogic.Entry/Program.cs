@@ -43,6 +43,8 @@ builder.Services
     .AddApplication()
     .AddInfrastructure();
 
+builder.Services.AddCoreAdmin();
+
 Jwt jwt = new();
 builder.Configuration.GetSection("Jwt").Bind(jwt);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -94,7 +96,9 @@ app.UseSwaggerUI();
 // app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles();
 app.UseCors(CorsConfiguration.CorsPolicyName);
 app.MapControllers();
+app.MapDefaultControllerRoute();
 
 app.Run();

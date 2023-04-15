@@ -6,6 +6,7 @@ using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.DomainErrors;
 using ErrorOr;
 using Mapster;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 {
-    public class ViewHupUsersQueryHandler : IHandler<ViewHupUsersQuery, ErrorOr<List<UserRecentReadModel>>>
+    public class ViewHubUsersQueryHandler : IHandler<ViewHubUsersQuery, ErrorOr<List<UserRecentReadModel>>>
     {
         private readonly IHubRepository _hubRepository;
 
@@ -24,7 +25,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 
         private readonly IUserRepository _userRepository;
 
-        public ViewHupUsersQueryHandler(IHubRepository hubRepository, IUserRepository userRepository, IUserHubRepository userHubRepository)
+        public ViewHubUsersQueryHandler(IHubRepository hubRepository, IUserRepository userRepository, IUserHubRepository userHubRepository)
         {
             _hubRepository = hubRepository;
 
@@ -36,7 +37,7 @@ namespace BusinessLogic.Application.Queries.Hubs.viewHubUsers
 
 
 
-        public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewHupUsersQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<List<UserRecentReadModel>>> Handle(ViewHubUsersQuery request, CancellationToken cancellationToken)
         {
 
 

@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Application.Models.Channels;
+﻿using BusinessLogic.Application.Models.Annoucements.ChannelAnnoucements;
+using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Plans;
 using BusinessLogic.Application.Models.Posts;
@@ -15,6 +17,8 @@ public record UserRecentReadModel(
     List<PlanReadModel> Plans,
     List<HubReadModel> Hubs,
     List<ChannelReadModel> Channels,
+    List<ChannelAnnouncementReadModel> ChannelAnnouncements,
+    List<HubAnnouncementReadModel> HubAnnouncements,
     List<PostReadModel> Posts,
     List<UserReadModel> Followers,
     List<UserReadModel> FollowedUsers,

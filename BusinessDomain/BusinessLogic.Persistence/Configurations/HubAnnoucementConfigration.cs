@@ -15,16 +15,14 @@ namespace BusinessLogic.Persistence.Configurations
 
         public override void Configure(EntityTypeBuilder<HubAnnouncement> builder)
         {
-      /*      builder.ToTable("HubAnnouncement");
-
+            builder.ToTable("HubAnnouncement");
             base.Configure(builder);
-
             builder
             .HasOne(r => r.Hub)
             .WithMany(u => u.HubAnnouncements)
-            .OnDelete(DeleteBehavior.Cascade);*/
+            .OnDelete(DeleteBehavior.Cascade);
 
-       
+
 
 
         }

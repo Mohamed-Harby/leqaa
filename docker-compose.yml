@@ -21,9 +21,9 @@ services:
       - ./Authentication:/src/Authentication
     healthcheck:
       test: ["CMD","curl","-f","http://authenticationdb:3308"]
-      timeout: 1s
-      interval: 1s
-      retries: 10
+      timeout: 100s
+      interval: 5s
+      retries: 20
     restart: always
 
 
@@ -71,10 +71,10 @@ services:
       - businessdomaindb
       - rabbitmq
     healthcheck:
-      test: ["CMD","curl","-f","http://businessdomaindb:3307",";", "curl","-f","http://rabbitmq:5672"]
-      timeout: 1s
-      interval: 1s
-      retries: 10
+      test: rabbitmq-diagnostics -q ping;curl --fail http://businessdomaindb:3307
+      timeout: 100s
+      interval: 5s
+      retries: 20
     restart: always
 
   businessdomaindb:
@@ -104,9 +104,9 @@ services:
       - 5007:5007
     healthcheck:
       test: ["CMD","curl","-f","http://paymentgatewaydb:3309"]
-      timeout: 1s
-      interval: 1s
-      retries: 10
+      timeout: 100s
+      interval: 5s
+      retries: 20
     depends_on:
       - paymentgatewaydb
     volumes:

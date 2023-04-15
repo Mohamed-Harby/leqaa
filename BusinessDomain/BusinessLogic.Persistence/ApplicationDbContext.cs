@@ -1,4 +1,5 @@
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Plan;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -9,6 +10,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<Hub>? Hubs { get; set; }
     public DbSet<Channel>? Channels { get; set; }
     public DbSet<Room>? Rooms { get; set; }
+    public DbSet<Post>? Posts { get; set; }
+    public DbSet<HubAnnouncement>? HubAnnouncements { get; set; }
+    public DbSet<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
+    public DbSet<Plan>? Plans { get; set; }
     private readonly IConfiguration? configuration;
     public ApplicationDbContext()
     {
@@ -27,7 +32,7 @@ public class ApplicationDbContext : DbContext
                             ServerVersion.AutoDetect(connectionString))
                             .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
         }
-        
+
         base.OnConfiguring(optionsBuilder);
     }
     protected async override void OnModelCreating(ModelBuilder modelBuilder)
@@ -35,6 +40,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         await modelBuilder.SeedDataAsync();
         base.OnModelCreating(modelBuilder);
-        
+
     }
 }

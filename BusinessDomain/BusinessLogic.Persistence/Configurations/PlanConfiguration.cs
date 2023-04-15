@@ -8,6 +8,7 @@ public class PlanConfiguration : BaseConfiguration<Plan>
 {
     public override void Configure(EntityTypeBuilder<Plan> builder)
     {
+        builder.ToTable("plans");
         base.Configure(builder);
         builder.Property(p => p.Type).IsRequired();
         builder
