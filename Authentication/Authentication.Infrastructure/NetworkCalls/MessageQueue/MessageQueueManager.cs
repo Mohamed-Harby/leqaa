@@ -29,20 +29,31 @@ public class MessageQueueManager : IMessageQueueManager
     {
         channel.ExchangeDeclare(
             exchange: RabbitMQConstants.AuthenticationExchange,
-            type: ExchangeType.Topic,
+            type: ExchangeType.Fanout,
             durable: false,
             autoDelete: false
         );
         channel.QueueDeclare(
-            queue: RabbitMQConstants.UserQueue,
+            queue: RabbitMQConstants.UserToBusiness,
+            durable: false,
+            exclusive: false,
+            autoDelete: false
+        );
+        channel.QueueDeclare(
+            queue: RabbitMQConstants.UserToChat,
             durable: false,
             exclusive: false,
             autoDelete: false
         );
         channel.QueueBind(
-            queue: RabbitMQConstants.UserQueue,
+            queue: RabbitMQConstants.UserToBusiness,
             exchange: RabbitMQConstants.AuthenticationExchange,
-            RabbitMQConstants.UserQueue);
+            RabbitMQConstants.UserToBusiness);
+        channel.QueueBind(
+            queue: RabbitMQConstants.UserToChat,
+            exchange: RabbitMQConstants.AuthenticationExchange,
+            RabbitMQConstants.UserToChat);
+
 
         IBasicProperties props = channel.CreateBasicProperties();
         props.ContentType = "application/json";
@@ -53,7 +64,7 @@ public class MessageQueueManager : IMessageQueueManager
 
         channel.BasicPublish(
             exchange: RabbitMQConstants.AuthenticationExchange,
-            routingKey: RabbitMQConstants.UserQueue,
+            routingKey: "",
             mandatory: false,
             basicProperties: props,
             convertedUser);

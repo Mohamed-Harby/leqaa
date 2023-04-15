@@ -23,20 +23,20 @@ public class MessageQueueHelper
 
         channel.ExchangeDeclare(
              exchange: "Authentication",
-             type: ExchangeType.Topic,
+             type: ExchangeType.Fanout,
              durable: false,
              autoDelete: false
          );
         channel.QueueDeclare(
-            queue: "Authentication.User",
+            queue: "Authentication.UserToBusiness",
             durable: false,
             exclusive: false,
             autoDelete: false
         );
         channel.QueueBind(
-            queue: "Authentication.User",
+            queue: "Authentication.UserToBusiness",
             exchange: "Authentication",
-            "Authentication.User");
+            "Authentication.UserToBusiness");
         var consumer = new EventingBasicConsumer(channel);
         consumer.Received += async (ch, ea) =>
          {
@@ -51,7 +51,7 @@ public class MessageQueueHelper
              await userRepository.SaveAsync();
              channel.BasicAck(ea.DeliveryTag, false);
          };
-        var channelTag = channel.BasicConsume("Authentication.User", false, consumer);
+        var channelTag = channel.BasicConsume("Authentication.UserToBusiness", false, consumer);
 
         return Task.CompletedTask;
     }
