@@ -60,7 +60,7 @@ public class MessageQueueManager : IMessageQueueManager
         props.DeliveryMode = 2;
 
         string serializedUser = JsonConvert.SerializeObject(userReadModel);
-        byte[] convertedUser = Encoding.UTF32.GetBytes(serializedUser);
+        byte[] convertedUser = Encoding.UTF8.GetBytes(serializedUser);
 
         channel.BasicPublish(
             exchange: RabbitMQConstants.AuthenticationExchange,
