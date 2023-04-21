@@ -9,6 +9,7 @@
   "author": "Amr Senblo",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.10.3",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "crypto-js": "^4.1.1",
