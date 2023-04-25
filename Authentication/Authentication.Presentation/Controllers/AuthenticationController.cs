@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Authentication.Presentation.Controllers;
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-// [Authorize(AuthenticationSchemes = "Bearer")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class AuthenticationController : Controller
 {
     private readonly ISender _sender;
@@ -45,15 +45,13 @@ public class AuthenticationController : Controller
         var loginQuery = credentials.Adapt<LoginQuery>();
         Results results = await _sender.Send(loginQuery);
 
-       
+
         if (!results.IsSuccess)
             return BadRequest(results);
-
-
-
         return Ok(results);
     }
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetUser()
     {
         string username = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
