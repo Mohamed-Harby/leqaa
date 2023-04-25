@@ -99,6 +99,6 @@ app.UseAuthorization();
 app.UseStaticFiles();
 app.UseCors(CorsConfiguration.CorsPolicyName);
 app.MapControllers();
-app.MapDefaultControllerRoute();
+// app.MapDefaultControllerRoute();
 
 app.Run();
