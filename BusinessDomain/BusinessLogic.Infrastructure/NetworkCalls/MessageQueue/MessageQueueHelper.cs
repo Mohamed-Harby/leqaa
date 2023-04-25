@@ -45,7 +45,7 @@ public class MessageQueueHelper
              var dbcontext = new ApplicationDbContext(options, serviceProvider.GetRequiredService<IConfiguration>());
              IUserRepository userRepository = new UserRepository(dbcontext);
              var userEncoded = ea.Body.ToArray();
-             var userDecoded = Encoding.UTF32.GetString(userEncoded);
+             var userDecoded = Encoding.UTF8.GetString(userEncoded);
              UserWriteModel userDeserialialized = JsonConvert.DeserializeObject<UserWriteModel>(userDecoded)!;
              await userRepository.AddAsync(userDeserialialized.Adapt<User>());
              await userRepository.SaveAsync();
