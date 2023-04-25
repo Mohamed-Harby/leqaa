@@ -28,7 +28,7 @@ public abstract class BaseEmailSender : IEmailSender, IConfirmationEmailSender, 
         };
         using (var smtpClient = new SmtpClient())
         {
-            await smtpClient.ConnectAsync(Smtp.Host, Smtp.Port, useSsl: true);
+            await smtpClient.ConnectAsync(Smtp.Host, Smtp.Port, useSsl: false);
             await smtpClient.AuthenticateAsync(Smtp.Email, Smtp.Password);
             await smtpClient.SendAsync(mailMessage);
             await smtpClient.DisconnectAsync(quit: true);
