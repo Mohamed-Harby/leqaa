@@ -52,7 +52,7 @@ public class AuthenticationController : Controller
     }
     [HttpGet]
     [Authorize]
-    public async Task<IActionResult> GetUserH()
+    public async Task<IActionResult> GetUser()
     {
         string username = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         if (username is null)
