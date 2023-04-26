@@ -39,26 +39,25 @@ public class RegisterUserCommandHandler : IHandler<RegisterUserCommand>
         {
             authenticationResults.AddErrorMessages(UserErrors.EmailAlreadyExists);
         }
+
         if (authenticationResults.ErrorMessages.Count > 0)
             return authenticationResults;
+        var result = await _userManager.CreateAsync(user, request.Password);
 
-        var resultTask = _userManager.CreateAsync(user, request.Password);
+        if (!result.Succeeded)
+        {
+            authenticationResults.AddErrorMessages(result.Errors.Select(e => e.Description).ToArray());
+            return authenticationResults;
+        }
 
         string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
         try
         {
             await _emailSender.SendConfirmationAsync(request.Email, request.ConfirmationLink, token);
-            authenticationResults.IsSuccess = true;
         }
         catch
         {
             authenticationResults.AddErrorMessages("Couldn't send confirmation email, try to confirm your email later");
-        }
-        var result = await resultTask;
-        if (!result.Succeeded)
-        {
-            authenticationResults.AddErrorMessages(result.Errors.Select(e => e.Description).ToArray());
-            return authenticationResults;
         }
         var userReadModel = user.Adapt<UserReadModel>();
         _messageQueueManager.PublishUser(userReadModel);
