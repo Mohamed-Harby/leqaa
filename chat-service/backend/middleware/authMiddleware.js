@@ -1,41 +1,46 @@
 const jwt = require("jsonwebtoken");
+const { parse } = require("uuid");
 const User = require("../models/userModel.js");
 const asyncHandler = require("express-async-handler");
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
+  let decodedUUID;
 
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      // token =
-      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6Implc2luZTY5NjRAcHJvZXhib2wuY29tIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiamVzaW5lNjk2NEBwcm9leGJvbC5jb20iLCJleHAiOjE2ODEwNjE5MDd9.pIBcMTONaSuo5jOcalgrXR35YE5IAH7pkt5eXzHamE8";
-
       //                                                    0       1
       token = req.headers.authorization.split(" ")[1]; // Bearer kdjfasjkj ==>token
 
-      //decodes token id
-      // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      // console.log(decoded);
+     
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET,
+        (err, decoded) => {
+          if (err) {
+            console.error("Invalid token:", err.message);
+          } else {
+            // console.log("Decoded token:", Object.keys(decoded));
 
-
-      const decoded =jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-          console.error("Invalid token:", err.message);
-        } else {
-          console.log("Decoded token:", decoded);
+            exports.decodedUUID = parse(
+              decoded[
+                "http://schemas.microsoft.com/ws/2008/06/identity/claims/primarysid"
+              ]
+            );
+            console.log("Decoded token:", decoded);
+          }
         }
-      });
+      );
 
-
-      req.user = await User.findById(decoded.id).select("-password");
+      req.user = await User.findById(decodedUUID).select("-password");
 
       next();
     } catch (error) {
       res.status(401);
-     throw error;
+      throw error;
       // throw new Error("Not authorized, token failed");
     }
   }

@@ -113,7 +113,8 @@ const allUsers = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  // const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(keyword);
   res.send(users);
 });
 
@@ -166,7 +167,8 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (user) {
+  // if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
       name: user.name,

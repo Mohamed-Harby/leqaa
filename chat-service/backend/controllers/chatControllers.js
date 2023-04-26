@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
 
+const protect = require("./../middleware/authMiddleware");
+
 var uuid = require("node-uuid");
 
 //@description     Create or fetch One to One Chat
@@ -18,7 +20,7 @@ const accessChat = asyncHandler(async (req, res) => {
   var isChat = await Chat.find({
     isGroupChat: false,
     $and: [
-      { users: { $elemMatch: { $eq: req.user._id } } },
+      { users: { $elemMatch: { $eq: protect.decodedUUID } } },
       { users: { $elemMatch: { $eq: userId } } },
     ],
   })
@@ -37,7 +39,7 @@ const accessChat = asyncHandler(async (req, res) => {
       _id: uuid.v1(),
       chatName: "sender",
       isGroupChat: false,
-      users: [req.user._id, userId],
+      users: [protect.decodedUUID, userId],
     };
 
     try {
@@ -59,7 +61,7 @@ const accessChat = asyncHandler(async (req, res) => {
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
   try {
-    Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+    Chat.find({ users: { $elemMatch: { $eq: protect.decodedUUID } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")

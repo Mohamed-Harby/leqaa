@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    // gender: {
+    //   enum: {
+    //     values: ["Male", "Female"],
+    //     message: "Gender is either: Male or Female",
+    //   },
+    // },
   },
   { timestamps: true }
 );
