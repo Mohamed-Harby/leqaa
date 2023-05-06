@@ -32,7 +32,7 @@ const schema = yup.object().shape({
     .required(),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], 'Passwords must match')
+    .oneOf([yup.ref("password"), null], "Passwords must match")
     .required(),
 });
 
@@ -89,12 +89,12 @@ function Register() {
 
         <div className="right">
           <div className="links">
-            <Link className="active">Sign Up</Link>
             <Link to={`/login`}>Login</Link>
+            <Link className="active">Register</Link>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>
-            <h1>Sign Up</h1>
+            {/* <h2>Get in touch today!</h2> */}
 
             <div className="input">
               <input
@@ -103,7 +103,11 @@ function Register() {
                 name="name"
                 {...register("name")}
               />
-              {errors.name && <p>{errors.name.message}</p>}
+              {errors.name ? (
+                <span>{errors.name.message} </span>
+              ) : (
+                <span></span>
+              )}
             </div>
 
             <div className="input">
@@ -113,28 +117,32 @@ function Register() {
                 placeholder="Email"
                 {...register("email")}
               />
-              {(errors.email || auth.user.errorMessages) && (
-                <p>
-                  {errors.name?.message ||
+              {errors.email || auth.user.errorMessages ? (
+                <span>
+                  {errors.email?.message ||
                     (auth.user.errorMessages[0]?.includes("Email") &&
                       auth.user?.errorMessages[0])}
-                </p>
+                </span>
+              ) : (
+                <span></span>
               )}
             </div>
 
             <div className="input">
               <input
-                placeholder="User Name"
+                placeholder="Username"
                 type="text"
                 name="username"
                 {...register("userName")}
               />
-              {(errors.username || auth.user.errorMessages) && (
-                <p>
+              {errors.username || auth.user.errorMessages ? (
+                <span>
                   {errors.name?.message ||
                     (auth.user.errorMessages[0]?.includes("Username") &&
                       auth.user?.errorMessages[0])}
-                </p>
+                </span>
+              ) : (
+                <span></span>
               )}
             </div>
 
@@ -144,7 +152,11 @@ function Register() {
                 <option value={0}>Male</option>
                 <option value={1}>Female</option>
               </select>
-              {errors.gender && <p>{errors.gender.message}</p>}
+              {errors.gender ? (
+                <span>{errors.gender.message}</span>
+              ) : (
+                <span></span>
+              )}
             </div>
 
             <div className="input">
@@ -154,12 +166,14 @@ function Register() {
                 name="password"
                 {...register("password")}
               />
-              {(errors.password || auth.user.errorMessages) && (
-                <p>
+              {errors.password || auth.user.errorMessages ? (
+                <span>
                   {errors.password?.message ||
                     (auth.user.errorMessages[0]?.includes("password") &&
                       auth.user?.errorMessages[0])}
-                </p>
+                </span>
+              ) : (
+                <span></span>
               )}
             </div>
 
@@ -170,13 +184,15 @@ function Register() {
                 name="confirmPassword"
                 {...register("confirmPassword")}
               />
-              {errors.confirmPassword && (
-                <p>{errors.confirmPassword.message}</p>
+              {errors.confirmPassword ? (
+                <span>{errors.confirmPassword.message}</span>
+              ) : (
+                <span></span>
               )}
             </div>
 
             <div className="input">
-              <button type="submit">Submit</button>{" "}
+              <button type="submit">Register</button>{" "}
             </div>
           </form>
         </div>

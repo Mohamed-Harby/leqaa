@@ -17,14 +17,16 @@ import useCookies from "react-cookie/cjs/useCookies";
 import { getCookies } from "../../Custom/useCookies";
 import { BsCameraVideo } from "react-icons/bs";
 
+import RichLogo from "../../assets/svg/rich-logo.svg";
+
 const schema = yup.object().shape({
   password: yup
     .string()
     .min(8)
     .max(20)
-    .matches(/\d+/)
-    .matches(/[a-z]+/)
-    .matches(/[A-Z]+/)
+    .matches(/\d+/, "Password must have a number")
+    .matches(/[a-z]+/, "Password must have a small letter")
+    .matches(/[A-Z]+/, "Password must have a capital letter")
     .required(),
 });
 
@@ -61,10 +63,8 @@ function Login() {
       <Navbar />
       <div className="login">
         <div className="left">
-          <h1>
-            <BsCameraVideo />
-            Video Calls and Meetings for personal Use and organizations.
-          </h1>
+          <img src={RichLogo} alt="logo" height={100} />
+          {/* <h1>Video Calls and Meetings for personal Use and organizations.</h1> */}
           <p>
             Leqaa is a service for secure, high-quality video meetings and calls
             available for everyone.
@@ -73,25 +73,26 @@ function Login() {
 
         <div className="right">
           <div className="links">
-            <Link to={`/register`}>Sign Up</Link>
             <Link className="active">Login</Link>
+            <Link to={`/register`}>Register</Link>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>
-            <h1>Log In</h1>
             <div className="input">
               <input
                 placeholder="User Name"
                 type="text"
-                name="name"
+                name="userName"
                 {...register("userName")}
               />
-              {(errors.name || auth.user.errorMessages) && (
-                <p>
+              {errors.name || auth.user.errorMessages ? (
+                <span>
                   {errors.name?.message ||
-                    (auth.user.errorMessages[0]?.includes("username") &&
+                    (auth.user.errorMessages[0]?.includes("userName") &&
                       auth.user?.errorMessages[0])}
-                </p>
+                </span>
+              ) : (
+                <span></span>
               )}
             </div>
             <div className="input">
@@ -101,23 +102,30 @@ function Login() {
                 placeholder="Password"
                 {...register("password")}
               />
-              {(errors.password || auth.user.errorMessages) && (
-                <p>
+              {errors.password || auth.user.errorMessages ? (
+                <span>
                   {errors.password?.message ||
                     (auth.user.errorMessages[0]?.includes("password") &&
                       auth.user?.errorMessages[0])}
-                </p>
+                </span>
+              ) : (
+                <span></span>
               )}
             </div>
-            {auth.user.errorMessages && (
-              <p>
+            {auth.user.errorMessages ? (
+              <span>
                 {auth.user.errorMessages[0]?.includes("email") &&
                   auth.user?.errorMessages[0]}
-              </p>
+              </span>
+            ) : (
+              <span></span>
             )}
-            <Link to={"/resetpassword"}>ResetPassword</Link>
+            <div className="reset-password">
+              <span>Forgot your password?</span>
+              <Link to={"/resetpassword"}>Reset it now!</Link>
+            </div>
             <div className="input">
-              <button type="submit">Submit</button>{" "}
+              <button type="submit">Login</button>{" "}
             </div>
           </form>
         </div>
