@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import "./PublicProfile.css";
 import RadiusImg from "../../RadiusImg/RadiusImg";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,19 +13,10 @@ import {
 import { AiOutlineEdit } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import Waiting from "../../Waiting/Waiting";
-
-const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8)
-    .max(20)
-    .matches(/\d+/)
-    .matches(/[a-z]+/)
-    .matches(/[A-Z]+/)
-    .required(),
-});
+import { useAuth } from "../../../Custom/useAuth";
 
 const PublicProfile = () => {
+  const auth = useAuth();
   const [base64String, setBase64String] = useState();
   const navigate = useNavigate();
   const [user, setUser] = useState({});
@@ -43,11 +32,20 @@ const PublicProfile = () => {
     console.log("next");
     reader.onload = function () {
       setBase64String(reader.result.replace("data:", "").replace(/^.+,/, ""));
-      dispatch(setProfilePicture({ profilePicture: {profilePicture: reader.result.replace("data:", "").replace(/^.+,/, "")}, token: token }));
+      dispatch(
+        setProfilePicture({
+          profilePicture: {
+            profilePicture: reader.result
+              .replace("data:", "")
+              .replace(/^.+,/, ""),
+          },
+          token: token,
+        })
+      );
     };
     reader.readAsDataURL(file);
-    // setRefresh(true);
   };
+
   useEffect(() => {
     dispatch(viewUserProfile(token));
   }, []);
@@ -58,18 +56,26 @@ const PublicProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  } = useForm();
 
   const onSubmitHandler = (data) => {
     console.log(data);
   };
 
-  // useEffect(() => {
-  //   response.profilePicture != null && window.location.reload(false)
-  // }, [response.profilePicture])
+  const handleReset = () => {
+    console.log(user.email);
+    auth.useSendResetPasswordEmail({ email: user.email });
+  };
+
+  useEffect(() => {
+    if (auth.user.isReset) {
+      navigate(`/resetpassword/${user.email}`);
+    }
+  }, [auth.user]);
+
+  if (auth.loading) {
+    return <Waiting />;
+  }
 
   return (
     <div className="publicprofile">
@@ -112,17 +118,9 @@ const PublicProfile = () => {
           <p>{errors.username?.message}</p>
         </div>
 
-        <div className="input">
-          <label htmlFor="">Change Password</label>
-
-          <input
-            placeholder="Change Password"
-            type="password"
-            name="password"
-            {...register("password")}
-          />
-          <p>{errors.password?.message}</p>
-        </div>
+        <button className="input" onClick={() => handleReset()}>
+          Change Password
+        </button>
 
         <div className="input">
           <button type="submit">Submit</button>{" "}

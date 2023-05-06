@@ -10,30 +10,30 @@ function Navbar() {
   const auth = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const logout = () =>{
+    auth.useLogout()
+    navigate('/login')
+  }
   const modalClose = () => {
     setModalOpen(false);
   };
-  const logOut = () => {
-    setCookies("token", "", 1);
-    navigate("/login");
-  };
+
   return (
     <>
       <nav>
         <ul>
           <li>
-            <Link to={auth.user.user ? "/" : "/login"}>Leqaa</Link>
+            <Link to={auth?.user?.user ? "/" : "/login"}>Leqaa</Link>
           </li>
 
-          <li>{auth.user.user && <Searchbar />}</li>
+          <li>{auth?.user?.user && <Searchbar />}</li>
 
           <li>
-            {auth.user.user && (
+            {auth?.user?.user && (
               <button onClick={() => setModalOpen(true)}>+</button>
             )}
-            {!auth.user.user && <Link to={`/login`}> Log In </Link>}
-            {auth.user.user && (
-              <button onClick={() => logOut()}>Log out</button>
+            {auth?.user?.user && (
+              <button onClick={() => logout()}>Log out</button>
             )}
           </li>
         </ul>

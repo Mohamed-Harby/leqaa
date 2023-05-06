@@ -39,14 +39,28 @@ export const login = createAsyncThunk("auth/login", async (payload) => {
 })
 
 export const getUser = createAsyncThunk("auth/getuser", async (payload) => {
-    const getUserUrl = 'GetUser'
-    const response = await axios.get(baseUrl + getUserUrl,{
-        headers:{
-            Authorization: `Bearer ${payload}`
+    try {
+        const getUserUrl = 'GetUser'
+        const response = await axios.get(baseUrl + getUserUrl, {
+            headers: {
+                Authorization: `Bearer ${payload}`
+            }
+        })
+        console.log(response.data)
+        return response?.data
+    } catch (error) {
+        console.log(error);
+        const response = {
+            data: {
+                "isSuccess": false,
+                "token": "",
+                "errorMessages": [],
+                "user": null
+            }
         }
-    })
-    console.log(response.data)
-    return response?.data
+        console.log(response.data);
+        return response?.data
+    }
 })
 
 export const sendResetPasswordEmail = createAsyncThunk("auth/sendResetPasswordEmail", async (payload) => {
@@ -58,7 +72,7 @@ export const sendResetPasswordEmail = createAsyncThunk("auth/sendResetPasswordEm
 
 export const resetPassword = createAsyncThunk("auth/resetpassword", async (payload) => {
     const resetPasswordUrl = 'ResetPassword'
-    const response = await axios.put(baseUrl + resetPasswordUrl,payload)
+    const response = await axios.put(baseUrl + resetPasswordUrl, payload)
     console.log(response.data)
     return response?.data
 })
@@ -128,7 +142,7 @@ const authSlice = createSlice({
                 state.status = "failed"
                 state.error = action.error.message
             })
-            ////////////////////////////////////////////////
+        ////////////////////////////////////////////////
     }
 })
 

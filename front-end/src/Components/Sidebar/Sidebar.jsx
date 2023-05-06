@@ -28,6 +28,7 @@ function Sidebar() {
   useEffect(() => {
     setUser(response);
   }, [status]);
+  console.log(auth.user);
   return (
     <div className={closeSidebar ? "sidebar sidebarResponsive" : "sidebar"}>
       <ul>
@@ -69,7 +70,7 @@ function Sidebar() {
             <BsGear />
             <span className={closeSidebar ? "hideText" : "text"}>Setting</span>
           </NavLink>
-          <NavLink to={`/profile/${auth.user.user?.userName}`}>
+          <NavLink to={`/profile/${auth?.user?.user?.userName}`}>
             <RadiusImg
               img={
                 user?.profilePicture
@@ -79,7 +80,7 @@ function Sidebar() {
               size={40}
             />
             <span className={closeSidebar ? "hideText" : "text"}>
-              {auth.user.user?.userName}
+              {auth?.user?.user?.userName}
             </span>
           </NavLink>
         </li>
