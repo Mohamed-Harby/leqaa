@@ -220,13 +220,10 @@ public class UserController : BaseController
 
         var LeaveHubCommand = new LeaveHubCommand(username, hubID);
         var result = await _sender.Send(LeaveHubCommand);
-        return result.Match(
-            hub => Ok(hub),
-            errors => Problem(errors)
-        );
+        return Ok(result);
 
     }
-
+    
 
 
     [HttpDelete]

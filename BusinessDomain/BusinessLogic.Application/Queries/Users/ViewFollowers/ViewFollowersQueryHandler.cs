@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Domain;
 using ErrorOr;
@@ -17,25 +18,49 @@ namespace BusinessLogic.Application.Queries.Users.ViewFollowers
 
         private readonly IUserRepository _userRepository;
         private readonly IUserUserRepository _userUserRepository;
-        public ViewFollowersQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository)
+        private readonly ICacheService _cacheService;
+        public ViewFollowersQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository, ICacheService cacheService)
         {
             _userRepository = userRepository;
             _userUserRepository = userUserRepository;
+            _cacheService = cacheService;
         }
         public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewFollowersQuery request, CancellationToken cancellationToken)
         {
-         /*   IQueryable<User> followedUsers;*/
-            var followerUsersIDs = (await _userUserRepository.GetAsync(u=>u.FollowedId == request.UserId))
-           .Select(f => f.FollowerId)
+            /*   IQueryable<User> followedUsers;*/
+
+
+
+            var CachedData = await _cacheService.GetAsync<IEnumerable<User>>("viewfollowers");
+
+            if (CachedData != null && CachedData.Count() > 0)
+            {
+                return CachedData.Adapt<List<UserReadModel>>();
+            }
+
+
+            var followerUsersIDs = (await _userUserRepository.GetAsync(u => u.FollowedId == request.UserId))
+         .Select(f => f.FollowerId)
+         .ToList();
+            var followedUsers = (await _userRepository.GetAllAsync())
+           .Where(u => followerUsersIDs.Contains(u.Id))
            .ToList();
 
-            var followedUsers =(await  _userRepository.GetAllAsync())
-         .Where(u => followerUsersIDs.Contains(u.Id))
-           .ToList()
-        .Adapt<List<UserReadModel>>();
 
 
-            return followedUsers;
+            var expiryTime = DateTime.Now.AddSeconds(30);
+            _cacheService.SetData<IEnumerable<User>>("viewfollowers", followedUsers, expiryTime);
+
+
+
+
+
+
+
+            var Users = followedUsers.Adapt<List<UserReadModel>>();
+
+
+            return Users;
         }
     }
 }
