@@ -3,6 +3,7 @@ using BusinessLogic.Application.Interfaces.TextChat;
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Handlers;
 using BusinessLogic.Infrastructure.Authorization.PolicyProviders;
+using BusinessLogic.Infrastructure.Caching_Services;
 using BusinessLogic.Infrastructure.NetworkCalls;
 using BusinessLogic.Infrastructure.NetworkCalls.TextChat;
 using BusinessLogic.Shared;
@@ -30,6 +31,10 @@ public static class InfrastructureDependencyInjection
             configure.BaseAddress = new Uri(configuration.GetSection("textChatUri").Value);
         }
         );
+        services.AddTransient<ICacheService, CacheService>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanJoinRoomPolicyProvider>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanDeployHubsPolicyProvider>();
+        // services.AddSingleton<IAuthorizationPolicyProvider, CanCreateChannelsPolicyProvider>();
         return services;
     }
 }

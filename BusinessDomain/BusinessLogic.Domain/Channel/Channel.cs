@@ -1,4 +1,4 @@
-using System.Threading.Channels;
+
 
 namespace BusinessLogic.Domain;
 public class Channel : BaseEntity

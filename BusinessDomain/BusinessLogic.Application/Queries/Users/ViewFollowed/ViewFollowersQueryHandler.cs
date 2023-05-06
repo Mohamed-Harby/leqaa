@@ -18,25 +18,60 @@ namespace BusinessLogic.Application.Queries.Users.ViewFollowers
 
         private readonly IUserRepository _userRepository;
         private readonly IUserUserRepository _userUserRepository;
-        public ViewFollowedQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository)
+        private readonly ICacheService _cacheService;
+        public ViewFollowedQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository, ICacheService cacheService)
         {
             _userRepository = userRepository;
             _userUserRepository = userUserRepository;
+            _cacheService = cacheService;
         }
         public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewFollowedQuery request, CancellationToken cancellationToken)
         {
-         /*   IQueryable<User> followedUsers;*/
-            var followedUsersIDs = (await _userUserRepository.GetAsync(u=>u.FollowerId == request.UserId))
+            /*   IQueryable<User> followedUsers;*/
+
+
+
+
+            var CachedData = await _cacheService.GetAsync<IEnumerable<User>>("viewfollowed");
+
+            if (CachedData != null && CachedData.Count() > 0)
+            {
+                return CachedData.Adapt<List<UserReadModel>>();
+            }
+
+
+
+            var followedUsersIDs = (await _userUserRepository.GetAsync(u => u.FollowerId == request.UserId))
            .Select(f => f.FollowedId)
            .ToList();
 
-            var followedUsers =(await  _userRepository.GetAllAsync())
+            var followedUsers = (await _userRepository.GetAllAsync())
          .Where(u => followedUsersIDs.Contains(u.Id))
-           .ToList()
-        .Adapt<List<UserReadModel>>();
+           .ToList();
 
 
-            return followedUsers;
+
+            var expiryTime = DateTime.Now.AddSeconds(30);
+            _cacheService.SetData<IEnumerable<User>>("viewfollowed", followedUsers, expiryTime);
+
+
+
+
+
+
+
+            var Users = followedUsers.Adapt<List<UserReadModel>>();
+
+
+            return Users;
+
+
+
+
+
+
+
+       
         }
     }
 }
