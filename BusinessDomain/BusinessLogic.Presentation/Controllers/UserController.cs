@@ -495,5 +495,4 @@ public class UserController : BaseController
            errors => Problem(errors)
        );
     }
-
 }
