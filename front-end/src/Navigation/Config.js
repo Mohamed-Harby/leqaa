@@ -1,5 +1,6 @@
 import { createBrowserRouter, Route, Navigate, useNavigate } from "react-router-dom";
 import { Layout } from "../Layout/Layout";
+import { getCookies } from "../Custom/useCookies";
 import Chat from "../Pages/Chat/Chat";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -8,42 +9,20 @@ import Settings from "../Pages/Settings/Settings";
 import Meeting from "../Pages/Meeting/Meeting";
 import Channels from "../Pages/Channels/Channels";
 import Organization from "../Pages/Organization/Organization";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD, HUB, CHANNEL, HUBs, HUBS } from "./Paths";
-import { useAuth } from "../Custom/useAuth";
-import { useEffect } from "react";
-import { baseUrl, getStatus, getUser } from "../redux/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import useCookies from "react-cookie/cjs/useCookies";
-import { getCookies } from "../Custom/useCookies";
-import axios from "axios";
 import Profile from "../Pages/Profile/Profile";
 import ResetPassword from "../Pages/ResetPassword/ResetPassword";
+import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD, HUB, CHANNEL, HUBs, HUBS, CONFIRMRESETPASSWORD } from "./Paths";
+import ConfirmResetPassword from "../Pages/ConfirmResetPassword/ConfirmResetPassword";
+import { defaultUser, useAuth } from "../Custom/useAuth";
+
 
 
 const ProtectedRoutes = ({ children }) => {
   const token = getCookies('token')
-  const navigate = useNavigate()
-  const auth = useAuth()
-  useEffect(() => {
-    axios.get(baseUrl + 'GetUser', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then((res) => {
-      console.log(res);
-      auth.setUser(res.data)
-    }).catch((error) => {
-      console.log(error);
-      auth.setUser({
-        "isSuccess": false,
-        "token": "",
-        "errorMessages": [],
-        "user": null
-      })
-      navigate('/login')
-    })
-  }, [children])
-  return children
+  if (!token) {
+    return <Navigate to='/login' />
+  }
+  return children;
 }
 
 export const RouterConfig = createBrowserRouter([
@@ -104,5 +83,9 @@ export const RouterConfig = createBrowserRouter([
   {
     path: RESETPASSWORD,
     element: <ResetPassword />,
+  },
+  {
+    path: CONFIRMRESETPASSWORD,
+    element: <ConfirmResetPassword />,
   },
 ]);

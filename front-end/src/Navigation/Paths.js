@@ -10,3 +10,4 @@ export const CHANNEL = "/channel/:id";
 export const HUBS = "/hub";
 export const HUB = "/hub/:id";
 export const RESETPASSWORD = "/resetpassword";
+export const CONFIRMRESETPASSWORD = "/resetpassword/:email";
