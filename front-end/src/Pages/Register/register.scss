@@ -3,9 +3,6 @@
 @use "../../helper/style" as *;
 
 
-
-
-
 .register {
   display: flex;
   justify-content: space-evenly;
@@ -32,27 +29,32 @@
     }
   }
 
-
-
-
-
   .right{
     display: flex;
     flex-direction: column;
     text-align: center;
+    justify-content: space-between;
     background-color: $secondColor;
-    border-radius: 20px;
-    width: 40vw;
-    height: calc(((100vh - 50px) / 2) + 10vh);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 35vw;
+    height: calc((100vh / 2) + 25vh);
 
     .links {
       display: flex;
+      height: 11%;
       a {
         text-decoration: none;
         background-color: $thirdColor;
         color: $fifthColor;
         width: 50%;
-        padding: 15px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
         &:first-child {
           border-top-left-radius: 20px;
         }
@@ -70,53 +72,73 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      height: 100%;
+      height: 80%;
+      gap: 5px;
 
       .input {
-        width: 70%;
+        width: 75%;
         display: flex;
         flex-direction: column;
-        margin: 10px 0;
-
+        // margin: 10px 0;
         input, select {
           background-color: $secondColor;
           color: $fifthColor;
           border: none;
           border-bottom: 1px solid $thirdColor;
           height: 100%;
+          font-size: 1rem;
           &::placeholder {
-            color: #dcdcdc;
+            color: #bebebe;
             opacity: 1;
           }
           &:focus {
             outline: none;
-            
           }
         }
-        p {
-          color: $fifthColor;
+        span {
+          color: $fourthColor;
+          font-size: 12px;
+          display: block;
+          height: 12px;
+          display: flex;
+          justify-content: flex-end;
+        }
+        select {
+          color: #bebebe;
         }
         button {
           background-color: $fourthColor;
           border-radius: 20px;
           color: $fifthColor;
           cursor: pointer;
-          align-self: flex-end;
+          align-self: center;
           padding: 10px;
           border: none;
-          width: 25%;
+          width: 50%;
+          font-size: 1rem;
+          transition: all 0.15s ease-in-out;
+          margin: 1rem 0 2rem 0;
+          &:hover {
+            background-color: $thirdColor;
+          }
         }
       }
     }
+  }
+}
 
-    
-
-
-
-
-
-    
-
-
+@media screen and (max-width: 800px) {
+  .register {
+    flex-direction: column;
+    height: unset;
+    gap: 3rem;
+    .left {
+      width: 80%;
+      margin-top: 5rem;
+    }
+    .right {
+      width: 60%;
+      margin-bottom: 5rem;
+    }
   }
 }

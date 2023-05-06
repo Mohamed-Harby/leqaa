@@ -71,12 +71,12 @@ function Register() {
 
         <div className="right">
           <div className="links">
-            <Link className="active">Sign Up</Link>
             <Link to={`/login`}>Login</Link>
+            <Link className="active">Register</Link>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>
-            <h1>Sign Up</h1>
+            {/* <h2>Get in touch today!</h2> */}
 
             <div className="input">
               <input
@@ -102,10 +102,9 @@ function Register() {
                 })}
               </div>
             </div>
-
             <div className="input">
               <input
-                placeholder="User Name"
+                placeholder="Username"
                 type="text"
                 name="username"
                 {...register("userName")}
@@ -151,13 +150,15 @@ function Register() {
                 {...register("confirmPassword")}
                 required
               />
-              {errors.confirmPassword && (
-                <p>{errors.confirmPassword.message}</p>
+              {errors.confirmPassword ? (
+                <span>{errors.confirmPassword.message}</span>
+              ) : (
+                <span></span>
               )}
             </div>
 
             <div className="input">
-              <button type="submit">Submit</button>{" "}
+              <button type="submit">Register</button>{" "}
             </div>
           </form>
         </div>
