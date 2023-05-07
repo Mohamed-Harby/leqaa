@@ -22,22 +22,22 @@ public class ChannelCreatedEventHandler : INotificationHandler<ChannelCreatedEve
     public Task Handle(ChannelCreatedEvent notification, CancellationToken cancellationToken)
     {
         _rabbitMqChannel.ExchangeDeclare(
-            Constants.BusinessChannelExchange,
+            Constants.BusinessGroupExchange,
             ExchangeType.Fanout);
 
         _rabbitMqChannel.QueueDeclare(
-            Constants.ChannelCreatedQueue,
+            Constants.GroupCreatedQueue,
             durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);
 
-        _rabbitMqChannel.QueueBind(Constants.ChannelCreatedQueue, Constants.BusinessChannelExchange, routingKey: string.Empty);
+        _rabbitMqChannel.QueueBind(Constants.GroupCreatedQueue, Constants.BusinessGroupExchange, routingKey: string.Empty);
 
         var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(notification.channel.Adapt<ChannelReadModel>()));
 
         _rabbitMqChannel.BasicPublish(
-            exchange: Constants.BusinessChannelExchange,
+            exchange: Constants.BusinessGroupExchange,
             routingKey: string.Empty,
             basicProperties: null,
             body: body);

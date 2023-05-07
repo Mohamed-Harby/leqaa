@@ -1,6 +1,8 @@
 using System.Text;
 using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Application.Models.Rooms;
 using BusinessLogic.Domain.Common.Events;
+using Mapster;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -11,7 +13,7 @@ public class RoomCreatedEventHandler : INotificationHandler<RoomCreatedEvent>
 {
     private readonly IModel _rabbitMqChannel;
 
-    public RoomCreatedEventHandler( IRabbitMQConnector rabbitMqConnector, IConfiguration configuration)
+    public RoomCreatedEventHandler(IRabbitMQConnector rabbitMqConnector, IConfiguration configuration)
     {
 
         _rabbitMqChannel = rabbitMqConnector.ConnectAsync(configuration).GetAwaiter().GetResult();
@@ -19,22 +21,22 @@ public class RoomCreatedEventHandler : INotificationHandler<RoomCreatedEvent>
     public Task Handle(RoomCreatedEvent notification, CancellationToken cancellationToken)
     {
         _rabbitMqChannel.ExchangeDeclare(
-           Constants.BusinessRoomExchange,
+           Constants.BusinessGroupExchange,
            ExchangeType.Fanout);
 
         _rabbitMqChannel.QueueDeclare(
-            Constants.RoomCreatedQueue,
+            Constants.GroupCreatedQueue,
             durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);
 
-        _rabbitMqChannel.QueueBind(Constants.RoomCreatedQueue, Constants.BusinessRoomExchange, routingKey: string.Empty);
+        _rabbitMqChannel.QueueBind(Constants.RoomCreatedQueue, Constants.BusinessGroupExchange, routingKey: string.Empty);
 
-        var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(notification));
+        var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(notification.room.Adapt<RoomReadModel>()));
 
         _rabbitMqChannel.BasicPublish(
-            exchange: Constants.BusinessRoomExchange,
+            exchange: Constants.BusinessGroupExchange,
             routingKey: string.Empty,
             basicProperties: null,
             body: body);
