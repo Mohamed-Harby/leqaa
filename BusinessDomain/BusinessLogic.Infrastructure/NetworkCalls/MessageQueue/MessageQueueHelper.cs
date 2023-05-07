@@ -2,7 +2,6 @@ using System.Text;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
-using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.Repositories;
 using Mapster;

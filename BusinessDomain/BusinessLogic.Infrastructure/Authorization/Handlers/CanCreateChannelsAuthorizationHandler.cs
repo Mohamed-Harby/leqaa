@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Infrastructure.NetworkCalls;
+using BusinessLogic.Infrastructure.NetworkCalls.Helpers;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
 public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCreateChannelsRequirement>

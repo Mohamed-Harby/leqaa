@@ -4,6 +4,7 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using BusinessLogic.Infrastructure.NetworkCalls;
+using BusinessLogic.Infrastructure.NetworkCalls.Helpers;
 using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

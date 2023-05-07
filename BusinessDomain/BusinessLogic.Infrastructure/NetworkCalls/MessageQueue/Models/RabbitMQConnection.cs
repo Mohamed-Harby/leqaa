@@ -1,4 +1,4 @@
-namespace BusinessLogic.Infrastructure.Models;
+namespace BusinessLogic.Infrastructure.NetworkCalls.MessageQueue.Models;
 public sealed record RabbitMQConnection
 {
     public string Host { get; set; } = string.Empty;

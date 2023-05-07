@@ -5,6 +5,7 @@ using BusinessLogic.Infrastructure.Authorization.Handlers;
 using BusinessLogic.Infrastructure.Authorization.PolicyProviders;
 using BusinessLogic.Infrastructure.Caching_Services;
 using BusinessLogic.Infrastructure.NetworkCalls;
+using BusinessLogic.Infrastructure.NetworkCalls.Helpers;
 using BusinessLogic.Infrastructure.NetworkCalls.TextChat;
 using BusinessLogic.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +19,7 @@ public static class InfrastructureDependencyInjection
     {
         services.AddSingleton<IFileManager, FileManager>();
         services.AddScoped<IHttpHelper, HttpHelper>();
+        services.AddScoped<IAPIHelper, APIHelper>();
         services.AddScoped<HttpHelper>();
         services.AddScoped<IAuthorizationHandler, CanJoinHubAuthorizationHandler>();
         services.AddScoped<IAuthorizationHandler, CanJoinRoomAuthorizationHandler>();

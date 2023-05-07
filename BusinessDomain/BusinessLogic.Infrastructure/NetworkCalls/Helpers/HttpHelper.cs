@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace BusinessLogic.Infrastructure.NetworkCalls;
+namespace BusinessLogic.Infrastructure.NetworkCalls.Helpers;
 public class HttpHelper : IHttpHelper
 {
     private readonly IHttpContextAccessor HttpAccessor;
@@ -32,5 +32,18 @@ public class HttpHelper : IHttpHelper
             await Response.Body.FlushAsync();
         });
         return Task.CompletedTask;
+    }
+    public string GetAuthorizationHeader()
+    {
+        string header = HttpContext.Request.Headers["Authorization"];
+        if (String.IsNullOrEmpty(header))
+        {
+            throw new HttpRequestException("token not provided, please provide a jwt token");
+        }
+        return header;
+    }
+    public string GetJwtToken()
+    {
+        return GetAuthorizationHeader().Split(' ')[1];
     }
 }

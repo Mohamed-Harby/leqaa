@@ -3,7 +3,6 @@ using BusinessLogic.Application.DependencyInjection;
 using BusinessLogic.Entry.Models;
 using BusinessLogic.Entry.ServiceConfigurations;
 using BusinessLogic.Infrastructure.DependencyInjection;
-using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.DependencyInjection;
@@ -18,6 +17,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using BusinessLogic.Entry.JsonConfigurations;
 using System.Text;
+using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,8 +40,8 @@ builder.Services.ConfigureOptions<AuthorizationOptionsSetup>();
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddPersistence(builder.Configuration)
-    .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(builder.Configuration)
+    .AddApplication();
 
 builder.Services.AddCoreAdmin();
 
