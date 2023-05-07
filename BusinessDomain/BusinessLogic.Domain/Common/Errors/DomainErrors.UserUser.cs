@@ -1,6 +1,6 @@
 using ErrorOr;
 
-namespace BusinessLogic.Domain.DomainErrors;
+namespace BusinessLogic.Domain.Common.Errors;
 public static partial class DomainErrors
 {
     public static partial class UserUser

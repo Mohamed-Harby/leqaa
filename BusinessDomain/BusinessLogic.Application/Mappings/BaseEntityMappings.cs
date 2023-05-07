@@ -6,6 +6,7 @@ using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 using Mapster;
 
 namespace BusinessLogic.Application.Mappings;

@@ -7,7 +7,7 @@ using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Queries.Users.ViewUserHubs;
 using BusinessLogic.Application.Queries.Users.ViewUserPosts;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using FluentValidation;
 using Mapster;

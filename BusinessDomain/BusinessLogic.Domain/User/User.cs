@@ -1,5 +1,7 @@
 using BusinessLogic.Domain.Plan;
 using BusinessLogic.Domain.Enums;
+using BusinessLogic.Domain.Common;
+
 namespace BusinessLogic.Domain;
 public class User : BaseEntity
 {

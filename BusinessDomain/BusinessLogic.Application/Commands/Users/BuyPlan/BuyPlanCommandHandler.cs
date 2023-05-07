@@ -2,7 +2,7 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Users;
 using ErrorOr;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.Plan;
 using Mapster;
 using BusinessLogic.Application.Models.Plans;

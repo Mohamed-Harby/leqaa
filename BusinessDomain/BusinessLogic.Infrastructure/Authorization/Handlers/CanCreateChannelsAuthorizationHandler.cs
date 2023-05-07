@@ -2,7 +2,7 @@ using System.Security.Claims;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.Plan;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;

@@ -9,6 +9,7 @@ using ErrorOr;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using BusinessLogic.Domain.Common.Errors;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
 public class CanJoinHubAuthorizationHandler : AuthorizationHandler<CanJoinHubRequirement>
@@ -56,7 +57,7 @@ public class CanJoinHubAuthorizationHandler : AuthorizationHandler<CanJoinHubReq
 
         if (user is null)
         {
-            errorMessages.Add(Domain.DomainErrors.DomainErrors.User.NotFound);
+            errorMessages.Add(DomainErrors.User.NotFound);
             System.Console.WriteLine("Error at usernameclaim check");
             context.Fail(new AuthorizationFailureReason(this, "Not authorized"));
             await WriteBody(errorMessages, context, requirement);
@@ -78,7 +79,7 @@ public class CanJoinHubAuthorizationHandler : AuthorizationHandler<CanJoinHubReq
 
         if (hub is null)
         {
-            errorMessages.Add(Domain.DomainErrors.DomainErrors.Hub.NotFound);
+            errorMessages.Add(DomainErrors.Hub.NotFound);
             context.Fail(new AuthorizationFailureReason(this, "hub not found"));
             await WriteBody(errorMessages, context, requirement);
             return;

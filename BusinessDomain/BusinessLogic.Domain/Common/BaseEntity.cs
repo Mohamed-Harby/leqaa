@@ -1,24 +1,21 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace BusinessLogic.Domain
+namespace BusinessLogic.Domain.Common
 {
     public abstract class BaseEntity
-    { 
-       [Key]
+    {
+        [Key]
         public Guid Id { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public static explicit operator BaseEntity(List<Hub> v)
-        {
-            throw new NotImplementedException();
-        }
+        public List<IDomainEvent> DomainEvents { get; set; } = new();
     }
 
 
 
 
-    public  class Entity
+    public class Entity
     {
         [Key]
         public Guid Id { get; set; }
@@ -31,6 +28,6 @@ namespace BusinessLogic.Domain
         public ICollection<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
 
 
-     
+
     }
 }

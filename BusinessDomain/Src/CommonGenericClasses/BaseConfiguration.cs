@@ -1,5 +1,6 @@
 using System;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

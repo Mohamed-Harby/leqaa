@@ -4,7 +4,7 @@ using BusinessLogic.Application.Extensions;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.SharedEnums;
 using ErrorOr;
 using FluentValidation;

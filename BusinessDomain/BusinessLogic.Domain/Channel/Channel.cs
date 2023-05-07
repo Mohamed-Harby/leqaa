@@ -1,5 +1,7 @@
 
 
+using BusinessLogic.Domain.Common;
+
 namespace BusinessLogic.Domain;
 public class Channel : BaseEntity
 {

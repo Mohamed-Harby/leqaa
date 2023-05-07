@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using BusinessLogic.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.Plan;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using BusinessLogic.Infrastructure.NetworkCalls;

@@ -7,7 +7,7 @@ using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 
 using Mapster;
