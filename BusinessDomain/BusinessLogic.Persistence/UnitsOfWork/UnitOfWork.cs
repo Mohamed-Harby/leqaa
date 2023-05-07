@@ -5,6 +5,7 @@ using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.Application.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using BusinessLogic.Domain.Common;
 
 namespace BusinessLogic.Persistence.UnitsOfWork;
 public class UnitOfWork : IUnitOfWork, IDisposable

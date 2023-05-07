@@ -4,7 +4,7 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Plans;
 using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.Plan;
 using ErrorOr;
 using Mapster;

@@ -8,7 +8,6 @@ using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Channels.ViewChannel;
 using BusinessLogic.Application.Queries.Channels.ViewRecentActivities;
 using BusinessLogic.Application.Queries.Channels.GetChannelMembers;
-
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
@@ -28,7 +27,7 @@ public class ChannelController : BaseController
         _sender = sender;
     }
     [HttpPost]
-    /*    [HasPermission(Permission.CanCreateChannel)]*/
+    // [HasPermission(Permission.CanCreateChannel)]
     public async Task<IActionResult> CreateChannel(ChannelWriteModel channelWriteModel)
     {
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;

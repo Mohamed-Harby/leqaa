@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 
 namespace BusinessLogic.Entry.JsonConfigurations;
 public class BaseEntityJsonConverter : JsonConverter<BaseEntity>

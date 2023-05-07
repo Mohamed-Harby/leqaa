@@ -12,5 +12,5 @@ namespace BusinessLogic.Application.Commands.Users.LeaveHub
     public record LeaveHubCommand(
      string UserName,
      Guid HubId
- ) : ICommand<ErrorOr<HubReadModel>>;
+ ) : ICommand<string>;
 }

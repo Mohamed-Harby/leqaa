@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Application.Interfaces;
+using BusinessLogic.Persistence.Interceptors;
 using BusinessLogic.Persistence.Repositories;
 using BusinessLogic.Persistence.UnitsOfWork;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,9 @@ public static class PersistenceDependencyInjection
         services.AddScoped<IUserPinnedChannelRepository, UserPinnedChannelRepository>();
         services.AddScoped<IUserPinnedHubRepository, UserPinnedHubRepository>();
         services.AddScoped<IUserPinnedPostRepository, UserPinnedPostRepository>();
+
+        services.AddScoped<IPublishDomainEventsInterceptor, PublishDomainEventsInterceptor>();
+        services.AddScoped<PublishDomainEventsInterceptor>();
 
 
         return services;

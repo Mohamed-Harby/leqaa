@@ -6,7 +6,7 @@ using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 using BusinessLogic.Application.Queries.Hubs.GetHubsWithoutUserHubs;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using Mapster;
 using System;

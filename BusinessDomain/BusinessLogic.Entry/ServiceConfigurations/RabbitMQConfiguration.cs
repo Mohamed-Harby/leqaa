@@ -1,5 +1,5 @@
-using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
+using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue.Models;
 using RabbitMQ.Client;
 
 namespace BusinessLogic.Entry.ServiceConfigurations;

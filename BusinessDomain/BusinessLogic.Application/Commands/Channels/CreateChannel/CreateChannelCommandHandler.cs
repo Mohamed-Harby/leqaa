@@ -4,7 +4,8 @@ using BusinessLogic.Application.Extensions;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
+using BusinessLogic.Domain.Common.Events;
 using BusinessLogic.Domain.SharedEnums;
 using ErrorOr;
 using FluentValidation;
@@ -47,6 +48,7 @@ public class DeployHubAnnoucementCommandHandler : IHandler<CreateChannelCommand,
         var channel = request.Adapt<Channel>();
 
         await _unitOfWork.CreateChannelAsync(channel, creatorUser);
+        channel.AddDomainEvent(new ChannelCreatedEvent(channel));
 
         if (await _userRepository.SaveAsync(cancellationToken) == 0)
         {

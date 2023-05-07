@@ -8,7 +8,7 @@ using BusinessLogic.Application.Models.Annoucements.HubAnnoucements;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Application.Queries.Hubs.viewHubUsers;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.SharedEnums;
 using ErrorOr;
 using FluentValidation;

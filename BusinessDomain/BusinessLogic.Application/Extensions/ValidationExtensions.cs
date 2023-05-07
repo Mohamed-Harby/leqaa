@@ -1,4 +1,5 @@
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 using ErrorOr;
 
 namespace BusinessLogic.Application.Extensions;

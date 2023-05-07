@@ -4,7 +4,7 @@ using BusinessLogic.Application.Commands.Users.AddUserByUser;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Users;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.DomainSucceeded.User;
 using BusinessLogic.Domain.SharedEnums;
 using ErrorOr;

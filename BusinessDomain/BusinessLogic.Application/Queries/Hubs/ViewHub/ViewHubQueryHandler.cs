@@ -1,7 +1,7 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using Mapster;
 

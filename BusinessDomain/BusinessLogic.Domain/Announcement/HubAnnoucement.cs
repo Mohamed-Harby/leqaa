@@ -1,6 +1,6 @@
 using System.Threading.Channels;
 using System.Xml.Linq;
-using static BusinessLogic.Domain.DomainErrors.DomainErrors;
+using BusinessLogic.Domain.Common;
 using static BusinessLogic.Domain.DomainSucceeded.User.DomainSucceded;
 
 namespace BusinessLogic.Domain;

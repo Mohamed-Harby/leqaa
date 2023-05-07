@@ -2,7 +2,7 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Shared;
 using ErrorOr;
@@ -15,16 +15,19 @@ public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubRea
     private readonly IUserRepository _userRepository;
     private readonly IFileManager _fileManager;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ICacheService _cacheService;
     public DeployHubCommandHandler(
         IHubRepository hubRepository,
         IUserRepository userRepository,
         IFileManager fileManager,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        ICacheService cacheService)
     {
         _hubRepository = hubRepository;
         _userRepository = userRepository;
         _fileManager = fileManager;
         _unitOfWork = unitOfWork;
+        _cacheService = cacheService;
     }
 
     public async Task<ErrorOr<HubReadModel>> Handle(DeployHubCommand request, CancellationToken cancellationToken)

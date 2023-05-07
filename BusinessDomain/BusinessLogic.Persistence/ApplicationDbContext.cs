@@ -1,5 +1,6 @@
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.Plan;
+using BusinessLogic.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -15,16 +16,17 @@ public class ApplicationDbContext : DbContext
     public DbSet<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
     public DbSet<Plan>? Plans { get; set; }
     private readonly IConfiguration? configuration;
-    public ApplicationDbContext()
-    {
+    private readonly PublishDomainEventsInterceptor _interceptor;
 
-    }
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration, PublishDomainEventsInterceptor interceptor) : base(options)
     {
         this.configuration = configuration;
+        _interceptor = interceptor;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.AddInterceptors(_interceptor);
+
         var connectionString = configuration.GetConnectionString("Default");
         if (!optionsBuilder.IsConfigured)
         {

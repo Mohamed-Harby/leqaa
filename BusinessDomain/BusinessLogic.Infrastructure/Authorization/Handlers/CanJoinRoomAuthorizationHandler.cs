@@ -4,7 +4,7 @@ using BusinessLogic.Domain;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
 public class CanJoinRoomAuthorizationHandler : AuthorizationHandler<CanJoinRoomRequirement>

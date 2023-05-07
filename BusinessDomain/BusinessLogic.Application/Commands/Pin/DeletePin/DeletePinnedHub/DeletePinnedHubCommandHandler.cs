@@ -3,7 +3,7 @@ using BusinessLogic.Application.Commands.Users.LeaveChannel;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain.SharedEnums;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Domain.DomainSucceeded.User;
 using ErrorOr;
 using System;
