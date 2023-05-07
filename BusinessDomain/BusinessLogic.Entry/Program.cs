@@ -71,8 +71,9 @@ builder.Services.AddAuthorization();
 
 try
 {
-    IModel channel = RabbitMQConfiguration.ConnectToRabbitMQ(builder.Configuration);
-    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
+    RabbitMQConnector rabbitMQConnector = new();
+    IModel channel = await rabbitMQConnector.ConnectAsync(builder.Configuration);
+    await MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
 }
 catch (Exception ex)
 {

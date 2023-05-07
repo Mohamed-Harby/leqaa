@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessLogic.Persistence.Interceptors;
 
 namespace BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
 public class MessageQueueHelper
@@ -41,7 +42,7 @@ public class MessageQueueHelper
          {
 
              var options = new DbContextOptions<ApplicationDbContext>();
-             var dbcontext = new ApplicationDbContext(options, serviceProvider.GetRequiredService<IConfiguration>());
+             var dbcontext = new ApplicationDbContext(options, serviceProvider.GetRequiredService<IConfiguration>(), serviceProvider.GetRequiredService<PublishDomainEventsInterceptor>());
              IUserRepository userRepository = new UserRepository(dbcontext);
              var userEncoded = ea.Body.ToArray();
              var userDecoded = Encoding.UTF8.GetString(userEncoded);

@@ -1,2 +1,4 @@
+using MediatR;
+
 namespace BusinessLogic.Domain.Common;
-public interface IDomainEvent { }
+public interface IDomainEvent : INotification { }

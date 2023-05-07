@@ -6,8 +6,10 @@ using BusinessLogic.Infrastructure.Authorization.PolicyProviders;
 using BusinessLogic.Infrastructure.Caching_Services;
 using BusinessLogic.Infrastructure.NetworkCalls;
 using BusinessLogic.Infrastructure.NetworkCalls.Helpers;
+using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
 using BusinessLogic.Infrastructure.NetworkCalls.TextChat;
 using BusinessLogic.Shared;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ public static class InfrastructureDependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddScoped<IRabbitMQConnector, RabbitMQConnector>();
         services.AddSingleton<IFileManager, FileManager>();
         services.AddScoped<IHttpHelper, HttpHelper>();
         services.AddScoped<IAPIHelper, APIHelper>();
@@ -34,6 +37,8 @@ public static class InfrastructureDependencyInjection
         }
         );
         services.AddTransient<ICacheService, CacheService>();
+
+        services.AddMediatR(typeof(TextChatService));
         // services.AddSingleton<IAuthorizationPolicyProvider, CanJoinRoomPolicyProvider>();
         // services.AddSingleton<IAuthorizationPolicyProvider, CanDeployHubsPolicyProvider>();
         // services.AddSingleton<IAuthorizationPolicyProvider, CanCreateChannelsPolicyProvider>();

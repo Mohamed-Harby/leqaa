@@ -1,33 +1,22 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLogic.Domain.Common
 {
-    public abstract class BaseEntity
+    public abstract class BaseEntity : IHasDomainEvent
     {
         [Key]
         public Guid Id { get; set; }
         public DateTime CreationDate { get; set; }
+        private readonly List<IDomainEvent> _domainEvents = new();
+        public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-        public List<IDomainEvent> DomainEvents { get; set; } = new();
-    }
-
-
-
-
-    public class Entity
-    {
-        [Key]
-        public Guid Id { get; set; }
-        public DateTime CreationDate { get; set; }
-
-        public ICollection<Hub>? Hubs { get; set; }
-        public ICollection<Post>? Posts { get; set; }
-        public ICollection<Channel>? Channels { get; set; }
-        public ICollection<HubAnnouncement>? HubAnnouncements { get; set; }
-        public ICollection<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
-
-
-
+        public void ClearDomainEvents()
+        {
+            _domainEvents.Clear();
+        }
+        public void AddDomainEvent(IDomainEvent domainEvent)
+        {
+            _domainEvents.Add(domainEvent);
+        }
     }
 }
