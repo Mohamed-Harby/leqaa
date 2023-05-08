@@ -1,4 +1,4 @@
-using BusinessLogic.Domain.Plan;
+using BusinessLogic.Domain;
 using CommonGenericClasses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -1,6 +1,6 @@
 using BusinessLogic.Domain.Common;
 
-namespace BusinessLogic.Domain.Plan;
+namespace BusinessLogic.Domain;
 public class Plan : BaseEntity
 {
     public Plan()

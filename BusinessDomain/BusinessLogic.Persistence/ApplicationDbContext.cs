@@ -1,5 +1,4 @@
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.Plan;
 using BusinessLogic.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

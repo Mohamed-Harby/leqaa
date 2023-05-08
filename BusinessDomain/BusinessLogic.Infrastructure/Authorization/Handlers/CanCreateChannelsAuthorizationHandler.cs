@@ -3,12 +3,12 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Infrastructure.Authorization.Requirements;
 using Microsoft.AspNetCore.Authorization;
 using BusinessLogic.Domain.Common.Errors;
-using BusinessLogic.Domain.Plan;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Infrastructure.NetworkCalls;
 using BusinessLogic.Infrastructure.NetworkCalls.Helpers;
+using BusinessLogic.Domain;
 
 namespace BusinessLogic.Infrastructure.Authorization.Handlers;
 public class CanCreateChannelAuthorizationHandler : AuthorizationHandler<CanCreateChannelsRequirement>

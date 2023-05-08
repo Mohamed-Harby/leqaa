@@ -3,9 +3,9 @@ using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Users;
 using ErrorOr;
 using BusinessLogic.Domain.Common.Errors;
-using BusinessLogic.Domain.Plan;
 using Mapster;
 using BusinessLogic.Application.Models.Plans;
+using BusinessLogic.Domain;
 
 namespace BusinessLogic.Application.Commands.Users.BuyPlan;
 public class BuyPlanCommandHandler : IHandler<BuyPlanCommand, ErrorOr<PlanReadModel>>

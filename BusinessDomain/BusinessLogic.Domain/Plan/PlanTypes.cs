@@ -1,4 +1,4 @@
-namespace BusinessLogic.Domain.Plan;
+namespace BusinessLogic.Domain;
 public enum PlanType
 {
     Free,
