@@ -12,6 +12,5 @@ public interface IApplicationDbContext
     DbSet<HubAnnouncement>? HubAnnouncements { get; set; }
     DbSet<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
     DbSet<Plan>? Plans { get; set; }
-    
-
+   
 }
