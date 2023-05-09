@@ -18,7 +18,7 @@ namespace CommonGenericClasses
     public class BaseCachedRepo<TEntity> : IBaseRepo<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext _db;
-        private readonly DbSet<TEntity> _table;
+        protected readonly DbSet<TEntity> _table;
         private readonly Dictionary<object, TEntity> _cache;
         private readonly IDistributedCache _distributedCache;
 
@@ -171,11 +171,35 @@ namespace CommonGenericClasses
             await _db.SaveChangesAsync();
         }
 
+        /*    public async Task<IQueryable<TEntity>> GetAllAsync()
+            {
+                return await Task.FromResult(_table);
+            }*/
+
         public async Task<IQueryable<TEntity>> GetAllAsync()
         {
-            return await Task.FromResult(_table);
-        }
+            var cacheKey = $"cache_{typeof(TEntity).Name}_all";
+            var cacheData = await _distributedCache.GetStringAsync(cacheKey);
 
+            if (!string.IsNullOrEmpty(cacheData))
+            {
+                var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
+                return entities.AsQueryable();
+            }
+
+            IQueryable<TEntity> query = _table;
+
+            var entitiesList = await query.ToListAsync();
+
+            var settings = new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
+
+            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entitiesList, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
+
+            return entitiesList.AsQueryable();
+        }
 
         public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
         {
