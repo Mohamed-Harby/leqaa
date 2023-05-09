@@ -44,10 +44,10 @@ namespace CommonGenericClasses
 
             if (!string.IsNullOrEmpty(cacheData))
             {
-                return JsonConvert.DeserializeObject<TEntity>(cacheData)!;
+                return JsonConvert.DeserializeObject<TEntity>(cacheData);
             }
 
-            if (_cache.TryGetValue(id, out TEntity? cachedEntity))
+            if (_cache.TryGetValue(id, out TEntity cachedEntity))
             {
                 return cachedEntity;
             }
@@ -65,7 +65,7 @@ namespace CommonGenericClasses
                 await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entity, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
             }
 
-            return entity!;
+            return entity;
         }
 
         public async Task<IEnumerable<TEntity>> RemoveRangeAsync(Expression<Func<TEntity, bool>> predicate)
@@ -111,7 +111,7 @@ namespace CommonGenericClasses
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
-                return entities.AsQueryable();
+                return entities!.AsQueryable();
             }
 
             IQueryable<TEntity> query = _table;
@@ -138,7 +138,7 @@ namespace CommonGenericClasses
             return entitiesList.AsQueryable();
         }
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null!)
         {
             IQueryable<TEntity> query = _table;
             if (predicate != null)
@@ -184,7 +184,7 @@ namespace CommonGenericClasses
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
-                return entities.AsQueryable();
+                return entities!.AsQueryable();
             }
 
             IQueryable<TEntity> query = _table;
@@ -201,7 +201,7 @@ namespace CommonGenericClasses
             return entitiesList.AsQueryable();
         }
 
-        public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
+        public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null!)
         {
             throw new NotImplementedException();
         }

@@ -63,7 +63,9 @@ services:
       dockerfile: BusinessDomain/BusinessLogic.Entry/Dockerfile
     environment:
       - ConnectionStrings__Default=Server=businessdomaindb;Port=3307;Database=BusinessLogicDb;Uid=root;Pwd=2510203121;
+      - ConnectionStrings__Redis=redis:6379
       - RabbitMQConnection__Host=rabbitmq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
     ports:
       - 5004:5004
     volumes:
@@ -71,6 +73,8 @@ services:
     depends_on:
       - businessdomaindb
       - rabbitmq
+      - seq
+      - redis
     healthcheck:
       test: rabbitmq-diagnostics -q ping;curl --fail http://businessdomaindb:3307
       interval: 1m30s
@@ -130,6 +134,16 @@ services:
       - paymentgatewaydbvolume:/var/lib/mysql3
     restart: always
 
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
   
 volumes:
   businessdbvolume2:

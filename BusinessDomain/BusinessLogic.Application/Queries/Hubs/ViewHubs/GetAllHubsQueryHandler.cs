@@ -11,15 +11,14 @@ namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, ErrorOr<List<HubReadModel>>>
 {
     private readonly IHubRepository _hubRepository;
-    private readonly ICacheService _cacheService;
 
 
-    public GetAllHubsQueryHandler(IHubRepository hubRepository,
-        ICacheService cacheService
+
+    public GetAllHubsQueryHandler(IHubRepository hubRepository
         )
     {
         _hubRepository = hubRepository;
-        _cacheService = cacheService;
+     
 
     }
 
@@ -27,16 +26,10 @@ public class GetAllHubsQueryHandler : IHandler<GetAllHubsQuery, ErrorOr<List<Hub
     {
 
 
-        var CachedData = await _cacheService.GetAsync<IEnumerable<Hub>>("hubs");
-
-        if(CachedData!= null && CachedData.Count()>0) { 
-        return CachedData.Adapt<List<HubReadModel>>();
-        }
 
         var hubs = await _hubRepository.GetAllAsync();
 
-        var expiryTime = DateTime.Now.AddSeconds(30);
-        _cacheService.SetData<IEnumerable<Hub>>("hubs", hubs, expiryTime);
+
 
 
 
