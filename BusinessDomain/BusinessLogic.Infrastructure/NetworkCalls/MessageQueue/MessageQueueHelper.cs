@@ -24,12 +24,12 @@ public class MessageQueueHelper
         channel.ExchangeDeclare(
              exchange: "Authentication",
              type: ExchangeType.Fanout,
-             durable: false,
+             durable: true,
              autoDelete: false
          );
         channel.QueueDeclare(
             queue: "Authentication.UserToBusiness",
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false
         );

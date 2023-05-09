@@ -10,18 +10,19 @@ services:
       dockerfile: BusinessDomain/BusinessLogic.Entry/Dockerfile
     environment:
       - ConnectionStrings__Default=Server=businessdomaindb;Port=3307;Database=BusinessLogicDb;Uid=root;Pwd=2510203121;
-      - SEQ_URL=http://seq:5341
+      - ConnectionStrings__Redis=redis:6379
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
     ports:
       - 5001:5001
-    volumes:
-      - ./BusinessDomain:/src/BusinessDomain
     depends_on:
       - businessdomaindb
+      - seq
     healthcheck:
-      test: ["CMD","curl","-f","http://businessdomaindb:3307"]
-      timeout: 1s
-      interval: 1s
-      retries: 20
+      test: ["CMD","curl","-f","http://businessdomaindb:3307",";","CMD","curl","-f","http://seq:5431"]
+      timeout: 1m30s
+      interval: 20s
+      retries: 5
+      start_period: 40s
 
   businessdomaindb:
     image: mysql/mysql-server:latest
@@ -43,39 +44,11 @@ services:
       - 5341:80
     environment:
       - ACCEPT_EULA=Y
-      
-  authentication:
-    image: authentication-dev
-    build:
-      context: .
-      dockerfile: Authentication/Authentication.Entry/Dockerfile
-    environment:
-      - ConnectionStrings__Default=server=authenticationdb;Port=3308;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
-      - Uri=http://localhost:5002
+  redis:
+    image: redis:latest
     ports:
-      - 5002:5002
-    depends_on:
-      - authenticationdb
-    healthcheck:
-      test: ["CMD","curl","-f","http://authenticationdb:3308"]
-      timeout: 1s
-      interval: 1s
-      retries: 10
-
-  authenticationdb:
-    image: mysql/mysql-server:latest
-    environment:
-      - MYSQL_ROOT_PASSWORD=2510203121
-      - MYSQL_DATABASE=LeqaaAuthentication
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=2510203121
-      - MYSQL_TCP_PORT=3308
-    volumes:
-      - authenticationdbvolume:/var/lib/mysql
-    ports:
-      - 3308:3308
-
+      - 6379:6379
+  
 volumes:
   businessdbvolume:
-  authenticationdbvolume:
 
