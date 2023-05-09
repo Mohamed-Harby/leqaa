@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
 
-const protect = require("./../middleware/authMiddleware");
+const {decodedUUID} = require("./../middleware/authMiddleware");
 
 var uuid = require("node-uuid");
 
@@ -20,7 +20,7 @@ const accessChat = asyncHandler(async (req, res) => {
   var isChat = await Chat.find({
     isGroupChat: false,
     $and: [
-      { users: { $elemMatch: { $eq: protect.decodedUUID } } },
+      { users: { $elemMatch: { $eq: decodedUUID } } },
       { users: { $elemMatch: { $eq: userId } } },
     ],
   })
@@ -35,11 +35,14 @@ const accessChat = asyncHandler(async (req, res) => {
   if (isChat.length > 0) {
     res.send(isChat[0]);
   } else {
+    const reciev = await User.findOne({_id:userId});
+    console.log("👉🏾 reciever 👉🏾", reciev);
+    const recierverName = reciev.name;
     var chatData = {
       _id: uuid.v1(),
-      chatName: "sender",
+      chatName: recierverName,  //chat name be the recierver name == userId 
       isGroupChat: false,
-      users: [protect.decodedUUID, userId],
+      users: [decodedUUID, userId], /// ❌❌❌ why it doesn't send the uuid ==>res is have only userId
     };
 
     try {
@@ -61,7 +64,7 @@ const accessChat = asyncHandler(async (req, res) => {
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
   try {
-    Chat.find({ users: { $elemMatch: { $eq: protect.decodedUUID } } })
+    Chat.find({ users: { $elemMatch: { $eq: decodedUUID } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")

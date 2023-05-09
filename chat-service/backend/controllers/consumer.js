@@ -1,15 +1,18 @@
 const User = require("./../models/userModel");
 const mongoose = require("mongoose");
 const amqp = require("amqplib");
+const Chat = require("../models/chatModel");
+const  decodedUUID  = require("./../middleware/authMiddleware");
 
+// console.log("😎", decodedUUID);
 async function consumeFromQueue(queueName, handleMessage) {
   try {
     // Connect to RabbitMQ server
-    const connection = await amqp.connect("amqp://localhost");
+    const connection = await amqp.connect("amqp://localhost:5672");
     const channel = await connection.createChannel();
 
     // Assert queue
-    const queue = await channel.assertQueue(queueName, { durable: false });
+    const queue = await channel.assertQueue(queueName, { durable: true });
 
     // Consume messages from queue
     channel.consume(
@@ -18,19 +21,6 @@ async function consumeFromQueue(queueName, handleMessage) {
         const messageString = msg.content.toString("utf-8");
         const messageJson = JSON.parse(messageString);
         console.log(messageJson);
-        // try {
-        //   User.create({
-        //     _id: messageJson.Id,
-        //     name: messageJson.Name,
-        //     email: messageJson.Email,
-        //     password: messageJson.password,
-        //     gender: messageJson.Gender,
-        //   });
-        // } catch (err) {
-        //   console.log(err);
-        // }
-
-        // User.create(messageJson);
 
         handleMessage(messageJson);
       },
@@ -46,11 +36,7 @@ const MyController = {
     // Call consumeFromQueue with appropriate arguments
     consumeFromQueue("Authentication.UserToChat", (message) => {
       console.log(`Received message: ${JSON.stringify(message)}`);
-      // console.log(`Type of the Received message: ${typeof message}`);
-      // console.log("NAME ===", message.Id);
-
       console.log(message);
-
       // Handle incoming message
       try {
         // let user = new User(message);
@@ -74,22 +60,46 @@ const MyController = {
       } catch (err) {
         console.log(err);
       }
-
-      // try {
-
-      //   const messageString = JSON.stringify(message);
-      //   console.log(messageString)
-      //   const messageObject = JSON.parse(messageString)
-      //   console.log(messageObject);
-      //   // console.log(Object.keys(message));
-      //   // const jsonMessage = JSON.parse(message);
-
-      //   // console.log(`Parsed JSON message: ${jsonMessage['Id']}`);
-      //   // console.log(`Type of the parsed JSON message: ${typeof jsonMessage}`);
-      // } catch (error) {
-      //   console.error(`Error parsing message: ${error}`);
-      // }
     });
+
+    consumeFromQueue(
+      "BusinessDomain.GroupCreated",
+      async (message, req, res) => {
+        // Message handling logic
+        console.log(`Received message: ${JSON.stringify(message)}`);
+        console.log(message);
+
+        try {
+          const users = message.JoinedUsers.map((user) => user.Id);
+          const existedGroup = await Chat.findById(message.Id);
+          console.log("uers😂", users);
+          // console.log("decoded uuid ", decodedUUID);
+          if (existedGroup) {
+            return res.status(400).send("Group already exists");
+          } /* else if (users.length < 2) {
+          return res
+            .status(400)
+            .send("More than 2 users are required to form a group chat");
+        }*/ else {
+            const groupChat = await Chat.create({
+              _id: message.Id,
+              chatName: message.Name,
+              users: users,
+              isGroupChat: true,
+              // groupAdmin: decodedUUID,
+            });
+
+            const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
+              .populate("users", "-password")
+              .populate("groupAdmin", "-password");
+
+            // res.status(200).json(fullGroupChat);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    );
   },
 
   // Other controller functions...

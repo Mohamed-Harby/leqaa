@@ -57,36 +57,36 @@ const server = app.listen(
 );
 
 const io = require("socket.io")(server, {
-  pingTimeout: 60000,
+  pingTimeout: 60000,                // pingTimeout means time will be waited if no connection happend it will be off to save bandwidth
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000",   // this will be changed during deployment
     // credentials: true,
   },
 });
 
-io.on("connection", (socket) => {
+io.on("connection", (socket) => {            // when a connection is done from the client ==> from front end will log ' kaza' ,,,, socket = io(ENDPOINT);
   console.log("Connected to socket.io");
-  socket.on("setup", (userData) => {
-    socket.join(userData._id);
-    socket.emit("connected");
+  socket.on("setup", (userData) => {        // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
+    socket.join(userData._id);             // this will create a room for this particular user 
+    socket.emit("connected");              // this wil send connected to client
   });
 
-  socket.on("join chat", (room) => {
+  socket.on("join chat", (room) => {       //will take room id from front end  ,, frontend ,,, socket.emit("join chat", selectedChat._id)
     socket.join(room);
     console.log("User Joined Room: " + room);
   });
   socket.on("typing", (room) => socket.in(room).emit("typing"));
   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
-  socket.on("new message", (newMessageRecieved) => {
+  socket.on("new message", (newMessageRecieved) => {        //to make a realtime messages
     var chat = newMessageRecieved.chat;
 
     if (!chat.users) return console.log("chat.users not defined");
 
     chat.users.forEach((user) => {
-      if (user._id == newMessageRecieved.sender._id) return;
+      if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
 
-      socket.in(user._id).emit("message recieved", newMessageRecieved);
+      socket.in(user._id).emit("message recieved", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.
     });
   });
 
