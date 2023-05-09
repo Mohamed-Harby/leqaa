@@ -2,6 +2,7 @@ using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain.Common.Errors;
+using BusinessLogic.Domain.Common.Events;
 using ErrorOr;
 using Mapster;
 
@@ -35,6 +36,7 @@ public class JoinChannelCommandHandler : IHandler<JoinChannelCommand, ErrorOr<Ch
             return DomainErrors.UserChannel.AlreadyJoinedChannel;
         }
         channel.AddUser(user);
+        channel.AddDomainEvent(new UserJoinedChannelEvent(user.Id, channel.Id));
         if (await _channelRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.CannotJoinChannel;

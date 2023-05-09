@@ -31,13 +31,7 @@ namespace BusinessLogic.Application.Queries.Users.ViewFollowers
 
 
 
-            var CachedData = await _cacheService.GetAsync<IEnumerable<User>>("viewfollowers");
-
-            if (CachedData != null && CachedData.Count() > 0)
-            {
-                return CachedData.Adapt<List<UserReadModel>>();
-            }
-
+     
 
             var followerUsersIDs = (await _userUserRepository.GetAsync(u => u.FollowedId == request.UserId))
          .Select(f => f.FollowerId)
@@ -48,9 +42,7 @@ namespace BusinessLogic.Application.Queries.Users.ViewFollowers
 
 
 
-            var expiryTime = DateTime.Now.AddSeconds(30);
-            _cacheService.SetData<IEnumerable<User>>("viewfollowers", followedUsers, expiryTime);
-
+           
 
 
 

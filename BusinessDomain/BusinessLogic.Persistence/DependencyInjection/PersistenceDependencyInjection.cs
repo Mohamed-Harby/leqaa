@@ -19,14 +19,15 @@ public static class PersistenceDependencyInjection
                           .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll).EnableSensitiveDataLogging()
                           , ServiceLifetime.Scoped);
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-        services.AddScoped<IHubRepository, HubRepository>();
-        services.AddScoped<IChannelRepository, ChannelRepository>();
+        services.AddScoped<IHubRepository, CachedHubRepository>();
+     
+        services.AddScoped<IChannelRepository, CachedChannelRepository>();
         services.AddScoped<IRoomRepository, RoomRepository>();
 
         services.AddScoped<IHubAnnouncementRepository, HubAnnouncementRepository>();
         services.AddScoped<IChannelAnnouncementRepository, ChannelAnnouncementRepository>();
-        services.AddScoped<IPostRepository, PostRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IPostRepository, CachedPostRepository>();
+        services.AddScoped<IUserRepository, CachedUserRepository>();
         services.AddScoped<IPlanRepository, PlanRepository>();
         services.AddScoped<IUserHubRepository, UserHubRepository>();
         services.AddScoped<IUserChannelRepository, UserChannelRepository>();

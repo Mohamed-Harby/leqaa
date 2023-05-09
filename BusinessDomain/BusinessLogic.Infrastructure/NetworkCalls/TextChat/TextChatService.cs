@@ -129,7 +129,7 @@ public class TextChatService : ITextChatService
         var response = await _apiHelper.SendAsync<ChatResponseModel>(requestModel);
         return response;
     }
-    public async Task<SendMessageResponseModel> GetMessagesFromChat(Guid chatId)
+    public async Task<List<SendMessageResponseModel>> GetMessagesFromChat(Guid chatId)
     {
         var requestModel = new APIRequestModel
         {
@@ -137,7 +137,7 @@ public class TextChatService : ITextChatService
             HttpMethod = HttpMethod.Get,
             Url = $"api/message/{chatId}"
         };
-        var response = await _apiHelper.SendAsync<SendMessageResponseModel>(requestModel);
+        var response = await _apiHelper.SendAsync<List<SendMessageResponseModel>>(requestModel);
         return response;
     }
 }

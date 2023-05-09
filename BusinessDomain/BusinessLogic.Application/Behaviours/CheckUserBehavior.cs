@@ -5,13 +5,13 @@ using ErrorOr;
 using MediatR;
 
 namespace BusinessLogic.Application.Behaviours;
-public class CheckUserBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public class CheckUserBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IUserNameInRequest<TResponse>
     where TResponse : IErrorOr
 {
     private readonly IUserRepository _userRepository;
 
-    public CheckUserBehaviour(IUserRepository userRepository)
+    public CheckUserBehavior(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }

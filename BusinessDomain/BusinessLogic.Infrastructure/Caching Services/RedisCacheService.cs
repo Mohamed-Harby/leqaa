@@ -1,25 +1,24 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using BusinessLogic.Application.Interfaces;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
-using BusinessLogic.Infrastructure.Caching_Services;
 using StackExchange.Redis;
-using BusinessLogic.Application.Interfaces;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Graph;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic.Infrastructure.Caching_Services
 {
-    public class CacheService : ICacheService
+    public class RedisCacheService : ICacheService
     {
-        /*  private readonly IDatabase _cache;*/
-       
+      /*  private readonly IDatabase _cache;*/
         private readonly IDistributedCache _distributedCache;
 
-        public CacheService(IDistributedCache distributedCache)
+        public RedisCacheService(IDistributedCache distributedCache)
         {
-            /*   var redis = ConnectionMultiplexer.Connect("localhost:6379");
-               _cache = redis.GetDatabase();*/
+         /*   var redis = ConnectionMultiplexer.Connect("localhost:6379");
+            _cache = redis.GetDatabase();*/
             _distributedCache = distributedCache;
         }
 
@@ -47,7 +46,7 @@ namespace BusinessLogic.Infrastructure.Caching_Services
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(data, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiryTime });
+            await _distributedCache.SetStringAsync(key, JsonConvert.SerializeObject(data, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiryTime });
 
             return data;
         }

@@ -1,4 +1,4 @@
-using BusinessLogic.Domain.Plan;
+using BusinessLogic.Domain;
 using CommonGenericClasses;
 
 namespace BusinessLogic.Application.Interfaces;

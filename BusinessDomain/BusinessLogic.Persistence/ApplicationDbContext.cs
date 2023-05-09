@@ -1,11 +1,11 @@
+using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.Plan;
 using BusinessLogic.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace BusinessLogic.Persistence;
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public DbSet<User>? Users { get; set; }
     public DbSet<Hub>? Hubs { get; set; }
