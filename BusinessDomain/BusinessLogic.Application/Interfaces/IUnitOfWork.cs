@@ -1,5 +1,6 @@
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 
 namespace BusinessLogic.Application.Interfaces
 {

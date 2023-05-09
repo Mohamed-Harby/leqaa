@@ -1,3 +1,5 @@
+using BusinessLogic.Domain.Common;
+
 namespace BusinessLogic.Domain;
 public class Post : BaseEntity
 {

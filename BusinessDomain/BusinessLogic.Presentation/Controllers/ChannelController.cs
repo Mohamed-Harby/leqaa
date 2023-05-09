@@ -8,7 +8,6 @@ using BusinessLogic.Application.Queries.channels.ViewChannels;
 using BusinessLogic.Application.Queries.Channels.ViewChannel;
 using BusinessLogic.Application.Queries.Channels.ViewRecentActivities;
 using BusinessLogic.Application.Queries.Channels.GetChannelMembers;
-
 using BusinessLogic.Infrastructure.Authorization;
 using BusinessLogic.Infrastructure.Authorization.Enums;
 using ErrorOr;
@@ -16,6 +15,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Application.Models.Users;
+using BusinessLogic.Application.Queries.Channels.FetchChannelMessages;
 
 namespace BusinessLogic.Presentation.Controllers;
 [ApiController]
@@ -28,7 +28,7 @@ public class ChannelController : BaseController
         _sender = sender;
     }
     [HttpPost]
-    /*    [HasPermission(Permission.CanCreateChannel)]*/
+    // [HasPermission(Permission.CanCreateChannel)]
     public async Task<IActionResult> CreateChannel(ChannelWriteModel channelWriteModel)
     {
         var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -110,7 +110,17 @@ public class ChannelController : BaseController
     public async Task<IActionResult> GetChannelMembers([FromQuery] Guid ChannelId)
     {
         var GetChannelMembersQuery = new GetChannelMembersQuery(ChannelId);
-     var result=await _sender.Send(GetChannelMembersQuery);
+        var result = await _sender.Send(GetChannelMembersQuery);
+        return result.Match(
+             channel => Ok(channel),
+             errors => Problem(errors)
+         );
+    }
+    [HttpGet]
+    public async Task<IActionResult> FetchChannelMessages([FromQuery] Guid ChannelId)
+    {
+        var FetchChannelMessagesCommand = new FetchChannelMessagesQuery(ChannelId);
+        var result = await _sender.Send(FetchChannelMessagesCommand);
         return result.Match(
              channel => Ok(channel),
              errors => Problem(errors)

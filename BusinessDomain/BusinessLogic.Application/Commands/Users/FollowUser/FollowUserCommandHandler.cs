@@ -1,7 +1,7 @@
 using BusinessLogic.Application.CommandInterfaces;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Users;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using Mapster;
 
@@ -42,10 +42,11 @@ public class FollowUserCommandHandler : IHandler<FollowUserCommand, ErrorOr<User
             {
                 return DomainErrors.User.InvalidFollowedUser;
             }
+            followedUser.IsFollowed = false;
             return followedUser.Adapt<UserReadModel>();
         }
-
         follower.FollowedUsers.Add(followedUser);
+        followedUser.IsFollowed = true;
 
         if (await _userRepository.SaveAsync(cancellationToken) == 0)
         {

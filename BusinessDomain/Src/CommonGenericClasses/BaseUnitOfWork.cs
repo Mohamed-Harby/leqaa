@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 using ErrorOr;
 
 namespace CommonGenericClasses

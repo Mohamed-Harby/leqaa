@@ -1,10 +1,11 @@
+using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.Plan;
+using BusinessLogic.Persistence.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace BusinessLogic.Persistence;
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     public DbSet<User>? Users { get; set; }
     public DbSet<Hub>? Hubs { get; set; }
@@ -15,16 +16,17 @@ public class ApplicationDbContext : DbContext
     public DbSet<ChannelAnnouncement>? ChannelAnnouncements { get; set; }
     public DbSet<Plan>? Plans { get; set; }
     private readonly IConfiguration? configuration;
-    public ApplicationDbContext()
-    {
+    private readonly PublishDomainEventsInterceptor _interceptor;
 
-    }
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration configuration, PublishDomainEventsInterceptor interceptor) : base(options)
     {
         this.configuration = configuration;
+        _interceptor = interceptor;
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.AddInterceptors(_interceptor);
+
         var connectionString = configuration.GetConnectionString("Default");
         if (!optionsBuilder.IsConfigured)
         {

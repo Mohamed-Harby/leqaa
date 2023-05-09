@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Domain.SharedEnums;
+﻿using BusinessLogic.Domain.Common;
+using BusinessLogic.Domain.SharedEnums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

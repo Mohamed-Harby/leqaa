@@ -10,6 +10,7 @@ services:
       dockerfile: BusinessDomain/BusinessLogic.Entry/Dockerfile
     environment:
       - ConnectionStrings__Default=Server=businessdomaindb;Port=3307;Database=BusinessLogicDb;Uid=root;Pwd=2510203121;
+      - SEQ_URL=http://seq:5341
     ports:
       - 5001:5001
     volumes:
@@ -21,14 +22,6 @@ services:
       timeout: 1s
       interval: 1s
       retries: 20
-
-  businessdomainunittests:
-    image: unittests:v1.0
-    build:
-      context: .
-      dockerfile: BusinessDomain/BusinessLogic.Tests/UnitTests/Dockerfile
-    volumes:
-      - ./BusinessDomain/BusinessLogic.Tests/UnitTests:/src/BusinessDomain/BusinessLogic.Tests/UnitTests
 
   businessdomaindb:
     image: mysql/mysql-server:latest
@@ -44,6 +37,13 @@ services:
     ports:
       - 3307:3307
 
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
+      
   authentication:
     image: authentication-dev
     build:

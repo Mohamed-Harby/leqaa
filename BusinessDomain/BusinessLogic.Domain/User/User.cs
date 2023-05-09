@@ -1,5 +1,6 @@
-using BusinessLogic.Domain.Plan;
 using BusinessLogic.Domain.Enums;
+using BusinessLogic.Domain.Common;
+
 namespace BusinessLogic.Domain;
 public class User : BaseEntity
 {
@@ -18,7 +19,7 @@ public class User : BaseEntity
         PinnedHubs = new HashSet<Hub>();
 
 
-        Plans = new List<Plan.Plan>();
+        Plans = new List<Plan>();
     }
     public User(string name, string email, string username, Gender gender)
     {
@@ -38,7 +39,7 @@ public class User : BaseEntity
 
         /* UserChannelAnnoucement = new HashSet<UserChannelAnnoucement>();*/
 
-        Plans = new List<Plan.Plan>();
+        Plans = new List<Plan>();
 
         Name = name;
         Email = email;
@@ -61,7 +62,7 @@ public class User : BaseEntity
     public virtual ICollection<Channel> PinnedChannels { get; set; }
     public virtual ICollection<Post> PinnedPosts { get; set; }
     public virtual ICollection<Hub> PinnedHubs { get; set; }
-    public virtual ICollection<Plan.Plan> Plans { get; set; }
+    public virtual ICollection<Plan> Plans { get; set; }
     public virtual ICollection<User> Followers { get; set; }//people who follow this user
     public virtual ICollection<User> FollowedUsers { get; set; }//people who this user follows
 }

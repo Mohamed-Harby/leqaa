@@ -2,7 +2,7 @@
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Domain;
 using ErrorOr;

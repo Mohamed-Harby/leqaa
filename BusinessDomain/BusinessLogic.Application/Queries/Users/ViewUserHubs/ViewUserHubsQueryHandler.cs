@@ -6,7 +6,7 @@ using BusinessLogic.Application.Models.Hubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Queries.Users.ViewUserHubs;
 using BusinessLogic.Domain;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using FluentValidation;
 using Mapster;
@@ -21,7 +21,7 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 {
     public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<List<HubReadModel>>>
     {
-        private readonly ICacheService _cacheService;
+        private readonly ICacheService _cacheService; 
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;

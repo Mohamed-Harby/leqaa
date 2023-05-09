@@ -8,6 +8,7 @@ using BusinessLogic.Application.Queries.Announcements.ViewChannelAnnoucement;
 using BusinessLogic.Application.Queries.Announcements.ViewHubAnnouncements;
 using ErrorOr;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

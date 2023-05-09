@@ -3,29 +3,32 @@ using BusinessLogic.Application.DependencyInjection;
 using BusinessLogic.Entry.Models;
 using BusinessLogic.Entry.ServiceConfigurations;
 using BusinessLogic.Infrastructure.DependencyInjection;
-using BusinessLogic.Infrastructure.Models;
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue;
 using BusinessLogic.Persistence;
 using BusinessLogic.Persistence.DependencyInjection;
 using BusinessLogic.Presentation.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMQ.Client;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using BusinessLogic.Entry.JsonConfigurations;
 using System.Text;
+
 using Microsoft.Graph.ExternalConnectors;
 using Microsoft.Extensions.Options;
 
+using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue.Models;
+using Serilog;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.ConfigureLogging((ctx, lc) =>
+builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    lc.AddConsole();
+    //i want to set the value of the serverUrl from the appsettings.json file if it's not set before
+    if (context.Configuration["Serilog:WriteTo:1:Args:serverUrl"] == "${SEQ_URL}")
+        context.Configuration["Serilog:WriteTo:1:Args:serverUrl"] = "http://localhost:5341";
+    Console.WriteLine("====" + context.Configuration["Serilog:WriteTo:1:Args:serverUrl"] + "====");
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
 });
 
 // Add services to the container.
@@ -50,8 +53,8 @@ builder.Services.ConfigureOptions<AuthorizationOptionsSetup>();
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddPersistence(builder.Configuration)
-    .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(builder.Configuration)
+    .AddApplication();
 
 builder.Services.AddCoreAdmin();
 
@@ -81,8 +84,9 @@ builder.Services.AddAuthorization();
 
 try
 {
-    IModel channel = RabbitMQConfiguration.ConnectToRabbitMQ(builder.Configuration);
-    MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
+    RabbitMQConnector rabbitMQConnector = new();
+    IModel channel = await rabbitMQConnector.ConnectAsync(builder.Configuration);
+    await MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
 }
 catch (Exception ex)
 {
@@ -104,6 +108,7 @@ app.UseSwaggerUI();
 // }
 
 // app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();

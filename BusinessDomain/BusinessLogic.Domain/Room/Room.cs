@@ -1,4 +1,4 @@
-using static BusinessLogic.Domain.DomainErrors.DomainErrors;
+using BusinessLogic.Domain.Common;
 
 namespace BusinessLogic.Domain;
 public class Room : BaseEntity

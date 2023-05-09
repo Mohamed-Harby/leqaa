@@ -1,7 +1,7 @@
 using BusinessLogic.Domain;
 using BusinessLogic.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using ErrorOr;
 using BusinessLogic.Application.Interfaces;
 using MediatR;

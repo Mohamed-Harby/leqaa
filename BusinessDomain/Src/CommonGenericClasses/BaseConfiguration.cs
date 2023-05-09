@@ -1,5 +1,6 @@
 using System;
 using BusinessLogic.Domain;
+using BusinessLogic.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,5 +12,6 @@ public class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> wher
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Id).ValueGeneratedOnAdd();
         builder.Property(e => e.CreationDate).HasDefaultValue(DateTime.UtcNow);
+        builder.Ignore(e => e.DomainEvents);
     }
 }

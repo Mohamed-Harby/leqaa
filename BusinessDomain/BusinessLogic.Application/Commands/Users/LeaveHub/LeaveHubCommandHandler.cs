@@ -4,7 +4,7 @@ using BusinessLogic.Application.Commands.Users.JoinHub;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
 using ErrorOr;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;

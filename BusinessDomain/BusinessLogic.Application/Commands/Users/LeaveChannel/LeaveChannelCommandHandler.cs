@@ -3,7 +3,7 @@ using BusinessLogic.Application.Commands.Users.JoinHub;
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Hubs;
 using ErrorOr;
-using BusinessLogic.Domain.DomainErrors;
+using BusinessLogic.Domain.Common.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,7 @@ using BusinessLogic.Domain.SharedEnums;
 using BusinessLogic.Domain;
 using BusinessLogic.Domain.DomainSucceeded.User;
 using BusinessLogic.Application.Models.Channels;
+using BusinessLogic.Domain.Common.Events;
 
 namespace BusinessLogic.Application.Commands.Users.LeaveChannel
 {
@@ -56,16 +57,16 @@ namespace BusinessLogic.Application.Commands.Users.LeaveChannel
             {
                 return DomainErrors.UserChannel.NotJoined;
             }
-     
+
             channel.JoinedUsers.Remove(user);
+            channel.AddDomainEvent(new UserLeftChannelEvent(user.Id, channel.Id));
 
-
-            if ((await _userChannelRepository.GetAsync(uc => uc.ChannelId == channel.Id, null, "")) 
-                .Count()==1) {
+            if ((await _userChannelRepository.GetAsync(uc => uc.ChannelId == channel.Id, null, ""))
+                .Count() == 1)
+            {
                 _channelRepository.Remove(channel);
                 await _channelRepository.SaveAsync(cancellationToken);
                 return DomainSucceded.User.channelLeftAndDeleted;
-
             }
             await _channelRepository.SaveAsync(cancellationToken);
             return DomainSucceded.User.ChannelLeft;

@@ -1,4 +1,6 @@
-namespace BusinessLogic.Domain.Plan;
+using BusinessLogic.Domain.Common;
+
+namespace BusinessLogic.Domain;
 public class Plan : BaseEntity
 {
     public Plan()
