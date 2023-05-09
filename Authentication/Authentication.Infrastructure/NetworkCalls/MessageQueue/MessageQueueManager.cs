@@ -30,18 +30,18 @@ public class MessageQueueManager : IMessageQueueManager
         channel.ExchangeDeclare(
             exchange: RabbitMQConstants.AuthenticationExchange,
             type: ExchangeType.Fanout,
-            durable: false,
+            durable: true,
             autoDelete: false
         );
         channel.QueueDeclare(
             queue: RabbitMQConstants.UserToBusiness,
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false
         );
         channel.QueueDeclare(
             queue: RabbitMQConstants.UserToChat,
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false
         );
