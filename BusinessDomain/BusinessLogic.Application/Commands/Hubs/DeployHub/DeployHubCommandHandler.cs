@@ -15,19 +15,18 @@ public class DeployHubCommandHandler : IHandler<DeployHubCommand, ErrorOr<HubRea
     private readonly IUserRepository _userRepository;
     private readonly IFileManager _fileManager;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ICacheService _cacheService;
+
     public DeployHubCommandHandler(
         IHubRepository hubRepository,
         IUserRepository userRepository,
         IFileManager fileManager,
-        IUnitOfWork unitOfWork,
-        ICacheService cacheService)
+        IUnitOfWork unitOfWork)
     {
         _hubRepository = hubRepository;
         _userRepository = userRepository;
         _fileManager = fileManager;
         _unitOfWork = unitOfWork;
-        _cacheService = cacheService;
+      
     }
 
     public async Task<ErrorOr<HubReadModel>> Handle(DeployHubCommand request, CancellationToken cancellationToken)

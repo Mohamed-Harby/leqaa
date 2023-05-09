@@ -103,7 +103,7 @@ namespace CommonGenericClasses
             return Task.FromResult(entity);
         }
 
-        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string include = "")
+        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null!, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string include = "")
         {
             var cacheKey = $"cache_{typeof(TEntity).Name}_{predicate}_{orderBy}_{include}";
             var cacheData = await _distributedCache.GetStringAsync(cacheKey);
@@ -111,7 +111,7 @@ namespace CommonGenericClasses
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
-                return entities.AsQueryable();
+                return entities!.AsQueryable();
             }
 
             IQueryable<TEntity> query = _table;
@@ -138,7 +138,7 @@ namespace CommonGenericClasses
             return entitiesList.AsQueryable();
         }
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null!)
         {
             IQueryable<TEntity> query = _table;
             if (predicate != null)
@@ -184,7 +184,7 @@ namespace CommonGenericClasses
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
-                return entities.AsQueryable();
+                return entities!.AsQueryable();
             }
 
             IQueryable<TEntity> query = _table;
@@ -201,7 +201,7 @@ namespace CommonGenericClasses
             return entitiesList.AsQueryable();
         }
 
-        public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null)
+        public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null!)
         {
             throw new NotImplementedException();
         }

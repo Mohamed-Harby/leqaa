@@ -10,28 +10,21 @@ namespace BusinessLogic.Application.Queries.Channels.VewChannels;
 public class GetAllChannelsQueryHandler : IHandler<ViewChannelsQuery, List<ChannelReadModel>>
 {
     private readonly IChannelRepository _channelRepository;
-    private readonly ICacheService _cacheService;
 
-    public GetAllChannelsQueryHandler(IChannelRepository channelRepository, ICacheService cacheService)
+
+    public GetAllChannelsQueryHandler(IChannelRepository channelRepository)
     {
         _channelRepository = channelRepository;
-        _cacheService = cacheService;
     }
 
     public async Task<List<ChannelReadModel>> Handle(ViewChannelsQuery request, CancellationToken cancellationToken)
     {
 
-        var CachedData = await _cacheService.GetAsync<IEnumerable<Channel>>("channels");
 
-        if (CachedData != null && CachedData.Count() > 0)
-        {
-            return CachedData.Adapt<List<ChannelReadModel>>();
-        }
 
         var channels = await _channelRepository.GetAllAsync();
 
-        var expiryTime = DateTime.Now.AddSeconds(30);
-        _cacheService.SetData<IEnumerable<Channel>>("channels", channels, expiryTime);
+     
 
 
 

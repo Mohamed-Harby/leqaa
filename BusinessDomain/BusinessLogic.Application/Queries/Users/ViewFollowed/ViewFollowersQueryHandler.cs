@@ -18,12 +18,11 @@ namespace BusinessLogic.Application.Queries.Users.ViewFollowers
 
         private readonly IUserRepository _userRepository;
         private readonly IUserUserRepository _userUserRepository;
-        private readonly ICacheService _cacheService;
-        public ViewFollowedQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository, ICacheService cacheService)
+        public ViewFollowedQueryHandler(IUserRepository userRepository, IUserUserRepository userUserRepository)
         {
             _userRepository = userRepository;
             _userUserRepository = userUserRepository;
-            _cacheService = cacheService;
+     
         }
         public async Task<ErrorOr<List<UserReadModel>>> Handle(ViewFollowedQuery request, CancellationToken cancellationToken)
         {

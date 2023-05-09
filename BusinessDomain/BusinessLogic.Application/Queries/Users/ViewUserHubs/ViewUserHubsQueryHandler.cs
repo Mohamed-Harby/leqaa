@@ -21,20 +21,20 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 {
     public class ViewUserPostsQueryHandler : IHandler<ViewUserHubsQuery, ErrorOr<List<HubReadModel>>>
     {
-        private readonly ICacheService _cacheService; 
+       
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserHubRepository _userChannelRepository;
 
         public ViewUserPostsQueryHandler(
-            ICacheService cacheService,
+        
             IChannelRepository channelRepository,
             IHubRepository hubRepository,
             IUserRepository userRepository,
             IUserHubRepository userChannelRepository)
         {
-            _cacheService = cacheService;
+           
             _channelRepository = channelRepository;
             _hubRepository = hubRepository;
             _userRepository = userRepository;
@@ -46,35 +46,25 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 
 
 
-            /*
-                        var CachedData = await _cacheService.GetAsync<IEnumerable<Hub>>("userHubs");
-
-                        if (CachedData != null && CachedData.Count() > 0)
-                        {
-                            return CachedData.Adapt<List<HubReadModel>>();
-                        }
-            */
 
 
 
 
-            var items = await _cacheService.handlCaching("items", async () => {
+         
 
 
-                return (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs")).FirstOrDefault()!.Hubs.ToList();
-            });
+              var user=(await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs")).FirstOrDefault()!;
+           
 
    
           
 
 
-        /*    var expiryTime = DateTime.Now.AddSeconds(30);
-            _cacheService.SetData<IEnumerable<Hub>>("userHubs", hubs, expiryTime);
-*/
+ 
             
 
 
-            return items
+            return user.Hubs.ToList()
             .Adapt<List<HubReadModel>>();
         }
 
