@@ -46,25 +46,35 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserHubs
 
 
 
+            /*
+                        var CachedData = await _cacheService.GetAsync<IEnumerable<Hub>>("userHubs");
 
-            var CachedData = await _cacheService.GetAsync<IEnumerable<Hub>>("userHubs");
-
-            if (CachedData != null && CachedData.Count() > 0)
-            {
-                return CachedData.Adapt<List<HubReadModel>>();
-            }
-
-             var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs")).FirstOrDefault()!;
-            var hubs = user.Hubs.ToList();
+                        if (CachedData != null && CachedData.Count() > 0)
+                        {
+                            return CachedData.Adapt<List<HubReadModel>>();
+                        }
+            */
 
 
-            var expiryTime = DateTime.Now.AddSeconds(30);
+
+
+            var items = await _cacheService.handlCaching("items", async () => {
+
+
+                return (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "Hubs")).FirstOrDefault()!.Hubs.ToList();
+            });
+
+   
+          
+
+
+        /*    var expiryTime = DateTime.Now.AddSeconds(30);
             _cacheService.SetData<IEnumerable<Hub>>("userHubs", hubs, expiryTime);
+*/
+            
 
 
-
-
-            return hubs
+            return items
             .Adapt<List<HubReadModel>>();
         }
 

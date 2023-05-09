@@ -10,7 +10,7 @@ namespace BusinessLogic.Application.Interfaces
     {
         Task<T> GetAsync<T>(string key);
          bool SetData<T>(string key, T data, DateTimeOffset expiration);
-    
+        Task<T> handlCaching<T>(string key, Func<T>? query);
        object RemoveData(string key);
     }
 }

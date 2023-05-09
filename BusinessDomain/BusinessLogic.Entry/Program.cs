@@ -18,6 +18,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using BusinessLogic.Entry.JsonConfigurations;
 using System.Text;
+using Microsoft.Graph.ExternalConnectors;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +35,15 @@ builder.Services.AddControllers().AddNewtonsoftJson(options => options.Serialize
 .AddControllersAsServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
 
+
+ string connection = builder.Configuration.GetConnectionString("Redis");
+    options.Configuration = connection;
+
+});
+builder.Services.AddDistributedMemoryCache();
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
 builder.Services.ConfigureOptions<AuthorizationOptionsSetup>();
 
