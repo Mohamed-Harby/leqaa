@@ -1,0 +1,174 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:  
+  authentication:
+    build:
+      context: .
+      dockerfile: Authentication/Authentication.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=server=authenticationdb;Port=3308;database=LeqaaAuthentication;Uid=root;Pwd=2510203121;
+      - Uri=http://localhost:5002
+      - RabbitMQ__Host=rabbitmq
+      - textChatUri=http://textchat:6969
+    ports:
+      - 5002:5002
+      - 5003:5003
+    depends_on:
+      - authenticationdb
+      - rabbitmq
+    volumes:
+      - ./Authentication:/src/Authentication
+    healthcheck:
+      test: ["CMD","curl","-f","http://authenticationdb:3308"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+
+
+  authenticationdb:
+    image: mysql/mysql-server:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=LeqaaAuthentication
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3308
+    volumes:
+      - authenticationdbvolume:/var/lib/mysql
+    ports:
+      - 3308:3308
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    
+  businessdomain:
+    image: bussinesslogic-dev
+    build:
+      context: .
+      dockerfile: BusinessDomain/BusinessLogic.Entry/Dockerfile
+    environment:
+      - ConnectionStrings__Default=Server=businessdomaindb;Port=3307;Database=BusinessLogicDb;Uid=root;Pwd=2510203121;
+      - ConnectionStrings__Redis=redis:6379
+      - RabbitMQConnection__Host=rabbitmq
+      - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
+    ports:
+      - 5004:5004
+    volumes:
+      - ./BusinessDomain:/src/BusinessDomain
+    depends_on:
+      - businessdomaindb
+      - rabbitmq
+      - seq
+      - redis
+      - textchat
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping;curl --fail http://businessdomaindb:3307
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+
+  businessdomaindb:
+    image: mysql/mysql-server:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=BusinessLogicDb
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3307
+
+    volumes:
+      - businessdbvolume2:/var/lib/mysql2
+    ports:
+      - 3307:3307
+
+  paymentgatewaymain:
+    image: paymentgatewaymain
+    build:
+      context: .
+      dockerfile: Payment-GateWay/Payment-GateWay.Main/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=paymentgatewaydb;Port=3309;database=payment;Uid=root;pwd=2510203121;
+    ports:
+      - 5006:5006
+      - 5007:5007
+    healthcheck:
+      test: ["CMD","curl","-f","http://paymentgatewaydb:3309"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      - paymentgatewaydb
+    volumes:
+      - ./Payment-GateWay:/src/Payment-GateWay
+    restart: always
+
+  paymentgatewaydb:
+    image: mysql/mysql-server:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=2510203121
+      - MYSQL_DATABASE=payment
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=2510203121
+      - MYSQL_TCP_PORT=3309
+    ports:
+      - 3309:3309
+    volumes:
+      - paymentgatewaydbvolume:/var/lib/mysql3
+    restart: always
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+  seq:
+    image: datalust/seq:latest
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
+  textchat:
+    image: textchat
+    build:
+      context: .
+      dockerfile: chat-service/backend/Dockerfile
+    environment:
+      - PORT=6969
+      - MONGO_URI=mongodb+srv://amrsenblo:AMRsenblo153920@cluster0.uxgntum.mongodb.net/?retryWrites=true&w=majority
+      - JWT_SECRET=913a7fd3ff6cc2ddfa994bee7e85a2cbb9c5e921a0c399547af673b33ac265a0
+      - RABBITMQ=amqp://guest:guest@rabbitmq:5672
+    ports:
+      - 6969:6969
+    depends_on:
+      - rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: always
+volumes:
+  businessdbvolume2:
+  authenticationdbvolume:
+  paymentgatewaydbvolume:
+

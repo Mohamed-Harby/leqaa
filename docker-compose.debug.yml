@@ -1,0 +1,17 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  paymentgatewaymain:
+    image: paymentgatewaymain
+    build:
+      context: .
+      dockerfile: Payment-GateWay/Payment-GateWay.Main/Dockerfile
+    ports:
+      - 5006:5006
+      - 5007:5007
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
