@@ -16,7 +16,7 @@ using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
 
 namespace BusinessLogic.Application.Commands.Pin.ViewPinned.ViewPinnedPosts;
 
-public class ViewPinnedPostsCommandHandler : IHandler<ViewPinnedPostsCommand, ErrorOr<List<PostReadModel>>>
+public class ViewPinnedPostsCommandHandler : IHandler<ViewPinnedPostsCommand, ErrorOr<List<PostRecentReadModel>>>
 {
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
@@ -41,16 +41,16 @@ public class ViewPinnedPostsCommandHandler : IHandler<ViewPinnedPostsCommand, Er
 
 
     }
-    public async Task<ErrorOr<List<PostReadModel>>> Handle(ViewPinnedPostsCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<List<PostRecentReadModel>>> Handle(ViewPinnedPostsCommand request, CancellationToken cancellationToken)
     {
         User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
         if (user == null)
         {
             return DomainErrors.User.NotFound;
         }
-        var PinnedPosts= user.PinnedPosts.ToList();
+        var PinnedPosts = user.PinnedPosts.ToList();
 
-        return PinnedPosts.Adapt<List<PostReadModel>>();
+        return PinnedPosts.Adapt<List<PostRecentReadModel>>();
 
     }
 

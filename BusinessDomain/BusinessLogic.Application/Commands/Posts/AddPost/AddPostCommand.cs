@@ -12,4 +12,4 @@ public record AddPostCommand(
     byte[]? Image,
     string Content,
     string UserName
-) : IUserNameInCommand<ErrorOr<PostWriteModel>>;
+) : IUserNameInCommand<ErrorOr<PostReadModel>>;

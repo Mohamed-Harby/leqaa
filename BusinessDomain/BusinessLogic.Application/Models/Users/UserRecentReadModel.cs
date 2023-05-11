@@ -19,7 +19,7 @@ public record UserRecentReadModel(
     List<ChannelReadModel> Channels,
     List<ChannelAnnouncementReadModel> ChannelAnnouncements,
     List<HubAnnouncementReadModel> HubAnnouncements,
-    List<PostReadModel> Posts,
+    List<PostRecentReadModel> Posts,
     List<UserReadModel> Followers,
     List<UserReadModel> FollowedUsers,
     DateTime CreationDate

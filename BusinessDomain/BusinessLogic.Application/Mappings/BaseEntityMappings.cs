@@ -19,7 +19,7 @@ public class BaseEntityMapping : IRegister
         .Include<Channel, ChannelReadModel>()
         .Include<ChannelAnnouncement, ChannelAnnouncementReadModel>()
         .Include<HubAnnouncement, HubAnnouncementReadModel>()
-        .Include<Post, PostReadModel>()
+        .Include<Post, PostRecentReadModel>()
         .Include<User, UserReadModel>();
     }
 }

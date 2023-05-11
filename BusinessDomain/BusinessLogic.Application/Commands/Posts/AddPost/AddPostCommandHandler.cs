@@ -12,7 +12,7 @@ using MediatR;
 using System.Runtime.CompilerServices;
 
 namespace BusinessLogic.Application.Commands.Posts.AddaPost;
-public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteModel>>
+public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostReadModel>>
 {
     private readonly IValidator<AddPostCommand> _validator;
 
@@ -34,7 +34,7 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteM
 
     }
 
-    public async Task<ErrorOr<PostWriteModel>> Handle(AddPostCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostReadModel>> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
 
@@ -42,11 +42,11 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostWriteM
 
         creatorUser!.Posts.Add(post);
 
-        var postmodel = post.Adapt<PostWriteModel>();
         if (await _PostRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
+        var postmodel = post.Adapt<PostReadModel>();
         return postmodel;
     }
 

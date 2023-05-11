@@ -107,10 +107,16 @@ namespace CommonGenericClasses
         {
             var cacheKey = $"cache_{typeof(TEntity).Name}_{predicate}_{orderBy}_{include}";
             var cacheData = await _distributedCache.GetStringAsync(cacheKey);
-
+            var existingTrackedEntity = _db.Set<TEntity>().Local
+                    .FirstOrDefault(predicate.Compile());
+            if (existingTrackedEntity != null)
+            {
+                _db.Entry(existingTrackedEntity).State = EntityState.Detached;
+            }
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
+                _db.Attach(entities![0]);
                 return entities!.AsQueryable();
             }
 

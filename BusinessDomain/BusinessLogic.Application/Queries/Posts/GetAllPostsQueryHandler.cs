@@ -7,29 +7,29 @@ using BusinessLogic.Domain;
 using Mapster;
 
 namespace BusinessLogic.Application.Queries.Posts.GetAllPosts;
-public class GetAllPostsQueryHandler : IHandler<GetAllPostsQuery, List<PostReadModel>>
+public class GetAllPostsQueryHandler : IHandler<GetAllPostsQuery, List<PostRecentReadModel>>
 {
     private readonly IPostRepository _PostsRepository;
- 
+
 
     public GetAllPostsQueryHandler(IPostRepository PostsRepository)
     {
         _PostsRepository = PostsRepository;
-       
+
     }
 
-    public async Task<List<PostReadModel>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
+    public async Task<List<PostRecentReadModel>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
     {
-       
+
         var posts = await _PostsRepository.GetAllAsync();
 
-      
+
         var skip = (request.PageNumber - 1) * request.PageSize;
         return (await _PostsRepository.GetAllAsync())
             .Skip(skip)
             .Take(request.PageSize)
              .ToList()
-            .Adapt<List<PostReadModel>>();
+            .Adapt<List<PostRecentReadModel>>();
     }
 
 

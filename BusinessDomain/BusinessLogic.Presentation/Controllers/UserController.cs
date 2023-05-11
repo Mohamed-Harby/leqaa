@@ -223,7 +223,7 @@ public class UserController : BaseController
         return Ok(result);
 
     }
-    
+
 
 
     [HttpDelete]
@@ -256,9 +256,10 @@ public class UserController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> AddUserByUserToHub(AddUserByUserCommand addUserByUserCommand)
+    public async Task<IActionResult> AddUserByUserToHub(AddUserToHubModel addUserToHubModel)
     {
-
+        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+        var addUserByUserCommand = new AddUserByUserCommand(username, addUserToHubModel.AddedUser, addUserToHubModel.HubId);
         var result = await _sender.Send(addUserByUserCommand);
         return result.Match(
             users => Ok(users),

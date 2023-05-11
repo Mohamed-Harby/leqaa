@@ -18,14 +18,12 @@ services:
     depends_on:
       - authenticationdb
       - rabbitmq
-    volumes:
-      - ./Authentication:/src/Authentication
     healthcheck:
       test: ["CMD","curl","-f","http://authenticationdb:3308"]
       interval: 1m30s
-      timeout: 10s
+      timeout: 20s
       retries: 3
-      start_period: 40s
+      start_period: 1m
     restart: always
 
 
@@ -68,9 +66,7 @@ services:
       - RabbitMQConnection__Host=rabbitmq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
     ports:
-      - 5004:5004
-    volumes:
-      - ./BusinessDomain:/src/BusinessDomain
+      - 5004:5004  
     depends_on:
       - businessdomaindb
       - rabbitmq
@@ -80,9 +76,9 @@ services:
     healthcheck:
       test: rabbitmq-diagnostics -q ping;curl --fail http://businessdomaindb:3307
       interval: 1m30s
-      timeout: 10s
+      timeout: 20s
       retries: 3
-      start_period: 40s
+      start_period: 2m
     restart: always
 
   businessdomaindb:
@@ -115,7 +111,7 @@ services:
       interval: 1m30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 1m
     depends_on:
       - paymentgatewaydb
     volumes:
@@ -163,9 +159,9 @@ services:
     healthcheck:
       test: rabbitmq-diagnostics -q ping
       interval: 1m30s
-      timeout: 10s
+      timeout: 20s
       retries: 3
-      start_period: 40s
+      start_period: 2m
     restart: always
 volumes:
   businessdbvolume2:

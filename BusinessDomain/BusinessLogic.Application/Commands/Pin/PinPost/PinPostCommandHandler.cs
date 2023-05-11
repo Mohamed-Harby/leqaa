@@ -14,7 +14,7 @@ using MediatR;
 using System.Runtime.CompilerServices;
 
 namespace BusinessLogic.Application.Commands.Pin.PinHubs;
-public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostReadModel>>
+public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostRecentReadModel>>
 {
     private readonly IPostRepository _PostRepository;
     private readonly IHubRepository _hubRepository;
@@ -39,10 +39,10 @@ public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostReadMo
 
 
     }
-    public async Task<ErrorOr<PostReadModel>> Handle(PinPostCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<PostRecentReadModel>> Handle(PinPostCommand request, CancellationToken cancellationToken)
     {
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Post?post = await _PostRepository.GetByIdAsync(request.PostId);
+        Post? post = await _PostRepository.GetByIdAsync(request.PostId);
 
         var PinningUser = await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedPosts")!;
         User? getuser = PinningUser.FirstOrDefault()!;
@@ -59,20 +59,20 @@ public class PinPostCommandHandler : IHandler<PinPostCommand, ErrorOr<PostReadMo
 
 
         creatorUser.PinnedPosts.Add(post);
-            await _unitOfWork.PinPostAsync(post, creatorUser);
+        await _unitOfWork.PinPostAsync(post, creatorUser);
 
-            if (await _unitOfWork.SaveAsync() == 0)
-            {
-
-
-                return DomainErrors.Post.InvalidPost;
-            }
-            return post.Adapt<PostReadModel>();
+        if (await _unitOfWork.SaveAsync() == 0)
+        {
 
 
+            return DomainErrors.Post.InvalidPost;
         }
+        return post.Adapt<PostRecentReadModel>();
 
-     
+
     }
+
+
+}
 
 
