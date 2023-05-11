@@ -32,11 +32,11 @@ public class LoginQueryHandler : IHandler<LoginQuery>
             return authenticationResults;
         }
 
-        if (!user.EmailConfirmed)
-        {
-            authenticationResults.AddErrorMessages("you email is not confirmed please confirm it first");
-            return authenticationResults;
-        }
+        // if (!user.EmailConfirmed)
+        // {
+        //     authenticationResults.AddErrorMessages("you email is not confirmed please confirm it first");
+        // return authenticationResults;
+        // }
         var token = _tokenGenerator.Generate(user);
         authenticationResults.SetToken(token);
         authenticationResults.IsSuccess = true;
