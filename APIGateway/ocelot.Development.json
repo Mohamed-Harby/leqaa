@@ -1,117 +1,46 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/api/v1/Authentication/Register",
-      "UpstreamHttpMethod": [
-        "Post"
-      ],
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v1/Authentication/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": "5002"
         }
       ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/Register"
+      "UpstreamPathTemplate": "/api/v1/Authentication/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
+    //for any end point in business
     {
-      "UpstreamPathTemplate": "/api/v1/Authentication/Login",
-      "UpstreamHttpMethod": [
-        "Post"
-      ],
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": "5004"
         }
       ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/Login",
-      "RateLimitOptions": {
-        "ClientWhitelist": [
-          "http://127.0.0.1",
-          "127.0.0.1",
-          "localhost",
-          "http://localhost",
-          "http://localhost:5000",
-          "http://localhost:5001",
-          "http://localhost:5002",
-          "http://localhost:5003",
-          "http://localhost:5004"
-        ],
-        "EnableRateLimiting": true,
-        "Period": "5s",
-        "PeriodTimespan": 5,
-        "Limit": 1
-      }
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
+    //for any end point in payment
+
     {
-      "UpstreamPathTemplate": "/api/v1/Authentication/SendConfirmationEmail",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v1/checkout/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": "5196"
         }
       ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/SendConfirmationEmail"
-    },
-    {
-      "UpstreamPathTemplate": "/api/v1/Authentication/SendResetPasswordEmail",
-      "UpstreamHttpMethod": [
-        "Get"
-      ],
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5003
-        }
-      ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/SendResetPasswordEmail"
-    },
-    {
-      "UpstreamPathTemplate": "/api/v1/Authentication/ConfirmEmail",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5003
-        }
-      ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/ConfirmEmail"
-    },
-    {
-      "UpstreamPathTemplate": "/api/v1/Authentication/ResetPassword",
-      "UpstreamHttpMethod": [
-        "PUT"
-      ],
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5003
-        }
-      ],
-      "DownstreamPathTemplate": "/api/v1/Authentication/ResetPassword"
+      "UpstreamPathTemplate": "/api/v1/checkout/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5001",
-    "RateLimitOptions": {
-      "QuotaExceededMessage": "Request rate limit exceeded.",
-      "HttpStatusCode": 909,
-      "ClientWhitelist": [],
-      "EnableRateLimiting": true,
-      "Period": "5s",
-      "PeriodTimespan": 2,
-      "Limit": 1
-    }
+    "BaseUrl": "http://localhost:5001"
   }
 }
