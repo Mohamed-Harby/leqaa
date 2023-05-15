@@ -4,11 +4,10 @@ const amqp = require("amqplib");
 const Chat = require("../models/chatModel");
 const  decodedUUID  = require("./../middleware/authMiddleware");
 
-// console.log("😎", decodedUUID);
 async function consumeFromQueue(queueName, handleMessage) {
   try {
     // Connect to RabbitMQ server
-    const connection = await amqp.connect(process.env.RABBITMQ);
+    const connection = await amqp.connect("amqp://localhost:5672");
     const channel = await connection.createChannel();
 
     // Assert queue
@@ -35,8 +34,9 @@ const MyController = {
   async startConsumingMessages() {
     // Call consumeFromQueue with appropriate arguments
     consumeFromQueue("Authentication.UserToChat", (message) => {
-      console.log(`Received message: ${JSON.stringify(message)}`);
-      console.log(message);
+
+      // console.log(`Received message: ${JSON.stringify(message)}`);
+      // console.log(message);
       // Handle incoming message
       try {
         // let user = new User(message);
@@ -65,6 +65,8 @@ const MyController = {
     consumeFromQueue(
       "BusinessDomain.GroupCreated",
       async (message, req, res) => {
+        console.log("😎😎😎😎😎😎😎😎😎", global.decodedUUID);
+
         // Message handling logic
         console.log(`Received message: ${JSON.stringify(message)}`);
         console.log(message);
