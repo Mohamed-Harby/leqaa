@@ -9,6 +9,7 @@
   "author": "Amr Senblo",
   "license": "ISC",
   "dependencies": {
+    "@socket.io/admin-ui": "^0.5.1",
     "amqplib": "^0.10.3",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
@@ -21,6 +22,7 @@
     "node-uuid": "^1.4.8",
     "nodemon": "^2.0.20",
     "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
     "uuid": "^9.0.0"
   }
 }
