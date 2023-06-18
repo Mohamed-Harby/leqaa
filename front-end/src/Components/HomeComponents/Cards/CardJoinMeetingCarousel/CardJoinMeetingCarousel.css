@@ -1,28 +1,68 @@
 .cardJoinMeetingCarousel {
-  border: 1px solid #C9A7EB;
-  border-radius: 10px;
+  border-radius: 1rem;
   display: flex;
-  padding: 20px;
+  padding: 0.7rem 1rem;
   gap: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 3px 0 #C9A7EB;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.cardJoinMeetingCarousel:hover {
+  border-color: #C9A7EB;
 }
 .cardJoinMeetingCarousel .content {
   display: flex;
   flex-direction: column;
-  color: #C9A7EB;
-  font-size: 18px;
+  color: #525252;
+  gap: 0.2rem;
+}
+.cardJoinMeetingCarousel .content .meetingName {
+  font-size: 1.2rem;
+  font-family: Lato;
+  font-weight: 700;
+}
+.cardJoinMeetingCarousel .content .creator {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+}
+.cardJoinMeetingCarousel .content .creator .creatorName {
+  font-size: 0.9rem;
+  font-family: Lato;
+  font-weight: 800;
+  color: #7C4ABC;
+}
+.cardJoinMeetingCarousel .content .actionSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Lato;
+  font-weight: 800;
+  font-size: 1rem;
 }
 .cardJoinMeetingCarousel button {
-  width: 100px;
+  width: 80px;
   height: -moz-fit-content;
   height: fit-content;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 10px;
   background-color: #7C4ABC;
-  color: #C9A7EB;
+  color: #fff;
   font-size: 16px;
   cursor: pointer;
   border: none;
   align-self: flex-end;
+  transition: all 0.15s ease-in-out;
+}
+.cardJoinMeetingCarousel button:hover {
+  background-color: #905BD4;
 }
 @media screen and (max-width: 480px) {
   .cardJoinMeetingCarousel button {

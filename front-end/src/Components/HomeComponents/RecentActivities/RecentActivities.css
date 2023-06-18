@@ -2,5 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 70%;
+  max-width: 900px;
+}
+@media screen and (max-width: 800px) {
+  .recentactivities {
+    width: 90%;
+  }
 }/*# sourceMappingURL=RecentActivities.css.map */

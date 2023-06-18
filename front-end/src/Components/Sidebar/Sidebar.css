@@ -1,11 +1,12 @@
 .sidebar {
-  background-color: #fff;
+  background-color: #7C4ABC;
   position: sticky;
-  top: 50px;
-  height: calc(100vh - 50px);
-  flex: 1;
+  top: 0;
+  height: 100vh;
   transition: 0.3s ease-in-out;
-  border-right: 1px solid #929292;
+  border-right: 4px solid #905BD4;
+  padding-top: 1rem;
+  padding-right: 2rem;
 }
 .sidebar ul {
   display: flex;
@@ -46,6 +47,7 @@
   text-decoration: none;
   padding: 5px;
   color: #C9A7EB;
+  transition: all 0.3s ease-in-out;
 }
 .sidebar ul li a svg {
   font-size: 30px;
@@ -75,6 +77,7 @@
 .sidebarResponsive {
   flex: 0;
   transition: 0.3s ease-in-out;
+  padding-right: 0;
 }
 .sidebarResponsive .showBar {
   visibility: visible;

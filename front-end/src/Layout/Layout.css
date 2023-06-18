@@ -1,6 +1,10 @@
 .layoutContainer {
   display: flex;
-  margin-top: 1rem;
+}
+
+.layoutContent {
+  margin: 2rem 3rem 0;
+  flex: 1;
 }
 
 ::-webkit-scrollbar {

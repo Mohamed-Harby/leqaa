@@ -1,13 +1,16 @@
 @use "../../helper/style" as *;
 
 .sidebar {
-  background-color: $firstColor;
+  background-color: $fourthColor;
   position: sticky;
-  top: 50px;
-  height: calc(100vh - 50px);
-  flex: 1;
+  top: 0;
+  height: calc(100vh);
+  // flex: 1;
   transition: 0.3s ease-in-out;
-  border-right: 1px solid $thirdColor;
+  border-right: 4px solid $eighthColor;
+  padding-top: 1rem;
+  padding-right: 2rem;
+
   ul {
     display: flex;
     flex-direction: column;
@@ -43,6 +46,7 @@
         text-decoration: none;
         padding: 5px;
         color: $fifthColor;
+        transition: all 0.3s ease-in-out;
         svg {
           font-size: 30px;
         }
@@ -73,6 +77,7 @@
 .sidebarResponsive {
   flex: 0;
   transition: 0.3s ease-in-out;
+  padding-right: 0;
   .showBar {
     visibility: visible;
     transition: 0.3s ease-in-out;

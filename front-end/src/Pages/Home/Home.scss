@@ -8,13 +8,16 @@
   align-items: center;
   .btns {
     width: 95%;
-    margin: 10px auto;
+    margin: 10px auto 2rem;
     display: flex;
 
     button {
-      @include Btn(150px, fit-content, 10px, 10px, $thirdColor, $fifthColor, 16px);
+      @include Btn(150px, fit-content, 0, 10px, transparent, $tenthColor, 16px);
       &:first-child{
         margin-right: 10px ;
+      }
+      &:hover {
+        background-color: $ninthColor;
       }
       @media screen and (max-width: 480px) {
         width: 100%;

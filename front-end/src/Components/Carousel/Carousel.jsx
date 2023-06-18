@@ -8,6 +8,7 @@ import CardJoinMeetingCarousel from "../HomeComponents/Cards/CardJoinMeetingCaro
 const Carousel = (props) => {
   const { show } = props;
   const arr = [
+    { meetingName: "meeting0", existingNumbers: 0 },
     { meetingName: "meeting1", existingNumbers: 10 },
     { meetingName: "meeting2", existingNumbers: 12 },
     { meetingName: "meeting3", existingNumbers: 14 },

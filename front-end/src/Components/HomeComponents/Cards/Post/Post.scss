@@ -3,7 +3,10 @@
 .post {
   color: $fifthColor;
   width: 95%;
-  border: 1px solid $fifthColor;
+  // border: 1px solid $secondColor;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 3px 0px $tenthColor;
   border-radius: 10px;
   padding: 20px;
   margin: 10px 0;
@@ -17,11 +20,65 @@
         margin-right: 10px;
       }
     }
+    .creatorSection {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      .creatorName {
+        font-size: 1rem;
+        color: $fourthColor;
+        font-weight: 800;
+        font-family: Lato;
+      }
+    }
   }
-  .footer {
-    white-space: nowrap;
-    width: 500px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .postText {
+    padding: 0.5rem 1rem;
+    .content {
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      // margin-bottom: 1rem;
+      word-wrap: break-word;
+      line-height: 1.5rem;
+      font-size: 1.2rem;
+      // font-weight: 600;
+      font-family: Arial, Helvetica, sans-serif;
+      color: $tenthColor;
+      // margin: 0.5rem 1rem;
+      // letter-spacing: 0.05rem;
+      // word-spacing: 0.15rem;
+      display: inline;
+      &.expanded {
+        max-height: none;
+      }
+    }
   }
+    .seeMoreButton {
+      background-color: transparent;
+      color: #7c4abc;
+      border: none;
+      outline: none;
+      // padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      // display: inline;
+    }
+    .reactions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      padding: 0 3rem;
+      // gap: 1rem;
+      .reaction {
+        width: 200px;
+        border: 1px solid $tenthColor;
+        height: 40px;
+        // border-radius: 20px;
+      }
+    }
+    
 }

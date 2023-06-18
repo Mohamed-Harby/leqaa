@@ -4,8 +4,9 @@
   display: flex;
   width: 100%;
   position: relative;
-  background-color: $secondColor;
-  border-radius: 10px;
+  background-color: $ninthColor;
+  // border: 2px solid $eighthColor;
+  border-radius: 30px;
   @media screen and (max-width: 1025px) {
     width: 80vw;
   }
@@ -55,13 +56,18 @@
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: $thirdColor;
-  border: 1px solid #ddd;
+  background-color: $firstColor;
+  border: 2px solid $fifthColor;
   cursor: pointer;
+  transition: all 200ms linear;
+  &:hover{
+    border-color: $eighthColor;
+  }
 }
+
 
 .left-arrow {
   left: 0px;

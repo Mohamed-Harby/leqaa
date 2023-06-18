@@ -1,21 +1,60 @@
 @use "../../../../helper/style" as *;
 
 .cardJoinMeetingCarousel{
-    border: 1px solid $fifthColor;
-    border-radius: 10px;
+    // border: 2px solid $fifthColor;
+    border-radius: 1rem;
     display: flex;
-    padding: 20px;
+    padding: 0.7rem 1rem;
     gap: 10px;
+    background-color: $firstColor;
+    box-shadow: 0 0 3px 0 $fifthColor;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    user-select: none;
+    &:hover{
+        border-color: $fifthColor;
+    }
     .content{
         display: flex;
         flex-direction: column;
-        color: $fifthColor;
-        font-size: 18px
-
+        color: $tenthColor;
+        gap: 0.2rem;
+        .meetingName {
+          font-size: 1.2rem;
+          font-family: Lato;
+          font-weight: 700;
+        }
+        .creator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.4rem;
+            
+            .creatorName {
+                font-size: 0.9rem;
+                font-family: Lato;
+                font-weight: 800;
+                color: $fourthColor;
+            }
+        }
+        .actionSection {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          font-family: Lato;
+          font-weight: 800;
+          font-size: 1rem;
+        }
     }
     button{
-        @include Btn(100px, fit-content, 10px, 10px, $fourthColor, $fifthColor, 16px);
+        @include Btn(80px, fit-content, 20px, 10px, $fourthColor, $firstColor, 16px);
         align-self: flex-end;
+        transition: all 0.15s ease-in-out;
+        &:hover{
+            background-color: $eighthColor;
+        }
         @media screen and (max-width: 480px) {
           width: 50px;
           font-size: 12px;

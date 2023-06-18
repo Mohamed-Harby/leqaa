@@ -2,8 +2,8 @@
   display: flex;
   width: 100%;
   position: relative;
-  background-color: #262427;
-  border-radius: 10px;
+  background-color: #EEEEEE;
+  border-radius: 30px;
 }
 @media screen and (max-width: 1025px) {
   .carousel {
@@ -104,12 +104,17 @@
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: #929292;
-  border: 1px solid #ddd;
+  background-color: #fff;
+  border: 2px solid #C9A7EB;
   cursor: pointer;
+  transition: all 200ms linear;
+}
+.left-arrow:hover,
+.right-arrow:hover {
+  border-color: #905BD4;
 }
 
 .left-arrow {

@@ -7,23 +7,26 @@
 }
 .home .btns {
   width: 95%;
-  margin: 10px auto;
+  margin: 10px auto 2rem;
   display: flex;
 }
 .home .btns button {
   width: 150px;
   height: -moz-fit-content;
   height: fit-content;
-  border-radius: 10px;
+  border-radius: 0;
   padding: 10px;
-  background-color: #929292;
-  color: #C9A7EB;
+  background-color: transparent;
+  color: #525252;
   font-size: 16px;
   cursor: pointer;
   border: none;
 }
 .home .btns button:first-child {
   margin-right: 10px;
+}
+.home .btns button:hover {
+  background-color: #EEEEEE;
 }
 @media screen and (max-width: 480px) {
   .home .btns button {

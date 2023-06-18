@@ -14,7 +14,11 @@ import { getCookies } from "../../Custom/useCookies";
 import { getWindowSize, useGetWidth } from "../../Custom/useDimension";
 import { getUser } from "../../redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getResponseRecentActivities, viewRecentActivities, viewRecentActivitiesHome } from "../../redux/homeSlice";
+import {
+  getResponseRecentActivities,
+  viewRecentActivities,
+  viewRecentActivitiesHome,
+} from "../../redux/homeSlice";
 // import CallToolsBar from '../../Components/CallToolsBar/CallToolsBar'
 // import TypingBar from '../../Components/TypingBar/TypingBar';
 
@@ -28,8 +32,8 @@ function Home() {
   const token = getCookies("token");
   console.log(token);
   const width = useGetWidth();
-  const dispatch = useDispatch()
-  const recentactivities = useSelector(getResponseRecentActivities)
+  const dispatch = useDispatch();
+  const recentactivities = useSelector(getResponseRecentActivities);
 
   useEffect(() => {
     if (width <= 768) {
@@ -42,9 +46,8 @@ function Home() {
 
   console.log(width);
   useEffect(() => {
-    dispatch(viewRecentActivitiesHome({token: token}))
+    dispatch(viewRecentActivitiesHome({ token: token }));
   }, []);
-
 
   return (
     <div className="home">
@@ -54,6 +57,14 @@ function Home() {
           onClick={() => setComponents(recentActivities.current.value)}
           value="RecentActivities"
           ref={recentActivities}
+          style={{
+            borderBottom:
+              components == "RecentActivities" ? "2px solid #905BD4" : "",
+            background:
+              components == "RecentActivities"
+                ? "radial-gradient(100% 100% at 50% 100%, rgba(181, 129, 233, 0.5) 23.19%, rgba(255, 255, 255, 0) 58.62%)"
+                : "",
+          }}
         >
           Recent Activities
         </button>
@@ -61,6 +72,14 @@ function Home() {
           onClick={() => setComponents(recommended.current.value)}
           value="Recommended"
           ref={recommended}
+          style={{
+            borderBottom:
+              components == "Recommended" ? "2px solid #905BD4" : "",
+            background:
+              components == "Recommended"
+                ? "radial-gradient(100% 100% at 50% 100%, rgba(181, 129, 233, 0.5) 23.19%, rgba(255, 255, 255, 0) 58.62%)"
+                : "",
+          }}
         >
           Recommended
         </button>
