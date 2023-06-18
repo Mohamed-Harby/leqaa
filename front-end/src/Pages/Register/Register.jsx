@@ -8,6 +8,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { defaultUser, useAuth } from "../../Custom/useAuth";
 import Waiting from "../../Components/Waiting/Waiting";
+import banner from "../../assets/svg/user-banner.svg";
+import LogoWhite from "../../assets/svg/logo-white.svg";
 
 const schema = yup.object().shape({
   confirmPassword: yup
@@ -39,8 +41,8 @@ function Register() {
   };
 
   useEffect(() => {
-    auth.setUser(defaultUser)
-  },[])
+    auth.setUser(defaultUser);
+  }, []);
 
   useEffect(() => {
     console.log(auth.user);
@@ -55,29 +57,23 @@ function Register() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="register">
         <div className="left">
-          <h1>
-            <BsCameraVideo />
-            Video Calls and Meetings for personal Use and organizations.
-          </h1>
-          <p>
-            Leqaa is a service for secure, high-quality video meetings and calls
-            available for everyone.
-          </p>
+          <div className="banner-heading">
+            <img src={LogoWhite} width={50} height={50} /> <h1>leqaa</h1>
+          </div>
+          <img src={banner} className="banner-image"></img>
+          <div className="banner-footer-text">Join and connect globally!</div>
         </div>
 
         <div className="right">
-          <div className="links">
-            <Link to={`/login`}>Login</Link>
-            <Link className="active">Register</Link>
+          <div className="heading">
+            <h1>Join our vibrant community!</h1>
           </div>
 
           <form onSubmit={handleSubmit(onSubmitHandler)}>
-            {/* <h2>Get in touch today!</h2> */}
-
             <div className="input">
               <input
                 placeholder="Name"
@@ -161,6 +157,14 @@ function Register() {
               <button type="submit">Register</button>{" "}
             </div>
           </form>
+          <button
+            className="naviagte-button"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login instead
+          </button>
         </div>
       </div>
     </>

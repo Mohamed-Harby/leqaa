@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: #1b1b1b;
+  background-color: #fff;
   position: sticky;
   top: 50px;
   height: calc(100vh - 50px);
@@ -63,12 +63,12 @@
 }
 .sidebar ul li a:hover {
   background-color: #e2e0e3;
-  color: #1b1b1b;
+  color: #fff;
   border-radius: 10px;
 }
 .sidebar ul li .active {
   background-color: #e2e0e3;
-  color: #1b1b1b;
+  color: #fff;
   border-radius: 10px;
 }
 

@@ -1,98 +1,122 @@
 .register {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 50px);
-  background: #1b1b1b;
-  color: #e2e0e3;
+  height: calc(100vh);
+  background: #fff;
+  color: #fff;
 }
 .register .left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 40vw;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 60vw;
+  height: 100%;
+  background-color: #905BD4;
 }
-.register .left h1 {
-  color: #a379de;
+
+.register .left .banner-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: flex-start;
+  gap: 1rem;
+  margin: 0 2rem;
+  font-family: Lato;
+  font-weight: 600;
 }
-.register .left h1 svg {
-  font-size: 25px;
-  margin-right: 5px;
+
+.register .left .banner-heading h1 {
+  padding-bottom: 1rem;
 }
-.register .left p {
-  margin-top: 10px;
+
+.register .left .banner-footer-text {
+  font-size: 1.2rem;
+  font-family: Lato;
+  font-weight: 600;
+}
+
+.register .left .banner-image {
+  width: 70%;
+  height: 70%;
+  /* align-self: flex-end;
+  justify-self: flex-end; */
+  object-fit: cover;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 0;
+  margin: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.register .left .banner-image:hover {
+  cursor: pointer;
+  transform: scale(1.03); /* Example of a transitioned property on hover */
 }
 .register .right {
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: space-between;
-  background-color: #262427;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 35vw;
-  height: 75vh;
+  width: 40vw;
+  height: 100vh;
+  padding: 4rem 3rem;
+  /* background-color: #262427; */
 }
-.register .right .links {
-  display: flex;
-  height: 11%;
-}
-.register .right .links a {
-  text-decoration: none;
-  background-color: #656366;
-  color: #e2e0e3;
-  width: 50%;
-  height: 100%;
+
+.register .right .heading {
+  font-size: 0.9rem;
+  font-family: Lato;
+  font-weight: 600;
+  color: #262427;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  margin-bottom: 3rem;
 }
-.register .right .links a:first-child {
-  border-top-left-radius: 20px;
-}
-.register .right .links a:last-child {
-  border-top-right-radius: 20px;
-}
-.register .right .links .active {
-  background-color: #a379de;
-}
+
 .register .right form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   height: 80%;
-  gap: 5px;
+  gap: 1.3rem;
 }
 .register .right form .input {
   width: 75%;
   display: flex;
   flex-direction: column;
 }
-.register .right form .input input, .register .right form .input select {
-  background-color: #262427;
-  color: #e2e0e3;
+.register .right form .input input,
+.register .right form .input select {
+  /* background-color: #262427; */
+  color: #262427;
   border: none;
   border-bottom: 1px solid #656366;
   height: 100%;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-family: Lato;
+  font-weight: 600;
+  padding: 0.2rem 0;
 }
-.register .right form .input input::-moz-placeholder, .register .right form .input select::-moz-placeholder {
-  color: #bebebe;
+.register .right form .input input::-moz-placeholder,
+.register .right form .input select::-moz-placeholder {
+  color: #929292;
   opacity: 1;
 }
-.register .right form .input input::placeholder, .register .right form .input select::placeholder {
-  color: #bebebe;
+.register .right form .input input::placeholder,
+.register .right form .input select::placeholder {
+  color: #929292;
   opacity: 1;
 }
 .register .right form .input input:focus, .register .right form .input select:focus {
   outline: none;
 }
 .register .right form .input span {
-  color: #a379de;
+  color: #7C4ABC;
   font-size: 12px;
   display: block;
   height: 12px;
@@ -103,9 +127,9 @@
   color: #bebebe;
 }
 .register .right form .input button {
-  background-color: #a379de;
+  background-color: #7C4ABC;
   border-radius: 20px;
-  color: #e2e0e3;
+  color: #fff;
   cursor: pointer;
   align-self: center;
   padding: 10px;
@@ -113,10 +137,57 @@
   width: 50%;
   font-size: 1rem;
   transition: all 0.15s ease-in-out;
-  margin: 1rem 0 2rem 0;
+  margin: 0 0 2rem 0;
 }
 .register .right form .input button:hover {
-  background-color: #656366;
+  background-color: #905BD4;
+}
+.register .right form .reset-password {
+  width: 75%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -3rem;
+  gap: 0.3rem;
+}
+.register .right form .action-span a {
+  color: #7C4ABC;
+  text-decoration: none;
+}
+.register .right form .reset-password a:hover {
+  text-decoration: underline;
+}
+
+.other-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.action-span {
+  color: #262427;
+  font-family: Lato;
+  font-weight: 600;
+}
+
+.naviagte-button {
+  background-color: #48b42c;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  align-self: center;
+  padding: 10px;
+  border: none;
+  width: 50%;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+  /* margin: 2rem 0 2rem 0; */
+}
+
+.naviagte-button:hover {
+  background-color: #6bc555;
 }
 
 @media screen and (max-width: 800px) {
@@ -126,11 +197,12 @@
     gap: 3rem;
   }
   .register .left {
-    width: 80%;
-    margin-top: 5rem;
+    width: 100%;
+    /* margin-top: 5rem; */
+    display: none;
   }
   .register .right {
-    width: 60%;
-    margin-bottom: 5rem;
+    width: 100%;
+    /* margin-bottom: 5rem; */
   }
 }/*# sourceMappingURL=register.css.map */

@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form";
 import { defaultUser, useAuth } from "../../Custom/useAuth";
 import { BsCameraVideo } from "react-icons/bs";
 import Waiting from "../../Components/Waiting/Waiting";
+import banner from "../../assets/svg/calling-banner.svg";
+import LogoWhite from "../../assets/svg/logo-white.svg";
 
 function Login() {
   const auth = useAuth();
@@ -33,27 +35,24 @@ function Login() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="login">
         <div className="left">
-          <img src={RichLogo} alt="logo" height={100} />
-          {/* <h1>Video Calls and Meetings for personal Use and organizations.</h1> */}
-          <p>
-            Leqaa is a service for secure, high-quality video meetings and calls
-            available for everyone.
-          </p>
+          <div className="banner-heading">
+            <img src={LogoWhite} width={50} height={50} /> <h1>leqaa</h1>
+          </div>
+          <img src={banner} className="banner-image"></img>
+          <div className="banner-footer-text">Join and connect globally!</div>
         </div>
 
         <div className="right">
-          <div className="links">
-            <Link className="active">Login</Link>
-            <Link to={`/register`}>Register</Link>
+          <div className="heading">
+            <h1>Welcome back!</h1>
           </div>
-
           <form onSubmit={handleSubmit(onSubmitHandler)}>
             <div className="input">
               <input
-                placeholder="User Name"
+                placeholder="Username"
                 type="text"
                 name="userName"
                 {...register("userName")}
@@ -84,11 +83,24 @@ function Login() {
                 return <>{errorMsg.includes("email") ? errorMsg : null}</>;
               })}
             </div>
-            <Link to={"/resetpassword"}>ResetPassword</Link>
+            <span className="action-span">
+              <Link to={"/resetpassword"}>Forgot password?</Link>
+            </span>
+            {/* <span className="action-span">
+                Not joined yet? <Link to={`/register`}>register now!</Link>
+              </span> */}
             <div className="input">
-              <button type="submit">Login</button>{" "}
+              <button type="submit">Login</button>
             </div>
           </form>
+          <button
+            className="naviagte-button"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            Create an account
+          </button>
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 .meetingPage {
   flex: 4;
   position: relative;
-  background-color: #1b1b1b;
+  background-color: #fff;
   color: #e2e0e3;
   display: flex;
   flex-direction: column;

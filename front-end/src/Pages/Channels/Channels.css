@@ -1,7 +1,7 @@
 .channelsPage {
   flex: 4;
   display: flex;
-  background-color: #1b1b1b;
+  background-color: #fff;
   color: #e2e0e3;
   height: calc(100vh - 50px);
 }

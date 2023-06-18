@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #1b1b1b;
+  background: #fff;
   overflow-y: auto;
 }
 @media screen and (max-width: 480px) {

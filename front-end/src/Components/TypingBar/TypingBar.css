@@ -1,5 +1,5 @@
 .typingBar {
-  background-color: #1b1b1b;
+  background-color: #fff;
   display: flex;
   align-items: center;
   padding: 1rem 0.7rem;
@@ -40,7 +40,7 @@
   display: none;
 }
 .typingBar button {
-  background-color: #1b1b1b;
+  background-color: #fff;
   color: #e2e0e3;
   border: none;
   font-size: 2rem;

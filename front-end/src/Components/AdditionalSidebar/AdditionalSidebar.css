@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #1b1b1b;
+  background-color: #fff;
   border-right: 1px solid #656366;
   position: sticky;
   overflow-y: auto;
