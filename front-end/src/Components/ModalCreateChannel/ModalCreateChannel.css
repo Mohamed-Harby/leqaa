@@ -1,5 +1,5 @@
 .modalCreateChannel {
-  color: #e2e0e3;
+  color: #C9A7EB;
   margin-top: -1rem;
 }
 .modalCreateChannel h1 {
@@ -14,26 +14,26 @@
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   border-radius: 3px;
 }
 .modalCreateChannel form input:focus {
   outline: none;
-  border: 1px solid #e2e0e3;
+  border: 1px solid #C9A7EB;
   background-color: #262427;
 }
 .modalCreateChannel form input::-moz-placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .modalCreateChannel form input::placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .modalCreateChannel form select {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   border: none;
-  border-bottom: 1px solid #656366;
+  border-bottom: 1px solid #929292;
   height: 100%;
   width: 75%;
   margin-left: 15px;
@@ -54,8 +54,8 @@
 .modalCreateChannel form .inputFile {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   border-radius: 3px;
 }
 .modalCreateChannel form .inputFile label {
@@ -79,7 +79,7 @@
 }
 .modalCreateChannel form button {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   padding: 0.7rem;
   cursor: pointer;
   border: none;

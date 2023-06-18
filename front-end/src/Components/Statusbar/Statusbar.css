@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   height: 70px;
   padding: 10px;
 }
@@ -15,7 +15,7 @@
 }
 .statusbar .left p {
   margin: -2px 0px;
-  color: #a379de;
+  color: #7C4ABC;
 }
 .statusbar .right {
   display: flex;

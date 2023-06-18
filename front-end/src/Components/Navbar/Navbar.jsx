@@ -10,10 +10,10 @@ function Navbar() {
   const auth = useAuth();
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const logout = () =>{
-    auth.useLogout()
-    navigate('/login')
-  }
+  const logout = () => {
+    auth.useLogout();
+    navigate("/login");
+  };
   const modalClose = () => {
     setModalOpen(false);
   };
@@ -26,7 +26,7 @@ function Navbar() {
             <Link to={auth?.user?.user ? "/" : "/login"}>Leqaa</Link>
           </li>
 
-          <li>{auth?.user?.user && <Searchbar />}</li>
+          <li>{<Searchbar />}</li>
 
           <li>
             {auth?.user?.user && (

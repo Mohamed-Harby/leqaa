@@ -27,9 +27,9 @@
 .plans form .input input,
 .plans form .input select {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   border: none;
-  border-bottom: 1px solid #656366;
+  border-bottom: 1px solid #929292;
   height: 100%;
 }
 .plans form .input input::-moz-placeholder, .plans form .input select::-moz-placeholder {
@@ -46,12 +46,12 @@
   outline: none;
 }
 .plans form .input p {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .plans form .input button {
-  background-color: #a379de;
+  background-color: #7C4ABC;
   border-radius: 20px;
-  color: #e2e0e3;
+  color: #C9A7EB;
   cursor: pointer;
   align-self: flex-end;
   padding: 10px;
@@ -63,5 +63,5 @@
   margin-left: 20px;
 }
 .plans div h3 span {
-  color: #a379de;
+  color: #7C4ABC;
 }/*# sourceMappingURL=Account.css.map */

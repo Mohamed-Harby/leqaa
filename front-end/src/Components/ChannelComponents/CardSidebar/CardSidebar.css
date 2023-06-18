@@ -1,5 +1,5 @@
 .cardSidebar {
-  border: 1px solid #e2e0e3;
+  border: 1px solid #C9A7EB;
   border-radius: 10px;
   display: flex;
   padding: 10px;
@@ -11,7 +11,7 @@
 .cardSidebar .content {
   display: flex;
   flex-direction: column;
-  color: #e2e0e3;
+  color: #C9A7EB;
   font-size: 18px;
 }
 .cardSidebar .content div:nth-child(2) {

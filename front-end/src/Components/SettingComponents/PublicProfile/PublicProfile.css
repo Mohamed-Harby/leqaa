@@ -29,9 +29,9 @@
 .publicprofile form .input input,
 .publicprofile form .input select {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   border: none;
-  border-bottom: 1px solid #656366;
+  border-bottom: 1px solid #929292;
   height: 100%;
 }
 .publicprofile form .input input::-moz-placeholder, .publicprofile form .input select::-moz-placeholder {
@@ -48,12 +48,12 @@
   outline: none;
 }
 .publicprofile form .input p {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .publicprofile form .input button {
-  background-color: #a379de;
+  background-color: #7C4ABC;
   border-radius: 20px;
-  color: #e2e0e3;
+  color: #C9A7EB;
   cursor: pointer;
   align-self: flex-end;
   padding: 10px;
@@ -77,7 +77,7 @@
   border: 1px solid;
   border-radius: 10px;
   padding: 5px;
-  background-color: #a379de;
+  background-color: #7C4ABC;
 }
 .publicprofile .image label span svg {
   font-size: 25px;

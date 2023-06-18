@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: calc(100vh);
+  height: 100vh;
   background: #fff;
   color: #fff;
 }
@@ -16,9 +16,8 @@
   background-color: #905BD4;
   position: relative;
 }
-
 .login .left::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -26,8 +25,6 @@
   background-color: #C9A7EB;
   height: 100%;
 }
-
-
 .login .left .banner-heading {
   display: flex;
   flex-direction: row;
@@ -39,25 +36,22 @@
   font-family: Lato;
   font-weight: 600;
 }
-.login .left .banner-heading :hover {
+.login .left .banner-heading:hover {
   cursor: pointer;
 }
 .login .left .banner-heading h1 {
   padding-bottom: 1rem;
 }
-
 .login .left .banner-footer-text {
   font-size: 1.2rem;
   font-family: Lato;
   font-weight: 600;
 }
-
 .login .left .banner-image {
   width: 70%;
   height: 70%;
-  /* align-self: flex-end;
-  justify-self: flex-end; */
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 0;
@@ -66,7 +60,7 @@
 }
 .login .left .banner-image:hover {
   cursor: pointer;
-  transform: scale(1.03); /* Example of a transitioned property on hover */
+  transform: scale(1.03);
 }
 .login .right {
   display: flex;
@@ -76,9 +70,7 @@
   width: 40vw;
   height: 100vh;
   padding: 4rem 3rem;
-  /* background-color: #262427; */
 }
-
 .login .right .heading {
   font-size: 0.9rem;
   font-family: Lato;
@@ -89,7 +81,6 @@
   align-items: center;
   margin-bottom: 3rem;
 }
-
 .login .right form {
   display: flex;
   flex-direction: column;
@@ -106,27 +97,31 @@
 }
 .login .right form .input input,
 .login .right form .input select {
-  /* background-color: #262427; */
   color: #262427;
   border: none;
-  border-bottom: 1px solid #656366;
+  border-bottom: 1px solid #929292;
   height: 100%;
   font-size: 1.1rem;
   font-family: Lato;
   font-weight: 600;
   padding: 0.2rem 0;
 }
-.register .right form .input input::-moz-placeholder,
-.register .right form .input select::-moz-placeholder {
+.login .right form .input input::-moz-placeholder,
+.login .right form .input select::-moz-placeholder {
   color: #929292;
   opacity: 1;
 }
-.register .right form .input input::placeholder,
-.register .right form .input select::placeholder {
+.login .right form .input input::-moz-placeholder, .login .right form .input select::-moz-placeholder {
   color: #929292;
   opacity: 1;
 }
-.login .right form .input input:focus, .login .right form .input select:focus {
+.login .right form .input input::placeholder,
+.login .right form .input select::placeholder {
+  color: #929292;
+  opacity: 1;
+}
+.login .right form .input input:focus,
+.login .right form .input select:focus {
   outline: none;
 }
 .login .right form .input span {
@@ -138,7 +133,7 @@
   justify-content: flex-end;
 }
 .login .right form .input select {
-  color: #bebebe;
+  color: #929292;
 }
 .login .right form .input button {
   background-color: #7C4ABC;
@@ -156,7 +151,7 @@
 .login .right form .input button:hover {
   background-color: #905BD4;
 }
-.login .right form .reset-password {
+.login .right form .input .reset-password {
   width: 75%;
   display: flex;
   justify-content: flex-end;
@@ -167,11 +162,10 @@
   color: #7C4ABC;
   text-decoration: none;
 }
-.login .right form .reset-password a:hover {
+.login .right form .action-span a:hover {
   text-decoration: underline;
 }
-
-.other-actions {
+.login .other-actions {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -179,15 +173,13 @@
   gap: 1rem;
   margin-top: 1rem;
 }
-
-.action-span {
+.login .action-span {
   color: #262427;
   font-family: Lato;
   font-weight: 600;
 }
-
-.naviagte-button {
-  background-color: #48b42c;
+.login .naviagte-button {
+  background-color: #48B42C;
   border-radius: 20px;
   color: #fff;
   cursor: pointer;
@@ -198,13 +190,10 @@
   font-size: 1rem;
   transition: all 0.2s ease-in-out;
   max-width: 350px;
-  /* margin: 2rem 0 2rem 0; */
 }
-
-.naviagte-button:hover {
+.login .naviagte-button:hover {
   background-color: #6bc555;
 }
-
 @media screen and (max-width: 800px) {
   .login {
     flex-direction: column;
@@ -213,11 +202,9 @@
   }
   .login .left {
     width: 100%;
-    /* margin-top: 5rem; */
     display: none;
   }
   .login .right {
     width: 100%;
-    /* margin-bottom: 5rem; */
   }
 }/*# sourceMappingURL=login.css.map */

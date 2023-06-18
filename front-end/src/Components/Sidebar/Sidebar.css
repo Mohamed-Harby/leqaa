@@ -5,7 +5,7 @@
   height: calc(100vh - 50px);
   flex: 1;
   transition: 0.3s ease-in-out;
-  border-right: 1px solid #656366;
+  border-right: 1px solid #929292;
 }
 .sidebar ul {
   display: flex;
@@ -23,7 +23,7 @@
 .sidebar ul li .edit-control {
   display: flex;
   justify-content: space-between;
-  color: #e2e0e3;
+  color: #C9A7EB;
   font-size: 20px;
 }
 .sidebar ul li .control .bar,
@@ -45,7 +45,7 @@
   align-items: center;
   text-decoration: none;
   padding: 5px;
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .sidebar ul li a svg {
   font-size: 30px;
@@ -62,12 +62,12 @@
   border-radius: 50%;
 }
 .sidebar ul li a:hover {
-  background-color: #e2e0e3;
+  background-color: #C9A7EB;
   color: #fff;
   border-radius: 10px;
 }
 .sidebar ul li .active {
-  background-color: #e2e0e3;
+  background-color: #C9A7EB;
   color: #fff;
   border-radius: 10px;
 }

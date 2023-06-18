@@ -17,22 +17,22 @@
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   border-radius: 3px;
 }
 .MeetingSettingsContainer form select:focus {
   outline: none;
 }
 .MeetingSettingsContainer form select::-moz-placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .MeetingSettingsContainer form select::placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .MeetingSettingsContainer form button {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   padding: 0.7rem;
   cursor: pointer;
   border: none;

@@ -1,4 +1,9 @@
-import { createBrowserRouter, Route, Navigate, useNavigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { Layout } from "../Layout/Layout";
 import { getCookies } from "../Custom/useCookies";
 import Chat from "../Pages/Chat/Chat";
@@ -11,19 +16,33 @@ import Channels from "../Pages/Channels/Channels";
 import Organization from "../Pages/Organization/Organization";
 import Profile from "../Pages/Profile/Profile";
 import ResetPassword from "../Pages/ResetPassword/ResetPassword";
-import { ROOT, LOGIN, REGISTER, SETTINGS, MEETING, CHAT, CHANNELS, ORGANIZATION, PROFILE, RESETPASSWORD, HUB, CHANNEL, HUBs, HUBS, CONFIRMRESETPASSWORD } from "./Paths";
+import {
+  ROOT,
+  LOGIN,
+  REGISTER,
+  SETTINGS,
+  MEETING,
+  CHAT,
+  CHANNELS,
+  ORGANIZATION,
+  PROFILE,
+  RESETPASSWORD,
+  HUB,
+  CHANNEL,
+  HUBs,
+  HUBS,
+  CONFIRMRESETPASSWORD,
+} from "./Paths";
 import ConfirmResetPassword from "../Pages/ConfirmResetPassword/ConfirmResetPassword";
 import { defaultUser, useAuth } from "../Custom/useAuth";
 
-
-
 const ProtectedRoutes = ({ children }) => {
-  const token = getCookies('token')
-  if (!token) {
-    return <Navigate to='/login' />
-  }
+  const token = getCookies("token");
+  // if (!token) {
+  //   return <Navigate to='/login' />
+  // }
   return children;
-}
+};
 
 export const RouterConfig = createBrowserRouter([
   {

@@ -1,100 +1,141 @@
 
-
 @use "../../helper/style" as *;
-
 
 .register {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: calc(100vh - 50px);
+  height: calc(100vh);
   background: $firstColor;
-  color: $fifthColor;
+  color: $firstColor;
 
-  
   .left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 40vw;
-    h1 {
-      color: $fourthColor;
-      svg{
-        font-size: 25px;
-        margin-right: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60vw;
+    height: 100%;
+    background-color: $eighthColor;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0.5rem;
+      background-color: $fifthColor;
+      height: 100%;
+    }
+
+    .banner-heading {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      align-self: flex-start;
+      gap: 1rem;
+      margin: 0 2rem;
+      font-family: Lato;
+      font-weight: 600;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      h1 {
+        padding-bottom: 1rem;
       }
     }
-    p {
-      margin-top: 10px;
+
+    .banner-footer-text {
+      font-size: 1.2rem;
+      font-family: Lato;
+      font-weight: 600;
+    }
+
+    .banner-image {
+      width: 70%;
+      height: 70%;
+      object-fit: cover;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 0;
+      margin: 0;
+      transition: all 0.5s ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.03);
+      }
     }
   }
 
-  .right{
+  .right {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: space-between;
-    background-color: $secondColor;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    width: 35vw;
-    height: calc((100vh / 2) + 25vh);
+    width: 40vw;
+    height: 100vh;
+    padding: 4rem 3rem;
+    background-color: $firstColor;
 
-    .links {
+    .heading {
+      font-size: 0.9rem;
+      font-family: Lato;
+      font-weight: 600;
+      color: $secondColor;
       display: flex;
-      height: 11%;
-      a {
-        text-decoration: none;
-        background-color: $thirdColor;
-        color: $fifthColor;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        &:first-child {
-          border-top-left-radius: 20px;
-        }
-        &:last-child {
-          border-top-right-radius: 20px;
-        }
-      }
-      .active {
-        background-color: $fourthColor;
-      }
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 3rem;
     }
 
     form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: center;
       height: 80%;
-      gap: 5px;
+      gap: 2rem;
 
       .input {
         width: 75%;
         display: flex;
         flex-direction: column;
-        // margin: 10px 0;
-        input, select {
-          background-color: $secondColor;
-          color: $fifthColor;
+        max-width: 450px;
+
+        input,
+        select {
+          color: $secondColor;
           border: none;
           border-bottom: 1px solid $thirdColor;
           height: 100%;
-          font-size: 1rem;
-          &::placeholder {
-            color: #bebebe;
-            opacity: 1;
-          }
-          &:focus {
-            outline: none;
-          }
+          font-size: 1.1rem;
+          font-family: Lato;
+          font-weight: 600;
+          padding: 0.2rem 0;
         }
+
+        input::-moz-placeholder,
+        select::-moz-placeholder {
+          color: $thirdColor;
+          opacity: 1;
+        }
+
+        input::placeholder,
+        select::placeholder {
+          color: $thirdColor;
+          opacity: 1;
+        }
+
+        input:focus,
+        select:focus {
+          outline: none;
+        }
+
         span {
           color: $fourthColor;
           font-size: 12px;
@@ -103,13 +144,15 @@
           display: flex;
           justify-content: flex-end;
         }
+
         select {
-          color: #bebebe;
+          color: $thirdColor;
         }
+
         button {
           background-color: $fourthColor;
           border-radius: 20px;
-          color: $fifthColor;
+          color: $firstColor;
           cursor: pointer;
           align-self: center;
           padding: 10px;
@@ -117,28 +160,69 @@
           width: 50%;
           font-size: 1rem;
           transition: all 0.15s ease-in-out;
-          margin: 1rem 0 2rem 0;
+          margin: 0 0 2rem 0;
+
           &:hover {
-            background-color: $thirdColor;
+            background-color: $eighthColor;
           }
+        }
+
+        .reset-password {
+          width: 75%;
+          display: flex;
+          justify-content: flex-end;
+          margin-top: -3rem;
+          gap: 0.3rem;
         }
       }
     }
   }
-}
 
-@media screen and (max-width: 800px) {
-  .register {
+  .other-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .action-span {
+    color: $secondColor;
+    font-family: Lato;
+    font-weight: 600;
+  }
+
+  .naviagte-button {
+    background-color: $sixthColor;
+    border-radius: 20px;
+    color: $firstColor;
+    cursor: pointer;
+    align-self: center;
+    padding: 10px;
+    border: none;
+    width: 50%;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+    max-width: 350px;
+
+    &:hover {
+      background-color: $seventhColor;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
     flex-direction: column;
     height: unset;
     gap: 3rem;
+
     .left {
-      width: 80%;
-      margin-top: 5rem;
+      width: 100%;
+      display: none;
     }
+
     .right {
-      width: 60%;
-      margin-bottom: 5rem;
+      width: 100%;
     }
   }
 }

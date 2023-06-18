@@ -45,7 +45,7 @@
 }
 .modalCalling .modalCalling-content .btns span {
   cursor: pointer;
-  background-color: #a379de;
+  background-color: #7C4ABC;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -53,7 +53,7 @@
 }
 .modalCalling .modalCalling-content .btns span svg {
   font-size: 25px;
-  color: #e2e0e3;
+  color: #C9A7EB;
   position: absolute;
   left: 50%;
   top: 50%;

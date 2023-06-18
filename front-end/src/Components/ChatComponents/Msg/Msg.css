@@ -14,12 +14,12 @@
 }
 .sender div,
 .receiver div {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 
 .sender {
   align-self: flex-end;
-  background-color: #656366;
+  background-color: #929292;
   position: relative;
   right: 20px;
   border-bottom-right-radius: 0;
@@ -36,7 +36,7 @@
   bottom: 0;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent transparent transparent #a379de;
+  border-color: transparent transparent transparent #7C4ABC;
 }
 
 .receiver {
@@ -55,5 +55,5 @@
   bottom: 0;
   border-width: 10px;
   border-style: solid;
-  border-color: transparent #a379de transparent transparent;
+  border-color: transparent #7C4ABC transparent transparent;
 }/*# sourceMappingURL=Msg.css.map */

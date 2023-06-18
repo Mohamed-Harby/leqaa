@@ -1,5 +1,6 @@
 .layoutContainer {
   display: flex;
+  margin-top: 1rem;
 }
 
 ::-webkit-scrollbar {
@@ -8,14 +9,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #656366;
+  background: #929292;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e2e0e3;
+  background: #C9A7EB;
   border-radius: 5rem;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a379de;
+  background: #7C4ABC;
 }/*# sourceMappingURL=Layout.css.map */

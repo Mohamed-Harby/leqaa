@@ -8,7 +8,7 @@
   background-color: #262427;
   border-radius: 10px;
   color: white;
-  border: 1px solid #656366;
+  border: 1px solid #929292;
   text-decoration: none;
   cursor: pointer;
 }
@@ -43,8 +43,8 @@
   height: fit-content;
   border-radius: 10px;
   padding: 10px;
-  background-color: #a379de;
-  color: #e2e0e3;
+  background-color: #7C4ABC;
+  color: #C9A7EB;
   font-size: 16px;
   cursor: pointer;
   border: none;

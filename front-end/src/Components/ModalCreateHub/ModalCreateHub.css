@@ -1,5 +1,5 @@
 .modalCreateHub {
-  color: #e2e0e3;
+  color: #C9A7EB;
   margin-top: -1rem;
 }
 .modalCreateHub h1 {
@@ -14,26 +14,26 @@
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   border-radius: 3px;
 }
 .modalCreateHub form input:focus {
   outline: none;
-  border: 1px solid #e2e0e3;
+  border: 1px solid #C9A7EB;
   background-color: #262427;
 }
 .modalCreateHub form input::-moz-placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .modalCreateHub form input::placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .modalCreateHub form .inputFile {
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   border-radius: 3px;
 }
 .modalCreateHub form .inputFile label {
@@ -65,11 +65,11 @@
   margin-right: 0.6rem;
 }
 .modalCreateHub form .radioBox input[type=radio]:checked + label {
-  color: #a379de;
+  color: #7C4ABC;
 }
 .modalCreateHub form button {
   background-color: #262427;
-  color: #e2e0e3;
+  color: #C9A7EB;
   padding: 0.7rem;
   cursor: pointer;
   border: none;

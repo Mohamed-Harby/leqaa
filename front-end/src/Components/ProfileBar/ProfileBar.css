@@ -16,10 +16,10 @@
 .profilebar .left div span {
   margin-left: 15px;
   font-weight: 800;
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .profilebar .left div span:last-child {
-  color: #a379de;
+  color: #7C4ABC;
   font-weight: 600;
 }
 .profilebar .right {
@@ -28,7 +28,7 @@
 }
 .profilebar .right svg {
   font-size: 30px;
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .profilebar .right svg:first-child {
   margin-right: 10px;

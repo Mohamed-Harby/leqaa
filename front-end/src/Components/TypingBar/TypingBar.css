@@ -15,7 +15,7 @@
   padding: 0.7rem 0.4rem;
   background-color: #262427;
   border: none;
-  color: #e2e0e3;
+  color: #C9A7EB;
   font-size: 1.1rem;
   box-shadow: 0px 0px 5px 1px black;
 }
@@ -23,11 +23,11 @@
   outline: none;
 }
 .typingBar input::-moz-placeholder {
-  color: #656366;
+  color: #929292;
   padding: 1rem;
 }
 .typingBar input::placeholder {
-  color: #656366;
+  color: #929292;
   padding: 1rem;
 }
 .typingBar label {
@@ -41,7 +41,7 @@
 }
 .typingBar button {
   background-color: #fff;
-  color: #e2e0e3;
+  color: #C9A7EB;
   border: none;
   font-size: 2rem;
   display: flex;

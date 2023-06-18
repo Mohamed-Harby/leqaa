@@ -5,10 +5,10 @@
   justify-content: center;
   align-items: center;
   font-size: 100px;
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .wait .p1, .wait .p2, .wait .p3 {
-  color: #a379de;
+  color: #7C4ABC;
 }
 .wait .l1 {
   animation: letter1 2.5s linear 0s infinite alternate;

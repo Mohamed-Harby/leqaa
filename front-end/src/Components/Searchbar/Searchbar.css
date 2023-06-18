@@ -15,7 +15,7 @@
   border-radius: 5px;
   padding: 0 25px;
   box-shadow: 0px 0px 5px 1px black;
-  color: #e2e0e3;
+  color: #C9A7EB;
   transition: width 0.4s ease-in-out;
 }
 @media screen and (max-width: 768px) {
@@ -31,11 +31,11 @@
   }
 }
 .search .showAnimation::-moz-placeholder, .search .hideAnimation::-moz-placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .search .showAnimation::placeholder,
 .search .hideAnimation::placeholder {
-  color: #e2e0e3;
+  color: #C9A7EB;
 }
 .search .showAnimation:focus,
 .search .hideAnimation:focus {

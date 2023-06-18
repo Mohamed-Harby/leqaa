@@ -6,7 +6,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 export const Layout = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="layoutContainer">
         <Sidebar />
         <Outlet />

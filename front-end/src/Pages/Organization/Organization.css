@@ -2,7 +2,7 @@
   flex: 4;
   display: flex;
   background-color: #fff;
-  color: #e2e0e3;
+  color: #C9A7EB;
   height: calc(100vh - 50px);
 }
 .organizationPage .organization-section {
@@ -22,8 +22,8 @@
   height: fit-content;
   border-radius: 10px;
   padding: 10px;
-  background-color: #656366;
-  color: #e2e0e3;
+  background-color: #929292;
+  color: #C9A7EB;
   font-size: 16px;
   cursor: pointer;
   border: none;
