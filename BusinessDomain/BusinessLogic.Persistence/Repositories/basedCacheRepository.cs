@@ -15,39 +15,46 @@ using BusinessLogic.Domain.Common;
 
 namespace CommonGenericClasses
 {
-    public class BaseCachedRepo<TEntity> : IBaseRepo<TEntity> where TEntity : BaseEntity
+    public class BaseCachedRepo<TEntity> : BaseRepo<TEntity>, IBaseRepo<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbContext _db;
         protected readonly DbSet<TEntity> _table;
         private readonly Dictionary<object, TEntity> _cache;
         private readonly IDistributedCache _distributedCache;
+        public BaseCachedRepo(DbContext db, IDistributedCache distributedCache) : base(db)
+        {
+            _distributedCache = distributedCache;
+            this._db = db;
+            this._table = db.Set<TEntity>();
+            _cache = new Dictionary<object, TEntity>();
+        }
 
-        public BaseCachedRepo(DbContext db, IDistributedCache distributedCache)
+  /*      public BaseCachedRepo(DbContext db, IDistributedCache distributedCache)
         {
             this._db = db;
             this._table = db.Set<TEntity>();
             _cache = new Dictionary<object, TEntity>();
             _distributedCache = distributedCache;
-        }
-
+        }*/
+/*
         public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _table.AddAsync(entity);
             await SaveAsync();
             return entity;
         }
-
+*/
         public async Task<TEntity> GetByIdAsync(object id)
         {
             var cacheKey = $"cache_{typeof(TEntity).Name}_{id}";
-            var cacheData = await _distributedCache.GetStringAsync(cacheKey);
+            var cacheData = await _distributedCache.GetStringAsync(cacheKey)!;
 
             if (!string.IsNullOrEmpty(cacheData))
             {
-                return JsonConvert.DeserializeObject<TEntity>(cacheData);
+                return JsonConvert.DeserializeObject<TEntity>(cacheData)!;
             }
 
-            if (_cache.TryGetValue(id, out TEntity cachedEntity))
+            if (_cache.TryGetValue(id, out TEntity? cachedEntity ))
             {
                 return cachedEntity;
             }
@@ -65,29 +72,29 @@ namespace CommonGenericClasses
                 await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entity, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
             }
 
-            return entity;
+            return entity!;
         }
 
-        public async Task<IEnumerable<TEntity>> RemoveRangeAsync(Expression<Func<TEntity, bool>> predicate)
+     /*   public async Task<IEnumerable<TEntity>> RemoveRangeAsync(Expression<Func<TEntity, bool>> predicate)
         {
             IEnumerable<TEntity> entities = (await GetAsync(predicate)).ToList();
             _table.RemoveRange(entities);
             await SaveAsync();
             return entities;
-        }
+        }*/
 
-        public async Task<TEntity> RemoveAsync(Expression<Func<TEntity, bool>> predicate)
+    /*    public async Task<TEntity> RemoveAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            TEntity entityToRemove = (await GetAsync(predicate)).FirstOrDefault();
+            TEntity entityToRemove = (await GetAsync(predicate)).FirstOrDefault()!;
             if (entityToRemove != null)
             {
                 _table.Remove(entityToRemove);
                 await SaveAsync();
             }
-            return entityToRemove;
-        }
+            return entityToRemove!;
+        }*/
 
-        public async Task<TEntity> RemoveByIdAsync(object id)
+       /* public async Task<TEntity> RemoveByIdAsync(object id)
         {
             TEntity entityToRemove = await GetByIdAsync(id);
             if (entityToRemove != null)
@@ -95,15 +102,15 @@ namespace CommonGenericClasses
                 _table.Remove(entityToRemove);
                 await SaveAsync();
             }
-            return entityToRemove;
-        }
-        public virtual Task<TEntity> UpdateAsync(TEntity entity)
+            return entityToRemove!;
+        }*/
+     /*   public virtual Task<TEntity> UpdateAsync(TEntity entity)
         {
             _table.Update(entity);
             return Task.FromResult(entity);
-        }
+        }*/
 
-        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null!, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string include = "")
+        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null!, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string include = "")
         {
             var cacheKey = $"cache_{typeof(TEntity).Name}_{predicate}_{orderBy}_{include}";
             var cacheData = await _distributedCache.GetStringAsync(cacheKey);
@@ -137,39 +144,39 @@ namespace CommonGenericClasses
 
             return entitiesList.AsQueryable();
         }
+        /*  
+                public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null!)
+                {
+                    IQueryable<TEntity> query = _table;
+                    if (predicate != null)
+                        query = _table.Where<TEntity>(predicate);
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null!)
-        {
-            IQueryable<TEntity> query = _table;
-            if (predicate != null)
-                query = _table.Where<TEntity>(predicate);
+                    return await query.CountAsync();
+                }
 
-            return await query.CountAsync();
-        }
+              public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
+                {
+                    try
+                    {
+                        await _db.SaveChangesAsync(cancellationToken);
+                        return true;
+                    }
+                    catch (DbUpdateException ex )
+                    {
+                        //Logging.Error(ex, $"DbUpdateException on saving changes. Reason: {ex.Message}");
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+                        //Logging.Error(ex, $"Exception on saving changes. Reason: {ex.Message}");
+                        return false;
+                    }
+                }*/
 
-        public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                await _db.SaveChangesAsync(cancellationToken);
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                //Logging.Error(ex, $"DbUpdateException on saving changes. Reason: {ex.Message}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                //Logging.Error(ex, $"Exception on saving changes. Reason: {ex.Message}");
-                return false;
-            }
-        }
-
-        public async Task SaveAsync()
-        {
-            await _db.SaveChangesAsync();
-        }
+        /* public async Task SaveAsync()
+         {
+             await _db.SaveChangesAsync();
+         }*/
 
         /*    public async Task<IQueryable<TEntity>> GetAllAsync()
             {
@@ -201,7 +208,7 @@ namespace CommonGenericClasses
             return entitiesList.AsQueryable();
         }
 
-        public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null!)
+   /*     public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null!)
         {
             throw new NotImplementedException();
         }
@@ -215,7 +222,7 @@ namespace CommonGenericClasses
         public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
         {
             return await _db.SaveChangesAsync(cancellationToken);
-        }
+        }*/
     }
 }
 

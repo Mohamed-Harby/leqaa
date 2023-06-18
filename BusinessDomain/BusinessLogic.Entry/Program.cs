@@ -86,7 +86,7 @@ try
 {
     RabbitMQConnector rabbitMQConnector = new();
     IModel channel = await rabbitMQConnector.ConnectAsync(builder.Configuration);
-    await MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder.Services.BuildServiceProvider());
+    await MessageQueueHelper.SubscribeToRegisterUsersQueue(channel, builder!.Services.BuildServiceProvider());
 }
 catch (Exception ex)
 {
