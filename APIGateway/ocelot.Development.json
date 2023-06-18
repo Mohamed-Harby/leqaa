@@ -3,6 +3,9 @@
     {
       "DownstreamPathTemplate": "/api/v1/Authentication/{everything}",
       "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -10,12 +13,16 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Authentication/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "ServiceName": "Authentication"
     },
     //for any end point in business
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -23,13 +30,17 @@
         }
       ],
       "UpstreamPathTemplate": "/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "ServiceName": "Business"
     },
     //for any end point in payment
 
     {
       "DownstreamPathTemplate": "/api/v1/checkout/{everything}",
       "DownstreamScheme": "http",
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -37,10 +48,18 @@
         }
       ],
       "UpstreamPathTemplate": "/api/v1/checkout/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "ServiceName": "checkout"
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5001"
+    "BaseUrl": "http://localhost:5001",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+
+
   }
 }

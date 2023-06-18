@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 using System.Text;
 using static AuthenticationOptions.JwtBearerOptionsSetup;
 
@@ -17,7 +18,10 @@ var env = builder.Environment.EnvironmentName;
 builder.Configuration
     .AddJsonFile($"ocelot.{env}.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
-builder.Services.AddOcelot(builder.Configuration);
+builder.Services.AddOcelot(builder.Configuration).AddConsul()
+   .AddConfigStoredInConsul();
+
+/*builder.Services.AddOcelot().AddConsul();*/
 Jwt jwt = new();
 builder.Configuration.GetSection("Jwt").Bind(jwt);
 builder.Services.AddMvc();
@@ -52,5 +56,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 await app.UseOcelot();
+
 
 app.Run();
