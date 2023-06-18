@@ -38,6 +38,9 @@
   font-family: Lato;
   font-weight: 600;
 }
+.register .left .banner-heading :hover {
+  cursor: pointer;
+}
 
 .register .left .banner-heading h1 {
   padding-bottom: 1rem;

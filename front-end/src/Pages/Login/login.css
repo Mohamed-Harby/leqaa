@@ -39,7 +39,9 @@
   font-family: Lato;
   font-weight: 600;
 }
-
+.login .left .banner-heading :hover {
+  cursor: pointer;
+}
 .login .left .banner-heading h1 {
   padding-bottom: 1rem;
 }

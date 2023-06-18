@@ -61,7 +61,12 @@ function Register() {
 
       <div className="register">
         <div className="left">
-          <div className="banner-heading">
+          <div
+            className="banner-heading"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <img src={LogoWhite} width={50} height={50} /> <h1>leqaa</h1>
           </div>
           <img src={banner} className="banner-image"></img>
