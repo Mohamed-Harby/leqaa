@@ -14,7 +14,19 @@
   width: 60vw;
   height: 100%;
   background-color: #905BD4;
+  position: relative;
 }
+
+.login .left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.5rem;
+  background-color: #C9A7EB;
+  height: 100%;
+}
+
 
 .login .left .banner-heading {
   display: flex;
@@ -88,6 +100,7 @@
   width: 75%;
   display: flex;
   flex-direction: column;
+  max-width: 450px;
 }
 .login .right form .input input,
 .login .right form .input select {
@@ -182,6 +195,7 @@
   width: 50%;
   font-size: 1rem;
   transition: all 0.2s ease-in-out;
+  max-width: 350px;
   /* margin: 2rem 0 2rem 0; */
 }
 
