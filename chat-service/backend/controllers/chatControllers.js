@@ -64,8 +64,7 @@ const accessChat = asyncHandler(async (req, res) => {
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
   try {
-    console.log(global.decodedUUID);
-        Chat.find({ users: { $elemMatch: { $eq: decodedUUID } } })
+    Chat.find({ users: { $elemMatch: { $eq: decodedUUID } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
