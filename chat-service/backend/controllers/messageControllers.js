@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const Chat = require("../models/chatModel");
 var uuid = require("node-uuid");
 
-const protect= require('./../middleware/authMiddleware')
+const protect = require("./../middleware/authMiddleware");
 
 const mongoose = require("mongoose");
 
@@ -60,5 +60,8 @@ const sendMessage = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+const uploadFile = asyncHandler(async(req, res) => {
+  
+});
 
-module.exports = { allMessages, sendMessage };
+module.exports = { allMessages, sendMessage, uploadFile };
