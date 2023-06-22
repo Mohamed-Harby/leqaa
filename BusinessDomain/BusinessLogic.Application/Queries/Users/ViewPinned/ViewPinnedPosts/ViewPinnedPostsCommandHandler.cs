@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Application.CommandInterfaces;
-using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+
 using BusinessLogic.Application.Interfaces;
 using BusinessLogic.Application.Models.Channels;
 using BusinessLogic.Domain.Common.Errors;
@@ -43,7 +43,7 @@ public class ViewPinnedPostsCommandHandler : IHandler<ViewPinnedPostsCommand, Er
     }
     public async Task<ErrorOr<List<PostReadModel>>> Handle(ViewPinnedPostsCommand request, CancellationToken cancellationToken)
     {
-        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
+        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName,null, "PinnedPosts")).FirstOrDefault()!;
         if (user == null)
         {
             return DomainErrors.User.NotFound;

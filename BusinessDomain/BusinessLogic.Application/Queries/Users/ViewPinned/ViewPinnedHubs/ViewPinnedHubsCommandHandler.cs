@@ -42,7 +42,7 @@ public class ViewPinnedHubsCommandHandler : IHandler<ViewPinnedHubsCommand, Erro
     }
     public async Task<ErrorOr<List<HubReadModel>>> Handle(ViewPinnedHubsCommand request, CancellationToken cancellationToken)
     {
-        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
+        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName,null, "PinnedHubs")).FirstOrDefault()!;
         if (user == null)
         {
             return DomainErrors.User.NotFound;

@@ -27,7 +27,7 @@ public class AddHubCommandHandler : IHandler<UpdateHubCommand, ErrorOr<HubUpdate
 
     public async Task<ErrorOr<HubUpdateModel>> Handle(UpdateHubCommand request, CancellationToken cancellationToken)
     {
-        var hub = await _hubRepository.GetByIdAsync(request.hubId);
+        var hub = await _hubRepository.GetByIdAsync(request.Id);
 
         if (request.Name != null)
             hub.Name = request.Name;

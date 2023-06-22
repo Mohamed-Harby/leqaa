@@ -35,7 +35,7 @@ namespace BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser
         public async Task<ErrorOr<List<UserReadModel>>> Handle(AddMultibleUsersByUserCommand request, CancellationToken cancellationToken)
 
         {
-            var addingUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "")).FirstOrDefault()!;
+            var addingUser = (await _userRepository.GetAsync(n => n.UserName == request.UserName, null, "")).FirstOrDefault();
             var hub = await _hubRepository.GetByIdAsync(request.HubId);
 
             if (addingUser == null || hub == null)
@@ -43,43 +43,48 @@ namespace BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser
                 return DomainErrors.User.NotFound;
             }
 
-            UserHub userHub = (await _userHubRepository.GetAsync(uh => uh.UserId == addingUser.Id && uh.HubId == hub.Id, null, "")).FirstOrDefault()!;
-            if (userHub == null)
-            {
-                return DomainErrors.User.NotFound;
-            }
-
             var addedUsers = new List<User>();
             foreach (var addedUserName in request.AddedUserNames)
             {
-                User addedUser = (await _userRepository.GetAsync(u => u.UserName == addedUserName,null,"")).FirstOrDefault()!;
+                var addedUser = (await _userRepository.GetAsync(n => n.UserName == addedUserName, null, "")).FirstOrDefault();
                 if (addedUser == null)
                 {
                     return DomainErrors.User.NotFound;
                 }
 
-                var newUserHub = new UserHub
+                var existingUserHub = (await _userHubRepository.GetAsync(uh => uh.UserId == addedUser.Id && uh.HubId == hub.Id, null, "")).FirstOrDefault()!;
+                if (existingUserHub ==null)
                 {
-                    UserId = addedUser.Id,
-                    HubId = hub.Id
-                };
 
-                await _userHubRepository.AddAsync(newUserHub);
-                addedUsers.Add(addedUser);
+
+                    var newUserHub = new UserHub
+                    {
+                        UserId = addedUser.Id,
+                        HubId = hub.Id
+                    };
+
+                    addedUser.Hubs.Add(hub);
+
+                    await _userHubRepository.AddAsync(newUserHub);
+                    addedUsers.Add(addedUser);
+
+
+                    await _userHubRepository.SaveAsync();
+                }
+                else
+                {
+                    // UserHub entry already exists, skip adding the user
+                    continue;
+                }
+
+              
             }
 
             await _userHubRepository.SaveAsync();
-            foreach (var user in addedUsers)
-            {
-                user.Hubs.Add(hub);
-            }
-            
-            await _hubRepository.UpdateAsync(hub);
-            await _hubRepository.SaveAsync(cancellationToken);
+            await _userRepository.UpdateAsync(addingUser);
+            await _userRepository.SaveAsync(cancellationToken);
 
             return addedUsers.Adapt<List<UserReadModel>>();
         }
-
-       
     }
 }

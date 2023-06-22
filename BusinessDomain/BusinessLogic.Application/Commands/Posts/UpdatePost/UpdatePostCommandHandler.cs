@@ -38,6 +38,10 @@ public class UpdatePostCommandHandler : IHandler<UpdatePostCommand, ErrorOr<Post
     public async Task<ErrorOr<PostUpdateModel>> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
     {
         var post = await _postRepository.GetByIdAsync(request.postId);
+        if (post == null)
+        {
+            return DomainErrors.Post.NotFound;
+        }
 
         if (request.Title != null)
         {

@@ -45,7 +45,7 @@ public class PostController : BaseController
             postWriteModel.Content,
             username);
 
-        ErrorOr<PostWriteModel> result = await _sender.Send(addPostCommand);
+        ErrorOr<PostReadModel> result = await _sender.Send(addPostCommand);
         return result.Match(
              post => Ok(post),
              errors => Problem(errors)
@@ -71,9 +71,9 @@ public class PostController : BaseController
 
 
     [HttpPut("")]
-    public async Task<IActionResult> EditPost([FromQuery] Guid id, [FromBody] PostUpdateModel PostUpdateModel)
+    public async Task<IActionResult> EditPost( [FromBody] PostUpdateModel PostUpdateModel)
     {
-        var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
+        var UpdatePostCommand = new UpdatePostCommand(PostUpdateModel.Id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
 
         var results = await _sender.Send(UpdatePostCommand);
 
