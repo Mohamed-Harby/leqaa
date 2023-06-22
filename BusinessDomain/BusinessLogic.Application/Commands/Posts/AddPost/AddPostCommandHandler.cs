@@ -39,15 +39,20 @@ public class AddPostCommandHandler : IHandler<AddPostCommand, ErrorOr<PostReadMo
         User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault();
 
         var post = request.Adapt<Post>();
+   
+        post.UserId = creatorUser!.Id; 
+        post.User= creatorUser;
+
+        
 
         creatorUser!.Posts.Add(post);
 
+       
         if (await _PostRepository.SaveAsync(cancellationToken) == 0)
         {
             return DomainErrors.Channel.InvalidChannel;
         }
-        var postmodel = post.Adapt<PostReadModel>();
-        return postmodel;
+        return post.Adapt<PostReadModel>(); 
     }
 
 

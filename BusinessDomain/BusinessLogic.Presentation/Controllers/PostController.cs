@@ -45,7 +45,7 @@ public class PostController : BaseController
             postWriteModel.Content,
             username);
 
-        var result = await _sender.Send(addPostCommand);
+        ErrorOr<PostReadModel> result = await _sender.Send(addPostCommand);
         return result.Match(
              post => Ok(post),
              errors => Problem(errors)
@@ -56,10 +56,10 @@ public class PostController : BaseController
 
 
     [HttpGet]
-    public async Task<IActionResult> ViewPosts([FromQuery] int pageNumber, int pageSize)
+    public async Task<IActionResult> ViewPosts([FromQuery] int pageNumber,int pageSize)
     {
-        var query = new GetAllPostsQuery(pageNumber, pageSize);
-        ErrorOr<List<PostRecentReadModel>> results = await _sender.Send(query);
+        var query = new GetAllPostsQuery(pageNumber,pageSize);
+       ErrorOr<List<PostReadModel>> results = await _sender.Send(query);
 
         return results.Match(
           ViewPosts => Ok(ViewPosts),
@@ -71,9 +71,9 @@ public class PostController : BaseController
 
 
     [HttpPut("")]
-    public async Task<IActionResult> EditPost([FromQuery] Guid id, [FromBody] PostUpdateModel PostUpdateModel)
+    public async Task<IActionResult> EditPost( [FromBody] PostUpdateModel PostUpdateModel)
     {
-        var UpdatePostCommand = new UpdatePostCommand(id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
+        var UpdatePostCommand = new UpdatePostCommand(PostUpdateModel.Id, PostUpdateModel.Title, PostUpdateModel.Image, PostUpdateModel.Content);
 
         var results = await _sender.Send(UpdatePostCommand);
 
@@ -89,7 +89,7 @@ public class PostController : BaseController
     {
 
         var DeleteModel = new DeletePostCommand(id);
-        var result = await _sender.Send(DeleteModel);
+       var result= await _sender.Send(DeleteModel);
 
 
         return Ok(result);

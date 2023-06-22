@@ -14,3 +14,9 @@ public record UserReadModel(
     DateTime CreationDate
     ) : BaseReadModel(Id, CreationDate);
 
+public record AddMultibleUsersByUser(
+ 
+    List<string> AddedUserNames,
+
+     Guid? HubId
+     );

@@ -41,15 +41,15 @@ namespace BusinessLogic.Application.Queries.Users.GetFollowedUsersCount
         public async Task<ErrorOr<int>> Handle(GetFollowedUsersCountQuery request, CancellationToken cancellationToken)
         {
             var followedUsersCount = await _userUserRepository.GetAsync(u => u.FollowedId == request.UserId, null, "");
-            if (followedUsersCount == null)
+              if (followedUsersCount == null)
             {
                 return 0;
             }
             return followedUsersCount.Count();
-
+          
         }
     }
 
-
-
-}
+        
+    
+} 

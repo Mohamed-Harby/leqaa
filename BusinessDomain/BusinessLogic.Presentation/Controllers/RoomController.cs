@@ -29,7 +29,7 @@ public class RoomController : BaseController
 
 
     [Authorize]
-    [HasPermission(Permission.CanJoinRoom)]
+   /* [HasPermission(Permission.CanJoinRoom)]*/
     [HttpGet]
     public Task<IActionResult> GetRoom(string roomId)
     {

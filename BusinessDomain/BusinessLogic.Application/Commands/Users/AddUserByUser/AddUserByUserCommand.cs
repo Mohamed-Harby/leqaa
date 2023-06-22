@@ -14,6 +14,7 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
     public record AddUserByUserCommand(
         string UserName,
-        string AddedUser,
-        Guid? HubId) : IUserNameInCommand<ErrorOr<UserReadModel>>;
+        string addedUser,
+        Guid? hupId,
+        Guid? channelId) : IUserNameInCommand<ErrorOr<UserReadModel>>;
 }

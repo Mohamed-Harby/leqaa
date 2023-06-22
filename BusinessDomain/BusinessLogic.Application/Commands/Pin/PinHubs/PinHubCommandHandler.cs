@@ -41,31 +41,30 @@ public class PinHubCommandHandler : IHandler<PinHubCommand, ErrorOr<HubReadModel
     }
     public async Task<ErrorOr<HubReadModel>> Handle(PinHubCommand request, CancellationToken cancellationToken)
     {
-        User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
-        Hub? hub = await _hubRepository.GetByIdAsync(request.HubId);
+      /*  User? creatorUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;*/
+        Hub? hupToPin = await _hubRepository.GetByIdAsync(request.HubId);
+        User PinningUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedHubs")).FirstOrDefault()!; 
+        
+        var PinnedHubs = PinningUser.PinnedHubs;
 
-        var PinningUser = await _userRepository.GetAsync(u => u.UserName == request.UserName, null, "PinnedHubs")!;
-        User? getuser= PinningUser.FirstOrDefault()!;
-        var PinnedHubs = getuser.PinnedHubs;
-
-        foreach(var userHup in PinnedHubs)
+        foreach(var hup in PinnedHubs)
         {
-            if(userHup.Id==request.HubId)
+            if(hup.Id==request.HubId)
             {
                 return DomainErrors.Hub.AlreadyExest;
             }
 
         }
-        creatorUser.PinnedHubs.Add(hub);
+        PinningUser.PinnedHubs.Add(hupToPin);
 
-        await _unitOfWork.PinHubAsync(hub, creatorUser);
+        await _unitOfWork.PinHubAsync(hupToPin, PinningUser);
         if (await _unitOfWork.SaveAsync() == 0)
         {
         return DomainErrors.Hub.InvalidHub;
 
         }
 
-        return hub.Adapt<HubReadModel>();
+        return hupToPin.Adapt<HubReadModel>();
 
 
     }

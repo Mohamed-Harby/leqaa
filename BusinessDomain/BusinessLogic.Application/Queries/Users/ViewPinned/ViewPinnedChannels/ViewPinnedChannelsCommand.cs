@@ -7,7 +7,7 @@ using ErrorOr;
 using MediatR;
 using System.Reflection.Metadata;
 
-namespace BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+namespace BusinessLogic.Application.Queries.Pin.ViewPinned.ViewpinnedChannels;
 
 public record ViewPinnedChannelsCommand(
    string UserName

@@ -16,4 +16,4 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts;
 public record ViewUserPostsQuery(
 string UserName
 
-) : IUserNameInQuery<ErrorOr<List<PostRecentReadModel>>>;
+) : IUserNameInQuery<ErrorOr<List<PostReadModel>>>;

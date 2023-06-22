@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
 {
-    public class ViewUserPostsQueryHandler : IHandler<ViewUserPostsQuery, ErrorOr<List<PostRecentReadModel>>>
+    public class ViewUserPostsQueryHandler : IHandler<ViewUserPostsQuery, ErrorOr<List<PostReadModel>>>
     {
         private readonly IChannelRepository _channelRepository;
         private readonly IHubRepository _hubRepository;
@@ -28,7 +28,7 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
         private readonly IUserHubRepository _userChannelRepository;
         private readonly IPostRepository _postRepository;
 
-
+      
 
         public ViewUserPostsQueryHandler(
             IChannelRepository channelRepository,
@@ -44,24 +44,24 @@ namespace BusinessLogic.Application.Queries.Users.ViewUserPosts
             _userRepository = userRepository;
             _userChannelRepository = userChannelRepository;
             _postRepository = postRepository;
-
+           
         }
-        public async Task<ErrorOr<List<PostRecentReadModel>>> Handle(ViewUserPostsQuery request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<List<PostReadModel>>> Handle(ViewUserPostsQuery request, CancellationToken cancellationToken)
         {
 
 
 
-
+           
 
             var user = (await _userRepository.GetAsync(u => u.UserName == request.UserName, null!, "")).FirstOrDefault()!;
-            var posts = await _postRepository.GetAsync(p => p.UserId == user.Id, null, "");
+           var posts=await _postRepository.GetAsync(p=>p.UserId==user.Id,null,"");
 
-
+        
 
 
 
             return posts
-            .Adapt<List<PostRecentReadModel>>();
+            .Adapt<List<PostReadModel>>();
 
 
 

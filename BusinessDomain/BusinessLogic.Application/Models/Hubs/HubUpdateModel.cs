@@ -9,8 +9,9 @@ namespace BusinessLogic.Application.Models.Hubs
   
 
     public record HubUpdateModel(
-        Guid hubid,
+        Guid id,
         string name,
-        string description
+        string description,
+        byte[]? logo
     );
 }

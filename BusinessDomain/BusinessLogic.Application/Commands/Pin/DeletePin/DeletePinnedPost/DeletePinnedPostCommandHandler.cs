@@ -19,7 +19,7 @@ using BusinessLogic.Application.Models.Posts;
 
 namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub
 {
-    public class DeletePinnedPostCommandHandler : IHandler<DeletePinnedPostCommand, ErrorOr<PostRecentReadModel>>
+    public class DeletePinnedPostCommandHandler : IHandler<DeletePinnedPostCommand, ErrorOr<PostReadModel>>
     {
 
         private readonly IUserPinnedHubRepository _userPinnedHubRepository;
@@ -29,13 +29,13 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub
         private readonly IChannelRepository _channelRepository;
         private readonly IPostRepository _postRepository;
         private readonly IUnitOfWork _unitOfWork;
-
+   
         public DeletePinnedPostCommandHandler(
-
+        
             IUserPinnedHubRepository userPinnedHubRepository,
             IHubRepository hubRepository,
             IUserChannelRepository userChannelRepository,
-            IUserRepository userRepository,
+            IUserRepository userRepository, 
             IChannelRepository channelRepository,
             IPostRepository postRepository,
             IUnitOfWork unitOfWork
@@ -53,11 +53,11 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub
             _channelRepository = channelRepository;
             _postRepository = postRepository;
             _unitOfWork = unitOfWork;
-
+      
 
         }
 
-        public async Task<ErrorOr<PostRecentReadModel>> Handle(DeletePinnedPostCommand request, CancellationToken cancellationToken)
+        public async Task<ErrorOr<PostReadModel>> Handle(DeletePinnedPostCommand request, CancellationToken cancellationToken)
         {
             var user = (await _userRepository.GetAsync(u => u.UserName == request.userName)).FirstOrDefault()!;
             var post = await _postRepository.GetByIdAsync(request.PostId);
@@ -66,7 +66,7 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub
             {
                 return DomainErrors.Post.NotFound;
             }
-            var userPinnedHub = (await _userPinnedHubRepository.GetAsync(uh => uh.UserPinnedid == user.Id && uh.PinnedHubId == post.Id
+            var userPinnedHub = (await _userPinnedHubRepository.GetAsync(uh => uh.UserPinnedid== user.Id && uh.PinnedHubId == post.Id
             )).FirstOrDefault()!;
             if (userPinnedHub is null)
             {
@@ -74,15 +74,15 @@ namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub
             }
 
             post.PostPinningUsers.Remove(user);
-            if (await _unitOfWork.SaveAsync(cancellationToken) == 0)
+            if (await _unitOfWork. SaveAsync(cancellationToken) == 0)
             {
                 return DomainErrors.Post.InvalidPost;
             }
             return DomainSucceded.User.ChannelUnPinned;
         }
 
-
+       
     }
 }
-
+    
 
