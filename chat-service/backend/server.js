@@ -53,17 +53,10 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   // when a connection is done from the client ==> from front end will log ' kaza' ,,,, socket = io(ENDPOINT);
   console.log("Connected to socket.io");
-<<<<<<< HEAD
   socket.on("setup", (userData) => {
     // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
     socket.join(userData._id); // this will create a room for this particular user
     socket.emit("connected"); // this wil send connected to client
-=======
-  socket.on("setup", (userData) => {       // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
-    console.log("setup succeeded")
-    socket.join(userData._id);             // this will create a room for this particular user 
-    socket.emit("connected");              // this wil send connected to client
->>>>>>> f5b03e00e33defcc726288dd37837b7a7d7ce393
   });
 
   socket.on("join chat", (room) => {
@@ -77,7 +70,6 @@ io.on("connection", (socket) => {
   socket.on("new message", (newMessageRecieved) => {
     console.log(newMessageRecieved); //to make a realtime messages
     var chat = newMessageRecieved.chat;
-<<<<<<< HEAD
 
     console.log("newMessageRecieved.sender._id", newMessageRecieved.sender._id);
     if (!chat.users) return console.log("chat.users not defined");
@@ -88,21 +80,11 @@ io.on("connection", (socket) => {
       // chat.users.forEach((user) => {
       //   if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
       //   socket.in(user._id).emit("message recieved", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.
-=======
-    console.log(chat);
-    if (!chat.users) return console.log("chat.users not defined");
-
-    chat.users.forEach((user) => {
-      console.log(user)
-      // if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
-
-      io.to(user).emit("message received", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.
->>>>>>> f5b03e00e33defcc726288dd37837b7a7d7ce393
     });
   });
 
-  // socket.off("setup", () => {
-  //   console.log("USER DISCONNECTED");
-  //   socket.leave(userData._id);
-  // });
+  socket.off("setup", () => {
+    console.log("USER DISCONNECTED");
+    socket.leave(userData._id);
+  });
 });
