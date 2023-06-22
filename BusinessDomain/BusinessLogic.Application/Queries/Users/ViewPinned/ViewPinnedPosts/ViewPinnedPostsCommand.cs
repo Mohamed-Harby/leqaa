@@ -12,4 +12,4 @@ namespace BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
 public record ViewPinnedPostsCommand(
    string UserName
 
-) : IUserNameInCommand<ErrorOr<List<PostRecentReadModel>>>;
+) : IUserNameInCommand<ErrorOr<List<PostReadModel>>>;

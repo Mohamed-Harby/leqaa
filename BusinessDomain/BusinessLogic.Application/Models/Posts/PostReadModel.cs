@@ -1,7 +1,9 @@
-namespace BusinessLogic.Application.Models.Posts;
+﻿namespace BusinessLogic.Application.Models.Posts;
+
 public record PostReadModel(
     Guid Id,
-    string Title,
-    byte[]? Image,
-    string Content,
+    string PostTitle,
+    byte[]? PostImage,
+    string PostContent,
     DateTime CreationDate) : BaseReadModel(Id, CreationDate);
+

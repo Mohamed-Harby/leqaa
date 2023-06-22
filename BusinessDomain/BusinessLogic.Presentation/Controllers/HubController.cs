@@ -30,7 +30,7 @@ public class HubController : BaseController
     }
 
     [HttpPost]
-    [HasPermission(Permission.CanDeployHubs)]
+/*    [HasPermission(Permission.CanDeployHubs)]*/
     public async Task<IActionResult> DeployHub(HubWriteModel hub)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -82,7 +82,7 @@ public class HubController : BaseController
     [HttpPut]
     public async Task<IActionResult> EditHub( HubUpdateModel HubUpdateModel)
     {
-        var UpdateHubCommand = new UpdateHubCommand(HubUpdateModel.hubid, HubUpdateModel.name, HubUpdateModel.description);
+        var UpdateHubCommand = new UpdateHubCommand(HubUpdateModel.id, HubUpdateModel.name, HubUpdateModel.description,HubUpdateModel.logo);
 
 
         ErrorOr<HubUpdateModel> results = await _sender.Send(UpdateHubCommand);
@@ -119,22 +119,4 @@ public class HubController : BaseController
             );
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

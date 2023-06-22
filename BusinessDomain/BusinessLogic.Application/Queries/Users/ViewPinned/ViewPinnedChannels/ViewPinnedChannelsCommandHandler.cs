@@ -13,7 +13,7 @@ using Mapster;
 using MediatR;
 using System.Runtime.CompilerServices;
 
-namespace BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+namespace BusinessLogic.Application.Queries.Pin.ViewPinned.ViewpinnedChannels;
 public class ViewPinnedChannelsCommandHandler : IHandler<ViewPinnedChannelsCommand, ErrorOr<List<ChannelReadModel>>>
 {
     private readonly IPostRepository _PostRepository;
@@ -41,7 +41,7 @@ public class ViewPinnedChannelsCommandHandler : IHandler<ViewPinnedChannelsComma
     }
     public async Task<ErrorOr<List<ChannelReadModel>>> Handle(ViewPinnedChannelsCommand request, CancellationToken cancellationToken)
     {
-        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
+        User? user = (await _userRepository.GetAsync(u => u.UserName == request.UserName,null, "PinnedChannels")).FirstOrDefault()!;
         if (user == null)
         {
             return DomainErrors.User.NotFound;

@@ -32,7 +32,7 @@ using BusinessLogic.Application.Commands.Users.JoinChannel;
 using BusinessLogic.Application.Commands.Pin.PinHubs;
 using BusinessLogic.Application.Models.Posts;
 using BusinessLogic.Application.Commands.Pin.PinPosts;
-using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedChannels;
+
 using BusinessLogic.Application.Commands.Pin.ViewPinned.ViewpinnedPosts;
 using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedChannel;
 using BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedHub;
@@ -43,6 +43,7 @@ using BusinessLogic.Application.Queries.Users.ViewFollowers;
 using BusinessLogic.Application.Queries.Users.ViewFollowed;
 using BusinessLogic.Application.Commands.Users.AddMultibleUsersByUser;
 using BusinessLogic.Application.Queries.Users.GetChannelUserNotIn;
+using BusinessLogic.Application.Queries.Pin.ViewPinned.ViewpinnedChannels;
 
 namespace BusinessLogic.Presentation.Controllers;
 [Route("api/v1/[controller]/[action]")]
@@ -199,7 +200,7 @@ public class UserController : BaseController
     }
 
     [HttpPut]
-    [HasPermission(Permission.CanJoinHub)]
+   /* [HasPermission(Permission.CanJoinHub)]*/
     public async Task<IActionResult> JoinHub(JoinHubModel joinHubModel)
     {
         string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
@@ -223,7 +224,7 @@ public class UserController : BaseController
         return Ok(result);
 
     }
-
+    
 
 
     [HttpDelete]
@@ -256,10 +257,9 @@ public class UserController : BaseController
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> AddUserByUserToHub(AddUserToHubModel addUserToHubModel)
+    public async Task<IActionResult> AddUserByUserToHub(AddUserByUserCommand addUserByUserCommand)
     {
-        string username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
-        var addUserByUserCommand = new AddUserByUserCommand(username, addUserToHubModel.AddedUser, addUserToHubModel.HubId);
+
         var result = await _sender.Send(addUserByUserCommand);
         return result.Match(
             users => Ok(users),
@@ -463,11 +463,12 @@ public class UserController : BaseController
 
     }
     [HttpPost]
-    public async Task<IActionResult> AddUsersByUser([FromBody] AddMultibleUsersByUserCommand request)
+    public async Task<IActionResult> AddUsersByUserToHub([FromBody] AddMultibleUsersByUser request)
     {
+        var username = User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         var command = new AddMultibleUsersByUserCommand
         (
-           request.UserName,
+           username,
             request.AddedUserNames,
              request.HubId
         );

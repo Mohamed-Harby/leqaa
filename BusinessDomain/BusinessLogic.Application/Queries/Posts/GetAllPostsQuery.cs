@@ -6,4 +6,4 @@ using MediatR;
 namespace BusinessLogic.Application.Queries.Hubs.GetAllHubs;
 public record GetAllPostsQuery(
     int PageNumber,
-int PageSize) : IQuery<List<PostRecentReadModel>>;
+int PageSize) : IQuery<List<PostReadModel>>;

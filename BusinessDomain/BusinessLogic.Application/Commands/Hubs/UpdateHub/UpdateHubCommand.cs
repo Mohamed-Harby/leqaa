@@ -6,8 +6,9 @@ using MediatR;
 
 namespace BusinessLogic.Application.Commands.Hubs.UpdateHub;
 public record UpdateHubCommand(
-    Guid hubId,
+    Guid Id,
     string Name,
-    string? Description
+    string? Description,
+    byte[]? logo
 
 ) : ICommand<ErrorOr<HubUpdateModel>>;

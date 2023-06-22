@@ -7,7 +7,7 @@ public class PostMappings : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Post, PostRecentReadModel>()
+        config.NewConfig<Post, PostReadModel>()
         .Map(dest => dest.Id, src => src.Id)
         .Map(dest => dest.PostTitle, src => src.Title)
         .Map(dest => dest.PostContent, src => src.Content)

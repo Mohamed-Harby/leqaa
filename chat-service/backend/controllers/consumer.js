@@ -33,10 +33,17 @@ async function consumeFromQueue(queueName, handleMessage) {
 const MyController = {
   async startConsumingMessages() {
     // Call consumeFromQueue with appropriate arguments
+<<<<<<< HEAD
    
     const addUserToChat = async (message) => {
       console.log(`Received message: ${JSON.stringify(message)}`);
       console.log(message);
+=======
+    consumeFromQueue("Authentication.UserToChat", (message) => {
+
+      // console.log(`Received message: ${JSON.stringify(message)}`);
+      // console.log(message);
+>>>>>>> f5b03e00e33defcc726288dd37837b7a7d7ce393
       // Handle incoming message
       try {
         // let user = new User(message);
@@ -62,10 +69,21 @@ const MyController = {
       }
     };
 
+<<<<<<< HEAD
     const createGroup = async (message, req, res) => {
       // Message handling logic
       console.log(`Received message: ${JSON.stringify(message)}`);
       console.log(message);
+=======
+    consumeFromQueue(
+      "BusinessDomain.GroupCreated",
+      async (message, req, res) => {
+        console.log("😎😎😎😎😎😎😎😎😎", global.decodedUUID);
+
+        // Message handling logic
+        console.log(`Received message: ${JSON.stringify(message)}`);
+        console.log(message);
+>>>>>>> f5b03e00e33defcc726288dd37837b7a7d7ce393
 
       try {
         const users = message.JoinedUsers.map((user) => user.Id);
