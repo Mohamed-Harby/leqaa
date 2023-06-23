@@ -1,17 +1,33 @@
 {
-  "name": "streaming-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "signaling-server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Leqaa-team",
-  "license": "ISC",
+  "name": "livestream-server",
+  "version": "0.0.1",
+  "description": "A conference call implementation using WebRTC, Socket.io and Node.js.",
+  "main": "src/app.js",
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "socket.io": "^4.6.1"
-  }
+    "express": "^4.17.3",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "watch": "nodemon --watch \"src/\" --exec \"node src/app.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amirsanni/livestream-server.git"
+  },
+  "keywords": [
+    "LiveStream",
+    "Server"
+  ],
+  "author": "Amir Sanni <amirsanni@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amirsanni/livestream-server/issues"
+  },
+  "homepage": "https://github.com/amirsanni/livestream-server#readme"
 }
