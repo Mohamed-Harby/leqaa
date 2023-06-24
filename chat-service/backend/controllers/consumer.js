@@ -7,7 +7,9 @@ const  decodedUUID  = require("./../middleware/authMiddleware");
 async function consumeFromQueue(queueName, handleMessage) {
   try {
     // Connect to RabbitMQ server
-    const connection = await amqp.connect("amqp://localhost:5672");
+    const connection = await amqp.connect(
+      process.env.RABBITMQ
+    );
     const channel = await connection.createChannel();
 
     // Assert queue
