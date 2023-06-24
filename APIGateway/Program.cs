@@ -44,8 +44,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true
     };
 });
-var x=System.Environment.GetEnvironmentVariable("DownstreamHost");
-var myVarValue =Environment.GetEnvironmentVariable("BaseUrl");
+var x = System.Environment.GetEnvironmentVariable("DownstreamHost");
+var myVarValue = Environment.GetEnvironmentVariable("BaseUrl");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
