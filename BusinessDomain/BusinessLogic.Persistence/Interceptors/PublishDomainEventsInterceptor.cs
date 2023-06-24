@@ -42,9 +42,9 @@ public class PublishDomainEventsInterceptor : SaveChangesInterceptor, IPublishDo
 
         domainEvents.ForEach(domainEvent =>
         {
-            var policyResults =  Policy.Handle<Exception>()
+            var policyResults = Policy.Handle<Exception>()
             .WaitAndRetry(3, retryAttempt => TimeSpan.FromMilliseconds(1000 * retryAttempt))
-            .ExecuteAndCapture(async () => await _publisher.Publish(domainEvent));
+            .ExecuteAndCapture(async () => await _publisher.Publish(domainEvents));
             _logger.LogError(policyResults.FinalException?.ToString());
         });
 

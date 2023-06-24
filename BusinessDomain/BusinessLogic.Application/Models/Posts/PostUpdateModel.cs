@@ -9,10 +9,10 @@ namespace BusinessLogic.Application.Models.Posts;
     public record PostUpdateModel
     (
 
-        Guid postId,
+        Guid Id,
      string Title,
     byte[]? Image,
-   string Content,
-    string Username
+   string Content
+
     );
 

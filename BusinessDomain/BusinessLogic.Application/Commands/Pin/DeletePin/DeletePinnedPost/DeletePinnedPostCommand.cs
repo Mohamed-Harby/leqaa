@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Application.Commands.Pin.DeletePin.DeletePinnedPost
 {
-    public record DeletePinnedPostCommand(
-        string userName,
-        Guid PostId
+  public record DeletePinnedPostCommand(
+      string userName,
+      Guid PostId
 
-        ) : ICommand<ErrorOr<PostRecentReadModel>>;
+      ) : ICommand<ErrorOr<PostReadModel>>;
 }

@@ -44,9 +44,9 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
         {
             User addingUser = (await _userRepository.GetAsync(u => u.UserName == request.UserName)).FirstOrDefault()!;
 
-            User addedUser = (await _userRepository.GetAsync(u => u.UserName == request.AddedUser)).FirstOrDefault()!;
+            User addedUser = (await _userRepository.GetAsync(u => u.UserName == request.addedUser)).FirstOrDefault()!;
 
-            var hub = await _hubRepository.GetByIdAsync(request.HubId);
+            var hub = await _hubRepository.GetByIdAsync(request.hupId);
 
             if (addedUser == null || addingUser == null)
             {
@@ -69,6 +69,7 @@ namespace BusinessLogic.Application.Commands.Users.AddUserByUser
 
 
             await _userHubRepository.AddAsync(newUserHub);
+            await _userHubRepository.SaveAsync();
             hub.AddUser(addedUser);
             await _hubRepository.UpdateAsync(hub);
             await _hubRepository.SaveAsync(cancellationToken);
