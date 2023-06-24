@@ -64,10 +64,12 @@ public class TextChatService : ITextChatService
             Url = "api/chat",
             RequestContent = chatWithUserRequestModel
         };
+        
         return await _apiHelper.SendAsync<ChatWithUserResponseModel>(requestModel);
     }
     public async Task<SendMessageResponseModel> SendMessage(SendMessageRequestModel sendMessageRequestModel)
     {
+        
         socket.On("message recieved", data => Console.WriteLine(data));
         var requestModel = new APIRequestModel
         {

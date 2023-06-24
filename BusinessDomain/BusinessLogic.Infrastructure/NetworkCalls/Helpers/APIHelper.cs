@@ -36,7 +36,7 @@ public class APIHelper : IAPIHelper
             .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromMilliseconds(1000 * retryAttempt))
             .ExecuteAndCaptureAsync<HttpResponseMessage>(() => http.SendAsync(httpRequestMessage));
         var response = result.Result;
-        response.EnsureSuccessStatusCode();
+
         return JsonConvert.DeserializeObject<TRes>(await response.Content.ReadAsStringAsync())!;
     }
 }
