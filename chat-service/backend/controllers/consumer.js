@@ -2,10 +2,11 @@ const User = require("./../models/userModel");
 const mongoose = require("mongoose");
 const amqp = require("amqplib");
 const Chat = require("../models/chatModel");
-const decodedUUID = require("./../middleware/authMiddleware");
+const  decodedUUID  = require("./../middleware/authMiddleware");
 
 async function consumeFromQueue(queueName, handleMessage) {
   try {
+    console.log(process.env.RABBITMQ);
     // Connect to RabbitMQ server
     const connection = await amqp.connect(
       process.env.RABBITMQ
@@ -35,10 +36,10 @@ async function consumeFromQueue(queueName, handleMessage) {
 const MyController = {
   async startConsumingMessages() {
     // Call consumeFromQueue with appropriate arguments
-   
-    const addUserToChat = async (message) => {
-      console.log(`Received message: ${JSON.stringify(message)}`);
-      console.log(message);
+    consumeFromQueue("Authentication.UserToChat", (message) => {
+
+      // console.log(`Received message: ${JSON.stringify(message)}`);
+      // console.log(message);
       // Handle incoming message
       try {
         // let user = new User(message);
@@ -62,48 +63,51 @@ const MyController = {
       } catch (err) {
         console.log(err);
       }
-    };
+    });
 
-    const createGroup = async (message, req, res) => {
-      // Message handling logic
-      console.log(`Received message: ${JSON.stringify(message)}`);
-      console.log(message);
+    consumeFromQueue(
+      "BusinessDomain.GroupCreated",
+      async (message, req, res) => {
+        console.log("😎😎😎😎😎😎😎😎😎", global.decodedUUID);
 
-      try {
-        const users = message.JoinedUsers.map((user) => user.Id);
-        const existedGroup = await Chat.findById(message.Id);
-        console.log("uers😂", users);
-        // console.log("decoded uuid ", decodedUUID);
-        if (existedGroup) {
-          return res.status(400).send("Group already exists");
-        } /* else if (users.length < 2) {
+        // Message handling logic
+        console.log(`Received message: ${JSON.stringify(message)}`);
+        console.log(message);
+
+        try {
+          const users = message.JoinedUsers.map((user) => user.Id);
+          const existedGroup = await Chat.findById(message.Id);
+          console.log("uers😂", users);
+          // console.log("decoded uuid ", decodedUUID);
+          if (existedGroup) {
+            return res.status(400).send("Group already exists");
+          } /* else if (users.length < 2) {
           return res
             .status(400)
             .send("More than 2 users are required to form a group chat");
         }*/ else {
-          const groupChat = await Chat.create({
-            _id: message.Id,
-            chatName: message.Name,
-            users: users,
-            isGroupChat: true,
-            // groupAdmin: decodedUUID,
-          });
+            const groupChat = await Chat.create({
+              _id: message.Id,
+              chatName: message.Name,
+              users: users,
+              isGroupChat: true,
+              // groupAdmin: decodedUUID,
+            });
 
-          const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
-            .populate("users", "-password")
-            .populate("groupAdmin", "-password");
+            const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
+              .populate("users", "-password")
+              .populate("groupAdmin", "-password");
 
-          // res.status(200).json(fullGroupChat);
+            // res.status(200).json(fullGroupChat);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
       }
-    };
-
-    consumeFromQueue("Authentication.UserToChat", addUserToChat);
-    consumeFromQueue("BusinessDomain.GroupCreated", createGroup);
+    );
   },
 
+  // Other controller functions...
 };
 
 module.exports = MyController;
