@@ -65,6 +65,7 @@ services:
       - ConnectionStrings__Redis=redis:6379
       - RabbitMQConnection__Host=rabbitmq
       - Serilog__WriteTo__1__Args__serverUrl=http://seq:5341
+      - textChatUri=http://textchat:6969/
     ports:
       - 5004:5004  
     depends_on:
