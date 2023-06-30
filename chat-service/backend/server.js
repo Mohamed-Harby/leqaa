@@ -27,13 +27,13 @@ app.use("/api/message", messageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
+// Handle uncaught exceptions
+process.on("uncaughtException", (error) => {
+  logger.error("Uncaught Exception:", error);
+  // process.exit(1); // Exit the process or take other necessary actions
+});
 
-
-
-
-
-
-const MyController = require('./controllers/consumer');
+const MyController = require("./controllers/consumer");
 
 // Initialize controller
 const myController = Object.create(MyController);
@@ -43,13 +43,6 @@ myController.startConsumingMessages();
 
 // Other app initialization code...
 
-
-
-
-
-
-
-
 const PORT = process.env.PORT || 6969;
 const server = app.listen(
   PORT,
@@ -57,35 +50,39 @@ const server = app.listen(
 );
 
 const io = require("socket.io")(server, {
-  pingTimeout: 60000,                // pingTimeout means time will be waited if no connection happend it will be off to save bandwidth
+  pingTimeout: 60000, // pingTimeout means time will be waited if no connection happend it will be off to save bandwidth
   cors: {
-    origin: "http://localhost:3000",   // this will be changed during deployment
+    origin: "http://localhost:3000", // this will be changed during deployment
     // credentials: true,
   },
 });
 
-io.on("connection", (socket) => {            // when a connection is done from the client ==> from front end will log ' kaza' ,,,, socket = io(ENDPOINT);
+io.on("connection", (socket) => {
+  // when a connection is done from the client ==> from front end will log ' kaza' ,,,, socket = io(ENDPOINT);
   console.log("Connected to socket.io");
-  socket.on("setup", (userData) => {       // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
-    console.log("setup succeeded")
-    socket.join(userData._id);             // this will create a room for this particular user 
-    socket.emit("connected");              // this wil send connected to client
+  socket.on("setup", (userData) => {
+    // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
+    console.log("setup succeeded");
+    socket.join(userData._id); // this will create a room for this particular user
+    socket.emit("connected"); // this wil send connected to client
   });
 
-  socket.on("join chat", (room) => {       //will take room id from front end  ,, frontend ,,, socket.emit("join chat", selectedChat._id)
+  socket.on("join chat", (room) => {
+    //will take room id from front end  ,, frontend ,,, socket.emit("join chat", selectedChat._id)
     socket.join(room);
     console.log("User Joined Room: " + room);
   });
   socket.on("typing", (room) => socket.in(room).emit("typing"));
   socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
-  socket.on("new message", (newMessageRecieved) => {        //to make a realtime messages
+  socket.on("new message", (newMessageRecieved) => {
+    //to make a realtime messages
     var chat = newMessageRecieved.chat;
     console.log(chat);
     if (!chat.users) return console.log("chat.users not defined");
 
     chat.users.forEach((user) => {
-      console.log(user)
+      console.log(user);
       // if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
 
       io.to(user).emit("message received", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.

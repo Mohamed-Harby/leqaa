@@ -51,12 +51,11 @@
 
 // module.exports = { protect };
 
-
 const jwt = require("jsonwebtoken");
 const { parse } = require("uuid");
 const User = require("../models/userModel.js");
 const asyncHandler = require("express-async-handler");
-let decodedUUID;  
+let decodedUUID;
 const protect = asyncHandler(async (req, res, next) => {
   let token;
 
@@ -75,19 +74,19 @@ const protect = asyncHandler(async (req, res, next) => {
             console.error("Invalid token:", err.message);
             res.status(401).json({ message: err.message });
           } else {
-            decodedUUID = 
+            decodedUUID =
               decoded[
                 "http://schemas.microsoft.com/ws/2008/06/identity/claims/primarysid"
-              ]
-            ;
+              ];
+            req.decoded = decoded;
             console.log("Decoded token:", decoded);
           }
         }
       );
 
       req.user = await User.findById(decodedUUID).select("-password");
-      x(decodedUUID)
-      global.decodedUUID=decodedUUID;
+      x(decodedUUID);
+      global.decodedUUID = decodedUUID;
       next();
     } catch (error) {
       res.status(401);
@@ -100,15 +99,11 @@ const protect = asyncHandler(async (req, res, next) => {
     throw new Error("Not authorized, no token");
   }
 });
-// i want a time out to be set here before exporting the decodedUUID  
+// i want a time out to be set here before exporting the decodedUUID
 // so that it can be used in the consumer.js file
 // i want to export the decodedUUID and the protect function
 
-
-
-function x(val){
-
-  module.exports = { protect, val:val};
+function x(val) {
+  module.exports = { protect, val: val };
 }
 x();
-

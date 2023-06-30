@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const Chat = require("../models/chatModel");
 var uuid = require("node-uuid");
 
-const protect= require('./../middleware/authMiddleware')
+const protect = require("./../middleware/authMiddleware");
 
 const mongoose = require("mongoose");
 
@@ -28,24 +28,39 @@ const allMessages = asyncHandler(async (req, res) => {
 //@access          Protected
 const sendMessage = asyncHandler(async (req, res) => {
   const { content, chatId } = req.body;
-
+  // console.log("👿👿👿", Object.keys(req.decoded));
+  // console.log("😂keys😁", req.decoded.keys());
   if (!content || !chatId) {
     console.log("Invalid data passed into request");
     return res.sendStatus(400);
   }
+  const senderObj = {
+    name: req.decoded[
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    ],
+
+    email:
+      req.decoded[
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+      ],
+
+    _id: req.decoded[
+      "http://schemas.microsoft.com/ws/2008/06/identity/claims/primarysid"
+    ],
+  };
 
   var newMessage = {
     _id: uuid.v1(),
     // sender: req.user._id,
-    sender: protect.decodedUUID,
+    sender: senderObj,
     content: content,
-    chat: chatId,
+    chat: chatId, //chatid , isGroupChat, createdAt, users array
   };
 
   try {
     var message = await Message.create(newMessage);
 
-    message = await message.populate("sender", "name pic");
+    message = await message.populate("sender", "_id name email");
     message = await message.populate("chat");
     message = await User.populate(message, {
       path: "chat.users",
