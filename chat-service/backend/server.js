@@ -79,11 +79,14 @@ io.on("connection", (socket) => {
     //to make a realtime messages
     var chat = newMessageRecieved.chat;
     console.log(chat);
-    if (!chat.users) return console.log("chat.users not defined");
+    if (!chat.users) {
+      console.log("chat.users not defined");
+      return;
+    }
 
     chat.users.forEach((user) => {
       console.log(user);
-      // if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
+      if (user._id === newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
 
       io.to(user).emit("message received", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.
     });
