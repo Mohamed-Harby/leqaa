@@ -28,7 +28,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 640, DateTimeKind.Utc).AddTicks(8948));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 471, DateTimeKind.Utc).AddTicks(8226));
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
@@ -81,7 +81,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 640, DateTimeKind.Utc).AddTicks(5696));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 471, DateTimeKind.Utc).AddTicks(3900));
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("longblob");
@@ -111,7 +111,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 645, DateTimeKind.Utc).AddTicks(6604));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 477, DateTimeKind.Utc).AddTicks(4450));
 
                     b.Property<string>("Description")
                         .HasMaxLength(4000)
@@ -156,7 +156,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 645, DateTimeKind.Utc).AddTicks(3562));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 477, DateTimeKind.Utc).AddTicks(2079));
 
                     b.Property<Guid>("HubId")
                         .HasColumnType("char(36)");
@@ -180,7 +180,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.ToTable("HubAnnouncement", (string)null);
                 });
 
-            modelBuilder.Entity("BusinessLogic.Domain.Plan", b =>
+            modelBuilder.Entity("BusinessLogic.Domain.Plan.Plan", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -189,7 +189,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 654, DateTimeKind.Utc).AddTicks(7155));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 489, DateTimeKind.Utc).AddTicks(6402));
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -218,7 +218,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 655, DateTimeKind.Utc).AddTicks(543));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 489, DateTimeKind.Utc).AddTicks(9188));
 
                     b.Property<byte[]>("Image")
                         .HasColumnType("longblob");
@@ -250,7 +250,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 659, DateTimeKind.Utc).AddTicks(8492));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 494, DateTimeKind.Utc).AddTicks(7392));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -269,7 +269,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("StartedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 660, DateTimeKind.Utc).AddTicks(650));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 494, DateTimeKind.Utc).AddTicks(9052));
 
                     b.HasKey("Id");
 
@@ -300,7 +300,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 664, DateTimeKind.Utc).AddTicks(7788));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 512, DateTimeKind.Utc).AddTicks(3337));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -355,7 +355,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 664, DateTimeKind.Utc).AddTicks(6303));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 512, DateTimeKind.Utc).AddTicks(804));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -381,12 +381,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 662, DateTimeKind.Utc).AddTicks(3113));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 497, DateTimeKind.Utc).AddTicks(4065));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("814016c7-afb2-43f9-9a91-9ff365c3a643"));
+                        .HasDefaultValue(new Guid("c21d81ed-98e1-400c-ae7e-577830d84467"));
 
                     b.HasKey("UserId", "ChannelAnnouncementId");
 
@@ -406,12 +406,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 676, DateTimeKind.Utc).AddTicks(5829));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 527, DateTimeKind.Utc).AddTicks(6164));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("980ba3e7-0a78-4a89-82a9-d49076538b34"));
+                        .HasDefaultValue(new Guid("59c7a755-5919-44ce-b135-0fd87647d363"));
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -434,12 +434,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 676, DateTimeKind.Utc).AddTicks(1933));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 527, DateTimeKind.Utc).AddTicks(2428));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("9a5a606f-805a-4841-a2d3-467711920082"));
+                        .HasDefaultValue(new Guid("f5397ed4-6ca0-4914-8b5a-cdbb2540ba97"));
 
                     b.HasKey("UserId", "HubAnnouncementId");
 
@@ -459,12 +459,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 3, 11, 39, 676, DateTimeKind.Local).AddTicks(9170));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 20, 1, 53, 528, DateTimeKind.Local).AddTicks(860));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("bfc03eb6-24fd-4eb0-b4ee-9d89ea9475ed"));
+                        .HasDefaultValue(new Guid("97d5448f-0061-474e-81b3-4594c3f3657b"));
 
                     b.HasKey("UserPinnedId", "PinnedChannelId");
 
@@ -484,12 +484,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 3, 11, 39, 677, DateTimeKind.Local).AddTicks(2417));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 20, 1, 53, 528, DateTimeKind.Local).AddTicks(4907));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("83489396-2bb9-42f5-92f3-0319fc87ffca"));
+                        .HasDefaultValue(new Guid("bbe6e50a-0907-4208-bb07-2f6bf10ce135"));
 
                     b.HasKey("UserPinnedid", "PinnedHubId");
 
@@ -509,12 +509,12 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 3, 11, 39, 677, DateTimeKind.Local).AddTicks(5523));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 20, 1, 53, 528, DateTimeKind.Local).AddTicks(8812));
 
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)")
-                        .HasDefaultValue(new Guid("3d0b84dd-1efc-4070-bd08-0e4df9cfc9a2"));
+                        .HasDefaultValue(new Guid("f606d54f-421f-4b0b-a92b-f9772a59b60b"));
 
                     b.HasKey("UserPinnedId", "PinnedPostId");
 
@@ -534,7 +534,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 677, DateTimeKind.Utc).AddTicks(8466));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 529, DateTimeKind.Utc).AddTicks(2012));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -560,7 +560,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
-                        .HasDefaultValue(new DateTime(2023, 6, 29, 1, 11, 39, 678, DateTimeKind.Utc).AddTicks(1099));
+                        .HasDefaultValue(new DateTime(2023, 4, 15, 18, 1, 53, 529, DateTimeKind.Utc).AddTicks(4894));
 
                     b.Property<Guid>("Id")
                         .HasColumnType("char(36)");
@@ -621,7 +621,7 @@ namespace BusinessLogic.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BusinessLogic.Domain.Plan", b =>
+            modelBuilder.Entity("BusinessLogic.Domain.Plan.Plan", b =>
                 {
                     b.HasOne("BusinessLogic.Domain.User", "User")
                         .WithMany("Plans")

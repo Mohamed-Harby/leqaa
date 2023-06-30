@@ -12,13 +12,11 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 {
     private ApplicationDbContext _context;
     private readonly IUserRepository _userRepository;
-    private readonly IUserUserRepository _userUserRepository;
     public UnitOfWork(ApplicationDbContext context, IUserRepository userRepository)
 
     {
         _context = context;
         _userRepository = userRepository;
-
     }
     public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
     {
@@ -31,24 +29,6 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         await _context.DisposeAsync();
     }
 
-
-    public Task<User> useruser(User Followed,User Follower)
-    {
-        var userUser = new UserUser
-        { Id = new Guid(),
-        FollowedId = Followed.Id,
-            FollowerId = Follower.Id,
-            Follower = Follower,
-            Followed = Followed,
-          
-        };
-
-        Followed.IsFollowed = true;
-        Follower.FollowedUsers.Add(Followed);
-        _context.Set<UserUser>().Update(userUser);
-        return Task.FromResult(Followed);
-
-    }
     public Task<Hub> CreateHubAsync(Hub hubToBeCreated, User creator)
     {
         var userHub = new UserHub

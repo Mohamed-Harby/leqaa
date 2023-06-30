@@ -14,7 +14,7 @@ namespace BusinessLogic.Application.Interfaces
         Task<Hub> PinHubAsync(Hub hub, User User);
         Task<Channel> PinChannelAsync(Channel channel, User creator);
         Task<Post> PinPostAsync(Post post, User creator);
-        Task<User> useruser(User Followed, User Follower);
+
         Task<ChannelAnnouncement> CreateChannelAnnoucementAsync(ChannelAnnouncement hubToBeCreated, User creator);
         Task<List<BaseEntity>> GetRecentActivitiesAsync(int pageNumber, int pageSize);
         Task<List<BaseEntity>> GetUserRecentActivitiesAsync(string userName, int pageNumber, int pageSize);

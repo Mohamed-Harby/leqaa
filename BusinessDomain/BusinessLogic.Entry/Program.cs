@@ -18,8 +18,7 @@ using Microsoft.Extensions.Options;
 
 using BusinessLogic.Infrastructure.NetworkCalls.MessageQueue.Models;
 using Serilog;
-using BusinessLogic.Entry.ConsulConfigurations;
-using Consul;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,14 +49,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddDistributedMemoryCache();
 builder.Services.ConfigureOptions<SwaggerGenOptionsSetup>();
 builder.Services.ConfigureOptions<AuthorizationOptionsSetup>();
-/*builder.Services.AddSingleton<IHostedService, ConsulHostedService>();*/
-/*builder.Services.Configure<ConsulConfig>(builder.Configuration.GetSection("Consul"));*/
-/*builder.Services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(consulConfig =>
-{
-    var address = builder.Configuration["Consul:address"];
-    consulConfig.Address = new Uri(address);
-}));
-*/
+
 builder.Services.AddSwaggerGen();
 builder.Services
     .AddPersistence(builder.Configuration)

@@ -101,13 +101,6 @@ namespace CommonGenericClasses
         {
             return await db.SaveChangesAsync(cancellationToken);
         }
-
-        public async Task<TEntity> CreateAsync(TEntity entity)
-        {
-            await table.AddAsync(entity);
-            await db.SaveChangesAsync();
-            return entity;
-        }
     }
 
 }

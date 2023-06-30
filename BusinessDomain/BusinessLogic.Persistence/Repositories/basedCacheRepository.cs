@@ -12,8 +12,6 @@ using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using BusinessLogic.Domain.Common;
-using System.Text;
-using System.Security.Cryptography;
 
 namespace CommonGenericClasses
 {
@@ -31,6 +29,21 @@ namespace CommonGenericClasses
             _cache = new Dictionary<object, TEntity>();
         }
 
+  /*      public BaseCachedRepo(DbContext db, IDistributedCache distributedCache)
+        {
+            this._db = db;
+            this._table = db.Set<TEntity>();
+            _cache = new Dictionary<object, TEntity>();
+            _distributedCache = distributedCache;
+        }*/
+/*
+        public async Task<TEntity> AddAsync(TEntity entity)
+        {
+            await _table.AddAsync(entity);
+            await SaveAsync();
+            return entity;
+        }
+*/
         public async Task<TEntity> GetByIdAsync(object id)
         {
             var cacheKey = $"cache_{typeof(TEntity).Name}_{id}";
@@ -56,27 +69,61 @@ namespace CommonGenericClasses
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 };
 
-                await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entity, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(200) });
+                await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entity, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
             }
 
             return entity!;
         }
-        /*    cache_User_-1237237105*/
 
-        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string include = "")
+     /*   public async Task<IEnumerable<TEntity>> RemoveRangeAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            var cacheKey = GetCacheKey(predicate, orderBy, include);
+            IEnumerable<TEntity> entities = (await GetAsync(predicate)).ToList();
+            _table.RemoveRange(entities);
+            await SaveAsync();
+            return entities;
+        }*/
+
+    /*    public async Task<TEntity> RemoveAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            TEntity entityToRemove = (await GetAsync(predicate)).FirstOrDefault()!;
+            if (entityToRemove != null)
+            {
+                _table.Remove(entityToRemove);
+                await SaveAsync();
+            }
+            return entityToRemove!;
+        }*/
+
+       /* public async Task<TEntity> RemoveByIdAsync(object id)
+        {
+            TEntity entityToRemove = await GetByIdAsync(id);
+            if (entityToRemove != null)
+            {
+                _table.Remove(entityToRemove);
+                await SaveAsync();
+            }
+            return entityToRemove!;
+        }*/
+     /*   public virtual Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            _table.Update(entity);
+            return Task.FromResult(entity);
+        }*/
+
+        public async Task<IQueryable<TEntity>> GetAsync(Expression<Func<TEntity, bool>> predicate = null!, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string include = "")
+        {
+            var cacheKey = $"cache_{typeof(TEntity).Name}_{predicate}_{orderBy}_{include}";
             var cacheData = await _distributedCache.GetStringAsync(cacheKey);
 
             if (!string.IsNullOrEmpty(cacheData))
             {
                 var entities = JsonConvert.DeserializeObject<List<TEntity>>(cacheData);
-                return entities.AsQueryable();
+                return entities!.AsQueryable();
             }
 
             IQueryable<TEntity> query = _table;
             if (predicate != null)
-                query = _table.Where(predicate);
+                query = _table.Where<TEntity>(predicate);
 
             if (orderBy != null)
                 query = orderBy(query);
@@ -93,54 +140,48 @@ namespace CommonGenericClasses
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entitiesList, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(200) });
+            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entitiesList, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
 
             return entitiesList.AsQueryable();
         }
-
-        private string GetCacheKey(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy, string include)
-        {
-            var cacheKey = new StringBuilder();
-            cacheKey.Append($"cache_{typeof(TEntity).Name}_");
-
-            if (predicate != null)
-            {
-                var predicateHashCode = ComputeHashCode(predicate);
-                cacheKey.Append(predicateHashCode);
-            }
-
-            if (orderBy != null)
-            {
-                var orderByHashCode = ComputeHashCode(orderBy);
-                cacheKey.Append(orderByHashCode);
-            }
-
-            if (!string.IsNullOrEmpty(include))
-            {
-                var includeHashCode = ComputeHashCode(include);
-                cacheKey.Append(includeHashCode);
-            }
-
-            return cacheKey.ToString();
-        }
-
-        private int ComputeHashCode(object obj)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var settings = new JsonSerializerSettings
+        /*  
+                public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null!)
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
+                    IQueryable<TEntity> query = _table;
+                    if (predicate != null)
+                        query = _table.Where<TEntity>(predicate);
 
-                var objJson = JsonConvert.SerializeObject(obj, settings);
-                var objBytes = Encoding.UTF8.GetBytes(objJson);
-                var hashBytes = sha256.ComputeHash(objBytes);
-                var hashCode = BitConverter.ToInt32(hashBytes, 0);
-                return hashCode;
-            }
-        }
+                    return await query.CountAsync();
+                }
 
+              public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
+                {
+                    try
+                    {
+                        await _db.SaveChangesAsync(cancellationToken);
+                        return true;
+                    }
+                    catch (DbUpdateException ex )
+                    {
+                        //Logging.Error(ex, $"DbUpdateException on saving changes. Reason: {ex.Message}");
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+                        //Logging.Error(ex, $"Exception on saving changes. Reason: {ex.Message}");
+                        return false;
+                    }
+                }*/
+
+        /* public async Task SaveAsync()
+         {
+             await _db.SaveChangesAsync();
+         }*/
+
+        /*    public async Task<IQueryable<TEntity>> GetAllAsync()
+            {
+                return await Task.FromResult(_table);
+            }*/
 
         public async Task<IQueryable<TEntity>> GetAllAsync()
         {
@@ -162,12 +203,26 @@ namespace CommonGenericClasses
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
 
-            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entitiesList, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(200) });
+            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(entitiesList, settings), new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30) });
 
             return entitiesList.AsQueryable();
         }
 
+   /*     public Task<IQueryable<TEntity>> GetByUserName(Expression<Func<TEntity, bool>> predicate = null!)
+        {
+            throw new NotImplementedException();
+        }
 
+        public TEntity Remove(TEntity entity)
+        {
+            _table.Remove(entity);
+            return entity;
+        }
+
+        public async Task<int> SaveAsync(CancellationToken cancellationToken = default)
+        {
+            return await _db.SaveChangesAsync(cancellationToken);
+        }*/
     }
 }
 
