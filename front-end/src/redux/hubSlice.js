@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl = "http://localhost:5004/api/v1/Hub/";
+const baseUrl = "http://4.246.190.37:5004/api/v1/Hub/";
 
 const initialState = {
   createHub: {},
@@ -21,7 +21,7 @@ export const deployHub = createAsyncThunk("hub/deployHub", async (payload) => {
   try {
     const response = await axios.post(baseUrl + deployHubUrl, payload.data, {
       headers: {
-        Authorization: `Bearer ${payload.token}`
+        Authorization: `Bearer ${payload.token}`,
       },
     });
     console.log(response.data);
@@ -32,64 +32,55 @@ export const deployHub = createAsyncThunk("hub/deployHub", async (payload) => {
   }
 });
 
-export const editHub = createAsyncThunk(
-  "channel/editHub",
-  async (payload) => {
-    console.log(payload);
-    const editHubUrl = `EditHub?id=${payload.id}`;
-    try {
-      const response = await axios.put(baseUrl + editHubUrl, payload.data, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`
-        },
-      });
-      console.log(response.data);
-      return response?.data;
-    } catch (error) {
-      console.log(error.response.data);
-      return error.response.data;
-    }
+export const editHub = createAsyncThunk("channel/editHub", async (payload) => {
+  console.log(payload);
+  const editHubUrl = `EditHub?id=${payload.id}`;
+  try {
+    const response = await axios.put(baseUrl + editHubUrl, payload.data, {
+      headers: {
+        Authorization: `Bearer ${payload.token}`,
+      },
+    });
+    console.log(response.data);
+    return response?.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
   }
-);
+});
 
-export const deleteHub = createAsyncThunk(
-  "hub/deleteHub",
-  async (payload) => {
-    console.log(payload);
-    const deleteHubUrl = `DeleteHub/${payload.id}`;
-    try {
-      const response = await axios.delete(baseUrl + deleteHubUrl, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`
-        },
-      });
-      console.log(response.status);
-      return response?.status;
-    } catch (error) {
-      console.log(error.response.data);
-      return error.response.data;
-    }
+export const deleteHub = createAsyncThunk("hub/deleteHub", async (payload) => {
+  console.log(payload);
+  const deleteHubUrl = `DeleteHub/${payload.id}`;
+  try {
+    const response = await axios.delete(baseUrl + deleteHubUrl, {
+      headers: {
+        Authorization: `Bearer ${payload.token}`,
+      },
+    });
+    console.log(response.status);
+    return response?.status;
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
   }
-);
+});
 
-export const getHub = createAsyncThunk(
-  "hub/getHub",
-  async (payload) => {
-    const getHubUrl = `ViewHub?Id=${payload.id}`;
-    try {
-      const response = await axios.get(baseUrl + getHubUrl, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`
-        },
-      });
-      console.log(response.data);
-      return response?.data;
-    } catch (error) {
-      console.log(error.response.data);
-      return error.response.data;
-    }
+export const getHub = createAsyncThunk("hub/getHub", async (payload) => {
+  const getHubUrl = `ViewHub?Id=${payload.id}`;
+  try {
+    const response = await axios.get(baseUrl + getHubUrl, {
+      headers: {
+        Authorization: `Bearer ${payload.token}`,
+      },
+    });
+    console.log(response.data);
+    return response?.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return error.response.data;
   }
-);
+});
 
 export const viewHubChannels = createAsyncThunk(
   "hub/viewhubchannels",
@@ -98,7 +89,7 @@ export const viewHubChannels = createAsyncThunk(
     try {
       const response = await axios.get(baseUrl + viewHubChannelsUrl, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -117,7 +108,7 @@ export const viewHubUsers = createAsyncThunk(
     try {
       const response = await axios.get(baseUrl + viewHubUsersUrl, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -212,7 +203,8 @@ const hubSlice = createSlice({
 export default hubSlice.reducer;
 export const getResponseCreatedHub = (state) => state.hub.createHub;
 export const getResponseEditedHub = (state) => state.hub.editedHub;
-export const getResponseGetDeleteHubStatus = (state) => state.hub.deleteHubStatus;
+export const getResponseGetDeleteHubStatus = (state) =>
+  state.hub.deleteHubStatus;
 export const getResponseGetHub = (state) => state.hub.getHub;
 export const getResponseGetHubChannels = (state) => state.hub.HubChannels;
 export const getResponseGetHubUsers = (state) => state.hub.HubUsers;

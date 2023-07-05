@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl = "http://localhost:5004/api/v1/Channel/";
+const baseUrl = "http://4.246.190.37:5004/api/v1/Channel/";
 
 const initialState = {
   createdChannel: {},
@@ -22,11 +22,15 @@ export const createChannel = createAsyncThunk(
     console.log(payload);
     const createChannelUrl = "CreateChannel";
     try {
-      const response = await axios.post(baseUrl + createChannelUrl, payload.data, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`
-        },
-      });
+      const response = await axios.post(
+        baseUrl + createChannelUrl,
+        payload.data,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
       console.log(response.data);
       return response?.data;
     } catch (error) {
@@ -44,7 +48,7 @@ export const editChannel = createAsyncThunk(
     try {
       const response = await axios.put(baseUrl + editChannelUrl, payload.data, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -64,7 +68,7 @@ export const deleteChannel = createAsyncThunk(
     try {
       const response = await axios.delete(baseUrl + deleteChannelUrl, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.status);
@@ -83,7 +87,7 @@ export const getChannel = createAsyncThunk(
     try {
       const response = await axios.get(baseUrl + getChannelUrl, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -103,7 +107,7 @@ export const viewRecentActivities = createAsyncThunk(
     try {
       const response = await axios.get(baseUrl + viewRecentActivitiesUrl, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -123,7 +127,7 @@ export const getChannelMembers = createAsyncThunk(
     try {
       const response = await axios.get(baseUrl + getChannelMembers, {
         headers: {
-          Authorization: `Bearer ${payload.token}`
+          Authorization: `Bearer ${payload.token}`,
         },
       });
       console.log(response.data);
@@ -134,7 +138,6 @@ export const getChannelMembers = createAsyncThunk(
     }
   }
 );
-
 
 const channelSlice = createSlice({
   name: "channel",
@@ -212,16 +215,20 @@ const channelSlice = createSlice({
       .addCase(getChannelMembers.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      })
+      });
   },
 });
 
 export default channelSlice.reducer;
-export const getResponseCreatedChannel = (state) => state.channel.createdChannel;
+export const getResponseCreatedChannel = (state) =>
+  state.channel.createdChannel;
 export const getResponseEditedChannel = (state) => state.channel.editedChannel;
 export const getResponseGetChannel = (state) => state.channel.getChannel;
-export const getResponseGetDeleteChannelStatus = (state) => state.channel.deleteChannelStatus;
-export const getResponseViewRecentActivitiesChannel = (state) => state.channel.recentActivitiesChannels;
-export const getResponseChannelMembers = (state) => state.channel.channelMembers;
+export const getResponseGetDeleteChannelStatus = (state) =>
+  state.channel.deleteChannelStatus;
+export const getResponseViewRecentActivitiesChannel = (state) =>
+  state.channel.recentActivitiesChannels;
+export const getResponseChannelMembers = (state) =>
+  state.channel.channelMembers;
 export const getErrorChannel = (state) => state.channel.error;
 export const getStatusChannel = (state) => state.channel.status;

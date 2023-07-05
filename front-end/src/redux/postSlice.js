@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const baseUrl = "http://localhost:5004/api/v1/Post/";
+const baseUrl = "http://4.246.190.37:5004/api/v1/Post/";
 
 const initialState = {
   response: {},
@@ -15,11 +15,15 @@ export const addNewPost = createAsyncThunk(
   async (payload) => {
     const createChannelUrl = "AddNewPost";
     try {
-      const response = await axios.post(baseUrl + createChannelUrl, payload.data, {
-        headers: {
-          Authorization: `Bearer ${payload.token}`
-        },
-      });
+      const response = await axios.post(
+        baseUrl + createChannelUrl,
+        payload.data,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`,
+          },
+        }
+      );
       console.log(response.data);
       return response?.data;
     } catch (error) {

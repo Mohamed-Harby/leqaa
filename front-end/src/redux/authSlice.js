@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
 
-export const baseUrl = 'http://localhost:5002/api/v1/Authentication/'
+export const baseUrl = 'http://4.246.190.37:5002/api/v1/Authentication/'
 
 
 const initialState = {

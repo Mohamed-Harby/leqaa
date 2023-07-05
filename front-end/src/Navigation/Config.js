@@ -38,9 +38,9 @@ import { defaultUser, useAuth } from "../Custom/useAuth";
 
 const ProtectedRoutes = ({ children }) => {
   const token = getCookies("token");
-  // if (!token) {
-  //   return <Navigate to='/login' />
-  // }
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
   return children;
 };
 

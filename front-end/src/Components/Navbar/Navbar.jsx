@@ -8,7 +8,7 @@ import "./Navbar.css";
 
 function Navbar() {
   const auth = useAuth();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
   const navigate = useNavigate();
   const logout = () => {
     auth.useLogout();

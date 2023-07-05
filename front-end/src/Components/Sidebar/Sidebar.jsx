@@ -12,6 +12,7 @@ import { getResponse, getStatus, viewUserProfile } from "../../redux/userSlice";
 import RadiusImg from "../RadiusImg/RadiusImg";
 import { getCookies } from "../../Custom/useCookies";
 import { useEffect } from "react";
+import Modal from "../Modal/Modal";
 
 function Sidebar() {
   const id = null;
@@ -22,6 +23,13 @@ function Sidebar() {
   const status = useSelector(getStatus);
   const token = getCookies("token");
   const dispatch = useDispatch();
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const modalClose = () => {
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     dispatch(viewUserProfile(token));
   }, []);
@@ -63,6 +71,7 @@ function Sidebar() {
             <BsCameraVideo />
             <span className={closeSidebar ? "hideText" : "text"}>Meeting</span>
           </NavLink>
+          {modalOpen && <Modal modalClose={modalClose} />}
         </li>
 
         <li className="bottom">
