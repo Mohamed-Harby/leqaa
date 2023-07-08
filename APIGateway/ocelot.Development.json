@@ -3,10 +3,6 @@
     {
       "DownstreamPathTemplate": "/api/v1/Authentication/{everything}",
       "DownstreamScheme": "http",
-      "ServiceName": "Authentication",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -20,10 +16,6 @@
     {
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
-
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -36,30 +28,39 @@
     //for any end point in payment
 
     {
-      "DownstreamPathTemplate": "/api/v1/checkout/{everything}",
+      "DownstreamPathTemplate": "/checkout/{everything}",
       "DownstreamScheme": "http",
-      "ServiceName": "checkout",
-      "LoadBalancerOptions": {
-        "Type": "LeastConnection"
-      },
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": "5196"
         }
       ],
-      "UpstreamPathTemplate": "/api/v1/checkout/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamPathTemplate": "/checkout/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "ServiceProvider": {
+        "Type": "Consul",
+        "Configuration": {
+          "Host": "localhost",
+          "Port": 8500,
+          "PollingInterval": 10000,
+          "ServiceName": "myServiceName",
+          "UseHttps": false
+        }
+      }
     }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5001",
-    "ServiceDiscoveryProvider": {
+    "ServiceProvider": {
       "Type": "Consul",
-      "Host": "localhost",
-      "Port": 8500,
-      "ConfigurationKey": "Ocelot",
-      "PollingInterval": 5000
+      "Configuration": {
+        "Host": "localhost",
+        "Port": 8500,
+        "PollingInterval": 10000,
+        "ServiceName": "myServiceName",
+        "UseHttps": false
+      }
     }
   }
 }
