@@ -1,29 +1,24 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+# git folder
+.git
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# npm
+node_modules
+npm-debug.log
 
-# Optional eslint cache
-.eslintcache
+# package
 
-# installed dependencies
-node_modules/
 
-# environment variables
+# mac
+.DS_Store
+
+# cache
+.cache
+
+# personal env
 .env
-.env.test
-.env.development
-.env.production
+.vercel
 
-# package managers lock files
-*.yarn.lock
-package-lock.json
+# yarn
+yarn.lock
+
+docker-push.sh
