@@ -15,7 +15,7 @@ import {
   getResponseChannelAnnoucement,
 } from "../../redux/announcementSlice";
 
-function TypingBar() {
+function TypingBar({ chat, socket }) {
   const dispatch = useDispatch();
   const typingBar = useRef();
   const [text, setText] = useState(null);
@@ -35,9 +35,29 @@ function TypingBar() {
     };
     reader.readAsDataURL(file);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(text);
+    try {
+      const res = await fetch("http://localhost:6969/api/message/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          content: text,
+          chatId: chat._id,
+        }),
+      }); // this is the fetch function that will send the message to the server
+      const data = await res.json();
+      console.log(data, "🌽🌽🌽🌽🌽🌽🌽⛑");
+      socket.emit("new message", data); // this will send the message to the server
+    } catch (error) {
+      console.log(error, "✅✅✅✅✅");
+    }
+
     if (pathname.split("/")[1] == "channel") {
       dispatch(
         deployChannelAnnoucement({

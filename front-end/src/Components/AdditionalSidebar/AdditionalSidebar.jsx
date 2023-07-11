@@ -5,7 +5,15 @@ import ModalDiscoverHubs from "../ModalDiscoverHubs/ModalDiscoverHubs";
 import Searchbar from "../Searchbar/Searchbar";
 import "./AdditionalSidebar.css";
 
-function AdditionalSidebar({ cards, path, setMembersList, setComponents }) {
+function AdditionalSidebar({
+  socket,
+  chats,
+  cards,
+  path,
+  setMembersList,
+  setComponents,
+  onselectchat,
+}) {
   console.log(cards);
   console.log(path);
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,7 +22,8 @@ function AdditionalSidebar({ cards, path, setMembersList, setComponents }) {
   };
 
   const handleClick = () => {
-    console.log("test");
+    // console.log("test😎😋😋😎😋");
+    // onselectchat();
   };
 
   return (
@@ -22,12 +31,36 @@ function AdditionalSidebar({ cards, path, setMembersList, setComponents }) {
       <div className="additional">
         <Searchbar />
         <div className="cards">
-          {cards?.map((card) => {
+          {/* {cards?.map((card) => {
             if (path == "/chat") {
-              return <Card card={card} />;
+              return <Card socket={socket} card={card} onClick={handleClick} />;
             } else {
               return (
-                <CardSidebar setComponents={setComponents} setMembersList={setMembersList} card={card} />
+                <CardSidebar
+                  setComponents={setComponents}
+                  setMembersList={setMembersList}
+                  card={card}
+                />
+              );
+            }
+          })} */}
+          {chats.map((chat) => {
+            if (path == "/chat") {
+              return (
+                <Card
+                  socket={socket}
+                  card={chat}
+                  onClick={handleClick}
+                  onselectchat={onselectchat}
+                />
+              );
+            } else {
+              return (
+                <CardSidebar
+                  setComponents={setComponents}
+                  setMembersList={setMembersList}
+                  card={chat}
+                />
               );
             }
           })}
