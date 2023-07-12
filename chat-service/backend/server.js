@@ -1,11 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
+
+const cors = require("cors");
 // const { chats } = require("./data/data");
 const connectDB = require("./config/db");
 const colors = require("colors");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const Message = require("./models/messageModel");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 // const jwt = require("jsonwebtoken");
 
@@ -13,6 +16,7 @@ dotenv.config();
 connectDB();
 const app = express();
 
+app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json()); //   to accept JSON data from frontend
 
 // creating a simple API
@@ -27,11 +31,11 @@ app.use("/api/message", messageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-// Handle uncaught exceptions
-process.on("uncaughtException", (error) => {
-  logger.error("Uncaught Exception:", error);
-  // process.exit(1); // Exit the process or take other necessary actions
-});
+// // Handle uncaught exceptions
+// process.on("uncaughtException", (error) => {
+//   logger.error("Uncaught Exception:", error);
+//   // process.exit(1); // Exit the process or take other necessary actions
+// });
 
 const MyController = require("./controllers/consumer");
 
@@ -51,19 +55,24 @@ const server = app.listen(
 
 const io = require("socket.io")(server, {
   pingTimeout: 60000, // pingTimeout means time will be waited if no connection happend it will be off to save bandwidth
-  cors: {
-    origin: "http://localhost:3000", // this will be changed during deployment
-    // credentials: true,
-  },
+  // cors: {
+  //   origin: "*", // this will be changed during deployment
+  //   // origin: "http://localhost:3000", // this will be changed during deployment
+  //   // credentials: true,
+  // },
 });
 
 io.on("connection", (socket) => {
   // when a connection is done from the client ==> from front end will log ' kaza' ,,,, socket = io(ENDPOINT);
   console.log("Connected to socket.io");
   socket.on("setup", (userData) => {
+    if (!userData) {
+      console.log("No user passed to socket.io");
+      return;
+    }
     // when a user create a new socket and send userData from fornt end ,,,,, the frontend should emit ====>  socket.emit("setup",user)  ,,, user is an object of the user data
     console.log("setup succeeded");
-    socket.join(userData._id); // this will create a room for this particular user
+    socket.join(userData.id); // this will create a room for this particular user
     socket.emit("connected"); // this wil send connected to client
   });
 
@@ -79,21 +88,28 @@ io.on("connection", (socket) => {
     //to make a realtime messages
     var chat = newMessageRecieved.chat;
     console.log(chat);
-    if (!chat.users) {
-      console.log("chat.users not defined");
-      return;
-    }
+    if (!chat.users) return console.log("chat.users not defined");
 
     chat.users.forEach((user) => {
       console.log(user);
-      if (user._id === newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
-
+      // if (user._id == newMessageRecieved.sender._id) return; //if user is the sender of the message return nothing
       io.to(user).emit("message received", newMessageRecieved); //The socket.in() method is used to emit the event to a specific room or channel that the user is subscribed to.
     });
-  });
+    const message = new Message({
+      sender: newMessageRecieved.sender._id,
+      content: newMessageRecieved.content,
+      chat: newMessageRecieved.chat,
+      readBy: [],
+    });
 
-  // socket.off("setup", () => {
-  //   console.log("USER DISCONNECTED");
-  //   socket.leave(userData._id);
-  // });
+    // Save the message to the database
+    message
+      .save()
+      .then(() => {
+        console.log("✔✔ Message saved to the database");
+      })
+      .catch((error) => {
+        console.error("❌❌ Error saving message to the database:", error);
+      });
+  });
 });

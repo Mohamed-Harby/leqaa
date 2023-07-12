@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-// const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 var uuid = require("node-uuid");
 
-// const crypto = require("node:crypto");
+const crypto = require("node:crypto");
 
 const userSchema = mongoose.Schema(
   {
