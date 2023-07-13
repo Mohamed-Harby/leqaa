@@ -51,10 +51,10 @@ public class CheckoutController : ControllerBase
             switch (product.PlanType.ToLower())
             {
                 case "premium":
-                    product.Price = 5000;
+                    product.Price = product.Price;
                     break;
                 case "platinum":
-                    product.Price = 8000;
+                    product.Price = product.Price;
                     break;
                 default:
                     return BadRequest("Invalid plan type.");
@@ -75,16 +75,14 @@ public class CheckoutController : ControllerBase
             if (user != null)
             {
 
-                string found = await _userPlanRepository.Find(user);
-                if (found == "True")
+                bool found = await _userPlanRepository.Find(user);
+                if (found ==true)
                 {
-                    await _userPlanRepository.AddAsync(product);
-                    await _userPlanRepository.SaveAsync();
+                    return Ok("user was added before");
                 }
-                 return Ok("user was added before");
-              
-
-                
+                 
+                await _userPlanRepository.AddAsync(product);
+                await _userPlanRepository.SaveAsync();
             }
 
             return Ok(stripeSettings);

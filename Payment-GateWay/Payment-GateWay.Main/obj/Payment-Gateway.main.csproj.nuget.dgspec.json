@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {}
+    "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {
+    "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
+        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
         "projectName": "Payment-Gateway.main",
-        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
+        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\Payment-Gateway.main.csproj",
         "packagesPath": "C:\\Users\\Mo Dawoud\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\obj\\",
+        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\Payment-Gateway.main\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mo Dawoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
-                "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\shared.csproj"
+              "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
+                "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj"
               }
             }
           }
@@ -98,14 +98,14 @@
         }
       }
     },
-    "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
+    "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
+        "projectUniqueName": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
         "projectName": "shared",
-        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
+        "projectPath": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\shared.csproj",
         "packagesPath": "C:\\Users\\Mo Dawoud\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\pay\\leqaa\\Payment-GateWay\\shared\\obj\\",
+        "outputPath": "C:\\Users\\Mo Dawoud\\Desktop\\payment\\leqaa\\Payment-GateWay\\shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mo Dawoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
