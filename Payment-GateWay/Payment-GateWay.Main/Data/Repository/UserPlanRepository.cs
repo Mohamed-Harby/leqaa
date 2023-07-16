@@ -35,6 +35,10 @@ namespace shared.Repository
                 return "not valid user name";
             }
             UserPlan user = (await table.Where(u => u.User == username).FirstOrDefaultAsync())!;
+            if(user == null)
+            {
+                return "user does not exists";
+            }
             var PlanType = user.PlanType;
             return PlanType;
         }
@@ -52,6 +56,36 @@ namespace shared.Repository
             return entity;
         }
 
-      
+        public virtual async Task<bool> Find(string username)
+        {
+   
+         var found=  await table.Where(table=> table.User == username).FirstOrDefaultAsync();
+            if (found != null)
+            {
+                return true;
+            }
+
+            return false;
+     
+        }
+
+        public async Task<string> BackToFree(string userName)
+        {
+
+            if (userName == null)
+            {
+                return "not valid user name";
+            }
+            UserPlan user = (await table.Where(u => u.User == userName).FirstOrDefaultAsync())!;
+            if (user == null)
+            {
+                return "user does not exists";
+            }
+            if (user.PlanType.ToLower() == "premium")
+            {
+                user.PlanType = "free";
+            }
+            return $"user plan type now is {user.PlanType} if you want to back to premium just buy it again";
+        }
     }
 }

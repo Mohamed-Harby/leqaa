@@ -31,8 +31,8 @@ builder.Services.AddSwaggerGen();
         options.UseSqlite("DataSource=:memory:"));*/
 builder.Services.AddDbContext<ApplicationDbContext>(Options =>
 {
-    var con = builder.Configuration.GetConnectionString("DefaultConnection");
-    System.Console.WriteLine(con);
+    var con =builder.Configuration.GetConnectionString("DefaultConnection");
+
 
     Options.UseMySql(con, ServerVersion.AutoDetect(con));
 });

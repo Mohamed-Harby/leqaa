@@ -51,10 +51,10 @@ public class CheckoutController : ControllerBase
             switch (product.PlanType.ToLower())
             {
                 case "premium":
-                    product.Price = 5000;
+                    product.Price = product.Price;
                     break;
                 case "platinum":
-                    product.Price = 8000;
+                    product.Price = product.Price;
                     break;
                 default:
                     return BadRequest("Invalid plan type.");
@@ -63,18 +63,26 @@ public class CheckoutController : ControllerBase
             product.User = user;
             StripeSettings stripeSettings = await CheckOut(product, thisApiUrl);
             var pubKey = _configuration["Stripe:PubKey"];
-
+       
             stripeSettings.PubKey = pubKey;
             stripeSettings.userName = user;
 
+            
+            
 
+        
             //here you save in data base
             if (user != null)
             {
-             await   _userPlanRepository.AddAsync(product);
-              await  _userPlanRepository.SaveAsync();
 
-
+                bool found = await _userPlanRepository.Find(user);
+                if (found ==true)
+                {
+                    return Ok("user was added before");
+                }
+                 
+                await _userPlanRepository.AddAsync(product);
+                await _userPlanRepository.SaveAsync();
             }
 
             return Ok(stripeSettings);
@@ -94,7 +102,7 @@ public class CheckoutController : ControllerBase
         var options = new SessionCreateOptions
         {
 
-            SuccessUrl = $"{s_wasmClientURL}/success?sessionId=" + "{CHECKOUT_SESSION_ID}",
+            SuccessUrl = $"{s_wasmClientURL}success?sessionId=" + "{CHECKOUT_SESSION_ID}",
             CancelUrl = s_wasmClientURL + "/failed",
             PaymentMethodTypes = new List<string>
             {
@@ -111,7 +119,7 @@ public class CheckoutController : ControllerBase
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
                             Name = product.PlanType,
-                            Description="User Name"+product.User,
+                            Description="User Name :"+product.User,
 
                         },
                     },
@@ -165,6 +173,18 @@ public class CheckoutController : ControllerBase
 
     }
 
+    [HttpGet("BackToFree")]
+    public async Task<string> BackToFree(string token)
+    {
+        string? userName = GetUserNameFromToken(token!);
+        if (userName == null)
+        {
+            return "not valid token";
+        }
+        var userNewPlanType= await _userPlanRepository.BackToFree(userName);
+        await _userPlanRepository.SaveAsync();
+        return userNewPlanType;
 
+    }
 
 }
